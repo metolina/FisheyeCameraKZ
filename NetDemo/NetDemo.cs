@@ -493,15 +493,19 @@ namespace NetDemo
         private void realPanel_DoubleClick(object sender, EventArgs e)
         {
 
-            switchRealScreen(sender as PlayPanel);
-            if (MultiScreen.Checked == false)
-            {
-                MultiScreen.Checked = true;
-            }
-            else
-            {
-                MultiScreen.Checked = false;
-            }
+            //switchRealScreen(sender as PlayPanel);
+            //if (MultiScreen.Checked == false)
+            //{
+            //    MultiScreen.Checked = true;
+
+            //}
+            //else
+            //{
+            //    MultiScreen.Checked = false;
+
+            //}
+            m_curRealPanel = m_mourseRightSelectedPanel = sender as PlayPanel;
+            FullScreen_Click(FullScreen, e);
             setPTZControlBtnStatus();
         }
 
@@ -1883,7 +1887,7 @@ namespace NetDemo
                 }
             }
 
-           
+
         }
 
 
@@ -2134,7 +2138,7 @@ namespace NetDemo
             }
             else
             {
-                
+
                 showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "get Preset");
             }
         }
@@ -2440,7 +2444,7 @@ namespace NetDemo
 
         private void NetDemo_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Do you want to exit?", "Info", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            DialogResult result = MessageBox.Show("Program kapanmak üzere", "Info", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (result == DialogResult.OK)
             {
                 e.Cancel = false;  //OK
@@ -4766,7 +4770,7 @@ namespace NetDemo
             */
 
                 dwPtzMode = (int)NETDEV_FISHEYE_PTZ_MODE_E.NETDEV_FISHEYE_MODE_LEFT_4PTZ;
-         
+
                 bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, dwInstallMode);
                 if (NETDEVSDK.FALSE == bRet)
                 {
@@ -6116,7 +6120,7 @@ namespace NetDemo
             ToolStripMenuItem toolStripMenuItem = sender as ToolStripMenuItem;
             if (toolStripMenuItem.Checked == false)
             {
-                 
+
                 this.m_layoutPanelWidth = this.LayoutPanel.Width;
                 this.m_layoutPanelHeight = this.LayoutPanel.Height;
 
