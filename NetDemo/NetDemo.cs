@@ -103,6 +103,9 @@ namespace NetDemo
         String strSubItemName = "";
         int iItemIndex = -1;
 
+
+
+        int screeninformation = 0;
         public static bool m_getCenterRecord = false;
 
         /******************* Define member variables end *******************************/
@@ -118,7 +121,10 @@ namespace NetDemo
         //init panel
         private void InitPanel()
         {
-
+            int nSqrt = (int)Math.Sqrt(NETDEMO.PLAYBACK_PANEL_MAX_SIZE);
+            int nHeight = this.playBackLayoutPanel.Height / nSqrt - 5;
+            int nWidth = this.playBackLayoutPanel.Width / nSqrt - 5;
+            //Bitmap mtplogo = new Bitmap(Properties.Resources.KZ_logo_2022, nHeight, nWidth);
             for (int i = 0; i < NETDEMO.REAL_PANEL_MAX_SIZE; i++)
             {
                 arrayRealPanel[i] = new PlayPanel();
@@ -135,19 +141,20 @@ namespace NetDemo
                 arrayRealPanel[i].MouseDown += new MouseEventHandler(realPanel_MouseDown);
                 arrayRealPanel[i].MouseUp += new MouseEventHandler(realPanel_MouseUp);
                 arrayRealPanel[i].MouseMove += new MouseEventHandler(realPanel_MouseMove);
+                arrayRealPanel[i].BackgroundImageLayout = ImageLayout.Stretch;
+                //arrayRealPanel[i].BackgroundImage = mtplogo;
             }
 
             m_curRealPanel = arrayRealPanel[0];
             m_curRealPanel.setBorderColor(Color.Red, 2);
             m_curRealPanel.Invalidate();
-
-
+           
             for (int i = 0; i < NETDEMO.PLAYBACK_PANEL_MAX_SIZE; i++)
             {
                 arrayPlayBackPanel[i] = new PlayPanel();
                 arrayPlayBackPanel[i].Padding = new Padding(0);
                 arrayPlayBackPanel[i].Margin = new Padding(0);
-                arrayPlayBackPanel[i].BackColor = Color.Black;
+                //arrayPlayBackPanel[i].BackColor = Color.Black;
                 arrayPlayBackPanel[i].Name = "playBackPanel " + i.ToString();
                 arrayPlayBackPanel[i].m_panelIndex = i;
                 arrayPlayBackPanel[i].setBorderColor(Color.White, 1);
@@ -156,9 +163,9 @@ namespace NetDemo
                 arrayPlayBackPanel[i].DoubleClick += new EventHandler(playBackPanel_DoubleClick);
             }
 
-            int nSqrt = (int)Math.Sqrt(NETDEMO.PLAYBACK_PANEL_MAX_SIZE);
-            int nHeight = this.playBackLayoutPanel.Height / nSqrt - 5;
-            int nWidth = this.playBackLayoutPanel.Width / nSqrt - 5;
+
+
+
             for (int i = 0; i < NETDEMO.PLAYBACK_PANEL_MAX_SIZE; i++)
             {
                 arrayPlayBackPanel[i].Height = nHeight;
@@ -341,14 +348,12 @@ namespace NetDemo
                 MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources.Mic123;
                 //MicVolumeBtn.Enabled = true;
                 //SliMicVolume.Enabled = true;
-                SliMicVolume.Value = m_curRealPanel.m_micVolume;
             }
             else
             {
                 MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources._222;
                 //MicVolumeBtn.Enabled = false;
                 //SliMicVolume.Enabled = false;
-                SliMicVolume.Value = 0;
             }
 
             if (true == m_curRealPanel.m_soundStatus)
@@ -356,14 +361,12 @@ namespace NetDemo
                 SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00008;
                 //SoundBtn.Enabled = true;
                 //SliSoundVolume.Enabled = true;
-                SliSoundVolume.Value = m_curRealPanel.m_volume;
             }
             else
             {
                 SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
                 //SoundBtn.Enabled = false;
                 //SliSoundVolume.Enabled = false;
-                SliSoundVolume.Value = 0;
             }
 
             this.m_curRealPanelIndex = m_curRealPanel.m_panelIndex + 1;
@@ -492,17 +495,31 @@ namespace NetDemo
 
         private void realPanel_DoubleClick(object sender, EventArgs e)
         {
-
-            switchRealScreen(sender as PlayPanel);
+            PlayPanel selectedplaypanel = sender as PlayPanel;
+            switchRealScreen(selectedplaypanel);
             if (MultiScreen.Checked == false)
             {
                 MultiScreen.Checked = true;
-
+                screeninformation = 0;
+                Int32 dwPtzMode = screeninformation;
+                Int32 dwInstallMode = 0;
+                Int32 bRet = NETDEVSDK.FALSE;
+                bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
+                NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+                //stopRealPlay(m_curRealPanel, true);
+                //startRealPlay();
             }
             else
             {
                 MultiScreen.Checked = false;
-
+                screeninformation = 4;
+                Int32 dwPtzMode = screeninformation;
+                Int32 dwInstallMode = 0;
+                Int32 bRet = NETDEVSDK.FALSE;
+                bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
+                NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+                //stopRealPlay(m_curRealPanel, true);
+                //startRealPlay();
             }
             //m_curRealPanel = m_mourseRightSelectedPanel = sender as PlayPanel;
             //FullScreen_Click(FullScreen, e);
@@ -1279,7 +1296,7 @@ namespace NetDemo
             }
             else
             {
-                stopRealPlay(m_curRealPanel, true);
+                //stopRealPlay(m_curRealPanel, true);
                 startRealPlay();
             }
         }
@@ -1450,6 +1467,8 @@ namespace NetDemo
 
         public void startRealPlay()
         {
+           
+
             if (m_CurSelectTreeNodeInfo.dwDeviceIndex < 0 || getChannelID() < 0)
             {
                 return;
@@ -1472,6 +1491,7 @@ namespace NetDemo
             }
             m_curRealPanel.m_playStatus = true;
             m_curRealPanel.m_playhandle = Handle;
+
 
             RealPlayInfo objRealPlayInfo = new RealPlayInfo();
             objRealPlayInfo.m_channel = getChannelID();
@@ -1509,8 +1529,6 @@ namespace NetDemo
 
             m_curRealPanel.m_volume = volumeTemp;
 
-            this.SliSoundVolume.Value = m_curRealPanel.m_volume;
-            this.SliSoundVolume.Enabled = true;
         }
 
         private void realPlayOpenMic()
@@ -1536,8 +1554,6 @@ namespace NetDemo
             showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "Get Mic volume");
 
             m_curRealPanel.m_micVolume = volumeTemp;
-            this.SliMicVolume.Value = m_curRealPanel.m_micVolume;
-            this.SliMicVolume.Enabled = true;
         }
 
         //stop realplay
@@ -1630,7 +1646,6 @@ namespace NetDemo
 
                 this.MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources._222;
                 m_curRealPanel.m_micStatus = false;
-                this.SliMicVolume.Enabled = false;
             }
             else
             {
@@ -1656,7 +1671,6 @@ namespace NetDemo
                 showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "Close volume");
 
                 this.SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
-                this.SliSoundVolume.Enabled = false;
                 m_curRealPanel.m_soundStatus = false;
             }
             else
@@ -4738,42 +4752,23 @@ namespace NetDemo
                     AlarmRecordsListView.Items.Add(item);
                 }));
             }
-            if ((int)NETDEV_ALARM_TYPE_E.NETDEV_ALARM_FISHEYE_STREAM_EXIST == pstReportInfo.stAlarmInfo.dwAlarmType)
-            {
-                Int32 dwPtzMode = 0;
+            //if ((int)NETDEV_ALARM_TYPE_E.NETDEV_ALARM_FISHEYE_STREAM_EXIST == pstReportInfo.stAlarmInfo.dwAlarmType)
+            //{
+                Int32 dwPtzMode = screeninformation;
                 Int32 dwInstallMode = 0;
                 Int32 bRet = NETDEVSDK.FALSE;
                 bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref dwInstallMode);
 
-                ///// KAMERA GÖRSEL AYARLAMA /////
-
-                /*
               
-                    NETDEV_FISHEYE_MODE_ORIGINAL= 0,             
-                    NETDEV_FISHEYE_MODE_180 = 1,              
-                    NETDEV_FISHEYE_MODE_360_1PTZ = 2,               
-                    NETDEV_FISHEYE_MODE_360_6PTZ = 3,              
-                    NETDEV_FISHEYE_MODE_3PTZ = 4,               
-                    NETDEV_FISHEYE_MODE_MID_ON_4PTZ = 5,              
-                    NETDEV_FISHEYE_MODE_MID_OFF_4PTZ = 6,              
-                    NETDEV_FISHEYE_MODE_LEFT_4PTZ = 7,               
-                    NETDEV_FISHEYE_MODE_8PTZ = 8,               
-                    NETDEV_FISHEYE_MODE_PANORAMA = 9,             
-                    NETDEV_FISHEYE_MODE_PR_3PTZ = 10,         10 = 0xA
-                    NETDEV_FISHEYE_MODE_PR_4PTZ = 11,         11 = 0xB
-                    NETDEV_FISHEYE_MODE_PR_8PTZ = 12,         12 = 0xC   hex değerlerinin decimal karşılıkları
-                    NETDEV_FISHEYE_MODE_INVALID = 0xFF             
-                yok öyle değil sayı eklemek istiyor
-            */
 
-                dwPtzMode = 4;
+                dwPtzMode = screeninformation;
 
                 bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, dwInstallMode);
-                if (NETDEVSDK.FALSE == bRet)
-                {
-                    showFailLogInfo(m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip + " chl:" + (m_curRealPanel.m_channelID), "set fish eye mode", NETDEVSDK.NETDEV_GetLastError());
-                }
-            }
+                //if (NETDEVSDK.FALSE == bRet)
+                //{
+                //    showFailLogInfo(m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip + " chl:" + (m_curRealPanel.m_channelID), "set fish eye mode", NETDEVSDK.NETDEV_GetLastError());
+                //}
+            //}
         }
 
         public void exceptionCallBack(IntPtr lpUserID, Int32 dwType, IntPtr lpExpHandle, IntPtr lpUserData)
@@ -4806,7 +4801,7 @@ namespace NetDemo
             }
             else if ((int)NETDEV_ALARM_TYPE_E.NETDEV_ALARM_FISHEYE_STREAM_EXIST == dwType)
             {
-                Int32 dwPtzMode = 0;
+                Int32 dwPtzMode = screeninformation;
                 Int32 dwInstallMode = 0;
                 Int32 bRet = NETDEVSDK.FALSE;
                 bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref dwInstallMode);
@@ -6087,7 +6082,6 @@ namespace NetDemo
             item.SubItems.Add(logInfo);
             item.SubItems.Add("Fail");
             item.SubItems.Add(Convert.ToString(errorCode));
-            this.logListView.Items.Insert(0, item);
             item.EnsureVisible();
 
             LogMessage.failLog(deviceInfo, logInfo, errorCode);
@@ -6100,7 +6094,6 @@ namespace NetDemo
             item.SubItems.Add(logInfo);
             item.SubItems.Add("Success");
             item.SubItems.Add("");
-            this.logListView.Items.Insert(0, item);
             item.EnsureVisible();
 
             LogMessage.sucessLog(deviceInfo, logInfo);
@@ -6108,7 +6101,6 @@ namespace NetDemo
 
         private void cleanLogBtn_Click(object sender, EventArgs e)
         {
-            logListView.Items.Clear();
         }
 
 

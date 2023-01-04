@@ -35,13 +35,11 @@ namespace NetDemo
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("(Right Click to Add Device)");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetDemo));
-            this.Discovery = new System.Windows.Forms.Button();
             this.DeviceTree = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.mainTabCtrl = new System.Windows.Forms.TabControl();
             this.LiveView = new System.Windows.Forms.TabPage();
             this.LayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.PannelPlayCtrl = new System.Windows.Forms.GroupBox();
             this.Sequence = new System.Windows.Forms.Button();
             this.LocalRecodBtn = new System.Windows.Forms.Button();
             this.CapturePicture = new System.Windows.Forms.Button();
@@ -50,10 +48,7 @@ namespace NetDemo
             this.group_win = new System.Windows.Forms.GroupBox();
             this.comboBoxMultiScreen = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupSound = new System.Windows.Forms.GroupBox();
-            this.SliSoundVolume = new System.Windows.Forms.TrackBar();
             this.SoundBtn = new System.Windows.Forms.Button();
-            this.SliMicVolume = new System.Windows.Forms.TrackBar();
             this.MicVolumeBtn = new System.Windows.Forms.Button();
             this.Playback = new System.Windows.Forms.TabPage();
             this.GetRecordDays = new System.Windows.Forms.Button();
@@ -633,7 +628,6 @@ namespace NetDemo
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.groupDiscovery = new System.Windows.Forms.GroupBox();
             this.deviceOper = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Login = new System.Windows.Forms.ToolStripMenuItem();
             this.Logout = new System.Windows.Forms.ToolStripMenuItem();
@@ -642,14 +636,7 @@ namespace NetDemo
             this.Property = new System.Windows.Forms.ToolStripMenuItem();
             this.rootOper = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.LocalDevice = new System.Windows.Forms.ToolStripMenuItem();
-            this.cleanLogBtn = new System.Windows.Forms.Button();
             this.settingLogBtn = new System.Windows.Forms.Button();
-            this.logListView = new System.Windows.Forms.ListView();
-            this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.DeviceInfo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Operation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ErrorCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PannelContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Close = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -666,13 +653,10 @@ namespace NetDemo
             this.MultiScreen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.CameraInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.Discovery = new System.Windows.Forms.Button();
             this.mainTabCtrl.SuspendLayout();
             this.LiveView.SuspendLayout();
-            this.PannelPlayCtrl.SuspendLayout();
             this.group_win.SuspendLayout();
-            this.groupSound.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SliSoundVolume)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SliMicVolume)).BeginInit();
             this.Playback.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBVideoTrackBar)).BeginInit();
@@ -763,22 +747,10 @@ namespace NetDemo
             this.groupBox37.SuspendLayout();
             this.groupBox33.SuspendLayout();
             this.groupBox25.SuspendLayout();
-            this.groupDiscovery.SuspendLayout();
             this.deviceOper.SuspendLayout();
             this.rootOper.SuspendLayout();
             this.PannelContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Discovery
-            // 
-            this.Discovery.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Discovery.Location = new System.Drawing.Point(35, 15);
-            this.Discovery.Name = "Discovery";
-            this.Discovery.Size = new System.Drawing.Size(93, 32);
-            this.Discovery.TabIndex = 0;
-            this.Discovery.Text = "Kamerayı Bul";
-            this.Discovery.UseVisualStyleBackColor = true;
-            this.Discovery.Click += new System.EventHandler(this.Discovery_Click);
             // 
             // DeviceTree
             // 
@@ -787,7 +759,7 @@ namespace NetDemo
             this.DeviceTree.HideSelection = false;
             this.DeviceTree.ImageIndex = 0;
             this.DeviceTree.ImageList = this.imageList1;
-            this.DeviceTree.Location = new System.Drawing.Point(12, 71);
+            this.DeviceTree.Location = new System.Drawing.Point(12, 467);
             this.DeviceTree.Name = "DeviceTree";
             treeNode1.ImageIndex = 0;
             treeNode1.Name = "root";
@@ -795,7 +767,7 @@ namespace NetDemo
             this.DeviceTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
             this.DeviceTree.SelectedImageIndex = 0;
-            this.DeviceTree.Size = new System.Drawing.Size(189, 748);
+            this.DeviceTree.Size = new System.Drawing.Size(127, 352);
             this.DeviceTree.TabIndex = 1;
             this.DeviceTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DeviceTree_AfterSelect);
             this.DeviceTree.Click += new System.EventHandler(this.DeviceTree_Click);
@@ -826,10 +798,10 @@ namespace NetDemo
             this.mainTabCtrl.Controls.Add(this.Maintenance);
             this.mainTabCtrl.Controls.Add(this.tabPage1);
             this.mainTabCtrl.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.mainTabCtrl.Location = new System.Drawing.Point(207, 13);
+            this.mainTabCtrl.Location = new System.Drawing.Point(145, 4);
             this.mainTabCtrl.Name = "mainTabCtrl";
             this.mainTabCtrl.SelectedIndex = 0;
-            this.mainTabCtrl.Size = new System.Drawing.Size(1041, 689);
+            this.mainTabCtrl.Size = new System.Drawing.Size(1135, 791);
             this.mainTabCtrl.TabIndex = 2;
             this.mainTabCtrl.SelectedIndexChanged += new System.EventHandler(this.mainTabCtrlSelectedChanged);
             // 
@@ -837,13 +809,10 @@ namespace NetDemo
             // 
             this.LiveView.BackColor = System.Drawing.Color.DarkGray;
             this.LiveView.Controls.Add(this.LayoutPanel);
-            this.LiveView.Controls.Add(this.PannelPlayCtrl);
-            this.LiveView.Controls.Add(this.group_win);
-            this.LiveView.Controls.Add(this.groupSound);
             this.LiveView.Location = new System.Drawing.Point(4, 26);
             this.LiveView.Name = "LiveView";
             this.LiveView.Padding = new System.Windows.Forms.Padding(3);
-            this.LiveView.Size = new System.Drawing.Size(1033, 659);
+            this.LiveView.Size = new System.Drawing.Size(1127, 761);
             this.LiveView.TabIndex = 0;
             this.LiveView.Text = "Live View";
             this.LiveView.UseVisualStyleBackColor = true;
@@ -851,31 +820,18 @@ namespace NetDemo
             // LayoutPanel
             // 
             this.LayoutPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.LayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LayoutPanel.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LayoutPanel.Location = new System.Drawing.Point(2, 6);
+            this.LayoutPanel.Location = new System.Drawing.Point(3, 3);
             this.LayoutPanel.Name = "LayoutPanel";
-            this.LayoutPanel.Size = new System.Drawing.Size(1025, 602);
+            this.LayoutPanel.Size = new System.Drawing.Size(1121, 755);
             this.LayoutPanel.TabIndex = 0;
             this.LayoutPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LayoutPanel_MouseUp);
-            // 
-            // PannelPlayCtrl
-            // 
-            this.PannelPlayCtrl.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.PannelPlayCtrl.Controls.Add(this.Sequence);
-            this.PannelPlayCtrl.Controls.Add(this.LocalRecodBtn);
-            this.PannelPlayCtrl.Controls.Add(this.CapturePicture);
-            this.PannelPlayCtrl.Controls.Add(this.StopRealPlay);
-            this.PannelPlayCtrl.Controls.Add(this.RealPlay);
-            this.PannelPlayCtrl.Location = new System.Drawing.Point(49, 602);
-            this.PannelPlayCtrl.Name = "PannelPlayCtrl";
-            this.PannelPlayCtrl.Size = new System.Drawing.Size(241, 51);
-            this.PannelPlayCtrl.TabIndex = 3;
-            this.PannelPlayCtrl.TabStop = false;
             // 
             // Sequence
             // 
             this.Sequence.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Sequence.Location = new System.Drawing.Point(170, 12);
+            this.Sequence.Location = new System.Drawing.Point(12, 350);
             this.Sequence.Name = "Sequence";
             this.Sequence.Size = new System.Drawing.Size(67, 32);
             this.Sequence.TabIndex = 3;
@@ -887,7 +843,7 @@ namespace NetDemo
             // LocalRecodBtn
             // 
             this.LocalRecodBtn.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LocalRecodBtn.Location = new System.Drawing.Point(112, 12);
+            this.LocalRecodBtn.Location = new System.Drawing.Point(12, 312);
             this.LocalRecodBtn.Name = "LocalRecodBtn";
             this.LocalRecodBtn.Size = new System.Drawing.Size(58, 32);
             this.LocalRecodBtn.TabIndex = 2;
@@ -900,7 +856,7 @@ namespace NetDemo
             // 
             this.CapturePicture.AutoSize = true;
             this.CapturePicture.BackgroundImage = global::NetDemo.Properties.Resources.camera;
-            this.CapturePicture.Location = new System.Drawing.Point(79, 12);
+            this.CapturePicture.Location = new System.Drawing.Point(84, 236);
             this.CapturePicture.Name = "CapturePicture";
             this.CapturePicture.Size = new System.Drawing.Size(30, 32);
             this.CapturePicture.TabIndex = 1;
@@ -910,7 +866,7 @@ namespace NetDemo
             // StopRealPlay
             // 
             this.StopRealPlay.BackgroundImage = global::NetDemo.Properties.Resources.STOP;
-            this.StopRealPlay.Location = new System.Drawing.Point(44, 12);
+            this.StopRealPlay.Location = new System.Drawing.Point(48, 236);
             this.StopRealPlay.Name = "StopRealPlay";
             this.StopRealPlay.Size = new System.Drawing.Size(30, 32);
             this.StopRealPlay.TabIndex = 1;
@@ -920,7 +876,7 @@ namespace NetDemo
             // RealPlay
             // 
             this.RealPlay.BackgroundImage = global::NetDemo.Properties.Resources.PLAY_ENABLE;
-            this.RealPlay.Location = new System.Drawing.Point(8, 12);
+            this.RealPlay.Location = new System.Drawing.Point(12, 236);
             this.RealPlay.Name = "RealPlay";
             this.RealPlay.Size = new System.Drawing.Size(30, 32);
             this.RealPlay.TabIndex = 0;
@@ -932,7 +888,7 @@ namespace NetDemo
             this.group_win.BackColor = System.Drawing.Color.WhiteSmoke;
             this.group_win.Controls.Add(this.comboBoxMultiScreen);
             this.group_win.Controls.Add(this.label1);
-            this.group_win.Location = new System.Drawing.Point(368, 602);
+            this.group_win.Location = new System.Drawing.Point(12, 401);
             this.group_win.Name = "group_win";
             this.group_win.Size = new System.Drawing.Size(120, 51);
             this.group_win.TabIndex = 4;
@@ -948,7 +904,7 @@ namespace NetDemo
             "16"});
             this.comboBoxMultiScreen.Location = new System.Drawing.Point(60, 19);
             this.comboBoxMultiScreen.Name = "comboBoxMultiScreen";
-            this.comboBoxMultiScreen.Size = new System.Drawing.Size(50, 25);
+            this.comboBoxMultiScreen.Size = new System.Drawing.Size(50, 21);
             this.comboBoxMultiScreen.TabIndex = 5;
             this.comboBoxMultiScreen.SelectedIndexChanged += new System.EventHandler(this.comboBoxMultiScreen_SelectedIndexChanged);
             // 
@@ -956,68 +912,29 @@ namespace NetDemo
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(4, 22);
+            this.label1.Location = new System.Drawing.Point(1, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Win Num";
-            // 
-            // groupSound
-            // 
-            this.groupSound.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.groupSound.Controls.Add(this.SliSoundVolume);
-            this.groupSound.Controls.Add(this.SoundBtn);
-            this.groupSound.Controls.Add(this.SliMicVolume);
-            this.groupSound.Controls.Add(this.MicVolumeBtn);
-            this.groupSound.Location = new System.Drawing.Point(622, 602);
-            this.groupSound.Name = "groupSound";
-            this.groupSound.Size = new System.Drawing.Size(336, 51);
-            this.groupSound.TabIndex = 5;
-            this.groupSound.TabStop = false;
-            // 
-            // SliSoundVolume
-            // 
-            this.SliSoundVolume.AutoSize = false;
-            this.SliSoundVolume.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.SliSoundVolume.Enabled = false;
-            this.SliSoundVolume.Location = new System.Drawing.Point(211, 19);
-            this.SliSoundVolume.Maximum = 255;
-            this.SliSoundVolume.Name = "SliSoundVolume";
-            this.SliSoundVolume.Size = new System.Drawing.Size(114, 24);
-            this.SliSoundVolume.TabIndex = 3;
-            this.SliSoundVolume.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.SliSoundVolume.Scroll += new System.EventHandler(this.SliSoundVolume_Scroll);
             // 
             // SoundBtn
             // 
             this.SoundBtn.AutoSize = true;
             this.SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
             this.SoundBtn.Enabled = false;
-            this.SoundBtn.Location = new System.Drawing.Point(167, 12);
+            this.SoundBtn.Location = new System.Drawing.Point(69, 274);
             this.SoundBtn.Name = "SoundBtn";
             this.SoundBtn.Size = new System.Drawing.Size(30, 32);
             this.SoundBtn.TabIndex = 2;
             this.SoundBtn.UseVisualStyleBackColor = true;
             this.SoundBtn.Click += new System.EventHandler(this.SoundBtn_Click);
             // 
-            // SliMicVolume
-            // 
-            this.SliMicVolume.AutoSize = false;
-            this.SliMicVolume.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.SliMicVolume.Enabled = false;
-            this.SliMicVolume.Location = new System.Drawing.Point(47, 19);
-            this.SliMicVolume.Maximum = 255;
-            this.SliMicVolume.Name = "SliMicVolume";
-            this.SliMicVolume.Size = new System.Drawing.Size(114, 24);
-            this.SliMicVolume.TabIndex = 1;
-            this.SliMicVolume.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.SliMicVolume.Scroll += new System.EventHandler(this.SliMicVolume_Scroll);
-            // 
             // MicVolumeBtn
             // 
             this.MicVolumeBtn.AutoSize = true;
             this.MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources._222;
-            this.MicVolumeBtn.Location = new System.Drawing.Point(6, 13);
+            this.MicVolumeBtn.Location = new System.Drawing.Point(12, 274);
             this.MicVolumeBtn.Name = "MicVolumeBtn";
             this.MicVolumeBtn.Size = new System.Drawing.Size(38, 32);
             this.MicVolumeBtn.TabIndex = 0;
@@ -1059,7 +976,7 @@ namespace NetDemo
             this.Playback.Location = new System.Drawing.Point(4, 26);
             this.Playback.Name = "Playback";
             this.Playback.Padding = new System.Windows.Forms.Padding(3);
-            this.Playback.Size = new System.Drawing.Size(1033, 659);
+            this.Playback.Size = new System.Drawing.Size(1065, 659);
             this.Playback.TabIndex = 1;
             this.Playback.Text = "Playback";
             this.Playback.UseVisualStyleBackColor = true;
@@ -1433,7 +1350,7 @@ namespace NetDemo
             this.Configure.Location = new System.Drawing.Point(4, 26);
             this.Configure.Name = "Configure";
             this.Configure.Padding = new System.Windows.Forms.Padding(3);
-            this.Configure.Size = new System.Drawing.Size(1033, 659);
+            this.Configure.Size = new System.Drawing.Size(1065, 659);
             this.Configure.TabIndex = 2;
             this.Configure.Text = "Configure";
             this.Configure.UseVisualStyleBackColor = true;
@@ -6648,7 +6565,7 @@ namespace NetDemo
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1033, 659);
+            this.tabPage1.Size = new System.Drawing.Size(1065, 659);
             this.tabPage1.TabIndex = 6;
             this.tabPage1.Text = "UserCfg";
             // 
@@ -6996,15 +6913,6 @@ namespace NetDemo
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // groupDiscovery
-            // 
-            this.groupDiscovery.Controls.Add(this.Discovery);
-            this.groupDiscovery.Location = new System.Drawing.Point(12, 2);
-            this.groupDiscovery.Name = "groupDiscovery";
-            this.groupDiscovery.Size = new System.Drawing.Size(189, 62);
-            this.groupDiscovery.TabIndex = 0;
-            this.groupDiscovery.TabStop = false;
-            // 
             // deviceOper
             // 
             this.deviceOper.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -7067,17 +6975,6 @@ namespace NetDemo
             this.LocalDevice.Text = "Local Device";
             this.LocalDevice.Click += new System.EventHandler(this.LocalDevice_Click);
             // 
-            // cleanLogBtn
-            // 
-            this.cleanLogBtn.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cleanLogBtn.Location = new System.Drawing.Point(1157, 708);
-            this.cleanLogBtn.Name = "cleanLogBtn";
-            this.cleanLogBtn.Size = new System.Drawing.Size(81, 32);
-            this.cleanLogBtn.TabIndex = 3;
-            this.cleanLogBtn.Text = "Clear";
-            this.cleanLogBtn.UseVisualStyleBackColor = true;
-            this.cleanLogBtn.Click += new System.EventHandler(this.cleanLogBtn_Click);
-            // 
             // settingLogBtn
             // 
             this.settingLogBtn.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -7088,50 +6985,6 @@ namespace NetDemo
             this.settingLogBtn.Text = "Setting";
             this.settingLogBtn.UseVisualStyleBackColor = true;
             this.settingLogBtn.Click += new System.EventHandler(this.settingLogBtn_Click);
-            // 
-            // logListView
-            // 
-            this.logListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Time,
-            this.DeviceInfo,
-            this.Operation,
-            this.Status,
-            this.ErrorCode});
-            this.logListView.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.logListView.FullRowSelect = true;
-            this.logListView.GridLines = true;
-            this.logListView.HideSelection = false;
-            this.logListView.Location = new System.Drawing.Point(211, 704);
-            this.logListView.Name = "logListView";
-            this.logListView.Size = new System.Drawing.Size(940, 52);
-            this.logListView.TabIndex = 6;
-            this.logListView.UseCompatibleStateImageBehavior = false;
-            this.logListView.View = System.Windows.Forms.View.Details;
-            // 
-            // Time
-            // 
-            this.Time.Text = "Time";
-            this.Time.Width = 141;
-            // 
-            // DeviceInfo
-            // 
-            this.DeviceInfo.Text = "Device Info";
-            this.DeviceInfo.Width = 141;
-            // 
-            // Operation
-            // 
-            this.Operation.Text = "Operation";
-            this.Operation.Width = 141;
-            // 
-            // Status
-            // 
-            this.Status.Text = "Status";
-            this.Status.Width = 141;
-            // 
-            // ErrorCode
-            // 
-            this.ErrorCode.Text = "Error Code";
-            this.ErrorCode.Width = 141;
             // 
             // PannelContextMenuStrip
             // 
@@ -7259,18 +7112,35 @@ namespace NetDemo
             this.CameraInfo.Text = "Camera Info";
             this.CameraInfo.Click += new System.EventHandler(this.CameraInfo_Click);
             // 
+            // Discovery
+            // 
+            this.Discovery.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Discovery.Location = new System.Drawing.Point(12, 198);
+            this.Discovery.Name = "Discovery";
+            this.Discovery.Size = new System.Drawing.Size(87, 32);
+            this.Discovery.TabIndex = 0;
+            this.Discovery.Text = "Kamerayı Bul";
+            this.Discovery.UseVisualStyleBackColor = true;
+            this.Discovery.Click += new System.EventHandler(this.Discovery_Click);
+            // 
             // NetDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1260, 757);
-            this.Controls.Add(this.logListView);
-            this.Controls.Add(this.groupDiscovery);
+            this.ClientSize = new System.Drawing.Size(1280, 800);
+            this.Controls.Add(this.Sequence);
+            this.Controls.Add(this.SoundBtn);
+            this.Controls.Add(this.group_win);
+            this.Controls.Add(this.Discovery);
+            this.Controls.Add(this.MicVolumeBtn);
+            this.Controls.Add(this.LocalRecodBtn);
+            this.Controls.Add(this.RealPlay);
+            this.Controls.Add(this.CapturePicture);
+            this.Controls.Add(this.StopRealPlay);
             this.Controls.Add(this.mainTabCtrl);
             this.Controls.Add(this.DeviceTree);
-            this.Controls.Add(this.cleanLogBtn);
             this.Controls.Add(this.settingLogBtn);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "NetDemo";
@@ -7279,14 +7149,8 @@ namespace NetDemo
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NetDemo_FormClosing);
             this.mainTabCtrl.ResumeLayout(false);
             this.LiveView.ResumeLayout(false);
-            this.PannelPlayCtrl.ResumeLayout(false);
-            this.PannelPlayCtrl.PerformLayout();
             this.group_win.ResumeLayout(false);
             this.group_win.PerformLayout();
-            this.groupSound.ResumeLayout(false);
-            this.groupSound.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SliSoundVolume)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SliMicVolume)).EndInit();
             this.Playback.ResumeLayout(false);
             this.Playback.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -7403,17 +7267,15 @@ namespace NetDemo
             this.groupBox37.ResumeLayout(false);
             this.groupBox33.ResumeLayout(false);
             this.groupBox25.ResumeLayout(false);
-            this.groupDiscovery.ResumeLayout(false);
             this.deviceOper.ResumeLayout(false);
             this.rootOper.ResumeLayout(false);
             this.PannelContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button Discovery;
         private System.Windows.Forms.TreeView DeviceTree;
         private System.Windows.Forms.TabControl mainTabCtrl;
         private System.Windows.Forms.TabPage LiveView;
@@ -7421,8 +7283,6 @@ namespace NetDemo
         private System.Windows.Forms.TabPage AlarmRecords;
         private System.Windows.Forms.TabPage VCA;
         private System.Windows.Forms.TabPage Maintenance;
-        private System.Windows.Forms.GroupBox groupDiscovery;
-        private System.Windows.Forms.GroupBox PannelPlayCtrl;
         private System.Windows.Forms.Button RealPlay;
         private System.Windows.Forms.Button CapturePicture;
         private System.Windows.Forms.Button StopRealPlay;
@@ -7431,10 +7291,7 @@ namespace NetDemo
         private System.Windows.Forms.GroupBox group_win;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxMultiScreen;
-        private System.Windows.Forms.GroupBox groupSound;
-        private System.Windows.Forms.TrackBar SliMicVolume;
         private System.Windows.Forms.Button MicVolumeBtn;
-        private System.Windows.Forms.TrackBar SliSoundVolume;
         private System.Windows.Forms.Button SoundBtn;
         private System.Windows.Forms.FlowLayoutPanel LayoutPanel;
         private System.Windows.Forms.ContextMenuStrip deviceOper;
@@ -7443,14 +7300,7 @@ namespace NetDemo
         private System.Windows.Forms.ToolStripMenuItem Logout;
         private System.Windows.Forms.ToolStripMenuItem Delete;
         private System.Windows.Forms.ToolStripMenuItem LocalDevice;
-        private System.Windows.Forms.Button cleanLogBtn;
         private System.Windows.Forms.Button settingLogBtn;
-        private ListView logListView;
-        private ColumnHeader Time;
-        private ColumnHeader DeviceInfo;
-        private ColumnHeader Operation;
-        private ColumnHeader Status;
-        private ColumnHeader ErrorCode;
         private GroupBox groupBox4;
         private Button factoryDefaultBtn;
         private Button RebootBtn;
@@ -8044,6 +7894,7 @@ namespace NetDemo
         private Button PBStartBtn;
         private Button GetHDDSmartInfo;
         private Button SyncPersonLibToDevBtn;
+        private Button Discovery;
     }
 }
 

@@ -49,7 +49,7 @@
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(60, 30);
             this.OKBtn.TabIndex = 4;
-            this.OKBtn.Text = "OK";
+            this.OKBtn.Text = "EKLE";
             this.OKBtn.UseVisualStyleBackColor = true;
             this.OKBtn.Click += new System.EventHandler(this.OKBtn_Click);
             // 
@@ -60,7 +60,7 @@
             this.CannelBtn.Name = "CannelBtn";
             this.CannelBtn.Size = new System.Drawing.Size(60, 30);
             this.CannelBtn.TabIndex = 5;
-            this.CannelBtn.Text = "Cannel";
+            this.CannelBtn.Text = "İPTAL";
             this.CannelBtn.UseVisualStyleBackColor = true;
             this.CannelBtn.Click += new System.EventHandler(this.CannelBtn_Click);
             // 
@@ -69,9 +69,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(68, 86);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 16);
+            this.label1.Size = new System.Drawing.Size(96, 16);
             this.label1.TabIndex = 2;
-            this.label1.Text = "IP/Domain Name";
+            this.label1.Text = "IP/Domain Adres";
             // 
             // label2
             // 
@@ -87,18 +87,18 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(68, 163);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 16);
+            this.label3.Size = new System.Drawing.Size(73, 16);
             this.label3.TabIndex = 2;
-            this.label3.Text = "User Name";
+            this.label3.Text = "Kullanıcı Adı";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(68, 201);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 16);
+            this.label4.Size = new System.Drawing.Size(30, 16);
             this.label4.TabIndex = 2;
-            this.label4.Text = "Password";
+            this.label4.Text = "Şifre";
             // 
             // ipDomainNameText
             // 
@@ -143,9 +143,9 @@
             this.DeviceTypeLab.AutoSize = true;
             this.DeviceTypeLab.Location = new System.Drawing.Point(68, 47);
             this.DeviceTypeLab.Name = "DeviceTypeLab";
-            this.DeviceTypeLab.Size = new System.Drawing.Size(32, 16);
+            this.DeviceTypeLab.Size = new System.Drawing.Size(72, 16);
             this.DeviceTypeLab.TabIndex = 6;
-            this.DeviceTypeLab.Text = "Type";
+            this.DeviceTypeLab.Text = "Bağlantı Tipi";
             // 
             // DeviceTypeCmb
             // 
@@ -182,7 +182,7 @@
             this.MaximizeBox = false;
             this.Name = "AddDevice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Device";
+            this.Text = "Cihaz Ekle";
             this.ResumeLayout(false);
             this.PerformLayout();
 
