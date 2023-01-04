@@ -493,20 +493,20 @@ namespace NetDemo
         private void realPanel_DoubleClick(object sender, EventArgs e)
         {
 
-            //switchRealScreen(sender as PlayPanel);
-            //if (MultiScreen.Checked == false)
-            //{
-            //    MultiScreen.Checked = true;
+            switchRealScreen(sender as PlayPanel);
+            if (MultiScreen.Checked == false)
+            {
+                MultiScreen.Checked = true;
 
-            //}
-            //else
-            //{
-            //    MultiScreen.Checked = false;
+            }
+            else
+            {
+                MultiScreen.Checked = false;
 
-            //}
-            m_curRealPanel = m_mourseRightSelectedPanel = sender as PlayPanel;
-            FullScreen_Click(FullScreen, e);
-            setPTZControlBtnStatus();
+            }
+            //m_curRealPanel = m_mourseRightSelectedPanel = sender as PlayPanel;
+            //FullScreen_Click(FullScreen, e);
+            //setPTZControlBtnStatus();
         }
 
         private void comboBoxMultiScreen_SelectedIndexChanged(object sender, EventArgs e)
