@@ -4763,13 +4763,10 @@ namespace NetDemo
                     NETDEV_FISHEYE_MODE_PR_4PTZ = 11,         11 = 0xB
                     NETDEV_FISHEYE_MODE_PR_8PTZ = 12,         12 = 0xC   hex değerlerinin decimal karşılıkları
                     NETDEV_FISHEYE_MODE_INVALID = 0xFF             
-                yok öyle değil sayı eklemek istiyorsan
-
-                dwPtzMode = (int)NETDEV_FISHEYE_PTZ_MODE_E.EKLEYECEĞİN YAZI AŞAĞIDAKİ GİBİ
-                dwPtzMode = (int)NETDEV_FISHEYE_PTZ_MODE_E.NETDEV_FISHEYE_MODE_LEFT_4PTZ;e
+                yok öyle değil sayı eklemek istiyor
             */
 
-                dwPtzMode = (int)NETDEV_FISHEYE_PTZ_MODE_E.NETDEV_FISHEYE_MODE_LEFT_4PTZ;
+                dwPtzMode = 4;
 
                 bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, dwInstallMode);
                 if (NETDEVSDK.FALSE == bRet)

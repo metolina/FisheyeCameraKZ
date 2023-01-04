@@ -774,9 +774,9 @@ namespace NetDemo
             this.Discovery.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Discovery.Location = new System.Drawing.Point(35, 15);
             this.Discovery.Name = "Discovery";
-            this.Discovery.Size = new System.Drawing.Size(80, 32);
+            this.Discovery.Size = new System.Drawing.Size(93, 32);
             this.Discovery.TabIndex = 0;
-            this.Discovery.Text = "Discovery";
+            this.Discovery.Text = "Kamerayı Bul";
             this.Discovery.UseVisualStyleBackColor = true;
             this.Discovery.Click += new System.EventHandler(this.Discovery_Click);
             // 
