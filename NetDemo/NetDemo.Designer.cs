@@ -33,23 +33,13 @@ namespace NetDemo
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("(Right Click to Add Device)");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("(Cihaz Ekle)");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetDemo));
             this.DeviceTree = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.mainTabCtrl = new System.Windows.Forms.TabControl();
             this.LiveView = new System.Windows.Forms.TabPage();
             this.LayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.Sequence = new System.Windows.Forms.Button();
-            this.LocalRecodBtn = new System.Windows.Forms.Button();
-            this.CapturePicture = new System.Windows.Forms.Button();
-            this.StopRealPlay = new System.Windows.Forms.Button();
-            this.RealPlay = new System.Windows.Forms.Button();
-            this.group_win = new System.Windows.Forms.GroupBox();
-            this.comboBoxMultiScreen = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SoundBtn = new System.Windows.Forms.Button();
-            this.MicVolumeBtn = new System.Windows.Forms.Button();
             this.Playback = new System.Windows.Forms.TabPage();
             this.GetRecordDays = new System.Windows.Forms.Button();
             this.BoxPositionList = new System.Windows.Forms.ComboBox();
@@ -587,6 +577,11 @@ namespace NetDemo
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.Sequence = new System.Windows.Forms.Button();
+            this.comboBoxMultiScreen = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.LocalRecodBtn = new System.Windows.Forms.Button();
+            this.RealPlay = new System.Windows.Forms.Button();
             this.label120 = new System.Windows.Forms.Label();
             this.groupBox38 = new System.Windows.Forms.GroupBox();
             this.label119 = new System.Windows.Forms.Label();
@@ -596,10 +591,14 @@ namespace NetDemo
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.Discovery = new System.Windows.Forms.Button();
             this.label118 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.MicVolumeBtn = new System.Windows.Forms.Button();
+            this.SoundBtn = new System.Windows.Forms.Button();
             this.label117 = new System.Windows.Forms.Label();
             this.label116 = new System.Windows.Forms.Label();
+            this.CapturePicture = new System.Windows.Forms.Button();
             this.label115 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label114 = new System.Windows.Forms.Label();
@@ -653,10 +652,21 @@ namespace NetDemo
             this.MultiScreen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.CameraInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.Discovery = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button60 = new System.Windows.Forms.Button();
+            this.button66 = new System.Windows.Forms.Button();
+            this.button67 = new System.Windows.Forms.Button();
+            this.button68 = new System.Windows.Forms.Button();
+            this.button70 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.mainTabCtrl.SuspendLayout();
             this.LiveView.SuspendLayout();
-            this.group_win.SuspendLayout();
             this.Playback.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBVideoTrackBar)).BeginInit();
@@ -759,15 +769,15 @@ namespace NetDemo
             this.DeviceTree.HideSelection = false;
             this.DeviceTree.ImageIndex = 0;
             this.DeviceTree.ImageList = this.imageList1;
-            this.DeviceTree.Location = new System.Drawing.Point(12, 467);
+            this.DeviceTree.Location = new System.Drawing.Point(8, 470);
             this.DeviceTree.Name = "DeviceTree";
             treeNode1.ImageIndex = 0;
             treeNode1.Name = "root";
-            treeNode1.Text = "(Right Click to Add Device)";
+            treeNode1.Text = "(Cihaz Ekle)";
             this.DeviceTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
             this.DeviceTree.SelectedImageIndex = 0;
-            this.DeviceTree.Size = new System.Drawing.Size(127, 352);
+            this.DeviceTree.Size = new System.Drawing.Size(134, 266);
             this.DeviceTree.TabIndex = 1;
             this.DeviceTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DeviceTree_AfterSelect);
             this.DeviceTree.Click += new System.EventHandler(this.DeviceTree_Click);
@@ -798,10 +808,10 @@ namespace NetDemo
             this.mainTabCtrl.Controls.Add(this.Maintenance);
             this.mainTabCtrl.Controls.Add(this.tabPage1);
             this.mainTabCtrl.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.mainTabCtrl.Location = new System.Drawing.Point(145, 4);
+            this.mainTabCtrl.Location = new System.Drawing.Point(145, -12);
             this.mainTabCtrl.Name = "mainTabCtrl";
             this.mainTabCtrl.SelectedIndex = 0;
-            this.mainTabCtrl.Size = new System.Drawing.Size(1135, 791);
+            this.mainTabCtrl.Size = new System.Drawing.Size(1136, 819);
             this.mainTabCtrl.TabIndex = 2;
             this.mainTabCtrl.SelectedIndexChanged += new System.EventHandler(this.mainTabCtrlSelectedChanged);
             // 
@@ -812,138 +822,23 @@ namespace NetDemo
             this.LiveView.Location = new System.Drawing.Point(4, 26);
             this.LiveView.Name = "LiveView";
             this.LiveView.Padding = new System.Windows.Forms.Padding(3);
-            this.LiveView.Size = new System.Drawing.Size(1127, 761);
+            this.LiveView.Size = new System.Drawing.Size(1128, 789);
             this.LiveView.TabIndex = 0;
-            this.LiveView.Text = "Live View";
             this.LiveView.UseVisualStyleBackColor = true;
             // 
             // LayoutPanel
             // 
             this.LayoutPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.LayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LayoutPanel.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LayoutPanel.Location = new System.Drawing.Point(3, 3);
+            this.LayoutPanel.Location = new System.Drawing.Point(-4, -4);
             this.LayoutPanel.Name = "LayoutPanel";
-            this.LayoutPanel.Size = new System.Drawing.Size(1121, 755);
+            this.LayoutPanel.Size = new System.Drawing.Size(1151, 797);
             this.LayoutPanel.TabIndex = 0;
             this.LayoutPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LayoutPanel_MouseUp);
             // 
-            // Sequence
-            // 
-            this.Sequence.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Sequence.Location = new System.Drawing.Point(12, 350);
-            this.Sequence.Name = "Sequence";
-            this.Sequence.Size = new System.Drawing.Size(67, 32);
-            this.Sequence.TabIndex = 3;
-            this.Sequence.Text = "Sequence";
-            this.Sequence.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Sequence.UseVisualStyleBackColor = true;
-            this.Sequence.Click += new System.EventHandler(this.Sequence_Click);
-            // 
-            // LocalRecodBtn
-            // 
-            this.LocalRecodBtn.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LocalRecodBtn.Location = new System.Drawing.Point(12, 312);
-            this.LocalRecodBtn.Name = "LocalRecodBtn";
-            this.LocalRecodBtn.Size = new System.Drawing.Size(58, 32);
-            this.LocalRecodBtn.TabIndex = 2;
-            this.LocalRecodBtn.Text = "Record";
-            this.LocalRecodBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LocalRecodBtn.UseVisualStyleBackColor = true;
-            this.LocalRecodBtn.Click += new System.EventHandler(this.LocalRecodBtn_Click);
-            // 
-            // CapturePicture
-            // 
-            this.CapturePicture.AutoSize = true;
-            this.CapturePicture.BackgroundImage = global::NetDemo.Properties.Resources.camera;
-            this.CapturePicture.Location = new System.Drawing.Point(84, 236);
-            this.CapturePicture.Name = "CapturePicture";
-            this.CapturePicture.Size = new System.Drawing.Size(30, 32);
-            this.CapturePicture.TabIndex = 1;
-            this.CapturePicture.UseVisualStyleBackColor = true;
-            this.CapturePicture.Click += new System.EventHandler(this.CapturePicture_Click);
-            // 
-            // StopRealPlay
-            // 
-            this.StopRealPlay.BackgroundImage = global::NetDemo.Properties.Resources.STOP;
-            this.StopRealPlay.Location = new System.Drawing.Point(48, 236);
-            this.StopRealPlay.Name = "StopRealPlay";
-            this.StopRealPlay.Size = new System.Drawing.Size(30, 32);
-            this.StopRealPlay.TabIndex = 1;
-            this.StopRealPlay.UseVisualStyleBackColor = true;
-            this.StopRealPlay.Click += new System.EventHandler(this.StopRealPlay_Click);
-            // 
-            // RealPlay
-            // 
-            this.RealPlay.BackgroundImage = global::NetDemo.Properties.Resources.PLAY_ENABLE;
-            this.RealPlay.Location = new System.Drawing.Point(12, 236);
-            this.RealPlay.Name = "RealPlay";
-            this.RealPlay.Size = new System.Drawing.Size(30, 32);
-            this.RealPlay.TabIndex = 0;
-            this.RealPlay.UseVisualStyleBackColor = true;
-            this.RealPlay.Click += new System.EventHandler(this.RealPlay_Click);
-            // 
-            // group_win
-            // 
-            this.group_win.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.group_win.Controls.Add(this.comboBoxMultiScreen);
-            this.group_win.Controls.Add(this.label1);
-            this.group_win.Location = new System.Drawing.Point(12, 401);
-            this.group_win.Name = "group_win";
-            this.group_win.Size = new System.Drawing.Size(120, 51);
-            this.group_win.TabIndex = 4;
-            this.group_win.TabStop = false;
-            // 
-            // comboBoxMultiScreen
-            // 
-            this.comboBoxMultiScreen.FormattingEnabled = true;
-            this.comboBoxMultiScreen.Items.AddRange(new object[] {
-            "1",
-            "4",
-            "9",
-            "16"});
-            this.comboBoxMultiScreen.Location = new System.Drawing.Point(60, 19);
-            this.comboBoxMultiScreen.Name = "comboBoxMultiScreen";
-            this.comboBoxMultiScreen.Size = new System.Drawing.Size(50, 21);
-            this.comboBoxMultiScreen.TabIndex = 5;
-            this.comboBoxMultiScreen.SelectedIndexChanged += new System.EventHandler(this.comboBoxMultiScreen_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(1, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Win Num";
-            // 
-            // SoundBtn
-            // 
-            this.SoundBtn.AutoSize = true;
-            this.SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
-            this.SoundBtn.Enabled = false;
-            this.SoundBtn.Location = new System.Drawing.Point(69, 274);
-            this.SoundBtn.Name = "SoundBtn";
-            this.SoundBtn.Size = new System.Drawing.Size(30, 32);
-            this.SoundBtn.TabIndex = 2;
-            this.SoundBtn.UseVisualStyleBackColor = true;
-            this.SoundBtn.Click += new System.EventHandler(this.SoundBtn_Click);
-            // 
-            // MicVolumeBtn
-            // 
-            this.MicVolumeBtn.AutoSize = true;
-            this.MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources._222;
-            this.MicVolumeBtn.Location = new System.Drawing.Point(12, 274);
-            this.MicVolumeBtn.Name = "MicVolumeBtn";
-            this.MicVolumeBtn.Size = new System.Drawing.Size(38, 32);
-            this.MicVolumeBtn.TabIndex = 0;
-            this.MicVolumeBtn.UseVisualStyleBackColor = true;
-            this.MicVolumeBtn.Click += new System.EventHandler(this.MicVolumeBtn_Click);
-            // 
             // Playback
             // 
-            this.Playback.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Playback.BackColor = System.Drawing.Color.White;
             this.Playback.Controls.Add(this.GetRecordDays);
             this.Playback.Controls.Add(this.BoxPositionList);
             this.Playback.Controls.Add(this.playBackLayoutPanel);
@@ -976,10 +871,8 @@ namespace NetDemo
             this.Playback.Location = new System.Drawing.Point(4, 26);
             this.Playback.Name = "Playback";
             this.Playback.Padding = new System.Windows.Forms.Padding(3);
-            this.Playback.Size = new System.Drawing.Size(1065, 659);
+            this.Playback.Size = new System.Drawing.Size(1128, 789);
             this.Playback.TabIndex = 1;
-            this.Playback.Text = "Playback";
-            this.Playback.UseVisualStyleBackColor = true;
             // 
             // GetRecordDays
             // 
@@ -1350,9 +1243,8 @@ namespace NetDemo
             this.Configure.Location = new System.Drawing.Point(4, 26);
             this.Configure.Name = "Configure";
             this.Configure.Padding = new System.Windows.Forms.Padding(3);
-            this.Configure.Size = new System.Drawing.Size(1065, 659);
+            this.Configure.Size = new System.Drawing.Size(1128, 789);
             this.Configure.TabIndex = 2;
-            this.Configure.Text = "Configure";
             this.Configure.UseVisualStyleBackColor = true;
             // 
             // cfgTabControl
@@ -1375,7 +1267,7 @@ namespace NetDemo
             // 
             // ConfigBasic
             // 
-            this.ConfigBasic.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ConfigBasic.BackColor = System.Drawing.Color.White;
             this.ConfigBasic.Controls.Add(this.GetHDDSmartInfo);
             this.ConfigBasic.Controls.Add(this.BaiscRefreshBtn);
             this.ConfigBasic.Controls.Add(this.groupBox8);
@@ -3575,9 +3467,8 @@ namespace NetDemo
             this.AlarmRecords.Location = new System.Drawing.Point(4, 26);
             this.AlarmRecords.Name = "AlarmRecords";
             this.AlarmRecords.Padding = new System.Windows.Forms.Padding(3);
-            this.AlarmRecords.Size = new System.Drawing.Size(1033, 659);
+            this.AlarmRecords.Size = new System.Drawing.Size(1128, 789);
             this.AlarmRecords.TabIndex = 3;
-            this.AlarmRecords.Text = "Alarm Records";
             this.AlarmRecords.UseVisualStyleBackColor = true;
             // 
             // groupBox5
@@ -3645,9 +3536,8 @@ namespace NetDemo
             this.VCA.Location = new System.Drawing.Point(4, 26);
             this.VCA.Name = "VCA";
             this.VCA.Padding = new System.Windows.Forms.Padding(3);
-            this.VCA.Size = new System.Drawing.Size(1033, 659);
+            this.VCA.Size = new System.Drawing.Size(1128, 789);
             this.VCA.TabIndex = 4;
-            this.VCA.Text = " VCA";
             this.VCA.UseVisualStyleBackColor = true;
             // 
             // VCATabCtrl
@@ -6475,9 +6365,8 @@ namespace NetDemo
             this.Maintenance.Location = new System.Drawing.Point(4, 26);
             this.Maintenance.Name = "Maintenance";
             this.Maintenance.Padding = new System.Windows.Forms.Padding(3);
-            this.Maintenance.Size = new System.Drawing.Size(1033, 659);
+            this.Maintenance.Size = new System.Drawing.Size(1128, 789);
             this.Maintenance.TabIndex = 5;
-            this.Maintenance.Text = "Maintenance";
             this.Maintenance.UseVisualStyleBackColor = true;
             // 
             // groupBox4
@@ -6539,16 +6428,25 @@ namespace NetDemo
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage1.Controls.Add(this.Sequence);
+            this.tabPage1.Controls.Add(this.comboBoxMultiScreen);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.LocalRecodBtn);
+            this.tabPage1.Controls.Add(this.RealPlay);
             this.tabPage1.Controls.Add(this.label120);
             this.tabPage1.Controls.Add(this.groupBox38);
             this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.comboBox2);
             this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.dateTimePicker2);
+            this.tabPage1.Controls.Add(this.Discovery);
             this.tabPage1.Controls.Add(this.label118);
             this.tabPage1.Controls.Add(this.dateTimePicker1);
+            this.tabPage1.Controls.Add(this.MicVolumeBtn);
+            this.tabPage1.Controls.Add(this.SoundBtn);
             this.tabPage1.Controls.Add(this.label117);
             this.tabPage1.Controls.Add(this.label116);
+            this.tabPage1.Controls.Add(this.CapturePicture);
             this.tabPage1.Controls.Add(this.label115);
             this.tabPage1.Controls.Add(this.textBox3);
             this.tabPage1.Controls.Add(this.label114);
@@ -6565,9 +6463,63 @@ namespace NetDemo
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1065, 659);
+            this.tabPage1.Size = new System.Drawing.Size(1128, 789);
             this.tabPage1.TabIndex = 6;
-            this.tabPage1.Text = "UserCfg";
+            // 
+            // Sequence
+            // 
+            this.Sequence.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Sequence.Location = new System.Drawing.Point(957, 375);
+            this.Sequence.Name = "Sequence";
+            this.Sequence.Size = new System.Drawing.Size(67, 28);
+            this.Sequence.TabIndex = 32;
+            this.Sequence.Text = "Sequence";
+            this.Sequence.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Sequence.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxMultiScreen
+            // 
+            this.comboBoxMultiScreen.FormattingEnabled = true;
+            this.comboBoxMultiScreen.Items.AddRange(new object[] {
+            "1",
+            "4",
+            "9",
+            "16"});
+            this.comboBoxMultiScreen.Location = new System.Drawing.Point(1008, 291);
+            this.comboBoxMultiScreen.Name = "comboBoxMultiScreen";
+            this.comboBoxMultiScreen.Size = new System.Drawing.Size(50, 25);
+            this.comboBoxMultiScreen.TabIndex = 31;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(934, 291);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 16);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Ekran Sayısı";
+            // 
+            // LocalRecodBtn
+            // 
+            this.LocalRecodBtn.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LocalRecodBtn.Location = new System.Drawing.Point(944, 310);
+            this.LocalRecodBtn.Name = "LocalRecodBtn";
+            this.LocalRecodBtn.Size = new System.Drawing.Size(58, 32);
+            this.LocalRecodBtn.TabIndex = 30;
+            this.LocalRecodBtn.Text = "Record";
+            this.LocalRecodBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LocalRecodBtn.UseVisualStyleBackColor = true;
+            this.LocalRecodBtn.Click += new System.EventHandler(this.LocalRecodBtn_Click_1);
+            // 
+            // RealPlay
+            // 
+            this.RealPlay.BackgroundImage = global::NetDemo.Properties.Resources.PLAY_ENABLE;
+            this.RealPlay.Location = new System.Drawing.Point(972, 274);
+            this.RealPlay.Name = "RealPlay";
+            this.RealPlay.Size = new System.Drawing.Size(30, 32);
+            this.RealPlay.TabIndex = 29;
+            this.RealPlay.UseVisualStyleBackColor = true;
             // 
             // label120
             // 
@@ -6650,6 +6602,19 @@ namespace NetDemo
             this.dateTimePicker2.Size = new System.Drawing.Size(112, 23);
             this.dateTimePicker2.TabIndex = 18;
             // 
+            // Discovery
+            // 
+            this.Discovery.BackgroundImage = global::NetDemo.Properties.Resources.search;
+            this.Discovery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Discovery.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Discovery.Location = new System.Drawing.Point(1044, 338);
+            this.Discovery.Name = "Discovery";
+            this.Discovery.Size = new System.Drawing.Size(30, 30);
+            this.Discovery.TabIndex = 0;
+            this.Discovery.Text = "Kamerayı Bul";
+            this.Discovery.UseVisualStyleBackColor = true;
+            this.Discovery.Click += new System.EventHandler(this.Discovery_Click);
+            // 
             // label118
             // 
             this.label118.AutoSize = true;
@@ -6668,6 +6633,30 @@ namespace NetDemo
             this.dateTimePicker1.Size = new System.Drawing.Size(110, 23);
             this.dateTimePicker1.TabIndex = 16;
             // 
+            // MicVolumeBtn
+            // 
+            this.MicVolumeBtn.AutoSize = true;
+            this.MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources.Mic123;
+            this.MicVolumeBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.MicVolumeBtn.Location = new System.Drawing.Point(1020, 504);
+            this.MicVolumeBtn.Name = "MicVolumeBtn";
+            this.MicVolumeBtn.Size = new System.Drawing.Size(38, 32);
+            this.MicVolumeBtn.TabIndex = 0;
+            this.MicVolumeBtn.UseVisualStyleBackColor = true;
+            this.MicVolumeBtn.Click += new System.EventHandler(this.MicVolumeBtn_Click);
+            // 
+            // SoundBtn
+            // 
+            this.SoundBtn.AutoSize = true;
+            this.SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
+            this.SoundBtn.Enabled = false;
+            this.SoundBtn.Location = new System.Drawing.Point(926, 450);
+            this.SoundBtn.Name = "SoundBtn";
+            this.SoundBtn.Size = new System.Drawing.Size(30, 32);
+            this.SoundBtn.TabIndex = 2;
+            this.SoundBtn.UseVisualStyleBackColor = true;
+            this.SoundBtn.Click += new System.EventHandler(this.SoundBtn_Click);
+            // 
             // label117
             // 
             this.label117.AutoSize = true;
@@ -6685,6 +6674,17 @@ namespace NetDemo
             this.label116.Size = new System.Drawing.Size(103, 17);
             this.label116.TabIndex = 13;
             this.label116.Text = "TimeTemplateID";
+            // 
+            // CapturePicture
+            // 
+            this.CapturePicture.AutoSize = true;
+            this.CapturePicture.BackgroundImage = global::NetDemo.Properties.Resources.camera;
+            this.CapturePicture.Location = new System.Drawing.Point(994, 440);
+            this.CapturePicture.Name = "CapturePicture";
+            this.CapturePicture.Size = new System.Drawing.Size(30, 32);
+            this.CapturePicture.TabIndex = 1;
+            this.CapturePicture.UseVisualStyleBackColor = true;
+            this.CapturePicture.Click += new System.EventHandler(this.CapturePicture_Click);
             // 
             // label115
             // 
@@ -7112,31 +7112,240 @@ namespace NetDemo
             this.CameraInfo.Text = "Camera Info";
             this.CameraInfo.Click += new System.EventHandler(this.CameraInfo_Click);
             // 
-            // Discovery
+            // panel3
             // 
-            this.Discovery.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Discovery.Location = new System.Drawing.Point(12, 198);
-            this.Discovery.Name = "Discovery";
-            this.Discovery.Size = new System.Drawing.Size(87, 32);
-            this.Discovery.TabIndex = 0;
-            this.Discovery.Text = "Kamerayı Bul";
-            this.Discovery.UseVisualStyleBackColor = true;
-            this.Discovery.Click += new System.EventHandler(this.Discovery_Click);
+            this.panel3.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.panel3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1295, 5);
+            this.panel3.TabIndex = 10;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(4, 1280);
+            this.panel1.TabIndex = 11;
+            // 
+            // button60
+            // 
+            this.button60.BackColor = System.Drawing.Color.Green;
+            this.button60.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button60.FlatAppearance.BorderSize = 0;
+            this.button60.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button60.ForeColor = System.Drawing.Color.White;
+            this.button60.Image = ((System.Drawing.Image)(resources.GetObject("button60.Image")));
+            this.button60.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button60.Location = new System.Drawing.Point(7, 61);
+            this.button60.Name = "button60";
+            this.button60.Size = new System.Drawing.Size(135, 45);
+            this.button60.TabIndex = 166;
+            this.button60.Text = " KAMERA BUL";
+            this.button60.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button60.UseVisualStyleBackColor = false;
+            this.button60.Click += new System.EventHandler(this.button60_Click);
+            // 
+            // button66
+            // 
+            this.button66.BackColor = System.Drawing.Color.Green;
+            this.button66.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button66.FlatAppearance.BorderSize = 0;
+            this.button66.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button66.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button66.ForeColor = System.Drawing.Color.White;
+            this.button66.Image = ((System.Drawing.Image)(resources.GetObject("button66.Image")));
+            this.button66.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button66.Location = new System.Drawing.Point(7, 112);
+            this.button66.Name = "button66";
+            this.button66.Size = new System.Drawing.Size(135, 45);
+            this.button66.TabIndex = 165;
+            this.button66.Text = " KAYIT";
+            this.button66.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button66.UseVisualStyleBackColor = false;
+            this.button66.Click += new System.EventHandler(this.button66_Click);
+            // 
+            // button67
+            // 
+            this.button67.BackColor = System.Drawing.Color.Green;
+            this.button67.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button67.FlatAppearance.BorderSize = 0;
+            this.button67.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button67.ForeColor = System.Drawing.Color.White;
+            this.button67.Image = ((System.Drawing.Image)(resources.GetObject("button67.Image")));
+            this.button67.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button67.Location = new System.Drawing.Point(7, 214);
+            this.button67.Name = "button67";
+            this.button67.Size = new System.Drawing.Size(135, 45);
+            this.button67.TabIndex = 164;
+            this.button67.Text = " KLAVYE";
+            this.button67.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button67.UseVisualStyleBackColor = false;
+            this.button67.Click += new System.EventHandler(this.button67_Click);
+            // 
+            // button68
+            // 
+            this.button68.BackColor = System.Drawing.Color.Green;
+            this.button68.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button68.FlatAppearance.BorderSize = 0;
+            this.button68.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button68.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button68.ForeColor = System.Drawing.Color.White;
+            this.button68.Image = ((System.Drawing.Image)(resources.GetObject("button68.Image")));
+            this.button68.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button68.Location = new System.Drawing.Point(7, 163);
+            this.button68.Name = "button68";
+            this.button68.Size = new System.Drawing.Size(135, 45);
+            this.button68.TabIndex = 167;
+            this.button68.Text = " BAŞLAT";
+            this.button68.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button68.UseVisualStyleBackColor = false;
+            this.button68.Click += new System.EventHandler(this.button68_Click);
+            // 
+            // button70
+            // 
+            this.button70.BackColor = System.Drawing.Color.Green;
+            this.button70.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button70.FlatAppearance.BorderSize = 0;
+            this.button70.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button70.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button70.ForeColor = System.Drawing.Color.White;
+            this.button70.Image = ((System.Drawing.Image)(resources.GetObject("button70.Image")));
+            this.button70.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button70.Location = new System.Drawing.Point(7, 10);
+            this.button70.Name = "button70";
+            this.button70.Size = new System.Drawing.Size(135, 45);
+            this.button70.TabIndex = 162;
+            this.button70.Text = " ANA EKRAN";
+            this.button70.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button70.UseVisualStyleBackColor = false;
+            this.button70.Click += new System.EventHandler(this.button70_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.Green;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
+            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.Location = new System.Drawing.Point(7, 265);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(136, 45);
+            this.button5.TabIndex = 221;
+            this.button5.Text = "AYARLAR";
+            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.Green;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Image = global::NetDemo.Properties.Resources.Mic123;
+            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.Location = new System.Drawing.Point(8, 419);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(136, 45);
+            this.button6.TabIndex = 224;
+            this.button6.Text = "SES";
+            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.Green;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.ForeColor = System.Drawing.Color.White;
+            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
+            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button7.Location = new System.Drawing.Point(8, 368);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(135, 45);
+            this.button7.TabIndex = 222;
+            this.button7.Text = "KONUŞMA";
+            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.Green;
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.ForeColor = System.Drawing.Color.White;
+            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
+            this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button8.Location = new System.Drawing.Point(8, 317);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(135, 45);
+            this.button8.TabIndex = 223;
+            this.button8.Text = "GÖRÜNTÜ ";
+            this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.Green;
+            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button9.ForeColor = System.Drawing.Color.White;
+            this.button9.Image = ((System.Drawing.Image)(resources.GetObject("button9.Image")));
+            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button9.Location = new System.Drawing.Point(6, 742);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(135, 45);
+            this.button9.TabIndex = 225;
+            this.button9.Text = "ÇIKIŞ";
+            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.panel2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel2.Location = new System.Drawing.Point(3, 793);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(141, 10);
+            this.panel2.TabIndex = 226;
             // 
             // NetDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1280, 800);
-            this.Controls.Add(this.Sequence);
-            this.Controls.Add(this.SoundBtn);
-            this.Controls.Add(this.group_win);
-            this.Controls.Add(this.Discovery);
-            this.Controls.Add(this.MicVolumeBtn);
-            this.Controls.Add(this.LocalRecodBtn);
-            this.Controls.Add(this.RealPlay);
-            this.Controls.Add(this.CapturePicture);
-            this.Controls.Add(this.StopRealPlay);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button67);
+            this.Controls.Add(this.button66);
+            this.Controls.Add(this.button68);
+            this.Controls.Add(this.button60);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.button70);
             this.Controls.Add(this.mainTabCtrl);
             this.Controls.Add(this.DeviceTree);
             this.Controls.Add(this.settingLogBtn);
@@ -7147,10 +7356,9 @@ namespace NetDemo
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KZ Mekatronik";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NetDemo_FormClosing);
+            this.Load += new System.EventHandler(this.NetDemo_Load);
             this.mainTabCtrl.ResumeLayout(false);
             this.LiveView.ResumeLayout(false);
-            this.group_win.ResumeLayout(false);
-            this.group_win.PerformLayout();
             this.Playback.ResumeLayout(false);
             this.Playback.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -7271,7 +7479,6 @@ namespace NetDemo
             this.rootOper.ResumeLayout(false);
             this.PannelContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -7283,14 +7490,7 @@ namespace NetDemo
         private System.Windows.Forms.TabPage AlarmRecords;
         private System.Windows.Forms.TabPage VCA;
         private System.Windows.Forms.TabPage Maintenance;
-        private System.Windows.Forms.Button RealPlay;
         private System.Windows.Forms.Button CapturePicture;
-        private System.Windows.Forms.Button StopRealPlay;
-        private System.Windows.Forms.Button LocalRecodBtn;
-        private System.Windows.Forms.Button Sequence;
-        private System.Windows.Forms.GroupBox group_win;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBoxMultiScreen;
         private System.Windows.Forms.Button MicVolumeBtn;
         private System.Windows.Forms.Button SoundBtn;
         private System.Windows.Forms.FlowLayoutPanel LayoutPanel;
@@ -7545,7 +7745,6 @@ namespace NetDemo
         private TrackBar TemperSensitivityTrackBar;
         private Button TemperRefreshBtn;
         private ImageList imageList1;
-        private ContextMenuStrip PannelContextMenuStrip;
         private ToolStripMenuItem Close;
         private ToolStripMenuItem CloseAll;
         private ToolStripSeparator toolStripSeparator1;
@@ -7895,6 +8094,25 @@ namespace NetDemo
         private Button GetHDDSmartInfo;
         private Button SyncPersonLibToDevBtn;
         private Button Discovery;
+        private Panel panel3;
+        private Panel panel1;
+        private Button button60;
+        private Button button66;
+        private Button button67;
+        private Button button68;
+        private Button button70;
+        private Button Sequence;
+        private ComboBox comboBoxMultiScreen;
+        private Label label1;
+        private Button LocalRecodBtn;
+        private Button RealPlay;
+        private Button button5;
+        private Button button6;
+        private Button button7;
+        private Button button8;
+        private Button button9;
+        private Panel panel2;
+        public ContextMenuStrip PannelContextMenuStrip;
     }
 }
 

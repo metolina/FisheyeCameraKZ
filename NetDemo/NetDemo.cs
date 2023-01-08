@@ -15,7 +15,10 @@ using NETSDKHelper;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
-
+using static NetDemo.Discovery;
+using Newtonsoft.Json;
+using static GeneralDef.NETDEMO;
+using System.Security.AccessControl;
 
 namespace NetDemo
 {
@@ -116,7 +119,17 @@ namespace NetDemo
             InitializeComponent();
             InitPanel();
             InitNetDemo();
+            CameraCheckList();
         }
+
+        private void CameraCheckList()
+        {
+            GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E eDeviceType = GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_IPC_OR_NVR;
+            AddLocalDevice("192.168.2.13", 80, "admin", "KZ-102030", eDeviceType);
+            AddLocalDevice("192.168.2.14", 80, "admin", "kz-102030", eDeviceType);
+            //this.DeviceTree.SelectedNode = this.DeviceTree.Nodes["(Cihaz Ekle)\\192.168.2.13\\channel 1"];
+        }
+
 
         //init panel
         private void InitPanel()
@@ -124,7 +137,7 @@ namespace NetDemo
             int nSqrt = (int)Math.Sqrt(NETDEMO.PLAYBACK_PANEL_MAX_SIZE);
             int nHeight = this.playBackLayoutPanel.Height / nSqrt - 5;
             int nWidth = this.playBackLayoutPanel.Width / nSqrt - 5;
-            //Bitmap mtplogo = new Bitmap(Properties.Resources.KZ_logo_2022, nHeight, nWidth);
+            Bitmap mtplogo = new Bitmap(Properties.Resources.KZ_logo_2022, nHeight, nWidth);
             for (int i = 0; i < NETDEMO.REAL_PANEL_MAX_SIZE; i++)
             {
                 arrayRealPanel[i] = new PlayPanel();
@@ -142,13 +155,16 @@ namespace NetDemo
                 arrayRealPanel[i].MouseUp += new MouseEventHandler(realPanel_MouseUp);
                 arrayRealPanel[i].MouseMove += new MouseEventHandler(realPanel_MouseMove);
                 arrayRealPanel[i].BackgroundImageLayout = ImageLayout.Stretch;
-                //arrayRealPanel[i].BackgroundImage = mtplogo;
+                //if (i==2)
+                //{
+                //    arrayRealPanel[i].BackgroundImage = mtplogo;
+                //}
             }
 
             m_curRealPanel = arrayRealPanel[0];
             m_curRealPanel.setBorderColor(Color.Red, 2);
             m_curRealPanel.Invalidate();
-           
+
             for (int i = 0; i < NETDEMO.PLAYBACK_PANEL_MAX_SIZE; i++)
             {
                 arrayPlayBackPanel[i] = new PlayPanel();
@@ -161,6 +177,7 @@ namespace NetDemo
                 this.playBackLayoutPanel.Controls.Add(arrayPlayBackPanel[i]);
                 arrayPlayBackPanel[i].Click += new EventHandler(playBackPanel_Click);
                 arrayPlayBackPanel[i].DoubleClick += new EventHandler(playBackPanel_DoubleClick);
+               
             }
 
 
@@ -206,6 +223,11 @@ namespace NetDemo
             this.LPRRealPlayFLayoutPanel.Controls.Add(m_curLPRRealPlayPanel);
 
             m_curLPRRealPlayPanel.Invalidate();
+            //Kayıtlı kameraları yazdırıyoruz
+
+
+            //AddLocalDevice(oDeviceIPList[i], oDevicePortList[i], strUserName, strPassword, eDeviceType);
+            //Kayıtlı kameraları yazdırıyoruz
         }
 
         //inie demo app
@@ -466,7 +488,10 @@ namespace NetDemo
 
         private void switchRealScreen(PlayPanel curSelectedPanel)
         {
-            m_curRealPanel = curSelectedPanel;
+            if (m_curRealPanel == null)
+            {
+                m_curRealPanel = curSelectedPanel;
+            }
             this.LayoutPanel.Controls.Clear();
             if (realMaxFlag == true)
             {
@@ -499,18 +524,40 @@ namespace NetDemo
             switchRealScreen(selectedplaypanel);
             if (MultiScreen.Checked == false)
             {
+
                 MultiScreen.Checked = true;
                 screeninformation = 0;
                 Int32 dwPtzMode = screeninformation;
                 Int32 dwInstallMode = 0;
                 Int32 bRet = NETDEVSDK.FALSE;
-                bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
-                NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+                //bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
+                //NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+
+                foreach (var item in arrayRealPanel)
+                {
+                    if (item.m_playhandle!=null)
+                    {
+                        bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(item.m_playhandle, ref dwPtzMode, ref dwInstallMode);
+                        NETDEVSDK.NETDEV_SetPtzAndFixMode(item.m_playhandle, screeninformation, dwInstallMode);
+                    }
+                    
+                }
+
+
+
+
+
+
+
+
+
+
                 //stopRealPlay(m_curRealPanel, true);
                 //startRealPlay();
             }
             else
             {
+                m_curRealPanel = selectedplaypanel;
                 MultiScreen.Checked = false;
                 screeninformation = 4;
                 Int32 dwPtzMode = screeninformation;
@@ -737,7 +784,7 @@ namespace NetDemo
                 showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "start Record");
 
                 m_curRealPanel.m_recordStatus = true;
-                this.LocalRecodBtn.Text = "Stop";
+                this.LocalRecodBtn.Text = "Durdur";
                 LocalSetting.m_strLocalRecordPath = temp;
             }
             else
@@ -751,7 +798,7 @@ namespace NetDemo
                 showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "stop Record");
 
                 m_curRealPanel.m_recordStatus = false;
-                this.LocalRecodBtn.Text = "Record";
+                this.LocalRecodBtn.Text = "Başlat";
             }
         }
 
@@ -1001,6 +1048,7 @@ namespace NetDemo
 
                 m_notLoggeddeviceInfoList.Add(deviceInfoTemp);
             }
+
         }
 
         //login local device
@@ -1467,8 +1515,6 @@ namespace NetDemo
 
         public void startRealPlay()
         {
-           
-
             if (m_CurSelectTreeNodeInfo.dwDeviceIndex < 0 || getChannelID() < 0)
             {
                 return;
@@ -2309,6 +2355,8 @@ namespace NetDemo
                     }
                     m_notLoggeddeviceInfoList.Clear();
                 }
+                //Bitmap mtplogo = new Bitmap(Properties.Resources.KZ_logo_2022, 300, 300);
+                //arrayRealPanel[2].BackgroundImage = mtplogo;
 
                 for (int i = 0; i < oList.Count;)
                 {
@@ -2997,6 +3045,7 @@ namespace NetDemo
                     PBVideoDateTimeLabel.Text = getStrTime(curTime);
                     PBRemainingTimeLabel.Text = convertRemainTime(m_curPlayBackPanel.m_endTime - curTime);
                 }
+
             }
 
             // updatedownload porcess
@@ -4754,20 +4803,20 @@ namespace NetDemo
             }
             //if ((int)NETDEV_ALARM_TYPE_E.NETDEV_ALARM_FISHEYE_STREAM_EXIST == pstReportInfo.stAlarmInfo.dwAlarmType)
             //{
-                Int32 dwPtzMode = screeninformation;
-                Int32 dwInstallMode = 0;
-                Int32 bRet = NETDEVSDK.FALSE;
-                bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref dwInstallMode);
+            Int32 dwPtzMode = screeninformation;
+            Int32 dwInstallMode = 0;
+            Int32 bRet = NETDEVSDK.FALSE;
+            bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref dwInstallMode);
 
-              
 
-                dwPtzMode = screeninformation;
 
-                bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, dwInstallMode);
-                //if (NETDEVSDK.FALSE == bRet)
-                //{
-                //    showFailLogInfo(m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip + " chl:" + (m_curRealPanel.m_channelID), "set fish eye mode", NETDEVSDK.NETDEV_GetLastError());
-                //}
+            dwPtzMode = screeninformation;
+
+            bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, dwInstallMode);
+            //if (NETDEVSDK.FALSE == bRet)
+            //{
+            //    showFailLogInfo(m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip + " chl:" + (m_curRealPanel.m_channelID), "set fish eye mode", NETDEVSDK.NETDEV_GetLastError());
+            //}
             //}
         }
 
@@ -4784,7 +4833,7 @@ namespace NetDemo
             item.SubItems.Add(strAlarmInfo);
             AlarmRecordsListView.Items.Add(item);
 
-            if ((int)NETDEV_EXCEPTION_TYPE_E.NETDEV_EXCEPTION_EXCHANGE == dwType)
+            if ((int)NETDEMO.NETDEV_EXCEPTION_TYPE_E.NETDEV_EXCEPTION_EXCHANGE == dwType)
             {
                 for (int dwIndex = 0; dwIndex < m_deviceInfoList.Count; dwIndex++)
                 {
@@ -6116,9 +6165,10 @@ namespace NetDemo
                 Form form = new Form();
                 form.WindowState = FormWindowState.Maximized;
                 form.FormBorderStyle = FormBorderStyle.None;
+                form.KeyUp += new KeyEventHandler(FullscreenKeyUp);
                 form.Controls.Add(this.LayoutPanel);
-                form.Width = Screen.PrimaryScreen.Bounds.Width - 10;
-                form.Height = Screen.PrimaryScreen.Bounds.Height - 10;
+                form.Width = Screen.PrimaryScreen.Bounds.Width;
+                form.Height = Screen.PrimaryScreen.Bounds.Height;
                 this.LayoutPanel.Width = form.Width;
                 this.LayoutPanel.Height = form.Height;
                 if (realMaxFlag == true)
@@ -6153,7 +6203,13 @@ namespace NetDemo
                 form.Close();
             }
         }
-
+        public void FullscreenKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F)
+            {
+                PannelContextMenuStrip.Items[9].PerformClick();
+            }
+        }
 
         private void MultiScreen_Click(object sender, EventArgs e)
         {
@@ -6373,6 +6429,10 @@ namespace NetDemo
 
         private void FishEyeControl(int MouseMoveMode, int x, int y)
         {
+            if (m_curRealPanel == null)
+            {
+                return;
+            }
             if (m_curRealPanel.m_playhandle == IntPtr.Zero)
             {
                 return;
@@ -10848,5 +10908,231 @@ namespace NetDemo
         {
             m_oPtzControl.control(m_curRealPanel.m_playhandle, (int)NETDEV_PTZ_E.NETDEV_PTZ_ZOOMWIDE_STOP);
         }
+
+        private void NetDemo_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+
+            TreeNodeCollection a = this.DeviceTree.Nodes[0].Nodes;
+            foreach (TreeNode nodess in a)
+            {
+                foreach (TreeNode item in nodess.Nodes)
+                {
+
+                    this.DeviceTree.SelectedNode = item;
+                    m_CurSelectTreeNodeInfo = (TreeNodeInfo)item.Tag;
+                    if (DeviceTree.SelectedNode == null)
+                    {
+                        return;
+                    }
+                    if (DeviceTree.SelectedNode.ImageIndex != NETDEMO.NETDEV_TREEVIEW_IMAGE_CHL_DEVICE_ON)
+                    {
+                        return;
+                    }
+                    if (m_curRealPanel.m_playStatus == false)
+                    {
+                        startRealPlay();
+                    }
+                    else
+                    {
+                        //stopRealPlay(m_curRealPanel, true);
+                        startRealPlay();
+                    }
+                    string strScreenNumber = this.comboBoxMultiScreen.SelectedItem.ToString();
+                    int nScreenNumber = int.Parse(strScreenNumber);
+
+                    m_curRealPanelIndex = m_curRealPanel.m_panelIndex + 1;
+                    if (m_curRealPanelIndex >= nScreenNumber)
+                    {
+                        m_curRealPanelIndex = 0;
+                    }
+
+                    m_curRealPanel = arrayRealPanel[m_curRealPanelIndex];
+                    this.setRealPanelBorderColor();
+                    //button68.PerformClick();
+                    
+                }
+            }
+           
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+            if (m_curRealPanel.m_playStatus == false)
+            {
+                return;
+            }
+
+            if (m_curRealPanel.m_recordStatus == false)
+            {
+                String temp = string.Copy(LocalSetting.m_strLocalRecordPath);
+                DateTime date = DateTime.Now;
+                String curTime = date.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
+                LocalSetting.m_strLocalRecordPath += "\\";
+                LocalSetting.m_strLocalRecordPath += m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip;
+                LocalSetting.m_strLocalRecordPath += "_";
+                LocalSetting.m_strLocalRecordPath += m_curRealPanel.m_channelID;
+                LocalSetting.m_strLocalRecordPath += "_";
+                LocalSetting.m_strLocalRecordPath += curTime;
+
+                byte[] localRecordPath;
+                GetUTF8Buffer(LocalSetting.m_strLocalRecordPath, NETDEVSDK.NETDEV_LEN_260, out localRecordPath);
+                int iRet = NETDEVSDK.NETDEV_SaveRealData(m_curRealPanel.m_playhandle, localRecordPath, (int)NETDEV_MEDIA_FILE_FORMAT_E.NETDEV_MEDIA_FILE_MP4);
+                if (NETDEVSDK.FALSE == iRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "start Record", NETDEVSDK.NETDEV_GetLastError());
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "start Record");
+
+                m_curRealPanel.m_recordStatus = true;
+                this.LocalRecodBtn.Text = "Durdur";
+                LocalSetting.m_strLocalRecordPath = temp;
+            }
+            else
+            {
+                int iRet = NETDEVSDK.NETDEV_StopSaveRealData(m_curRealPanel.m_playhandle);
+                if (NETDEVSDK.FALSE == iRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "stop Record", NETDEVSDK.NETDEV_GetLastError());
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "stop Record");
+
+                m_curRealPanel.m_recordStatus = false;
+                this.LocalRecodBtn.Text = "Başlat";
+            }
+        }
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+            if (null == objDiscovery)
+            {
+                objDiscovery = new Discovery(this);
+            }
+
+            objDiscovery.ShowDialog();
+        }
+
+        private void LocalRecodBtn_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (m_curRealPanel.m_playhandle == IntPtr.Zero)
+            {
+                if (m_CurSelectTreeNodeInfo.dwDeviceIndex > m_deviceInfoList.Count() || m_CurSelectTreeNodeInfo.dwDeviceIndex < 0)
+                {
+                    return;
+                }
+
+                String strNoPreviewTemp = string.Copy(LocalSetting.m_strPicSavePath);
+                DateTime oNoPreviewDate = DateTime.Now;
+                String strNoPreviewCurTime = oNoPreviewDate.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
+                LocalSetting.m_strPicSavePath += "\\";
+                LocalSetting.m_strPicSavePath += m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
+                LocalSetting.m_strPicSavePath += "_";
+                LocalSetting.m_strPicSavePath += (getChannelID());
+                LocalSetting.m_strPicSavePath += "_";
+                LocalSetting.m_strPicSavePath += strNoPreviewCurTime;
+
+                byte[] picNoPreviewSavePath;
+                GetUTF8Buffer(LocalSetting.m_strPicSavePath, NETDEVSDK.NETDEV_LEN_260, out picNoPreviewSavePath);
+
+                int iiRet = NETDEVSDK.NETDEV_CaptureNoPreview(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, getChannelID(), (int)NETDEV_LIVE_STREAM_INDEX_E.NETDEV_LIVE_STREAM_INDEX_MAIN, LocalSetting.m_strPicSavePath, (int)NETDEV_PICTURE_FORMAT_E.NETDEV_PICTURE_BMP);
+                if (NETDEVSDK.FALSE == iiRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview", NETDEVSDK.NETDEV_GetLastError());
+                    LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview");
+                LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+                return;
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (IntPtr.Zero == m_curRealPanel.m_playhandle)
+            {
+                return;
+            }
+
+            if (true == m_curRealPanel.m_soundStatus)
+            {
+                int iRet = NETDEVSDK.NETDEV_CloseSound(m_curRealPanel.m_playhandle);
+                if (NETDEVSDK.FALSE == iRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "Close volume fail", NETDEVSDK.NETDEV_GetLastError());
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "Close volume");
+
+                this.SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
+                m_curRealPanel.m_soundStatus = false;
+            }
+            else
+            {
+                realPlayOpenSound();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (IntPtr.Zero == m_curRealPanel.m_playhandle)
+            {
+                return;
+            }
+
+            if (true == m_curRealPanel.m_micStatus)
+            {
+                int iRet = NETDEVSDK.NETDEV_CloseMic(m_curRealPanel.m_playhandle);
+                if (NETDEVSDK.FALSE == iRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "Close Mic fail", NETDEVSDK.NETDEV_GetLastError());
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "Close Mic");
+
+                this.MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources._222;
+                m_curRealPanel.m_micStatus = false;
+            }
+            else
+            {
+                realPlayOpenMic();
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.StartupPath + "\\keyboard.exe");
+        }
+
+        private void button70_Click(object sender, EventArgs e)
+        {
+            CameraCheckList();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            PannelContextMenuStrip.Items[9].PerformClick()/*= true;*/;
+            //FullScreen_Click(sender,null);
+        }
+
     }
+
+
 }
+

@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using NETSDKHelper;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace NetDemo
 {
@@ -15,9 +17,9 @@ namespace NetDemo
     {
         NetDemo m_oNetDemo = null;
         private List<NETDEV_DISCOVERY_DEVINFO_S> oDeviceInfoList = new List<NETDEV_DISCOVERY_DEVINFO_S>();
-        private List<string> oDeviceIPList = new List<string>(); 
+        private List<string> oDeviceIPList = new List<string>();
         private List<Int16> oDevicePortList = new List<short>();
-        private List<string> oDeviceTypeList = new List<string>(); 
+        private List<string> oDeviceTypeList = new List<string>();
 
         public Discovery(NetDemo oNetDemo)
         {
@@ -28,9 +30,17 @@ namespace NetDemo
         //auto search
         private void AutoSearchBtn_Click(object sender, EventArgs e)
         {
-            discovery("0.0.0.0","0.0.0.0");
+            discovery("0.0.0.0", "0.0.0.0");
         }
-
+        public class CameraClass
+        {
+            public int cameraNo { get; set; }
+            public string Ip { get; set; }
+            public string Port { get; set; }
+            public string Username { get; set; }
+            public string Password { get; set; }
+            public string CameraType { get; set; }
+        }
         //segment search
         private void segmentSearchBtn_Click(object sender, EventArgs e)
         {
@@ -56,6 +66,7 @@ namespace NetDemo
                 {
                     eDeviceType = GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_VMS;
                 }
+            
                 m_oNetDemo.AddLocalDevice(oDeviceIPList[i], oDevicePortList[i], strUserName, strPassword, eDeviceType);
             }
 
@@ -100,8 +111,8 @@ namespace NetDemo
                 }
             }
         }
-    
-        private void discovery(String strStartIP,String strEndIP)
+
+        private void discovery(String strStartIP, String strEndIP)
         {
             if (strStartIP == "" || strEndIP == "")
             {
@@ -126,7 +137,7 @@ namespace NetDemo
                 return;
             }
         }
-       
+
         //discovery callback
         private void discoveryCallBack(IntPtr pstDevInfo, IntPtr lpUserData)
         {
@@ -188,15 +199,15 @@ namespace NetDemo
                         break;
                 }
 
-            
+
 
                 ListViewItem oListViewItem = new ListViewItem(str);
-                oListViewItem.SubItems.AddRange(new String[] {stDevInfo.szDevAddr, Convert.ToString(stDevInfo.dwDevPort), stDevInfo.szDevMac, stDevInfo.szDevSerailNum, stDevInfo.szManuFacturer});
+                oListViewItem.SubItems.AddRange(new String[] { stDevInfo.szDevAddr, Convert.ToString(stDevInfo.dwDevPort), stDevInfo.szDevMac, stDevInfo.szDevSerailNum, stDevInfo.szManuFacturer });
                 this.DeviceInfoListView.Items.Add(oListViewItem);
                 deviceNumberLabel.Text = Convert.ToString(DeviceInfoListView.Items.Count);
                 oListViewItem.EnsureVisible();
             }
         }
-        
+
     }
 }

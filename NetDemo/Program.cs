@@ -14,7 +14,7 @@ namespace NetDemo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NetDemo());
+            Application.Run(new Login());
         }
     }
 }

@@ -63,7 +63,7 @@
             this.segmentSearchBtn.Name = "segmentSearchBtn";
             this.segmentSearchBtn.Size = new System.Drawing.Size(80, 30);
             this.segmentSearchBtn.TabIndex = 0;
-            this.segmentSearchBtn.Text = "Search";
+            this.segmentSearchBtn.Text = "Gelişmiş Ara";
             this.segmentSearchBtn.UseVisualStyleBackColor = true;
             this.segmentSearchBtn.Click += new System.EventHandler(this.segmentSearchBtn_Click);
             // 
@@ -123,16 +123,16 @@
             this.Device_Number.AutoSize = true;
             this.Device_Number.Location = new System.Drawing.Point(626, 36);
             this.Device_Number.Name = "Device_Number";
-            this.Device_Number.Size = new System.Drawing.Size(113, 20);
+            this.Device_Number.Size = new System.Drawing.Size(95, 16);
             this.Device_Number.TabIndex = 3;
-            this.Device_Number.Text = "Device Number";
+            this.Device_Number.Text = "Bulunan Cihazlar";
             // 
             // deviceNumberLabel
             // 
             this.deviceNumberLabel.AutoSize = true;
             this.deviceNumberLabel.Location = new System.Drawing.Point(855, 36);
             this.deviceNumberLabel.Name = "deviceNumberLabel";
-            this.deviceNumberLabel.Size = new System.Drawing.Size(17, 20);
+            this.deviceNumberLabel.Size = new System.Drawing.Size(13, 16);
             this.deviceNumberLabel.TabIndex = 4;
             this.deviceNumberLabel.Text = "0";
             // 
@@ -142,9 +142,9 @@
             this.Auto_Search.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Auto_Search.Location = new System.Drawing.Point(626, 70);
             this.Auto_Search.Name = "Auto_Search";
-            this.Auto_Search.Size = new System.Drawing.Size(91, 20);
+            this.Auto_Search.Size = new System.Drawing.Size(77, 16);
             this.Auto_Search.TabIndex = 5;
-            this.Auto_Search.Text = "Auto Search";
+            this.Auto_Search.Text = "Otomatik Ara";
             // 
             // AutoSearchBtn
             // 
@@ -153,7 +153,7 @@
             this.AutoSearchBtn.Name = "AutoSearchBtn";
             this.AutoSearchBtn.Size = new System.Drawing.Size(80, 30);
             this.AutoSearchBtn.TabIndex = 6;
-            this.AutoSearchBtn.Text = "Search";
+            this.AutoSearchBtn.Text = "Ara";
             this.AutoSearchBtn.UseVisualStyleBackColor = true;
             this.AutoSearchBtn.Click += new System.EventHandler(this.AutoSearchBtn_Click);
             // 
@@ -171,14 +171,14 @@
             this.groupBox1.Size = new System.Drawing.Size(321, 172);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search Segment";
+            this.groupBox1.Text = "Arama Ayarları";
             // 
             // endIPText
             // 
             this.endIPText.Location = new System.Drawing.Point(92, 81);
             this.endIPText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.endIPText.Name = "endIPText";
-            this.endIPText.Size = new System.Drawing.Size(188, 26);
+            this.endIPText.Size = new System.Drawing.Size(188, 22);
             this.endIPText.TabIndex = 3;
             // 
             // startIPext
@@ -186,7 +186,7 @@
             this.startIPext.Location = new System.Drawing.Point(92, 37);
             this.startIPext.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.startIPext.Name = "startIPext";
-            this.startIPext.Size = new System.Drawing.Size(188, 26);
+            this.startIPext.Size = new System.Drawing.Size(188, 22);
             this.startIPext.TabIndex = 2;
             // 
             // label2
@@ -194,18 +194,18 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(8, 95);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 20);
+            this.label2.Size = new System.Drawing.Size(45, 16);
             this.label2.TabIndex = 1;
-            this.label2.Text = "End IP";
+            this.label2.Text = "Bitiş  IP";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 20);
+            this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Start IP";
+            this.label1.Text = "Başlangıç IP";
             // 
             // label3
             // 
@@ -214,7 +214,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(337, 28);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Note : Please select device(s) and add to list.";
+            this.label3.Text = "Not : Eklenecek cihazı listeden seçerek ekleyin.";
             // 
             // groupBox2
             // 
@@ -230,7 +230,7 @@
             this.groupBox2.Size = new System.Drawing.Size(321, 167);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Add Device";
+            this.groupBox2.Text = "Cihaz Kullanıcı ";
             // 
             // passwordText
             // 
@@ -239,7 +239,7 @@
             this.passwordText.MaxLength = 64;
             this.passwordText.Name = "passwordText";
             this.passwordText.PasswordChar = '*';
-            this.passwordText.Size = new System.Drawing.Size(191, 26);
+            this.passwordText.Size = new System.Drawing.Size(191, 22);
             this.passwordText.TabIndex = 2;
             this.passwordText.Text = "kz-102030";
             // 
@@ -248,7 +248,7 @@
             this.userNameText.Location = new System.Drawing.Point(90, 37);
             this.userNameText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userNameText.Name = "userNameText";
-            this.userNameText.Size = new System.Drawing.Size(191, 26);
+            this.userNameText.Size = new System.Drawing.Size(191, 22);
             this.userNameText.TabIndex = 2;
             this.userNameText.Text = "admin";
             // 
@@ -257,18 +257,18 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(8, 79);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 20);
+            this.label5.Size = new System.Drawing.Size(30, 16);
             this.label5.TabIndex = 1;
-            this.label5.Text = "Password";
+            this.label5.Text = "Şifre";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(8, 39);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 20);
+            this.label4.Size = new System.Drawing.Size(73, 16);
             this.label4.TabIndex = 0;
-            this.label4.Text = "User Name";
+            this.label4.Text = "Kullanıcı Adı";
             // 
             // addDeviceBtn
             // 
@@ -277,13 +277,13 @@
             this.addDeviceBtn.Name = "addDeviceBtn";
             this.addDeviceBtn.Size = new System.Drawing.Size(80, 30);
             this.addDeviceBtn.TabIndex = 0;
-            this.addDeviceBtn.Text = "Add";
+            this.addDeviceBtn.Text = "Ekle";
             this.addDeviceBtn.UseVisualStyleBackColor = true;
             this.addDeviceBtn.Click += new System.EventHandler(this.addDeviceBtn_Click);
             // 
             // Discovery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(953, 505);
             this.Controls.Add(this.groupBox2);
@@ -301,7 +301,7 @@
             this.MinimizeBox = false;
             this.Name = "Discovery";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Discovery";
+            this.Text = "Keşfet";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

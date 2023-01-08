@@ -166,7 +166,7 @@
             // 
             // Channel
             // 
-            this.Channel.Text = "Channel";
+            this.Channel.Text = "Kamera";
             // 
             // stopMonitorBtn
             // 
@@ -258,7 +258,7 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Channel";
+            this.columnHeader2.Text = "Kamera";
             // 
             // CycleMonitor
             // 
