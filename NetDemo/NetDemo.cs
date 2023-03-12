@@ -19,11 +19,17 @@ using static NetDemo.Discovery;
 using Newtonsoft.Json;
 using static GeneralDef.NETDEMO;
 using System.Security.AccessControl;
+using System.Reflection.Emit;
+using Microsoft.Win32;
 
 namespace NetDemo
 {
+
     public partial class NetDemo : Form
     {
+        [DllImport("user32.dll")]
+
+        static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
         /******************* Define member variables start *******************************/
 
         PlayPanel[] arrayRealPanel = new PlayPanel[NETDEMO.REAL_PANEL_MAX_SIZE];
@@ -113,13 +119,49 @@ namespace NetDemo
 
         /******************* Define member variables end *******************************/
 
+
+
+
+
         public NetDemo()
         {
             Control.CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
+            try
+            {
+                string appName = "NetDemo";
+                string appPath = Application.StartupPath+"\\NetDemo.exe"; // Uygulamanın tam yolunu burada belirtin
+
+                RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                rk.SetValue(appName, appPath);
+            }
+            catch (Exception)
+            {
+
+            }
+            //try
+            //{
+            //    RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+            //    if (key.GetValue("NetDemo").ToString() == "\"" + Application.ExecutablePath + "\"")
+            //    { // Eğer regeditte varsa, checkbox ı işaretle
+            //        // key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+            //        //key.SetValue("NetDemo", "\"" + Application.ExecutablePath + "\"");
+            //    }
+            //    else
+            //    {
+            //         key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+            //        key.SetValue("NetDemo", "\"" + Application.ExecutablePath + "\"");
+            //    }
+            //}
+            //catch
+            //{
+
+            //}
+           
             InitPanel();
             InitNetDemo();
             CameraCheckList();
+
         }
 
         private void CameraCheckList()
@@ -127,7 +169,8 @@ namespace NetDemo
             GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E eDeviceType = GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_IPC_OR_NVR;
             AddLocalDevice("192.168.2.13", 80, "admin", "KZ-102030", eDeviceType);
             AddLocalDevice("192.168.2.14", 80, "admin", "kz-102030", eDeviceType);
-            //this.DeviceTree.SelectedNode = this.DeviceTree.Nodes["(Cihaz Ekle)\\192.168.2.13\\channel 1"];
+            AddLocalDevice("192.168.10.16", 80, "admin", "kz-102030", eDeviceType);
+            this.DeviceTree.SelectedNode = this.DeviceTree.Nodes["(Cihaz Ekle)\\192.168.2.13\\channel 1"];
         }
 
 
@@ -177,7 +220,7 @@ namespace NetDemo
                 this.playBackLayoutPanel.Controls.Add(arrayPlayBackPanel[i]);
                 arrayPlayBackPanel[i].Click += new EventHandler(playBackPanel_Click);
                 arrayPlayBackPanel[i].DoubleClick += new EventHandler(playBackPanel_DoubleClick);
-               
+
             }
 
 
@@ -228,6 +271,7 @@ namespace NetDemo
 
             //AddLocalDevice(oDeviceIPList[i], oDevicePortList[i], strUserName, strPassword, eDeviceType);
             //Kayıtlı kameraları yazdırıyoruz
+
         }
 
         //inie demo app
@@ -492,6 +536,10 @@ namespace NetDemo
             {
                 m_curRealPanel = curSelectedPanel;
             }
+            else
+            {
+                m_curRealPanel = arrayPlayBackPanel[0];
+            }
             this.LayoutPanel.Controls.Clear();
             if (realMaxFlag == true)
             {
@@ -535,22 +583,15 @@ namespace NetDemo
 
                 foreach (var item in arrayRealPanel)
                 {
-                    if (item.m_playhandle!=null)
+                    if (item.m_playhandle != null)
                     {
                         bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(item.m_playhandle, ref dwPtzMode, ref dwInstallMode);
                         NETDEVSDK.NETDEV_SetPtzAndFixMode(item.m_playhandle, screeninformation, dwInstallMode);
+
                     }
-                    
+
                 }
-
-
-
-
-
-
-
-
-
+                //serialPort1.Close();
 
                 //stopRealPlay(m_curRealPanel, true);
                 //startRealPlay();
@@ -563,8 +604,20 @@ namespace NetDemo
                 Int32 dwPtzMode = screeninformation;
                 Int32 dwInstallMode = 0;
                 Int32 bRet = NETDEVSDK.FALSE;
-                bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
-                NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+                try
+                {
+                    bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
+                    NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+                }
+                catch (Exception)
+                {
+
+                    
+                }
+             
+                //serialPort1.BaudRate = 9600;
+                //serialPort1.PortName = "COM6";
+                //serialPort1.Open();
                 //stopRealPlay(m_curRealPanel, true);
                 //startRealPlay();
             }
@@ -6182,6 +6235,7 @@ namespace NetDemo
                 switchRealScreen(m_mourseRightSelectedPanel);
                 toolStripMenuItem.Checked = true;
                 form.ShowDialog();
+
             }
             else
             {
@@ -10954,10 +11008,10 @@ namespace NetDemo
                     m_curRealPanel = arrayRealPanel[m_curRealPanelIndex];
                     this.setRealPanelBorderColor();
                     //button68.PerformClick();
-                    
+
                 }
             }
-           
+
         }
 
         private void button66_Click(object sender, EventArgs e)
@@ -11130,7 +11184,127 @@ namespace NetDemo
             PannelContextMenuStrip.Items[9].PerformClick()/*= true;*/;
             //FullScreen_Click(sender,null);
         }
+        //Burada sol tıklamanın down kodunu hex türünden değişkene aktarıyoruz(basılı olma durumu).
+        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
 
+        //    //Burada sol tıklamanın up kodunu hex türünden belirtiyoruz(basıldıktan sonra bırakılma durumu).
+        private const int MOUSEEVENTF_LEFTUP = 0x0004;
+        int mousebuttontype = 0;
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                string data;
+                string[] splitted_data;
+                data = serialPort1.ReadLine();
+                splitted_data = data.Split(',');
+                var x = Convert.ToInt32(splitted_data[2]);
+                var y = Convert.ToInt32(splitted_data[1]);
+                if (x < 50)
+                {
+                    Cursor.Position = new Point(Cursor.Position.X - x, Cursor.Position.Y);
+                    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0x0004, Cursor.Position.X, Cursor.Position.Y, 0);
+                    //realPanel_MouseDown(sender, aa);
+                }
+                else if (x > 50)
+                {
+                    Cursor.Position = new Point(Cursor.Position.X + x, Cursor.Position.Y);
+                    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0x0004, Cursor.Position.X, Cursor.Position.Y, 0);
+                    //realPanel_MouseDown(sender, aa);
+                }
+                //else
+                //{
+                //    Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y);
+                //    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0, Cursor.Position.X, Cursor.Position.Y, 0);
+                //    realPanel_MouseDown(sender, aa);
+                //}
+                if (y > 50)
+                {
+                    Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y - y);
+                    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0x0004, Cursor.Position.X, Cursor.Position.Y, 0);
+                    //realPanel_MouseDown(sender, aa);
+                }
+                else if (y < 50)
+                {
+                    Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + y);
+                    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0x0004, Cursor.Position.X, Cursor.Position.Y, 0);
+                    //realPanel_MouseDown(sender, aa);
+
+                }
+                //else
+                //{
+                //    Cursor.Position = new Point(Cursor.Position.X , Cursor.Position.Y);
+                //    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left,0, Cursor.Position.X, Cursor.Position.Y, 0);
+                //    realPanel_MouseDown(sender, aa);
+                //}
+
+
+                if (splitted_data[13] == "1")
+                {
+                    //İlk satırda fareye sol tuşun basılmasını sağladık.
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+                }
+                //else if (splitted_data[13] == "0")
+                //{
+                //    mouse_event(MOUSEEVENTF_LEFTUP, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+                //}
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+            if (mainTabCtrl.Width != this.Width)
+            {
+                mainTabCtrl.Location = new Point(0, mainTabCtrl.Location.Y);
+                mainTabCtrl.Width = this.Width;
+
+                LayoutPanel.Width = this.Width;
+                switchRealScreen(null);
+                switchRealScreen(null);
+
+                button70.Visible = false;
+                button60.Visible = false;
+                button66.Visible = false;
+                button68.Visible = false;
+                button67.Visible = false;
+                button5.Visible = false;
+                button8.Visible = false;
+                button7.Visible = false;
+                button6.Visible = false;
+                button9.Visible = false;
+            }
+            else
+            {
+                mainTabCtrl.Location = new Point(145, mainTabCtrl.Location.Y);
+                mainTabCtrl.Width = 1136;
+                mainTabCtrl.Height = 819;
+                LayoutPanel.Width = 1151;
+                LayoutPanel.Height = 819;
+                switchRealScreen(null);
+                switchRealScreen(null);
+
+                button70.Visible = true;
+                button60.Visible = true;
+                button66.Visible = true;
+                button68.Visible = true;
+                button67.Visible = true;
+                button5.Visible = true;
+                button8.Visible = true;
+                button7.Visible = true;
+                button6.Visible = true;
+                button9.Visible = true;
+            }
+
+        }
     }
 
 

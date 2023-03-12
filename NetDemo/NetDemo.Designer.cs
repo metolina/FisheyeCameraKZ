@@ -41,6 +41,7 @@ namespace NetDemo
             this.LiveView = new System.Windows.Forms.TabPage();
             this.LayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.Playback = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
             this.GetRecordDays = new System.Windows.Forms.Button();
             this.BoxPositionList = new System.Windows.Forms.ComboBox();
             this.playBackLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -665,6 +666,8 @@ namespace NetDemo
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.button10 = new System.Windows.Forms.Button();
             this.mainTabCtrl.SuspendLayout();
             this.LiveView.SuspendLayout();
             this.Playback.SuspendLayout();
@@ -839,6 +842,7 @@ namespace NetDemo
             // Playback
             // 
             this.Playback.BackColor = System.Drawing.Color.White;
+            this.Playback.Controls.Add(this.label2);
             this.Playback.Controls.Add(this.GetRecordDays);
             this.Playback.Controls.Add(this.BoxPositionList);
             this.Playback.Controls.Add(this.playBackLayoutPanel);
@@ -873,6 +877,15 @@ namespace NetDemo
             this.Playback.Padding = new System.Windows.Forms.Padding(3);
             this.Playback.Size = new System.Drawing.Size(1128, 789);
             this.Playback.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1103, 317);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 17);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "label2";
             // 
             // GetRecordDays
             // 
@@ -7251,12 +7264,10 @@ namespace NetDemo
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.ForeColor = System.Drawing.Color.White;
             this.button6.Image = global::NetDemo.Properties.Resources.Mic123;
-            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(8, 419);
+            this.button6.Location = new System.Drawing.Point(69, 368);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(136, 45);
+            this.button6.Size = new System.Drawing.Size(73, 45);
             this.button6.TabIndex = 224;
-            this.button6.Text = "SES";
             this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
@@ -7273,9 +7284,8 @@ namespace NetDemo
             this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button7.Location = new System.Drawing.Point(8, 368);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(135, 45);
+            this.button7.Size = new System.Drawing.Size(65, 45);
             this.button7.TabIndex = 222;
-            this.button7.Text = "KONUŞMA";
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -7327,12 +7337,36 @@ namespace NetDemo
             this.panel2.Size = new System.Drawing.Size(141, 10);
             this.panel2.TabIndex = 226;
             // 
+            // serialPort1
+            // 
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.Green;
+            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button10.FlatAppearance.BorderSize = 0;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button10.ForeColor = System.Drawing.Color.White;
+            this.button10.Image = ((System.Drawing.Image)(resources.GetObject("button10.Image")));
+            this.button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button10.Location = new System.Drawing.Point(1177, 730);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(91, 58);
+            this.button10.TabIndex = 227;
+            this.button10.Text = "MENÜ";
+            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // NetDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1280, 800);
+            this.Controls.Add(this.button10);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button6);
@@ -8113,6 +8147,9 @@ namespace NetDemo
         private Button button9;
         private Panel panel2;
         public ContextMenuStrip PannelContextMenuStrip;
+        private System.IO.Ports.SerialPort serialPort1;
+        private Button button10;
+        private Label label2;
     }
 }
 
