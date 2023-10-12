@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.label2 = new System.Windows.Forms.Label();
             this.txt_sifre = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -46,19 +46,24 @@
             this.numeric_8 = new System.Windows.Forms.Button();
             this.numeric_9 = new System.Windows.Forms.Button();
             this.numeric_1 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.led = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button67 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(484, 346);
+            this.label2.Location = new System.Drawing.Point(346, 220);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 31);
             this.label2.TabIndex = 1;
@@ -67,7 +72,7 @@
             // txt_sifre
             // 
             this.txt_sifre.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_sifre.Location = new System.Drawing.Point(582, 333);
+            this.txt_sifre.Location = new System.Drawing.Point(444, 207);
             this.txt_sifre.Multiline = true;
             this.txt_sifre.Name = "txt_sifre";
             this.txt_sifre.PasswordChar = '*';
@@ -80,28 +85,17 @@
             // 
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.BorderSize = 3;
+            this.button1.FlatAppearance.BorderSize = 2;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(490, 415);
+            this.button1.Location = new System.Drawing.Point(352, 289);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(315, 65);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Giriş Yap";
+            this.button1.Text = "Giriş İçin Tıklayınız";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::NetDemo.Properties.Resources.KZ_logo_2022;
-            this.pictureBox1.Location = new System.Drawing.Point(410, 47);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(459, 183);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
             // 
             // groupBox1
             // 
@@ -117,7 +111,7 @@
             this.groupBox1.Controls.Add(this.numeric_8);
             this.groupBox1.Controls.Add(this.numeric_9);
             this.groupBox1.Controls.Add(this.numeric_1);
-            this.groupBox1.Location = new System.Drawing.Point(410, 542);
+            this.groupBox1.Location = new System.Drawing.Point(272, 383);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(459, 205);
             this.groupBox1.TabIndex = 6;
@@ -141,7 +135,8 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderSize = 2;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button2.FlatAppearance.BorderSize = 3;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.button2.Location = new System.Drawing.Point(373, 118);
@@ -170,7 +165,8 @@
             // numeric_2
             // 
             this.numeric_2.BackColor = System.Drawing.Color.White;
-            this.numeric_2.FlatAppearance.BorderSize = 2;
+            this.numeric_2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.numeric_2.FlatAppearance.BorderSize = 3;
             this.numeric_2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.numeric_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.numeric_2.Location = new System.Drawing.Point(105, 19);
@@ -184,7 +180,8 @@
             // numeric_3
             // 
             this.numeric_3.BackColor = System.Drawing.Color.White;
-            this.numeric_3.FlatAppearance.BorderSize = 2;
+            this.numeric_3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.numeric_3.FlatAppearance.BorderSize = 3;
             this.numeric_3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.numeric_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.numeric_3.Location = new System.Drawing.Point(192, 19);
@@ -198,7 +195,8 @@
             // numeric_4
             // 
             this.numeric_4.BackColor = System.Drawing.Color.White;
-            this.numeric_4.FlatAppearance.BorderSize = 2;
+            this.numeric_4.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.numeric_4.FlatAppearance.BorderSize = 3;
             this.numeric_4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.numeric_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.numeric_4.Location = new System.Drawing.Point(286, 19);
@@ -212,7 +210,8 @@
             // numeric_5
             // 
             this.numeric_5.BackColor = System.Drawing.Color.White;
-            this.numeric_5.FlatAppearance.BorderSize = 2;
+            this.numeric_5.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.numeric_5.FlatAppearance.BorderSize = 3;
             this.numeric_5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.numeric_5.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.numeric_5.Location = new System.Drawing.Point(373, 19);
@@ -226,7 +225,8 @@
             // numeric_6
             // 
             this.numeric_6.BackColor = System.Drawing.Color.White;
-            this.numeric_6.FlatAppearance.BorderSize = 2;
+            this.numeric_6.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.numeric_6.FlatAppearance.BorderSize = 3;
             this.numeric_6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.numeric_6.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.numeric_6.Location = new System.Drawing.Point(19, 118);
@@ -240,7 +240,8 @@
             // numeric_7
             // 
             this.numeric_7.BackColor = System.Drawing.Color.White;
-            this.numeric_7.FlatAppearance.BorderSize = 2;
+            this.numeric_7.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.numeric_7.FlatAppearance.BorderSize = 3;
             this.numeric_7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.numeric_7.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.numeric_7.Location = new System.Drawing.Point(105, 118);
@@ -254,7 +255,8 @@
             // numeric_8
             // 
             this.numeric_8.BackColor = System.Drawing.Color.White;
-            this.numeric_8.FlatAppearance.BorderSize = 2;
+            this.numeric_8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.numeric_8.FlatAppearance.BorderSize = 3;
             this.numeric_8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.numeric_8.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.numeric_8.Location = new System.Drawing.Point(192, 118);
@@ -268,7 +270,8 @@
             // numeric_9
             // 
             this.numeric_9.BackColor = System.Drawing.Color.White;
-            this.numeric_9.FlatAppearance.BorderSize = 2;
+            this.numeric_9.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.numeric_9.FlatAppearance.BorderSize = 3;
             this.numeric_9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.numeric_9.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.numeric_9.Location = new System.Drawing.Point(286, 118);
@@ -282,7 +285,8 @@
             // numeric_1
             // 
             this.numeric_1.BackColor = System.Drawing.Color.White;
-            this.numeric_1.FlatAppearance.BorderSize = 2;
+            this.numeric_1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.numeric_1.FlatAppearance.BorderSize = 3;
             this.numeric_1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.numeric_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.numeric_1.Location = new System.Drawing.Point(19, 19);
@@ -292,14 +296,6 @@
             this.numeric_1.Text = "1";
             this.numeric_1.UseVisualStyleBackColor = false;
             this.numeric_1.Click += new System.EventHandler(this.numeric_1_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(1, 305);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1600, 3);
-            this.panel1.TabIndex = 7;
             // 
             // panel3
             // 
@@ -322,17 +318,88 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Location = new System.Drawing.Point(1, 505);
+            this.panel2.Location = new System.Drawing.Point(-137, 379);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1600, 3);
             this.panel2.TabIndex = 8;
+            // 
+            // led
+            // 
+            this.led.BackColor = System.Drawing.Color.DodgerBlue;
+            this.led.FlatAppearance.BorderSize = 0;
+            this.led.Location = new System.Drawing.Point(988, 22);
+            this.led.Name = "led";
+            this.led.Size = new System.Drawing.Size(30, 20);
+            this.led.TabIndex = 797;
+            this.led.UseVisualStyleBackColor = false;
+            this.led.Click += new System.EventHandler(this.led_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Location = new System.Drawing.Point(-137, 179);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1600, 3);
+            this.panel1.TabIndex = 7;
+            // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM3";
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::NetDemo.Properties.Resources.KZ_logo_2022;
+            this.pictureBox1.Location = new System.Drawing.Point(413, 56);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(189, 77);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button67
+            // 
+            this.button67.BackColor = System.Drawing.Color.White;
+            this.button67.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.button67.FlatAppearance.BorderSize = 0;
+            this.button67.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button67.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button67.ForeColor = System.Drawing.Color.Black;
+            this.button67.Image = ((System.Drawing.Image)(resources.GetObject("button67.Image")));
+            this.button67.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button67.Location = new System.Drawing.Point(869, 12);
+            this.button67.Name = "button67";
+            this.button67.Size = new System.Drawing.Size(158, 97);
+            this.button67.TabIndex = 165;
+            this.button67.Text = " ";
+            this.button67.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.button67.UseVisualStyleBackColor = false;
+            this.button67.Click += new System.EventHandler(this.button67_Click);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.White;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button4.FlatAppearance.BorderSize = 2;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(881, 528);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(137, 43);
+            this.button4.TabIndex = 800;
+            this.button4.Text = "Şifre Değiştir";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Visible = false;
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1280, 800);
+            this.ClientSize = new System.Drawing.Size(1024, 600);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.led);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -342,13 +409,15 @@
             this.Controls.Add(this.txt_sifre);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.button67);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KZ MEKATRONİK";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.Login_Load);
+            this.Shown += new System.EventHandler(this.Login_Shown);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -370,11 +439,15 @@
         private System.Windows.Forms.Button numeric_8;
         private System.Windows.Forms.Button numeric_9;
         private System.Windows.Forms.Button numeric_1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button67;
+        private System.Windows.Forms.Button led;
+        private System.Windows.Forms.Panel panel1;
+        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button button4;
     }
 }

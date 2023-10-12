@@ -21,19 +21,35 @@ using static GeneralDef.NETDEMO;
 using System.Security.AccessControl;
 using System.Reflection.Emit;
 using Microsoft.Win32;
+using UsbLibrary;
+using NetDemo.Properties;
+using System.Security.Cryptography;
+using ThermalCamera.ViewModel;
+using System.IO.Ports;
+using NetSDKCS;
+using System.Windows.Media;
+using Color = System.Drawing.Color;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using System.Resources;
+using Vlc.DotNet.Forms;
+using System.Net;
+using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 namespace NetDemo
 {
 
     public partial class NetDemo : Form
     {
+        private UdpClient udpServer;
+        private IPEndPoint serverEndPoint;
+
         [DllImport("user32.dll")]
 
         static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
         /******************* Define member variables start *******************************/
 
         PlayPanel[] arrayRealPanel = new PlayPanel[NETDEMO.REAL_PANEL_MAX_SIZE];
-
         static readonly object locker = new object();
         private List<DeviceInfo> m_deviceInfoList = new List<DeviceInfo>();
 
@@ -51,19 +67,28 @@ namespace NetDemo
 
         Int32 m_curRealPanelIndex = 0;
 
-
+        int logCounter = 0;
         bool realMaxFlag = false;
         bool playBackMaxFlag = false;
 
-
+        string sayacpanel = "3";
+        string sayacpanel2 = "3";
+        string mouse = "0";
         int m_layoutPanelWidth = 0;
         int m_layoutPanelHeight = 0;
 
         PTZControl m_oPtzControl = null;
         Discovery objDiscovery = null;
 
-
+        string[] ports = System.IO.Ports.SerialPort.GetPortNames();
         public PlayPanel[] arrayPlayBackPanel = new PlayPanel[NETDEMO.PLAYBACK_PANEL_MAX_SIZE];
+        //public PlayPanel[] thermal= new PlayPanel[NETDEMO.PLAYBACK_PANEL_MAX_SIZE];
+        int valb = 0;
+        int valc = 0;
+
+        int panelacma = 0;
+
+        public PlayPanel[] thermalplaypanel = new PlayPanel[NETDEMO.PLAYBACK_PANEL_MAX_SIZE];
 
         public PlayPanel m_curPlayBackPanel;
         PlayBackInfo m_playBackInfo = new PlayBackInfo();
@@ -105,21 +130,40 @@ namespace NetDemo
         NETDEVSDK.NETDEV_DECODE_VIDEO_DATA_CALLBACK_PF playDecodeVideoCB = null;
         NETDEVSDK.NETDEV_ConflagrationAlarmMessCallBack_PF conflagrationAlarmCB = null;
 
-
+        int tabcontrolsayac = 0;
         Config m_config = null;
 
         /* privacy Mask Cfg*/
         String strSubItemName = "";
         int iItemIndex = -1;
 
-
-
+        int Okuma_Sayac = 0;
+        int Okuma_Sayac2 = 0;
         int screeninformation = 0;
         public static bool m_getCenterRecord = false;
 
         /******************* Define member variables end *******************************/
 
+        int rolenomodul = 0;
+        string kamera1 = "0";
+        string kamera2 = "0";
+        string kamera3 = "0";
+        string kamera4 = "0";
+        string irled1 = "0";
+        string irled2 = "0";
+        string irled3 = "0";
+        string irled4 = "0";
+        string hab1 = "0";
+        string hab2 = "0";
+        string hab3 = "0";
+        string hab4 = "0";
+        string sled1 = "0";
+        string sled2 = "0";
+        string sled3 = "0";
+        string sled4 = "0";
 
+        Form2 form2 = new Form2();//açılacak form
+        Form1 form1 = new Form1();//açılacak form
 
 
 
@@ -127,10 +171,11 @@ namespace NetDemo
         {
             Control.CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
+            serialPort1.DataReceived += new SerialDataReceivedEventHandler(serialPort1_DataReceived);
             try
             {
                 string appName = "NetDemo";
-                string appPath = Application.StartupPath+"\\NetDemo.exe"; // Uygulamanın tam yolunu burada belirtin
+                string appPath = Application.StartupPath + "\\NetDemo.exe"; // Uygulamanın tam yolunu burada belirtin
 
                 RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 rk.SetValue(appName, appPath);
@@ -139,6 +184,7 @@ namespace NetDemo
             {
 
             }
+
             //try
             //{
             //    RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
@@ -157,23 +203,283 @@ namespace NetDemo
             //{
 
             //}
-           
+
             InitPanel();
             InitNetDemo();
             CameraCheckList();
-
+            this.Pto_USB.ProductId = 22300;
+            this.Pto_USB.VendorId = 1155;
+            this.Pto_USB.CheckDevicePresent();
+            timer1.Start();
         }
+
+
+        #region USB BAĞLANTISI
+
+        private byte[] OutBuffer = new byte[65];
+        private void usb_OnDeviceArrived(object sender, EventArgs e)
+        {
+            AddToLog("USB Bağlı", "USB BAĞLI", 2, Color.Green);
+        }
+
+        private void usb_OnDeviceRemoved(object sender, EventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new EventHandler(usb_OnDeviceRemoved), new object[] { sender, e });
+            }
+            else
+            {
+                AddToLog("USB Kaldırıldı", "USB Kaldırıldı", 2, Color.Red);
+            }
+        }
+
+        private void usb_OnSpecifiedDeviceArrived(object sender, EventArgs e)
+        {
+            AddToLog("Cihaz Algılandı", "Cihaz Algılandı", 2, Color.Green);
+        }
+
+        private void usb_OnSpecifiedDeviceRemoved(object sender, EventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new EventHandler(usb_OnSpecifiedDeviceRemoved), new object[] { sender, e });
+            }
+            else
+            {
+                AddToLog("Aygıt bağlantısı kesildi", "Aygıt Bağlantısı kesildi", 2, Color.Red);
+            }
+        }
+
+        private void usb_OnDataSend(object sender, EventArgs e)
+        {
+            AddToLog("Veri gönderildi", "Veri Gönderildi", 2, Color.Yellow);
+        }
+
+
+
+
+        private void usb_OnDataRecieved(object sender, DataRecievedEventArgs args)
+        {
+            if (InvokeRequired)
+            {
+                try
+                {
+                    Invoke(new DataRecievedEventHandler(usb_OnDataRecieved), new object[] { sender, args });
+                }
+                catch
+                { }
+            }
+            else
+            {
+                byte i;
+                byte[] In_Data = new byte[64];
+                In_Data = args.data;
+                //for (i = 0; i < 29; ++i)
+                //{
+                //    In_datos.Text += Convert.ToString(In_Data[i]) + "  ";
+                //}
+
+                label8.Text = Convert.ToChar(In_Data[31]) + "" + Convert.ToChar(In_Data[32]) + "" + Convert.ToChar(In_Data[33]) + "" + Convert.ToChar(In_Data[34]);
+                label10.Text = Convert.ToString(In_Data[35]).ToString();
+                //if (In_Data[36] == 72)
+                //{
+                //    pictureBox4.Image = Resources.çarp_1;
+                //    pictureBox7.Image = Resources.çarp_2;
+                //}
+
+                //else if (In_Data[36] == 70)
+                //{
+                //    pictureBox4.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //    pictureBox7.Image = Resources.çarp_2;
+                //}
+                //else if (In_Data[36] == 69)
+                //{
+                //    pictureBox4.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //    pictureBox7.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //}
+
+
+                //if (In_Data[35] == 0)
+                //{
+                //    pictureBox1.Image = Resources.çarp_1;
+                //    pictureBox4.Image = Resources.çarp_1;
+                //    pictureBox7.Image = Resources.çarp_2;
+                //}
+                //else pictureBox1.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+
+
+
+
+                //label19.Text = Convert.ToChar(In_Data[37]) + "" + Convert.ToChar(In_Data[38]) + "" + Convert.ToChar(In_Data[39]) + "" + Convert.ToChar(In_Data[40]);
+                //label17.Text = Convert.ToString(In_Data[41]).ToString();
+                //if (In_Data[42] == 72)
+                //{
+                //    pictureBox5.Image = Resources.çarp_1;
+                //    pictureBox8.Image = Resources.çarp_2;
+                //}
+
+                //else if (In_Data[42] == 70)
+                //{
+                //    pictureBox5.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //    pictureBox8.Image = Resources.çarp_2;
+                //}
+                //else if (In_Data[42] == 69)
+                //{
+                //    pictureBox5.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //    pictureBox8.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //}
+
+
+                //if (In_Data[41] == 0)
+                //{
+                //    pictureBox2.Image = Resources.çarp_1;
+                //    pictureBox5.Image = Resources.çarp_1;
+                //    pictureBox8.Image = Resources.çarp_2;
+                //}
+                //else pictureBox2.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+
+
+
+                //label31.Text = Convert.ToChar(In_Data[43]) + "" + Convert.ToChar(In_Data[44]) + "" + Convert.ToChar(In_Data[45]) + "" + Convert.ToChar(In_Data[46]);
+                //label29.Text = Convert.ToString(In_Data[47]).ToString();
+                //if (In_Data[48] == 72)
+                //{
+                //    pictureBox6.Image = Resources.çarp_1;
+                //    pictureBox9.Image = Resources.çarp_2;
+                //}
+
+                //else if (In_Data[48] == 70)
+                //{
+                //    pictureBox6.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //    pictureBox9.Image = Resources.çarp_2;
+                //}
+                //else if (In_Data[48] == 69)
+                //{
+                //    pictureBox6.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //    pictureBox9.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //}
+
+
+                //if (In_Data[47] == 0)
+                //{
+                //    pictureBox3.Image = Resources.çarp_1;
+                //    pictureBox6.Image = Resources.çarp_1;
+                //    pictureBox9.Image = Resources.çarp_2;
+                //}
+                //else pictureBox3.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+
+
+                // if (In_Data[49] == 1) this.WindowState = FormWindowState.Normal;
+                //else this.WindowState = FormWindowState.Minimized;
+
+                /*if (In_Data[50] == 0) kapat_say++;
+                else kapat_say = 0;
+                if(kapat_say>9) timer1.Start();
+                else timer1.Stop();*/
+
+                //textBox1.Text = Convert.ToString(kapat_say);
+                AddToLog("Yeni Veri Alındı", "Yeni Veri Alındı", 2, Color.Black);
+            }
+        }
+
+
+        //protected override void OnHandleCreated(EventArgs e)
+        //{
+        //    base.OnHandleCreated(e);
+        //    Pto_USB.RegisterHandle(Handle);
+        //}
+
+        //protected override void WndProc(ref Message m)
+        //{
+        //    Pto_USB.ParseMessages(ref m);
+        //    base.WndProc(ref m);
+        //}
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+
+            OutBuffer[0] = 0; //indicação de erro - ignorado pelo mikroc
+            OutBuffer[1] = 2;
+            OutBuffer[2] = 2;
+            if (Pto_USB.SpecifiedDevice != null)
+            {
+                Pto_USB.SpecifiedDevice.SendData(OutBuffer);
+
+            }
+            //Thread.Sleep(1000);
+            //System.Diagnostics.Process.Start("shutdown", "/s /t 0");
+        }
+
+        #endregion
+
+
 
         private void CameraCheckList()
         {
             GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E eDeviceType = GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_IPC_OR_NVR;
-            AddLocalDevice("192.168.2.13", 80, "admin", "KZ-102030", eDeviceType);
-            AddLocalDevice("192.168.2.14", 80, "admin", "kz-102030", eDeviceType);
-            AddLocalDevice("192.168.10.16", 80, "admin", "kz-102030", eDeviceType);
-            this.DeviceTree.SelectedNode = this.DeviceTree.Nodes["(Cihaz Ekle)\\192.168.2.13\\channel 1"];
+            //AddLocalDevice("192.168.2.13", 80, "admin", "KZ-102030", eDeviceType);
+            //AddLocalDevice("192.168.2.14", 80, "admin", "kz-102030", eDeviceType);
+            //AddLocalDevice("192.168.10.16", 80, "admin", "kz-102030", eDeviceType);
+            #region Otomatik kayıtlı kameralar Atama yapılıyor
+            string dosyaAdi = "kayitlar.json";
+            string klasorYolu = Path.Combine(Application.LocalUserAppDataPath);
+            string dosyaYolu = Path.Combine(klasorYolu, dosyaAdi);
+
+            // Dosya var mı diye kontrol et
+            if (!File.Exists(dosyaYolu)) { }
+            else
+            {
+                // Dosyayı oku
+                string json = File.ReadAllText(dosyaYolu);
+
+                // JSON verisini Kayit nesnelerine dönüştür
+                KameraSettings kayitlar = JsonConvert.DeserializeObject<KameraSettings>(json);
+                if (kayitlar.cam1_ipadress != "" && kayitlar.cam1_password != "" && kayitlar.cam1_port != "" && kayitlar.cam1_username != "")
+                {
+                    var port1 = Convert.ToInt16(kayitlar.cam1_port);
+                    AddLocalDevice(kayitlar.cam1_ipadress, port1, kayitlar.cam1_username, kayitlar.cam1_password, eDeviceType);
+                }
+                if (kayitlar.cam2_ipadress != "" && kayitlar.cam2_password != "" && kayitlar.cam2_port != "" && kayitlar.cam2_username != "")
+                {
+                    var port2 = Convert.ToInt16(kayitlar.cam2_port);
+                    AddLocalDevice(kayitlar.cam2_ipadress, port2, kayitlar.cam2_username, kayitlar.cam2_password, eDeviceType);
+                }
+                if (kayitlar.cam3_ipadress != "" && kayitlar.cam3_password != "" && kayitlar.cam3_port != "" && kayitlar.cam3_username != "")
+                {
+                    var port3 = Convert.ToInt16(kayitlar.cam3_port);
+                    AddLocalDevice(kayitlar.cam3_ipadress, port3, kayitlar.cam3_username, kayitlar.cam3_password, eDeviceType);
+                }
+                if (kayitlar.cam4_ipadress != "" && kayitlar.cam4_password != "" && kayitlar.cam4_port != "" && kayitlar.cam4_username != "")
+                {
+                    var port4 = Convert.ToInt16(kayitlar.cam4_port);
+                    AddLocalDevice(kayitlar.cam4_ipadress, port4, kayitlar.cam4_username, kayitlar.cam4_password, eDeviceType);
+                }
+
+            }
+            #endregion
+            //this.DeviceTree.SelectedNode = this.DeviceTree.Nodes["(Cihaz Ekle)\\192.168.2.13\\channel 1"];
         }
 
-
+        public class KameraSettings
+        {
+            public string cam1_ipadress { get; set; }
+            public string cam1_port { get; set; }
+            public string cam1_username { get; set; }
+            public string cam1_password { get; set; }
+            public string cam2_ipadress { get; set; }
+            public string cam2_port { get; set; }
+            public string cam2_username { get; set; }
+            public string cam2_password { get; set; }
+            public string cam3_ipadress { get; set; }
+            public string cam3_port { get; set; }
+            public string cam3_username { get; set; }
+            public string cam3_password { get; set; }
+            public string cam4_ipadress { get; set; }
+            public string cam4_port { get; set; }
+            public string cam4_username { get; set; }
+            public string cam4_password { get; set; }
+        }
         //init panel
         private void InitPanel()
         {
@@ -398,6 +704,27 @@ namespace NetDemo
         private void realPanel_Click(object sender, EventArgs e)
         {
             m_curRealPanel = sender as PlayPanel;
+            if (m_curRealPanel.m_soundStatus == false)
+            {
+                //ses kapalı
+                //   button16.Image = System.Drawing.Image.FromFile(@"C:\Users\Administrator\Pictures\forestfloor.jpg");
+                button16.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\sesoff.png");
+            }
+            else
+            {
+                //ses açık
+                button16.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\sesac.png");
+            }
+            if (m_curRealPanel.m_recordStatus == false)
+            {
+                //video kayıt kapalı
+                button14.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\REC1.png");
+            }
+            else
+            {
+                //video kayıt açık
+                button14.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\REC2.png");
+            }
             setDeviceTreeSelectNode();
 
             if (true == m_curRealPanel.m_recordStatus)
@@ -532,14 +859,14 @@ namespace NetDemo
 
         private void switchRealScreen(PlayPanel curSelectedPanel)
         {
-            if (m_curRealPanel == null)
-            {
-                m_curRealPanel = curSelectedPanel;
-            }
-            else
-            {
-                m_curRealPanel = arrayPlayBackPanel[0];
-            }
+            //if (m_curRealPanel == null)
+            //{
+            //    m_curRealPanel = curSelectedPanel;
+            //}
+            //else
+            //{
+            //    m_curRealPanel = arrayPlayBackPanel[0];
+            //}
             this.LayoutPanel.Controls.Clear();
             if (realMaxFlag == true)
             {
@@ -565,19 +892,39 @@ namespace NetDemo
             }
         }
 
-
+        public int counterformoreconnection = 0;
+        public bool forfisheye = false;
         private void realPanel_DoubleClick(object sender, EventArgs e)
         {
             PlayPanel selectedplaypanel = sender as PlayPanel;
-            switchRealScreen(selectedplaypanel);
+            if (selectedplaypanel.m_playStatus == false)
+            {
+                return;
+            }
+
             if (MultiScreen.Checked == false)
             {
-
-                MultiScreen.Checked = true;
-                screeninformation = 0;
+                Int32 bRet = NETDEVSDK.FALSE;
                 Int32 dwPtzMode = screeninformation;
                 Int32 dwInstallMode = 0;
-                Int32 bRet = NETDEVSDK.FALSE;
+                if (forfisheye == true)
+                {
+                    dwPtzMode = 2;
+                    screeninformation = 2;
+                    dwInstallMode = 2;
+                    forfisheye = false;
+                }
+                else
+                {
+                    MultiScreen.Checked = true;
+                    screeninformation = 0;
+                    dwPtzMode = screeninformation;
+                    dwInstallMode = 0;
+                    forfisheye = true;
+                    switchRealScreen(selectedplaypanel);
+                    vlcControl1.Visible = true;
+
+                }
                 //bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
                 //NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
 
@@ -586,11 +933,29 @@ namespace NetDemo
                     if (item.m_playhandle != null)
                     {
                         bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(item.m_playhandle, ref dwPtzMode, ref dwInstallMode);
-                        NETDEVSDK.NETDEV_SetPtzAndFixMode(item.m_playhandle, screeninformation, dwInstallMode);
+                        if (bRet == 1)
+                        {
+                            //TabClear();
+                            //this.fisheye.Parent = this.mainTabCtrl; //show
+                            NETDEVSDK.NETDEV_SetPtzAndFixMode(item.m_playhandle, screeninformation, dwInstallMode);
+                            NETDEVSDK.NETDEV_GetPtzAndFixMode(item.m_playhandle, ref screeninformation, ref dwInstallMode);
+                            //fisheye bağlantısı tab olarak fisheye tarafına da eklenecek. 
+                            //playPanel6.handle = selectedplaypanel.Handle;
+                            screeninformation = 0;
+                            return;
+
+                        }
+                        else
+                        {
+                            screeninformation = 0;
+                            return;
+                        }
 
                     }
 
                 }
+
+
                 //serialPort1.Close();
 
                 //stopRealPlay(m_curRealPanel, true);
@@ -598,23 +963,67 @@ namespace NetDemo
             }
             else
             {
+
+                forfisheye = true;
                 m_curRealPanel = selectedplaypanel;
+                switchRealScreen(selectedplaypanel);
                 MultiScreen.Checked = false;
                 screeninformation = 4;
+                vlcControl1.Visible = false;
                 Int32 dwPtzMode = screeninformation;
+                var viewmod = new ThermalViewModelKalkan();
                 Int32 dwInstallMode = 0;
                 Int32 bRet = NETDEVSDK.FALSE;
                 try
                 {
                     bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
-                    NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+                    if (bRet == 1)
+                    {
+                        NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+                    }
+                    else if (bRet==0 && selectedplaypanel.m_playhandle!= IntPtr.Zero)
+                    {
+                        TabClear();
+                        this.mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[9];
+                       
+                        viewmod.Login();
+                        viewmod.RealPlayThermal(playPanel1.Handle);
+                        viewmod.RealPlay(playPanel3.Handle);
+                    }
+                    else
+                    {
+                        var asdf = mainTabCtrl.TabPages[0].Text;
+                        if (this.mainTabCtrl.TabPages[0].Text == "tabPage2")
+                        {
+                            TabClear();
+                            this.LiveView.Parent = this.mainTabCtrl; //show
+                        }
+                        else if (counterformoreconnection == 0)
+                        {
+                            counterformoreconnection++;
+                            TabClear();
+                            this.thermal.Parent = this.mainTabCtrl; //show
+                            var viewmodd = new ThermalViewModel();
+                            viewmodd.Login();
+                            viewmodd.RealPlay(playPanel1.Handle, 1);
+                            viewmodd.RealPlay(playPanel3.Handle, 0);
+                            //playPanel1.Handle = viewmodd.RealPlay(playPanel1.Handle);
+                        }
+                        else
+                        {
+                            TabClear();
+                            this.thermal.Parent = this.mainTabCtrl;
+                        }
+                        return;
+                    }
+
                 }
                 catch (Exception)
                 {
 
-                    
+
                 }
-             
+
                 //serialPort1.BaudRate = 9600;
                 //serialPort1.PortName = "COM6";
                 //serialPort1.Open();
@@ -858,33 +1267,33 @@ namespace NetDemo
 
         private void mainTabCtrlSelectedChanged(object sender, EventArgs e)
         {
-            if (this.mainTabCtrl.SelectedTab.Name == "LiveView")
-            {
-                //initLiveViewPage();
-            }
-            else if (this.mainTabCtrl.SelectedTab.Name == "Playback")
-            {
-                //initPlaybackPage();
-            }
-            else if (this.mainTabCtrl.SelectedTab.Name == "Configure")
-            {
-                if (m_CurSelectTreeNodeInfo.dwDeviceIndex >= 0 && m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle != IntPtr.Zero)
-                {
-                    m_config.cfgTabSwitch(0);/*basic0*/
-                }
-            }
-            else if (this.mainTabCtrl.SelectedTab.Name == "AlarmRecords")
-            {
-                //initAlarmRecordsPage();
-            }
-            else if (this.mainTabCtrl.SelectedTab.Name == "VCA")
-            {
-                //initVCAPage();
-            }
-            else if (this.mainTabCtrl.SelectedTab.Name == "Maintenance")
-            {
-                //initMaintenancePage();
-            }
+            //if (this.mainTabCtrl.SelectedTab.Name == "LiveView")
+            //{
+            //    //initLiveViewPage();
+            //}
+            //else if (this.mainTabCtrl.SelectedTab.Name == "Playback")
+            //{
+            //    //initPlaybackPage();
+            //}
+            //else if (this.mainTabCtrl.SelectedTab.Name == "Configure")
+            //{
+            //    if (m_CurSelectTreeNodeInfo.dwDeviceIndex >= 0 && m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle != IntPtr.Zero)
+            //    {
+            //        m_config.cfgTabSwitch(0);/*basic0*/
+            //    }
+            //}
+            //else if (this.mainTabCtrl.SelectedTab.Name == "AlarmRecords")
+            //{
+            //    //initAlarmRecordsPage();
+            //}
+            //else if (this.mainTabCtrl.SelectedTab.Name == "VCA")
+            //{
+            //    //initVCAPage();
+            //}
+            //else if (this.mainTabCtrl.SelectedTab.Name == "Maintenance")
+            //{
+            //    //initMaintenancePage();
+            //}
         }
 
         private void updateChnTreeNode(TreeNode orgTreeNode, NETDEV_DEV_CHN_ENCODE_INFO_S stChnInfo)
@@ -1058,7 +1467,16 @@ namespace NetDemo
                     treeNodeInfo.dwDeviceIndex = DeviceIndex;
                     treeNodeInfo.dwChannelID = deviceInfoTemp.m_channelInfoList[i].m_devVideoChlInfo.dwChannelID;
                     treeNodeChl.Tag = treeNodeInfo;
-                    Invoke((EventHandler)delegate { deviceTreeNode.Nodes.AddRange(new TreeNode[] { treeNodeChl }); });
+                    try
+                    {
+                        Invoke((EventHandler)delegate { deviceTreeNode.Nodes.AddRange(new TreeNode[] { treeNodeChl }); });
+
+                    }
+                    catch (Exception)
+                    {
+
+                        continue;
+                    }
                 }
             }
         }
@@ -1082,9 +1500,18 @@ namespace NetDemo
             {
                 return;
             }
-            Invoke((EventHandler)delegate { this.DeviceTree.Nodes[0].Nodes.Add(treeNode); });
-            this.DeviceTree.SelectedNode = DeviceTree.Nodes[0].Nodes[0];//
-            m_CurSelectTreeNodeInfo = (TreeNodeInfo)this.DeviceTree.SelectedNode.Tag;
+            try
+            {
+                Invoke((EventHandler)delegate { this.DeviceTree.Nodes[0].Nodes.Add(treeNode); });
+                this.DeviceTree.SelectedNode = DeviceTree.Nodes[0].Nodes[0];//
+                m_CurSelectTreeNodeInfo = (TreeNodeInfo)this.DeviceTree.SelectedNode.Tag;
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+           
         }
 
         //add local device
@@ -1097,7 +1524,7 @@ namespace NetDemo
                 deviceInfoTemp.m_port = port;
                 deviceInfoTemp.m_userName = userName;
                 deviceInfoTemp.m_password = password;
-                deviceInfoTemp.m_eDeviceType = eDeviceType;
+                deviceInfoTemp.m_eDeviceType = NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_IPC_OR_NVR;
 
                 m_notLoggeddeviceInfoList.Add(deviceInfoTemp);
             }
@@ -1120,7 +1547,7 @@ namespace NetDemo
                     && deviceInfo.m_port == m_deviceInfoList[i].m_port
                     && m_deviceInfoList[i].m_lpDevHandle != IntPtr.Zero)
                 {
-                    MessageBox.Show("The device already exists!");
+                    MessageBox.Show("Cihaz Zaten Ekli!");
                     return;
                 }
 
@@ -1148,6 +1575,7 @@ namespace NetDemo
                 pstDevLoginInfo.dwLoginProto = (int)NETDEV_LOGIN_PROTO_E.NETDEV_LOGIN_PROTO_ONVIF;
             }
 
+            //hata veriyor
             IntPtr lpDevHandle = NETDEVSDK.NETDEV_Login_V30(ref pstDevLoginInfo, ref pstSELogInfo);
 
             if (lpDevHandle == IntPtr.Zero)
@@ -1565,6 +1993,7 @@ namespace NetDemo
                 return m_CurSelectTreeNodeInfo.dwChannelID - 1;
             }
         }
+        public int say = 0;
 
         public void startRealPlay()
         {
@@ -1576,7 +2005,6 @@ namespace NetDemo
             m_curRealPanel.initPlayPanel();
             m_curRealPanel.m_deviceIndex = m_CurSelectTreeNodeInfo.dwDeviceIndex;
             m_curRealPanel.m_channelID = getChannelID();
-
             NETDEV_PREVIEWINFO_S stPreviewInfo = new NETDEV_PREVIEWINFO_S();
             stPreviewInfo.dwChannelID = getChannelID();
             //stPreviewInfo.dwFluency = 
@@ -1584,10 +2012,24 @@ namespace NetDemo
             stPreviewInfo.dwStreamType = Helper.m_dwStreamType;
             stPreviewInfo.hPlayWnd = m_curRealPanel.Handle;
             IntPtr Handle = NETDEVSDK.NETDEV_RealPlay(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, ref stPreviewInfo, IntPtr.Zero, IntPtr.Zero);
-            if (Handle == IntPtr.Zero)
+
+            var viewmodel = new ThermalViewModel();
+
+
+
+            if (Handle == IntPtr.Zero && viewmodel.verihandle() == IntPtr.Zero && say == 0)
             {
-                return;
+                if (Handle == IntPtr.Zero)
+                {
+                    say++;
+                    viewmodel.LoginInformation(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip, (ushort)m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_port, m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_userName, m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_password);
+                    viewmodel.Login();
+                    viewmodel.RealPlay(m_curRealPanel.Handle, 1);
+                    Handle = viewmodel.verihandle();
+                }
+
             }
+
             m_curRealPanel.m_playStatus = true;
             m_curRealPanel.m_playhandle = Handle;
 
@@ -1945,7 +2387,7 @@ namespace NetDemo
                         String strIPAddr = m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
                         Int32 udwPort = m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_port;
                         showFailLogInfo(strIPAddr + " : " + udwPort, "login", NETDEVSDK.NETDEV_GetLastError());
-                        MessageBox.Show("The device already exists!");
+                        MessageBox.Show("Cihaz Zaten Bağlı!");
                         return;
                     }
                 default:
@@ -2559,18 +3001,30 @@ namespace NetDemo
 
         private void NetDemo_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Program kapanmak üzere", "Info", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (result == DialogResult.OK)
-            {
+            //DialogResult result = MessageBox.Show("Program kapanmak üzere", "Info", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            //if (result == DialogResult.OK)
+            //{
                 e.Cancel = false;  //OK
+                if (serialPort1.IsOpen == true)
+                {
+                    serialPort1.Close();
+                    serialPort1.Close();
+                }
                 this.stopCycleMonitorThread();
                 this.stopKeepAliveDeviceThread();
-                NETDEVSDK.NETDEV_Cleanup();
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+                //NETDEVSDK.NETDEV_Cleanup();
+                this.stopCycleMonitorThread();
+                this.stopKeepAliveDeviceThread();
+                Form loginform = new Login();
+                loginform.Close();
+                Application.Exit();
+
+
+            //}
+            //else
+            //{
+            //    e.Cancel = true;
+            //}
         }
 
         private void PBQueryBtn_Click(object sender, EventArgs e)
@@ -3770,7 +4224,7 @@ namespace NetDemo
          */
         private void NetDHCPCkBox_CheckedChanged(object sender, EventArgs e)
         {
-            if ((sender as CheckBox).CheckState == CheckState.Checked)
+            if ((sender as System.Windows.Forms.CheckBox).CheckState == CheckState.Checked)
             {
                 DHCPEnable(false);
             }
@@ -3872,7 +4326,7 @@ namespace NetDemo
 
         private void NetNTPDHCPCkBox_CheckedChanged(object sender, EventArgs e)
         {
-            if ((sender as CheckBox).CheckState == CheckState.Checked)
+            if ((sender as System.Windows.Forms.CheckBox).CheckState == CheckState.Checked)
             {
                 NTPDHCPEnable(false);
             }
@@ -4851,6 +5305,11 @@ namespace NetDemo
                 item.SubItems.Add(strAlarmInfo);
                 this.BeginInvoke(new Action(() =>
                 {
+                    AlarmTetikle();
+                    //MessageBox.Show("alarm geldi");
+                    //koşan adam iconu tetiklenebilir
+                    //arrayRealPanel[0].setBorderColor(Color.Blue, 10);
+                    //arrayRealPanel[0].Invalidate();
                     AlarmRecordsListView.Items.Add(item);
                 }));
             }
@@ -4872,49 +5331,56 @@ namespace NetDemo
             //}
             //}
         }
-
         public void exceptionCallBack(IntPtr lpUserID, Int32 dwType, IntPtr lpExpHandle, IntPtr lpUserData)
         {
-            String strAlarmTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-            ListViewItem item = new ListViewItem(strAlarmTime);
-
-            String strDeviceIP = getDeviceIP(lpUserID);
-            item.SubItems.Add(strDeviceIP);
-
-            item.SubItems.Add("");
-            String strAlarmInfo = getAlarmInfo(dwType);
-            item.SubItems.Add(strAlarmInfo);
-            AlarmRecordsListView.Items.Add(item);
-
-            if ((int)NETDEMO.NETDEV_EXCEPTION_TYPE_E.NETDEV_EXCEPTION_EXCHANGE == dwType)
+            try
             {
-                for (int dwIndex = 0; dwIndex < m_deviceInfoList.Count; dwIndex++)
-                {
-                    if (NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_INVALID == m_deviceInfoList[dwIndex].m_eDeviceType)
-                    {
-                        continue;
-                    }
+                String strAlarmTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                ListViewItem item = new ListViewItem(strAlarmTime);
 
-                    if (m_deviceInfoList[dwIndex].m_lpDevHandle == lpUserID)
+                String strDeviceIP = getDeviceIP(lpUserID);
+                item.SubItems.Add(strDeviceIP);
+
+                item.SubItems.Add("");
+                String strAlarmInfo = getAlarmInfo(dwType);
+                item.SubItems.Add(strAlarmInfo);
+                AlarmRecordsListView.Items.Add(item);
+
+                if ((int)NETDEMO.NETDEV_EXCEPTION_TYPE_E.NETDEV_EXCEPTION_EXCHANGE == dwType)
+                {
+                    for (int dwIndex = 0; dwIndex < m_deviceInfoList.Count; dwIndex++)
                     {
-                        closeSelectedDeviceRealPlay(m_deviceInfoList[dwIndex], dwIndex, false);
+                        if (NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_INVALID == m_deviceInfoList[dwIndex].m_eDeviceType)
+                        {
+                            continue;
+                        }
+
+                        if (m_deviceInfoList[dwIndex].m_lpDevHandle == lpUserID)
+                        {
+                            closeSelectedDeviceRealPlay(m_deviceInfoList[dwIndex], dwIndex, false);
+                        }
+                    }
+                }
+                else if ((int)NETDEV_ALARM_TYPE_E.NETDEV_ALARM_FISHEYE_STREAM_EXIST == dwType)
+                {
+                    Int32 dwPtzMode = screeninformation;
+                    Int32 dwInstallMode = 0;
+                    Int32 bRet = NETDEVSDK.FALSE;
+                    bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref dwInstallMode);
+
+                    dwPtzMode = (int)NETDEV_FISHEYE_PTZ_MODE_E.NETDEV_FISHEYE_MODE_360_6PTZ;
+                    bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, dwInstallMode);
+                    if (NETDEVSDK.FALSE == bRet)
+                    {
+                        showFailLogInfo(m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip + " chl:" + (m_curRealPanel.m_channelID), "set fish eye mode", NETDEVSDK.NETDEV_GetLastError());
                     }
                 }
             }
-            else if ((int)NETDEV_ALARM_TYPE_E.NETDEV_ALARM_FISHEYE_STREAM_EXIST == dwType)
+            catch (Exception)
             {
-                Int32 dwPtzMode = screeninformation;
-                Int32 dwInstallMode = 0;
-                Int32 bRet = NETDEVSDK.FALSE;
-                bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref dwInstallMode);
 
-                dwPtzMode = (int)NETDEV_FISHEYE_PTZ_MODE_E.NETDEV_FISHEYE_MODE_360_6PTZ;
-                bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, dwInstallMode);
-                if (NETDEVSDK.FALSE == bRet)
-                {
-                    showFailLogInfo(m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip + " chl:" + (m_curRealPanel.m_channelID), "set fish eye mode", NETDEVSDK.NETDEV_GetLastError());
-                }
             }
+            
         }
 
         private void NETDEV_ConflagrationAlarmMessCallBack(IntPtr lpHandle, ref NETDEV_CONFLAGRATION_ALARM_INFO_S pstAlarmInfo, IntPtr lpUserParam)
@@ -6588,7 +7054,7 @@ namespace NetDemo
             panel.rectEndX = e.X;
             panel.rectEndY = e.Y;
             Graphics g = m_curRealPanel.CreateGraphics();
-            g.DrawRectangle(new Pen(Color.Red), panel.rectStartX, panel.rectStartY, panel.rectEndX - panel.rectStartX, panel.rectEndY - panel.rectStartY);
+            //g.DrawRectangle(new Pen(Color.Red), panel.rectStartX, panel.rectStartY, panel.rectEndX - panel.rectStartX, panel.rectEndY - panel.rectStartY);
 
             NETDEV_RECT_S rect = new NETDEV_RECT_S();
             bool flag = false;
@@ -6620,7 +7086,7 @@ namespace NetDemo
             if (e.Button == MouseButtons.Left)
             {
                 Graphics g = m_curRealPanel.CreateGraphics();
-                g.DrawRectangle(new Pen(Color.Red), panel.rectStartX, panel.rectStartY, panel.rectEndX - panel.rectStartX, panel.rectEndY - panel.rectStartY);
+                //g.DrawRectangle(new Pen(Color.Red), panel.rectStartX, panel.rectStartY, panel.rectEndX - panel.rectStartX, panel.rectEndY - panel.rectStartY);
             }
 
             int x = e.X;
@@ -10958,6 +11424,49 @@ namespace NetDemo
 
         }
 
+        public void textboxveridoldur()
+        {
+            string dosyaAdi = "kayitlar.json";
+            string klasorYolu = Path.Combine(Application.LocalUserAppDataPath);
+            string dosyaYolu = Path.Combine(klasorYolu, dosyaAdi);
+
+            foreach (string port in ports)
+            {
+                comboBox1.Items.Add(port);
+            }
+
+            // Dosya var mı diye kontrol et
+            if (!File.Exists(dosyaYolu))
+            {
+                MessageBox.Show("Hiç kamera ayarları kayıt edilmemiş");
+            }
+            else
+            {
+                // Dosyayı oku
+                string json = File.ReadAllText(dosyaYolu);
+
+                // JSON verisini Kayit nesnelerine dönüştür
+                KameraSettings kayitlar = JsonConvert.DeserializeObject<KameraSettings>(json);
+                txt_cam1_ip_adress.Text = kayitlar.cam1_ipadress;
+                txt_cam1_password.Text = kayitlar.cam1_password;
+                txt_cam1_port.Text = kayitlar.cam1_port;
+                txt_cam1_username.Text = kayitlar.cam1_username;
+                txt_cam2_ip_adress.Text = kayitlar.cam2_ipadress;
+                txt_cam2_password.Text = kayitlar.cam2_password;
+                txt_cam2_port.Text = kayitlar.cam2_port;
+                txt_cam2_username.Text = kayitlar.cam2_username;
+                txt_cam3_ip_adress.Text = kayitlar.cam3_ipadress;
+                txt_cam3_port.Text = kayitlar.cam3_port;
+                txt_cam3_username.Text = kayitlar.cam3_username;
+                txt_cam3_password.Text = kayitlar.cam3_password;
+                txt_cam4_ip_adress.Text = kayitlar.cam4_ipadress;
+                txt_cam4_port.Text = kayitlar.cam4_port;
+                txt_cam4_username.Text = kayitlar.cam4_username;
+                txt_cam4_password.Text = kayitlar.cam4_password;
+
+            }
+        }
+
         private void focusFarBtn_Click(object sender, EventArgs e)
         {
             m_oPtzControl.control(m_curRealPanel.m_playhandle, (int)NETDEV_PTZ_E.NETDEV_PTZ_ZOOMWIDE_STOP);
@@ -10965,101 +11474,253 @@ namespace NetDemo
 
         private void NetDemo_Load(object sender, EventArgs e)
         {
+            this.Hide();
+            Form loginform = new Login();
+            loginform.Close();
+            string dosyaAdi = "kayitlar.json";
+            string klasorYolu = Path.Combine(Application.LocalUserAppDataPath);
+            string dosyaYolu = Path.Combine(klasorYolu, dosyaAdi);
 
+            foreach (string port in ports)
+            {
+                comboBox1.Items.Add(port);
+            }
+
+            // Dosya var mı diye kontrol et
+            if (!File.Exists(dosyaYolu))
+            {
+                MessageBox.Show("Hiç kamera ayarları kayıt edilmemiş");
+            }
+            else
+            {
+                // Dosyayı oku
+                string json = File.ReadAllText(dosyaYolu);
+
+                // JSON verisini Kayit nesnelerine dönüştür
+                KameraSettings kayitlar = JsonConvert.DeserializeObject<KameraSettings>(json);
+                txt_cam1_ip_adress.Text = kayitlar.cam1_ipadress;
+                txt_cam1_password.Text = kayitlar.cam1_password;
+                txt_cam1_port.Text = kayitlar.cam1_port;
+                txt_cam1_username.Text = kayitlar.cam1_username;
+                txt_cam2_ip_adress.Text = kayitlar.cam2_ipadress;
+                txt_cam2_password.Text = kayitlar.cam2_password;
+                txt_cam2_port.Text = kayitlar.cam2_port;
+                txt_cam2_username.Text = kayitlar.cam2_username;
+                txt_cam3_ip_adress.Text = kayitlar.cam3_ipadress;
+                txt_cam3_port.Text = kayitlar.cam3_port;
+                txt_cam3_username.Text = kayitlar.cam3_username;
+                txt_cam3_password.Text = kayitlar.cam3_password;
+                txt_cam4_ip_adress.Text = kayitlar.cam4_ipadress;
+                txt_cam4_port.Text = kayitlar.cam4_port;
+                txt_cam4_username.Text = kayitlar.cam4_username;
+                txt_cam4_password.Text = kayitlar.cam4_password;
+
+            }
+
+           
+            //TabClear();
+            mainTabCtrl.SelectedIndex = 7; 
+
+            long GetDriveStatus(string driveName)
+            {
+                foreach (DriveInfo drive in DriveInfo.GetDrives())
+                {
+                    if (drive.IsReady && drive.Name == driveName)
+                    {
+                        return ((drive.TotalSize - drive.TotalFreeSpace) * 100) / drive.TotalSize;
+                    }
+                }
+                return -1;
+            } // diskin doluluk oranı
+
+            long yuzde = GetDriveStatus("C:\\");
+            // MessageBox.Show(Convert.ToString(yuzde));
+            if (Convert.ToInt32(yuzde) > 50)
+            {
+                AddToLog("Sitem", "Bilgisayara hafızasının " + Convert.ToString(yuzde) + " %  sı dolu. ", 7, Color.Red);
+                LblUyarı.Text = "Bilgisayara hafızasının " + Convert.ToString(yuzde) + " %  sı dolu. Lüffen verilerini yedekleyiniz";
+            }
+            LoadSettings();
+            ConnectBarcode1();
+            mainTabCtrl.SelectedIndex = 7;
+            groupBox39.Visible = false;
+            Application.DoEvents();
+            //Form1 form1 = new Form1();//açılacak form
+            form1.Show();
+            form2.Show();
+            form1.Hide(); //form 2 açılıyor.
+
+            //Form2 form2 = new Form2();//açılacak form
+            form2.Hide(); //form 2 açılıyor.
+            this.Hide();
+
+            Ping p = new Ping();
+            PingReply cevap = p.Send("192.168.1.107");
+            Thread.Sleep(500);
+            if (cevap.Status == IPStatus.Success)
+            {
+                checkBox1.Checked = true;
+                checkBox1.ForeColor = Color.Green;
+            }
+            else if (cevap.Status == IPStatus.TimedOut)
+            {
+                checkBox1.Checked = false;
+                checkBox1.ForeColor = Color.Black;
+
+            }
+        }
+
+        private void StartListening()
+        {
+            try
+            {
+                while (true)
+                {
+                    byte[] receivedData = udpServer.Receive(ref serverEndPoint);
+                    string receivedMessage = Encoding.UTF8.GetString(receivedData);
+
+                    // Mesajları ana thread üzerinden ListBox'a ekleme
+                    //Invoke(new Action(() => AppendLog("Alındı: " + receivedMessage)));
+
+                    // İstemciye cevap gönderme
+                    //string responseMessage = "Sunucudan merhaba!";
+                    //byte[] responseData = Encoding.UTF8.GetBytes(responseMessage);
+                    //udpServer.Send(responseData, responseData.Length, serverEndPoint);
+                }
+            }
+            catch (Exception ex)
+            {
+                //Invoke(new Action(() => AppendLog("Hata oluştu: " + ex.Message)));
+            }
         }
 
         private void button68_Click(object sender, EventArgs e)
         {
-
-            TreeNodeCollection a = this.DeviceTree.Nodes[0].Nodes;
-            foreach (TreeNode nodess in a)
+            try
             {
-                foreach (TreeNode item in nodess.Nodes)
+                TreeNodeCollection a = this.DeviceTree.Nodes[0].Nodes;
+                foreach (TreeNode nodess in a)
+                {
+                    foreach (TreeNode item in nodess.Nodes)
+                    {
+
+                        this.DeviceTree.SelectedNode = item;
+                        m_CurSelectTreeNodeInfo = (TreeNodeInfo)item.Tag;
+                        if (DeviceTree.SelectedNode == null)
+                        {
+                            return;
+                        }
+                        if (DeviceTree.SelectedNode.ImageIndex != NETDEMO.NETDEV_TREEVIEW_IMAGE_CHL_DEVICE_ON)
+                        {
+                            return;
+                        }
+                        if (m_curRealPanel.m_playStatus == false)
+                        {
+                            startRealPlay();
+                        }
+                        else
+                        {
+                            //stopRealPlay(m_curRealPanel, true);
+                            startRealPlay();
+                        }
+                        string strScreenNumber = this.comboBoxMultiScreen.SelectedItem.ToString();
+                        int nScreenNumber = int.Parse(strScreenNumber);
+
+                        m_curRealPanelIndex = m_curRealPanel.m_panelIndex + 1;
+                        if (m_curRealPanelIndex >= nScreenNumber)
+                        {
+                            m_curRealPanelIndex = 0;
+                        }
+
+                        m_curRealPanel = arrayRealPanel[m_curRealPanelIndex];
+                        this.setRealPanelBorderColor();
+                        //button68.PerformClick();
+                        AddToLog("Kameralar Başlatıldı", "Kameralar Başlatıldı", 1, Color.Black);
+                    }
+                }
+
+                if (checkBox1.Checked)
                 {
 
-                    this.DeviceTree.SelectedNode = item;
-                    m_CurSelectTreeNodeInfo = (TreeNodeInfo)item.Tag;
-                    if (DeviceTree.SelectedNode == null)
-                    {
-                        return;
-                    }
-                    if (DeviceTree.SelectedNode.ImageIndex != NETDEMO.NETDEV_TREEVIEW_IMAGE_CHL_DEVICE_ON)
-                    {
-                        return;
-                    }
-                    if (m_curRealPanel.m_playStatus == false)
-                    {
-                        startRealPlay();
-                    }
-                    else
-                    {
-                        //stopRealPlay(m_curRealPanel, true);
-                        startRealPlay();
-                    }
-                    string strScreenNumber = this.comboBoxMultiScreen.SelectedItem.ToString();
-                    int nScreenNumber = int.Parse(strScreenNumber);
+                    int port = 9004;
+                    IPAddress serverIP = IPAddress.Any;
+                    serverEndPoint = new IPEndPoint(serverIP, port);
+                    udpServer = new UdpClient(serverEndPoint);
 
-                    m_curRealPanelIndex = m_curRealPanel.m_panelIndex + 1;
-                    if (m_curRealPanelIndex >= nScreenNumber)
-                    {
-                        m_curRealPanelIndex = 0;
-                    }
+                    //AppendLog("UDP sunucusu başlatıldı. Dinlenen port: " + port);
 
-                    m_curRealPanel = arrayRealPanel[m_curRealPanelIndex];
-                    this.setRealPanelBorderColor();
-                    //button68.PerformClick();
+                    // Mesajları dinlemek için arka planda bir iş parçacığı başlatma
+                    var udpListenerThread = new System.Threading.Thread(StartListening);
+                    udpListenerThread.IsBackground = true;
+                    udpListenerThread.Start();
 
+                 
+
+
+
+                    vlcControl1.Video.IsMouseInputEnabled = false;
+                    vlcControl1.Video.IsKeyInputEnabled = false;
+
+                    vlcControl2.Video.IsMouseInputEnabled = false;
+                    vlcControl2.Video.IsKeyInputEnabled = false;
+
+                    vlcControl3.Video.IsMouseInputEnabled = false;
+                    vlcControl3.Video.IsKeyInputEnabled = false;
+
+                    string rtspUrl = "rtsp://" + textBox5.Text + "/stream=0";
+                    string rtspUrlT = "rtsp://" + textBox5.Text + "/stream=1";
+                    //vlcControl1.SetMedia(new Uri(rtspUrl), options: null);
+                    var options = new string[]
+                     {
+                // Önbelleğe alma süresini milisaniye cinsinden belirleyin (örneğin, 5000 ms).
+                "network-caching=1"
+                     };
+
+                    vlcControl1.SetMedia(new Uri(rtspUrl), options);
+                    vlcControl2.SetMedia(new Uri(rtspUrl), options);
+                    vlcControl3.SetMedia(new Uri(rtspUrlT), options);
+
+                    vlcControl1.Play();
+                    vlcControl2.Play();
+                    vlcControl3.Play();
+                    ;
+                }
+                else
+                {
+                    vlcControl1.Visible = false;
                 }
             }
+            catch(Exception ex)
+            {
 
+            }
         }
 
         private void button66_Click(object sender, EventArgs e)
         {
-            if (m_curRealPanel.m_playStatus == false)
+
+
+            string akl = "";
+            // FolderBrowserDialog fbd = new FolderBrowserDialog();
+            //if (fbd.ShowDialog() == DialogResult.OK)
+            //{
+            DirectoryInfo d = new DirectoryInfo(Application.StartupPath + "\\Record");
+            Files = d.GetFiles("*.mp4");
+            string str = "";
+            if (Files.Count() == 0)
             {
+
+                MessageBox.Show("Video Klasörün Boş");
                 return;
             }
-
-            if (m_curRealPanel.m_recordStatus == false)
+            foreach (FileInfo file in Files)
             {
-                String temp = string.Copy(LocalSetting.m_strLocalRecordPath);
-                DateTime date = DateTime.Now;
-                String curTime = date.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
-                LocalSetting.m_strLocalRecordPath += "\\";
-                LocalSetting.m_strLocalRecordPath += m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip;
-                LocalSetting.m_strLocalRecordPath += "_";
-                LocalSetting.m_strLocalRecordPath += m_curRealPanel.m_channelID;
-                LocalSetting.m_strLocalRecordPath += "_";
-                LocalSetting.m_strLocalRecordPath += curTime;
-
-                byte[] localRecordPath;
-                GetUTF8Buffer(LocalSetting.m_strLocalRecordPath, NETDEVSDK.NETDEV_LEN_260, out localRecordPath);
-                int iRet = NETDEVSDK.NETDEV_SaveRealData(m_curRealPanel.m_playhandle, localRecordPath, (int)NETDEV_MEDIA_FILE_FORMAT_E.NETDEV_MEDIA_FILE_MP4);
-                if (NETDEVSDK.FALSE == iRet)
-                {
-                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "start Record", NETDEVSDK.NETDEV_GetLastError());
-                    return;
-                }
-                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "start Record");
-
-                m_curRealPanel.m_recordStatus = true;
-                this.LocalRecodBtn.Text = "Durdur";
-                LocalSetting.m_strLocalRecordPath = temp;
+                akl = file.Name;
+                //listBox1.Items.Add(file.Name);
             }
-            else
-            {
-                int iRet = NETDEVSDK.NETDEV_StopSaveRealData(m_curRealPanel.m_playhandle);
-                if (NETDEVSDK.FALSE == iRet)
-                {
-                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "stop Record", NETDEVSDK.NETDEV_GetLastError());
-                    return;
-                }
-                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "stop Record");
-
-                m_curRealPanel.m_recordStatus = false;
-                this.LocalRecodBtn.Text = "Başlat";
-            }
+            //}
+            Process.Start(Application.StartupPath + "\\Record\\" + akl);
+            Process.Start(Application.StartupPath + "\\Record\\");
         }
 
         private void button60_Click(object sender, EventArgs e)
@@ -11077,39 +11738,76 @@ namespace NetDemo
 
         }
 
+        FileInfo[] Files;
+
         private void button8_Click(object sender, EventArgs e)
         {
-            if (m_curRealPanel.m_playhandle == IntPtr.Zero)
+
+            string akl = "";
+            // FolderBrowserDialog fbd = new FolderBrowserDialog();
+            //if (fbd.ShowDialog() == DialogResult.OK)
+            //{
+            DirectoryInfo d = new DirectoryInfo(Application.StartupPath + "\\Pic");
+            Files = d.GetFiles("*.jpg");
+            if (Files.Count() == 0)
             {
-                if (m_CurSelectTreeNodeInfo.dwDeviceIndex > m_deviceInfoList.Count() || m_CurSelectTreeNodeInfo.dwDeviceIndex < 0)
-                {
-                    return;
-                }
-
-                String strNoPreviewTemp = string.Copy(LocalSetting.m_strPicSavePath);
-                DateTime oNoPreviewDate = DateTime.Now;
-                String strNoPreviewCurTime = oNoPreviewDate.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
-                LocalSetting.m_strPicSavePath += "\\";
-                LocalSetting.m_strPicSavePath += m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
-                LocalSetting.m_strPicSavePath += "_";
-                LocalSetting.m_strPicSavePath += (getChannelID());
-                LocalSetting.m_strPicSavePath += "_";
-                LocalSetting.m_strPicSavePath += strNoPreviewCurTime;
-
-                byte[] picNoPreviewSavePath;
-                GetUTF8Buffer(LocalSetting.m_strPicSavePath, NETDEVSDK.NETDEV_LEN_260, out picNoPreviewSavePath);
-
-                int iiRet = NETDEVSDK.NETDEV_CaptureNoPreview(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, getChannelID(), (int)NETDEV_LIVE_STREAM_INDEX_E.NETDEV_LIVE_STREAM_INDEX_MAIN, LocalSetting.m_strPicSavePath, (int)NETDEV_PICTURE_FORMAT_E.NETDEV_PICTURE_BMP);
-                if (NETDEVSDK.FALSE == iiRet)
-                {
-                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview", NETDEVSDK.NETDEV_GetLastError());
-                    LocalSetting.m_strPicSavePath = strNoPreviewTemp;
-                    return;
-                }
-                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview");
-                LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+                MessageBox.Show("Resim Klasörü Boş");
                 return;
             }
+            string str = "";
+            foreach (FileInfo file in Files)
+            {
+                akl = file.Name;
+                //listBox1.Items.Add(file.Name);
+            }
+            //}
+            Process.Start(Application.StartupPath + "\\Pic\\" + akl);
+            Process.Start(Application.StartupPath + "\\Pic\\");
+            //int width = LayoutPanel.Width;
+            //int height = LayoutPanel.Height;
+
+            //// Bitmap nesnesi oluşturun
+            //Bitmap bmp = new Bitmap(width, height);
+
+            //// LayoutPanel'in görüntüsünü alın
+            //LayoutPanel.DrawToBitmap(bmp, new Rectangle(0, 0, width, height));
+
+            //// PictureBox'a görüntüyü ata
+            //pictureBox1.Image = bmp;
+
+
+
+            //if (m_curRealPanel.m_playhandle == IntPtr.Zero)
+            //{
+            //    if (m_CurSelectTreeNodeInfo.dwDeviceIndex > m_deviceInfoList.Count() || m_CurSelectTreeNodeInfo.dwDeviceIndex < 0)
+            //    {
+            //        return;
+            //    }
+
+            //    String strNoPreviewTemp = string.Copy(LocalSetting.m_strPicSavePath);
+            //    DateTime oNoPreviewDate = DateTime.Now;
+            //    String strNoPreviewCurTime = oNoPreviewDate.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
+            //    LocalSetting.m_strPicSavePath += "\\";
+            //    LocalSetting.m_strPicSavePath += m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
+            //    LocalSetting.m_strPicSavePath += "_";
+            //    LocalSetting.m_strPicSavePath += (getChannelID());
+            //    LocalSetting.m_strPicSavePath += "_";
+            //    LocalSetting.m_strPicSavePath += strNoPreviewCurTime;
+
+            //    byte[] picNoPreviewSavePath;
+            //    GetUTF8Buffer(LocalSetting.m_strPicSavePath, NETDEVSDK.NETDEV_LEN_260, out picNoPreviewSavePath);
+
+            //    int iiRet = NETDEVSDK.NETDEV_CaptureNoPreview(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, getChannelID(), (int)NETDEV_LIVE_STREAM_INDEX_E.NETDEV_LIVE_STREAM_INDEX_MAIN, LocalSetting.m_strPicSavePath, (int)NETDEV_PICTURE_FORMAT_E.NETDEV_PICTURE_BMP);
+            //    if (NETDEVSDK.FALSE == iiRet)
+            //    {
+            //        showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview", NETDEVSDK.NETDEV_GetLastError());
+            //        LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+            //        return;
+            //    }
+            //    showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview");
+            //    LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+            //    return;
+            //}
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -11145,7 +11843,7 @@ namespace NetDemo
                 return;
             }
 
-            if (true == m_curRealPanel.m_micStatus)
+            if (false == m_curRealPanel.m_micStatus)
             {
                 int iRet = NETDEVSDK.NETDEV_CloseMic(m_curRealPanel.m_playhandle);
                 if (NETDEVSDK.FALSE == iRet)
@@ -11166,7 +11864,7 @@ namespace NetDemo
 
         private void button9_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
         }
 
         private void button67_Click(object sender, EventArgs e)
@@ -11181,9 +11879,7 @@ namespace NetDemo
 
         private void button5_Click(object sender, EventArgs e)
         {
-            PannelContextMenuStrip.Items[9].PerformClick()/*= true;*/;
-            //FullScreen_Click(sender,null);
-            mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[5];
+            tabControl3.SelectedTab = tabControl3.TabPages[1];
         }
         //Burada sol tıklamanın down kodunu hex türünden değişkene aktarıyoruz(basılı olma durumu).
         private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
@@ -11191,123 +11887,2027 @@ namespace NetDemo
         //    //Burada sol tıklamanın up kodunu hex türünden belirtiyoruz(basıldıktan sonra bırakılma durumu).
         private const int MOUSEEVENTF_LEFTUP = 0x0004;
         int mousebuttontype = 0;
-        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+
+        private void TabClear()
         {
+        //    //this.LiveView.Parent = null; // hide
+        //    this.Playback.Parent = null; // hide
+        //    this.Configure.Parent = null; // hide
+        //    this.AlarmRecords.Parent = null; // hide
+
+        //    this.VCA.Parent = null; // hide
+        //    this.Maintenance.Parent = null;
+        //    this.tabPage1.Parent = null;
+        //    this.tabPage2.Parent = null;
+        //    this.rgbandthermal.Parent = null;
+        //    this.thermal.Parent = null;
+        //    this.rgb.Parent = null;
+        //    this.fisheye.Parent = null;
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            AddToLog("Program ", "Açıldı", 10, Color.Green);
+
+
+            mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[0];
+
+            Application.DoEvents();
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        private ListViewItem AddToLog(string grp, string dtl, int imgidx, Color clr)
+        {
+            if (logCounter >= 1000) logCounter = 0;
+
+            string logDir = Application.StartupPath + "\\Logs\\" + DateTime.Now.ToString("yyyyMMdd");
+            if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);
+            string logLine = grp + "\t" + dtl;
+
+            if (imgidx == 5)
+            {
+                File.AppendAllText(logDir + "\\Log.txt", DateTime.Now.ToString("HH:mm:ss.fff") + " " + logLine + Environment.NewLine);
+
+            }
+
+            int maxCap = 64;
+            if (listView4.Items.Count > maxCap) listView4.Items.Clear();
+
+            ListViewItem listItem = new ListViewItem(logCounter.ToString());
+            listItem.ImageIndex = imgidx;
+            listItem.SubItems.Add(DateTime.Now.ToString("HH:mm:ss.fff"));
+            //  listItem.SubItems.Add(grp);
+            listItem.SubItems.Add(dtl);
+            listView4.Items.Add(listItem);
+
+            listView4.Items[listView4.Items.Count - 1].ForeColor = clr;
+            listView4.Refresh();
+            logCounter++;
+            if (logCounter > 999) logCounter = 0;
+
+            listView4.Items[listView4.Items.Count - 1].EnsureVisible();
+
+            return listItem;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var kayitlar = new KameraSettings
+            {
+                cam1_ipadress = txt_cam1_ip_adress.Text,
+                cam1_port = txt_cam1_port.Text,
+                cam1_username = txt_cam1_username.Text,
+                cam1_password = txt_cam1_password.Text,
+                cam2_ipadress = txt_cam2_ip_adress.Text,
+                cam2_port = txt_cam2_port.Text,
+                cam2_username = txt_cam2_username.Text,
+                cam2_password = txt_cam2_password.Text,
+                cam3_ipadress = txt_cam3_ip_adress.Text,
+                cam3_port = txt_cam3_port.Text,
+                cam3_username = txt_cam3_username.Text,
+                cam3_password = txt_cam3_password.Text,
+                cam4_ipadress = txt_cam4_ip_adress.Text,
+                cam4_port = txt_cam4_port.Text,
+                cam4_username = txt_cam4_username.Text,
+                cam4_password = txt_cam4_password.Text,
+            };
+            string dosyaAdi = "kayitlar.json";
+            string klasorYolu = Path.Combine(Application.LocalUserAppDataPath);
+            string dosyaYolu = Path.Combine(klasorYolu, dosyaAdi);
+
+            // Nesneyi JSON formatına dönüştür
+            string json = JsonConvert.SerializeObject(kayitlar, Newtonsoft.Json.Formatting.Indented);
+
+            // JSON verisini dosyaya yaz
+            File.WriteAllText(dosyaYolu, json);
+            label3.Visible = true;
+            label3.BackColor = Color.Red;
+            label3.Text = "Kamera Ayalarınız Kayıt Edilmiştir.";
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            var kayitlar = new KameraSettings
+            {
+                cam1_ipadress = txt_cam1_ip_adress.Text,
+                cam1_port = txt_cam1_port.Text,
+                cam1_username = txt_cam1_username.Text,
+                cam1_password = txt_cam1_password.Text,
+                cam2_ipadress = txt_cam2_ip_adress.Text,
+                cam2_port = txt_cam2_port.Text,
+                cam2_username = txt_cam2_username.Text,
+                cam2_password = txt_cam2_password.Text,
+                cam3_ipadress = txt_cam3_ip_adress.Text,
+                cam3_port = txt_cam3_port.Text,
+                cam3_username = txt_cam3_username.Text,
+                cam3_password = txt_cam3_password.Text,
+                cam4_ipadress = txt_cam4_ip_adress.Text,
+                cam4_port = txt_cam4_port.Text,
+                cam4_username = txt_cam4_username.Text,
+                cam4_password = txt_cam4_password.Text,
+            };
+            string dosyaAdi = "kayitlar.json";
+            string klasorYolu = Path.Combine(Application.LocalUserAppDataPath);
+            string dosyaYolu = Path.Combine(klasorYolu, dosyaAdi);
+
+            // Nesneyi JSON formatına dönüştür
+            string json = JsonConvert.SerializeObject(kayitlar, Newtonsoft.Json.Formatting.Indented);
+
+            // JSON verisini dosyaya yaz
+            File.WriteAllText(dosyaYolu, json);
+            label3.Visible = true;
+            label3.BackColor = Color.Red;
+            label3.Text = "Kamera Ayalarınız Kayıt Edilmiştir.";
+        }
+
+        private void button11_Click_1(object sender, EventArgs e)
+        {
+            //this.tabPage7.Parent = null;
+            //this.tabPage6.Parent = null;
+            //this.tabPage5.Parent = this.tabControl3; //show
+
+            this.tabControl3.SelectedTab = tabControl3.TabPages[0];
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button60_Click_1(object sender, EventArgs e)
+        {
+            if (null == objDiscovery)
+            {
+                objDiscovery = new Discovery(this);
+            }
+          
+            objDiscovery.ShowDialog();
+        }
+
+        private void button13_Click_1(object sender, EventArgs e)
+        {
+            var kayitlar = new KameraSettings
+            {
+                cam1_ipadress = txt_cam1_ip_adress.Text,
+                cam1_port = txt_cam1_port.Text,
+                cam1_username = txt_cam1_username.Text,
+                cam1_password = txt_cam1_password.Text,
+                cam2_ipadress = txt_cam2_ip_adress.Text,
+                cam2_port = txt_cam2_port.Text,
+                cam2_username = txt_cam2_username.Text,
+                cam2_password = txt_cam2_password.Text,
+                cam3_ipadress = txt_cam3_ip_adress.Text,
+                cam3_port = txt_cam3_port.Text,
+                cam3_username = txt_cam3_username.Text,
+                cam3_password = txt_cam3_password.Text,
+                cam4_ipadress = txt_cam4_ip_adress.Text,
+                cam4_port = txt_cam4_port.Text,
+                cam4_username = txt_cam4_username.Text,
+                cam4_password = txt_cam4_password.Text,
+            };
+            string dosyaAdi = "kayitlar.json";
+            string klasorYolu = Path.Combine(Application.LocalUserAppDataPath);
+            string dosyaYolu = Path.Combine(klasorYolu, dosyaAdi);
+
+            // Nesneyi JSON formatına dönüştür
+            string json = JsonConvert.SerializeObject(kayitlar, Newtonsoft.Json.Formatting.Indented);
+
+            // JSON verisini dosyaya yaz
+            File.WriteAllText(dosyaYolu, json);
+            MessageBox.Show("Başarıyla Kayıt Edildi");
+            //label3.Visible = true;
+            //label3.BackColor = Color.Red;
+            //label3.Text = "Kamera Ayalarınız Kayıt Edilmiştir.";
+            CameraCheckList();
+            SaveSettings();
+
+        }
+
+        private void tabPage6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            AddToLog("Program ", "Açıldı", 10, Color.Green);
+            this.mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[7];
+
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (m_curRealPanel.m_playhandle != IntPtr.Zero)
+            {
+                if (m_CurSelectTreeNodeInfo.dwDeviceIndex > m_deviceInfoList.Count() || m_CurSelectTreeNodeInfo.dwDeviceIndex < 0)
+                {
+                    return;
+                }
+
+                String strNoPreviewTemp = string.Copy(LocalSetting.m_strPicSavePath);
+                DateTime oNoPreviewDate = DateTime.Now;
+                String strNoPreviewCurTime = oNoPreviewDate.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
+                LocalSetting.m_strPicSavePath += "\\";
+                LocalSetting.m_strPicSavePath += m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
+                LocalSetting.m_strPicSavePath += "_";
+                LocalSetting.m_strPicSavePath += (getChannelID());
+                LocalSetting.m_strPicSavePath += "_";
+                LocalSetting.m_strPicSavePath += strNoPreviewCurTime;
+
+                byte[] picNoPreviewSavePath;
+                GetUTF8Buffer(LocalSetting.m_strPicSavePath, NETDEVSDK.NETDEV_LEN_260, out picNoPreviewSavePath);
+
+                int iiRet = NETDEVSDK.NETDEV_CaptureNoPreview(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, getChannelID(), (int)NETDEV_LIVE_STREAM_INDEX_E.NETDEV_LIVE_STREAM_INDEX_MAIN, LocalSetting.m_strPicSavePath, (int)NETDEV_PICTURE_FORMAT_E.NETDEV_PICTURE_BMP);
+                if (NETDEVSDK.FALSE == iiRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview", NETDEVSDK.NETDEV_GetLastError());
+                    LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview");
+                LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+                return;
+            }
+        }
+
+        private void button15_Click_1(object sender, EventArgs e)
+        {
+            if (m_curRealPanel.m_playStatus == false)
+            {
+                return;
+            }
+
+            if (m_curRealPanel.m_recordStatus == false)
+            {
+                String temp = string.Copy(LocalSetting.m_strLocalRecordPath);
+                DateTime date = DateTime.Now;
+                String curTime = date.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
+                LocalSetting.m_strLocalRecordPath += "\\";
+                LocalSetting.m_strLocalRecordPath += m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip;
+                LocalSetting.m_strLocalRecordPath += "_";
+                LocalSetting.m_strLocalRecordPath += m_curRealPanel.m_channelID;
+                LocalSetting.m_strLocalRecordPath += "_";
+                LocalSetting.m_strLocalRecordPath += curTime;
+
+                byte[] localRecordPath;
+                GetUTF8Buffer(LocalSetting.m_strLocalRecordPath, NETDEVSDK.NETDEV_LEN_260, out localRecordPath);
+                int iRet = NETDEVSDK.NETDEV_SaveRealData(m_curRealPanel.m_playhandle, localRecordPath, (int)NETDEV_MEDIA_FILE_FORMAT_E.NETDEV_MEDIA_FILE_MP4);
+                if (NETDEVSDK.FALSE == iRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "start Record", NETDEVSDK.NETDEV_GetLastError());
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "start Record");
+                button14.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\REC2.png");
+
+                m_curRealPanel.m_recordStatus = true;
+                this.LocalRecodBtn.Text = "Durdur";
+                LocalSetting.m_strLocalRecordPath = temp;
+            }
+            else
+            {
+                int iRet = NETDEVSDK.NETDEV_StopSaveRealData(m_curRealPanel.m_playhandle);
+                if (NETDEVSDK.FALSE == iRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "stop Record", NETDEVSDK.NETDEV_GetLastError());
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "stop Record");
+
+                m_curRealPanel.m_recordStatus = false;
+                this.LocalRecodBtn.Text = "Başlat";
+                button14.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\REC1.png");
+
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (IntPtr.Zero == m_curRealPanel.m_playhandle)
+            {
+                return;
+            }
+
+            if (true == m_curRealPanel.m_soundStatus)
+            {
+                int iRet = NETDEVSDK.NETDEV_CloseSound(m_curRealPanel.m_playhandle);
+                if (NETDEVSDK.FALSE == iRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "Close volume fail", NETDEVSDK.NETDEV_GetLastError());
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "Close volume");
+
+                this.SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
+                button16.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\sesoff.png");
+                m_curRealPanel.m_soundStatus = false;
+            }
+            else
+            {
+                realPlayOpenSound();
+                button16.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\sesac.png");
+            }
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            //groupBox1.Visible = groupBox1.Visible == true ? false : true;
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            //button25.BackColor = Color.Red;
+            button25.Text = "BEKLEYİNİZ";
+
+            button25.Refresh();
+            string kaynak = Application.StartupPath + "\\Pic\\";
+            DriveInfo[] drives = DriveInfo.GetDrives();
+            string disk = "";
             try
             {
-                string data;
-                string[] splitted_data;
-                data = serialPort1.ReadLine();
-                splitted_data = data.Split(',');
-                var x = Convert.ToInt32(splitted_data[2]);
-                var y = Convert.ToInt32(splitted_data[1]);
-                if (x < 50)
+                disk = drives[1].ToString();
+            }
+            catch (Exception)
+            {
+                button25.Text = "DOSYA TRANSFERİ";
+                MessageBox.Show("Flash Takılı Değil");
+                return;
+            }
+            string hedef = @"D:\";
+            try
+            {
+                var dosyalar = new DirectoryInfo(kaynak).GetFiles("*.*");
+                foreach (FileInfo dosya in dosyalar)
                 {
-                    Cursor.Position = new Point(Cursor.Position.X - x, Cursor.Position.Y);
-                    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0x0004, Cursor.Position.X, Cursor.Position.Y, 0);
-                    //realPanel_MouseDown(sender, aa);
+                    dosya.CopyTo(@disk + dosya.Name);
                 }
-                else if (x > 50)
+                //Console.ReadKey();
+
+                string kaynak2 = Application.StartupPath + "\\Record\\";
+                DriveInfo[] drives1 = DriveInfo.GetDrives();
+                string disk1 = drives1[1].ToString();
+                string hedef1 = @"D:\";
+
+                var dosyalar1 = new DirectoryInfo(kaynak2).GetFiles("*.*");
+                foreach (FileInfo dosya in dosyalar1)
                 {
-                    Cursor.Position = new Point(Cursor.Position.X + x, Cursor.Position.Y);
-                    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0x0004, Cursor.Position.X, Cursor.Position.Y, 0);
-                    //realPanel_MouseDown(sender, aa);
+                    dosya.CopyTo(@disk1 + dosya.Name);
                 }
-                //else
-                //{
-                //    Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y);
-                //    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0, Cursor.Position.X, Cursor.Position.Y, 0);
-                //    realPanel_MouseDown(sender, aa);
-                //}
-                if (y > 50)
-                {
-                    Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y - y);
-                    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0x0004, Cursor.Position.X, Cursor.Position.Y, 0);
-                    //realPanel_MouseDown(sender, aa);
-                }
-                else if (y < 50)
-                {
-                    Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + y);
-                    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left, 0x0004, Cursor.Position.X, Cursor.Position.Y, 0);
-                    //realPanel_MouseDown(sender, aa);
-
-                }
-                //else
-                //{
-                //    Cursor.Position = new Point(Cursor.Position.X , Cursor.Position.Y);
-                //    MouseEventArgs aa = new MouseEventArgs(MouseButtons.Left,0, Cursor.Position.X, Cursor.Position.Y, 0);
-                //    realPanel_MouseDown(sender, aa);
-                //}
-
-
-                if (splitted_data[13] == "1")
-                {
-                    //İlk satırda fareye sol tuşun basılmasını sağladık.
-                    mouse_event(MOUSEEVENTF_LEFTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
-                }
-                //else if (splitted_data[13] == "0")
-                //{
-                //    mouse_event(MOUSEEVENTF_LEFTUP, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
-                //}
-
-
-
             }
             catch (Exception ex)
             {
 
             }
+            button25.Text = "DOSYA TRANSFERİ";
+            //button25.BackColor = Color.White;
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            TabClear();
+            this.rgbandthermal.Parent = this.mainTabCtrl; //show
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            TabClear();
+            this.LiveView.Parent = this.mainTabCtrl; //show
+
+        }
+
+        private void playPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void playPanel1_DoubleClick(object sender, EventArgs e)
+        {
+            TabClear();
+            mainTabCtrl.SelectedIndex = 0;
+
+        }
+        public int moreconnforthermal = 0;
+        private void playPanel3_DoubleClick(object sender, EventArgs e)
+        {
+            //TabClear();8
+            mainTabCtrl.SelectedIndex = 10;
+            var viewmod = new ThermalViewModelKalkan();
+            if (moreconnforthermal == 0)
+            {
+                viewmod.Login();
+                viewmod.RealPlay(playPanel5.Handle);
+                moreconnforthermal++;
+            }
+            this.rgb.Parent = this.mainTabCtrl;
+        }
+
+        private void role(int i, string modul)
+        {
+            try
+            {
+                if (modul == "kamera")
+                {
+                    if (serialPort1.IsOpen == true)
+                    {
+                        serialPort1.Write("9" + i.ToString() + "1");
+                    }
+                }
+                if (modul == "irled")
+                {
+                    if (serialPort1.IsOpen == true)
+                    {
+                        serialPort1.Write("9" + i.ToString() + "2");
+                    }
+                }
+                if (modul == "hab")
+                {
+                    if (serialPort1.IsOpen == true)
+                    {
+                        serialPort1.Write("9" + i.ToString() + "3");
+                    }
+                }
+                if (modul == "sinyal")
+                {
+                    if (serialPort1.IsOpen == true)
+                    {
+                        serialPort1.Write("9" + i.ToString() + "4");
+                    }
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
+        private void button28_Click(object sender, EventArgs e)
+        {
+            ConnectBarcode1();
+        }
+        private void ConnectBarcode1()
+        {
+            try
+            {
+                if (serialPort1.IsOpen == true)
+                {
+                    serialPort1.Close();
+                }
+
+                serialPort1.PortName = textBox8.Text;
+                serialPort1.BaudRate = Convert.ToInt32(textBox9.Text);
+                //  sp.DataBits = 8; // göndereceğimiz bilginin kaç bitten oluşacağını bildiriyoruz (int32).
+
+                // sp.StopBits = StopBits.One; // Stop bitinin kaç bit olacağını belirtir//sp.Parity = Parity.None; // Eşlik bitidir. Gönderilen verinin doğruluğunu kontrol etmek için kullanılır.
+                serialPort1.Open();
+                AddToLog("STM", "Bağlantı Kuruldu", 10, Color.Green);
+            }
+            catch
+            {
+                AddToLog("STM", "Bağlantı Hatası", 10, Color.Red);
+            }
         }
 
 
-        private void button10_Click(object sender, EventArgs e)
+        public int mouseclicker = 0;
+        public int breath = 0;
+        public int homescreen = 0;
+        public int right = 0;
+        public int left = 0;
+        public int up = 0;
+        public int down = 0;
+        public int home= 0;
+        public int zoom_in= 0;
+        public int zoom_out= 0;
+        private async void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                Okuma_Sayac++;
+                Okuma_Sayac2++;
+                string dataCom = serialPort1.ReadExisting();       // bufferdan verileri oku
+                string[] vals;
+
+
+                if (dataCom.Length > 95)
+                {
+                    Thread.Sleep(60);
+                    vals = dataCom.Split(',');
+
+                    //Form1 frm = new Form1();
+                    //frm.Invoke(new MethodInvoker(delegate { frm.Form2y = vals; }));
+
+                    SharedDataSingleton.Instance.SharedData = vals;
+                    //Class1 cls = new Class1();
+                    //cls.SetSplitValue(vals);
+
+                    //string[] valss = cls.GetSplitValue();
+                    //label139.Text = valss[0] + valss[1] + valss[2];
+                    string zero = vals[11];
+                    panelacma = Convert.ToInt32(vals[15]);
+
+                    if (zero != sayacpanel || vals[15] != sayacpanel2)
+                    {
+                        if (zero == "0")
+                        {
+                            if (panelacma == 0)
+                            {
+
+                                form2.Show();
+                                form1.Hide();
+                            }
+
+                            else
+                            {
+                                form2.Hide();
+                                form1.Show();
+
+                            }
+                        }
+                        else
+                        {
+                            form2.Hide();
+                            form1.Hide();
+                        }
+
+                        //Application.DoEvents();
+                    }
+
+                    sayacpanel = zero;
+                    sayacpanel2 = vals[15];
+
+
+                    if (vals[16] == "0" && valb == 0)
+                    {
+                        AddToLog("Program ", "Açıldı", 10, Color.Green);
+
+                        int selectedIndex = mainTabCtrl.SelectedIndex;
+
+                        if (selectedIndex == 0)
+                        {
+                            mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[7];
+                            Application.DoEvents();
+                        }
+                        else
+                        {
+                            mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[0];
+                            Application.DoEvents();
+                        }
+
+                        valb = 1;
+                    }
+
+                    if (vals[16] == "1") valb = 0;
+
+
+                    if (vals[17]=="0" && breath==0)
+                    {
+                        serialPort1.Write("301");
+                        Thread.Sleep(100);
+                        serialPort1.Write("300");
+                        breath = 1;
+                    }
+
+                    if (vals[17] == "1") breath = 0;
+
+
+                    if (vals[24]=="0")
+                    {
+                        SendMessage2("#TPUG2wPTZ046E");
+                        right = 1;
+                    }
+                    else if (vals[24]=="1" && right==1)
+                    {
+                        SendMessage2("#TPUG2wPTZ006A");
+                        SendMessage2("#TPUG2wPTZ006A");
+                        right = 0;
+                    }
+
+                    if (vals[22]=="0")
+                    {
+                        SendMessage2("#TPUG2wPTZ036D");
+                        left = 1;
+                    }
+                    else if (vals[22]=="1" && left==1)
+                    {
+                        SendMessage2("#TPUG2wPTZ006A");
+                        SendMessage2("#TPUG2wPTZ006A");
+                        left = 0;
+                    }
+
+                    if (vals[23]=="0")
+                    {
+                        SendMessage2("#TPUG2wPTZ016B");
+                        up = 1;
+                    }
+                    else if (vals[23]=="1" && up==1)
+                    {
+                        SendMessage2("#TPUG2wPTZ006A");
+                        SendMessage2("#TPUG2wPTZ006A");
+                        up = 0;
+                    }
+                    if (vals[21]=="0")
+                    {
+                        SendMessage2("#TPUG2wPTZ026C");
+                        down = 1;
+                    }
+                    else if (vals[21]=="1" && down==1)
+                    {
+                        SendMessage2("#TPUG2wPTZ006A");
+                        SendMessage2("#TPUG2wPTZ006A");
+                        down = 0;
+                    }
+                    if (vals[25]=="0")
+                    {
+                        SendMessage2("#TPUG2wPTZ056F");
+                    }
+                    else if (vals[25]=="1" && home==1)
+                    {
+                        SendMessage2("#TPUG2wPTZ006A");
+                        home = 0;
+                    }
+                    if (vals[29]=="0")
+                    {
+                        SendMessage2("#TPUM2wZMC025E");
+                        zoom_in = 1;
+                    }
+                    else if (vals[29]=="1" && zoom_in==1)
+                    {
+                        zoom_in = 0;
+                        SendMessage2("#TPUM2wZMC005C");
+                    }
+                    if (vals[27]=="0")
+                    {
+                        SendMessage2("#TPUM2wZMC015D");
+                        zoom_out = 1;
+                    }
+                    else if(zoom_out==1 && vals[27]=="1")
+                    {
+                        SendMessage2("#TPUM2wZMC005C");
+                        zoom_out = 0;
+                    }
+                    if (vals[98]=="1")
+                    {
+                        button55.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        button55.BackColor = Color.Red;
+                    }
+
+
+
+
+                    //string alici4 = vals[59] + vals[60] + vals[61] + vals[62];
+                    if (vals[19]=="0" && mouseclicker==0)
+                    {
+                        serialPort1.Write("801");
+                        mouseclicker = 1;
+                    }
+                    if (vals[19] == "1") mouseclicker = 0;
+
+
+                    kamera1 = vals[82];
+                    kamera2 = vals[83];
+                    kamera3 = vals[84];
+                    kamera4 = vals[85];
+                    irled1 = vals[86];
+                    irled2 = vals[87];
+                    irled3 = vals[88];
+                    irled4 = vals[89];
+                    hab1 = vals[90];
+                    hab2 = vals[91];
+                    hab3 = vals[92];
+                    hab4 = vals[93];
+                    sled1 = vals[94];
+                    sled2 = vals[95];
+                    sled3 = vals[96];
+                    sled4 = vals[97];
+
+                    if (vals[37] != mouse)
+                    {
+                        if (serialPort1.IsOpen == true)
+                        {
+                            serialPort1.Write("800");
+                        }
+                        if (vals[37] == "1")
+                        {
+                            button21.Invoke(new MethodInvoker(delegate { button21.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\rightclick.png"); ; }));
+                        }
+                        else
+                        {
+                            button21.Invoke(new MethodInvoker(delegate { button21.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\leftclick.png"); ; }));
+                        }
+                    }
+                    mouse = vals[37];
+
+                    if(vals[18]=="0")
+                    {
+                        //SaveSettings2();
+
+                        if (serialPort1.IsOpen == true)
+                        {
+                            serialPort1.Close();
+                            serialPort1.Close();
+                        }
+                        this.stopCycleMonitorThread();
+                        this.stopKeepAliveDeviceThread();
+                        //NETDEVSDK.NETDEV_Cleanup();
+                        this.stopCycleMonitorThread();
+                        this.stopKeepAliveDeviceThread();
+                        //Form loginform = new Login();
+                        //loginform.Show();
+
+                        ////this.Close(); // Mevcut formu kapat
+                        //Application.OpenForms[0].Close(); // Ana formu kapat (veya başka bir formu hedefleyin)
+
+                        //NetDemo yeniForm = new NetDemo(); // Yeni bir form oluştur
+                        //yeniForm.Show(); // Yeni formu göster
+
+                        Application.Restart();
+                    }
+
+           
+                    //if (LblAlici4.InvokeRequired)
+                    //{
+                    //    LblAlici4.Invoke(new MethodInvoker(delegate { LblAlici4.Text = alici4; }));
+
+
+
+                    //batarya
+                    //LblB1.Text = Convert.ToString(vals[43]).ToString();
+                    //LblB2.Text = Convert.ToString(vals[50]).ToString();
+                    //LblB3.Text = Convert.ToString(vals[57]).ToString();
+                    //LblB4.Text = Convert.ToString(vals[64]).ToString();
+                    label133.Text = "%" + vals[79]; //
+                        label134.Text = "%" + vals[78];
+
+                        if (Okuma_Sayac >= 6)
+                        {
+                          
+                            if (Convert.ToInt32(vals[79]) >= 0 && Convert.ToInt32(vals[79]) <= 9)
+                            {
+                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _0.png");
+                            }
+                            else if (Convert.ToInt32(vals[79]) >= 10 && Convert.ToInt32(vals[79]) <= 24)
+                            {
+                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _10.png");
+                            }
+                            else if (Convert.ToInt32(vals[79]) >= 25 && Convert.ToInt32(vals[79]) <= 49)
+                            {
+                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _25.png");
+                            }
+                            else if (Convert.ToInt32(vals[79]) >= 50 && Convert.ToInt32(vals[79]) <= 74)
+                            {
+                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _50.png");
+                            }
+                            else if (Convert.ToInt32(vals[79]) >= 75 && Convert.ToInt32(vals[79]) <= 89)
+                            {
+                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _75.png");
+                            }
+                            else if (Convert.ToInt32(vals[79]) >= 90 && Convert.ToInt32(vals[79]) <= 100)
+                            {
+                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _100.png");
+                            }
+
+                            if (Convert.ToInt32(vals[78]) >= 0 && Convert.ToInt32(vals[78]) <= 9)
+                            {
+                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _0.png");
+                            }
+                            else if (Convert.ToInt32(vals[78]) >= 10 && Convert.ToInt32(vals[78]) <= 24)
+                            {
+                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _10.png");
+                            }
+                            else if (Convert.ToInt32(vals[78]) >= 25 && Convert.ToInt32(vals[78]) <= 49)
+                            {
+                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _25.png");
+                            }
+                            else if (Convert.ToInt32(vals[78]) >= 50 && Convert.ToInt32(vals[78]) <= 74)
+                            {
+                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _50.png");
+                            }
+                            else if (Convert.ToInt32(vals[78]) >= 75 && Convert.ToInt32(vals[78]) <= 89)
+                            {
+                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _75.png");
+                            }
+                            else if (Convert.ToInt32(vals[78]) >= 90 && Convert.ToInt32(vals[78]) <= 100)
+                            {
+                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _100.png");
+                            }
+
+                            if (Convert.ToInt32(vals[73]) >= 0 && Convert.ToInt32(vals[73]) <= 9)  // röle 4 batarya
+                            {
+                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                            }
+                            else if (Convert.ToInt32(vals[73]) >= 10 && Convert.ToInt32(vals[73]) <= 24)
+                            {
+                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                            }
+                            else if (Convert.ToInt32(vals[73]) >= 25 && Convert.ToInt32(vals[73]) <= 49)
+                            {
+                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
+                            }
+                            else if (Convert.ToInt32(vals[73]) >= 50 && Convert.ToInt32(vals[73]) <= 74)
+                            {
+                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
+                            }
+                            else if (Convert.ToInt32(vals[73]) >= 75 && Convert.ToInt32(vals[73]) <= 89)
+                            {
+                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
+                            }
+                            else if (Convert.ToInt32(vals[73]) >= 90 && Convert.ToInt32(vals[73]) <= 100)
+                            {
+                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
+                            }
+
+                            if (Convert.ToInt32(vals[72]) >= 0 && Convert.ToInt32(vals[72]) <= 9)  // röle 3 batarya
+                            {
+                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                            }
+                            else if (Convert.ToInt32(vals[72]) >= 10 && Convert.ToInt32(vals[72]) <= 24)
+                            {
+                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                            }
+                            else if (Convert.ToInt32(vals[72]) >= 25 && Convert.ToInt32(vals[72]) <= 49)
+                            {
+                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
+                            }
+                            else if (Convert.ToInt32(vals[72]) >= 50 && Convert.ToInt32(vals[72]) <= 74)
+                            {
+                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
+                            }
+                            else if (Convert.ToInt32(vals[72]) >= 75 && Convert.ToInt32(vals[72]) <= 89)
+                            {
+                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
+                            }
+                            else if (Convert.ToInt32(vals[72]) >= 90 && Convert.ToInt32(vals[72]) <= 100)
+                            {
+                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
+                            }
+
+
+
+                            if (Convert.ToInt32(vals[71]) >= 0 && Convert.ToInt32(vals[71]) <= 9)  // röle 2 batarya
+                            {
+                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                            }
+                            else if (Convert.ToInt32(vals[71]) >= 10 && Convert.ToInt32(vals[71]) <= 24)
+                            {
+                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                            }
+                            else if (Convert.ToInt32(vals[71]) >= 25 && Convert.ToInt32(vals[71]) <= 49)
+                            {
+                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
+                            }
+                            else if (Convert.ToInt32(vals[71]) >= 50 && Convert.ToInt32(vals[71]) <= 74)
+                            {
+                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
+                            }
+                            else if (Convert.ToInt32(vals[71]) >= 75 && Convert.ToInt32(vals[71]) <= 89)
+                            {
+                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
+                            }
+                            else if (Convert.ToInt32(vals[71]) >= 90 && Convert.ToInt32(vals[71]) <= 100)
+                            {
+                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
+                            }
+
+                            if (Convert.ToInt32(vals[70]) >= 0 && Convert.ToInt32(vals[70]) <= 9)  // röle 1 batarya
+                            {
+                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                            }
+                            else if (Convert.ToInt32(vals[70]) >= 10 && Convert.ToInt32(vals[70]) <= 24)
+                            {
+                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                            }
+                            else if (Convert.ToInt32(vals[70]) >= 25 && Convert.ToInt32(vals[70]) <= 49)
+                            {
+                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
+                            }
+                            else if (Convert.ToInt32(vals[70]) >= 50 && Convert.ToInt32(vals[70]) <= 74)
+                            {
+                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
+                            }
+                            else if (Convert.ToInt32(vals[70]) >= 75 && Convert.ToInt32(vals[70]) <= 89)
+                            {
+                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
+                            }
+                            else if (Convert.ToInt32(vals[70]) >= 90 && Convert.ToInt32(vals[70]) <= 100)
+                            {
+                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
+                            }
+
+
+
+                        if (kamera2 == "1")
+                        {
+                            button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+                        if (irled2 == "1")
+                        {
+                            button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+                        if (hab2 == "1")
+                        {
+                            button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+
+
+
+
+                        if (kamera1 == "1")
+                        {
+                            button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+                        if (irled1 == "1")
+                        {
+                            button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+                        if (hab1 == "1")
+                        {
+                            button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+
+
+                        if (kamera3 == "1")
+                        {
+                            button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+                        if (irled3 == "1")
+                        {
+                            button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+                        if (hab3 == "1")
+                        {
+                            button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+
+
+
+
+
+                        if (kamera4 == "1")
+                        {
+                            button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+                        if (irled4 == "1")
+                        {
+                            button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+
+                        if (hab4 == "1")
+                        {
+                            button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                        }
+                        else
+                        {
+                            button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                        }
+                    }
+
+                        //if (Convert.ToInt32(vals[74]) == 0) //röle 1 
+                        //{
+                        //    button31.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                        //}
+
+
+                        if (Okuma_Sayac >= 6)
+                        {
+                            Okuma_Sayac = 0;
+                        }
+
+                        if (Convert.ToInt32(vals[77]) == 0) // röle 4 
+                        {
+                            button44.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                        }
+                        else
+                        {
+                            button44.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                        }
+
+                        if (Convert.ToInt32(vals[76]) == 0) //röle 3 
+                        {
+                            button41.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                        }
+                        else
+                        {
+                            button41.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                        }
+
+                        if (Convert.ToInt32(vals[75]) == 0) //röle 2 
+                        {
+                            button37.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                        }
+                        else
+                        {
+                            button37.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                        }
+
+                        if (Convert.ToInt32(vals[74]) == 0) //röle 1 
+                        {
+                            button31.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                        }
+                        else
+                        {
+                            button31.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                        }
+
+                        if (Okuma_Sayac2 >= 4)
+                        {
+                            if (Convert.ToInt32(vals[69]) >= 30 && Convert.ToInt32(vals[69]) <= 65)  // röle 4 sinyal
+                            {
+                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
+                            }
+                            else if (Convert.ToInt32(vals[69]) >= 65 && Convert.ToInt32(vals[69]) <= 85)
+                            {
+                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
+                            }
+                            else if (Convert.ToInt32(vals[69]) >= 86 && Convert.ToInt32(vals[69]) <= 105)
+                            {
+                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
+                            }
+                            else if (Convert.ToInt32(vals[69]) >= 106 && Convert.ToInt32(vals[69]) <= 120)
+                            {
+                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
+                            }
+                            else if (Convert.ToInt32(vals[69]) >= 121 && Convert.ToInt32(vals[69]) <= 135)
+                            {
+                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
+                            }
+                            else if (Convert.ToInt32(vals[69]) >= 136 && Convert.ToInt32(vals[69]) <= 140)
+                            {
+                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                            }
+                            else if (Convert.ToInt32(vals[69]) == 0)
+                            {
+                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                            }
+                            string aaa = (vals[64]);
+
+
+
+
+                            if (Convert.ToInt32(vals[68]) >= 30 && Convert.ToInt32(vals[68]) <= 65)  // röle 3 sinyal
+                            {
+                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
+                            }
+                            else if (Convert.ToInt32(vals[68]) >= 66 && Convert.ToInt32(vals[68]) <= 85)
+                            {
+                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
+                            }
+                            else if (Convert.ToInt32(vals[68]) >= 86 && Convert.ToInt32(vals[68]) <= 105)
+                            {
+                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
+                            }
+                            else if (Convert.ToInt32(vals[68]) >= 106 && Convert.ToInt32(vals[68]) <= 120)
+                            {
+                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
+                            }
+                            else if (Convert.ToInt32(vals[68]) >= 121 && Convert.ToInt32(vals[68]) <= 135)
+                            {
+                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
+                            }
+                            else if (Convert.ToInt32(vals[68]) >= 136 && Convert.ToInt32(vals[68]) <= 140)
+                            {
+                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                            }
+                            else if (Convert.ToInt32(vals[68]) == 0)
+                            {
+                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                            }
+
+
+
+
+                            if (Convert.ToInt32(vals[67]) >= 30 && Convert.ToInt32(vals[67]) <= 65)  // röle 2 sinyal
+                            {
+                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
+                            }
+                            else if (Convert.ToInt32(vals[67]) >= 66 && Convert.ToInt32(vals[67]) <= 85)
+                            {
+                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
+                            }
+                            else if (Convert.ToInt32(vals[67]) >= 86 && Convert.ToInt32(vals[67]) <= 105)
+                            {
+                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
+                            }
+                            else if (Convert.ToInt32(vals[67]) >= 106 && Convert.ToInt32(vals[67]) <= 120)
+                            {
+                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
+                            }
+                            else if (Convert.ToInt32(vals[67]) >= 121 && Convert.ToInt32(vals[67]) <= 135)
+                            {
+                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
+                            }
+                            else if (Convert.ToInt32(vals[67]) >= 136 && Convert.ToInt32(vals[67]) <= 140)
+                            {
+                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                            }
+                            else if (Convert.ToInt32(vals[67]) == 0)
+                            {
+                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                            }
+
+
+                            if (Convert.ToInt32(vals[66]) >= 30 && Convert.ToInt32(vals[66]) <= 65)  // röle 1 sinyal
+                            {
+                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
+                            }
+                            else if (Convert.ToInt32(vals[66]) >= 66 && Convert.ToInt32(vals[66]) <= 85)
+                            {
+                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
+                            }
+                            else if (Convert.ToInt32(vals[66]) >= 86 && Convert.ToInt32(vals[66]) <= 105)
+                            {
+                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
+                            }
+                            else if (Convert.ToInt32(vals[66]) >= 106 && Convert.ToInt32(vals[66]) <= 120)
+                            {
+                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
+                            }
+                            else if (Convert.ToInt32(vals[66]) >= 121 && Convert.ToInt32(vals[66]) <= 135)
+                            {
+                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
+                            }
+                            else if (Convert.ToInt32(vals[66]) >= 136 && Convert.ToInt32(vals[66]) <= 140)
+                            {
+                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                            }
+                            else if (Convert.ToInt32(vals[66]) == 0)
+                            {
+                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                            }
+
+                           
+                        }
+                        if (Okuma_Sayac2 >= 4)
+                        {
+                            Okuma_Sayac2 = 0;
+                        }
+                        string aaaa = vals[77];
+                        string aaaa2 = vals[76];
+
+                        if (Convert.ToString(vals[81]).ToString() == "1")
+                        {
+                            HABERLESME.BackColor = Color.Green;
+                        }
+                        else if (Convert.ToString(vals[81]).ToString() == "0")
+                        {
+                            HABERLESME.BackColor = Color.Red;
+                        }
+
+                        if (Convert.ToString(vals[80]).ToString() == "1")
+                        {
+
+                            if (serialPort1.IsOpen == true)
+                            {
+                                serialPort1.Write("100");
+                            }
+
+                            Thread.Sleep(1000);
+                            serialPort1.Close();
+                            System.Diagnostics.Process.Start("shutdown", "/s /t 0");
+                        }
+
+
+                    
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
+        private void playPanel5_DoubleClick(object sender, EventArgs e)
+        {
+            mainTabCtrl.SelectedIndex = 0;
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
 
-            if (mainTabCtrl.Width != this.Width)
+            if (m_curRealPanel.IsAlarmMode == true)
             {
-                mainTabCtrl.Location = new Point(0, mainTabCtrl.Location.Y);
-                mainTabCtrl.Width = this.Width;
-
-                LayoutPanel.Width = this.Width;
-                switchRealScreen(null);
-                switchRealScreen(null);
-
-                button70.Visible = false;
-                button60.Visible = false;
-                button66.Visible = false;
-                button68.Visible = false;
-                button67.Visible = false;
-                button5.Visible = false;
-                button8.Visible = false;
-                button7.Visible = false;
-                button6.Visible = false;
-                button9.Visible = false;
+                button29.BackgroundImage = global::NetDemo.Properties.Resources.run;
+                m_curRealPanel.IsAlarmMode = false;
             }
             else
             {
-                mainTabCtrl.Location = new Point(145, mainTabCtrl.Location.Y);
-                mainTabCtrl.Width = 1136;
-                mainTabCtrl.Height = 819;
-                LayoutPanel.Width = 1151;
-                LayoutPanel.Height = 819;
-                switchRealScreen(null);
-                switchRealScreen(null);
+                button29.BackgroundImage = global::NetDemo.Properties.Resources.runer_silhouette_running_fast;
+                m_curRealPanel.IsAlarmMode = true;
+            }
+        }
 
-                button70.Visible = true;
-                button60.Visible = true;
-                button66.Visible = true;
-                button68.Visible = true;
-                button67.Visible = true;
-                button5.Visible = true;
-                button8.Visible = true;
-                button7.Visible = true;
-                button6.Visible = true;
-                button9.Visible = true;
+        private void tabPage7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen == true)
+            {
+                serialPort1.Write("301");
+                Thread.Sleep(100);
+                serialPort1.Write("300");
+            }
+        }
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen == true)
+            {
+                serialPort1.Write("302");
+                Thread.Sleep(100);
+                serialPort1.Write("300");
+            }
+        }
+
+        private void HABERLESME_Click(object sender, EventArgs e)
+        {
+            if (HABERLESME.BackColor == Color.Green)
+            {
+                if (serialPort1.IsOpen == true)
+                {
+                    serialPort1.Write("200");
+                }
+            }
+
+            else if (HABERLESME.BackColor == Color.Red)
+            {
+                if (serialPort1.IsOpen == true)
+                {
+                    serialPort1.Write("201");
+                }
+            }
+        }
+        int counter = 20;
+        public void AlarmTetikle()
+        {
+            //alarm sesi çalışacak
+            if (m_curRealPanel.IsAlarmMode == true)
+            {
+                Assembly a = Assembly.GetExecutingAssembly();
+                Stream s = a.GetManifestResourceStream("../Resources/bip.mp3");
+                System.Media.SoundPlayer sp = new System.Media.SoundPlayer(s);
+                sp.Play();
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
+            if (counter % 2 == 0)
+            {
+                m_curPlayBackPanel.setBorderColor(System.Drawing.Color.Green, 25);
+                m_curRealPanel.Invalidate();
+                counter++;
+            }
+            else
+            {
+                m_curPlayBackPanel.setBorderColor(System.Drawing.Color.Red, 25);
+                m_curRealPanel.Invalidate();
+                counter++;
+            }
+
+            //durdurmak için gerçekleşen işlemler
+            if (counter == 20)
+            {
+                counter = 0;
+                timer2.Stop();
             }
 
         }
+
+        private void playPanel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void playPanel6_DoubleClick(object sender, EventArgs e)
+        {
+            TabClear();
+            this.thermal.Parent = this.mainTabCtrl;
+
+        }
+
+        private void button26_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+            if (panelacma == 1)
+            {
+                form2.Hide();
+                //form1.Show();
+                form1.Visible = form1.Visible == true ? false : true;
+            }
+            else
+            {
+               
+                form1.Hide();
+                //form2.Show();
+                form2.Visible = form2.Visible == true ? false : true;
+            }
+
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+            ConnectBarcode1();
+         
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen == true)
+            {
+                serialPort1.Close();
+            }
+        }
+
+        private void LoadSettings()
+        {
+            try
+            {
+
+                string fName = Application.StartupPath + "\\Settings\\Config.dat";
+                if (File.Exists(fName))
+                {
+                    string[] lines = File.ReadAllLines(fName);
+                    try
+                    {
+
+                        textBox8.Text = lines[0];
+                        textBox9.Text = lines[1];
+                        checkBox1.Checked = Convert.ToBoolean(lines[2]);
+                        textBox5.Text = lines[3];
+
+                    }
+                    catch (Exception ex)
+                    {
+                        //System.IO.File.Delete(fName);
+                    }
+
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        private void SaveSettings()
+        {
+            try
+            {
+                DateTime now = DateTime.Now;
+                using (StreamWriter sw = new StreamWriter(Application.StartupPath + "\\Settings\\config.dat"))
+                {
+                    sw.WriteLine(textBox8.Text);
+                    sw.WriteLine(textBox9.Text);
+                    sw.WriteLine(checkBox1.Checked.ToString());
+                    sw.WriteLine(textBox5.Text);
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void SaveSettings2()
+        {
+            try
+            {
+                DateTime now = DateTime.Now;
+                using (StreamWriter sw = new StreamWriter(Application.StartupPath + "\\Settings\\config2.dat"))
+                {
+                    sw.WriteLine(1);
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            tabControl3.SelectedTab = tabControl3.TabPages[2];
+        }
+
+        private void NetDemo_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                if (serialPort1.IsOpen == true)
+                {
+                    serialPort1.Close();
+                }
+                //Application.Exit();
+            }
+            catch
+            {
+                AddToLog("STM", "Hatası", 10, Color.Red);
+            }
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (groupBox39.Visible == true && rolenomodul == 1)
+                {
+                    groupBox39.Visible = false;
+                }
+                else
+                {
+                    groupBox39.Visible = true;
+                }
+                rolenomodul = 1;
+                label150.Text = "Röle No: 1";
+                if (kamera1 == "1")
+                {
+                    button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                }
+                else
+                {
+                    button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                }
+
+                if (irled1 == "1")
+                {
+                    button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                }
+                else
+                {
+                    button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                }
+
+                if (hab1 == "1")
+                {
+                    button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                }
+                else
+                {
+                    button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                }
+
+                //if (sled1 == "1")
+                //{
+                //    button23.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+                //}
+                //else
+                //{
+                //    button23.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+                //}
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            if (groupBox39.Visible == true && rolenomodul == 2)
+            {
+                groupBox39.Visible = false;
+            }
+            else
+            {
+                groupBox39.Visible = true;
+            }
+            rolenomodul = 2;
+            label150.Text = "Röle No: 2";
+
+
+            if (kamera2 == "1")
+            {
+                button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            }
+            else
+            {
+                button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            }
+
+            if (irled2 == "1")
+            {
+                button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            }
+            else
+            {
+                button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            }
+
+            if (hab2 == "1")
+            {
+                button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            }
+            else
+            {
+                button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            }
+
+            //if (sled2 == "1") //iptal edildi
+            //{
+            //    button23.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            //}
+            //else
+            //{
+            //    button23.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            //}
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            if (groupBox39.Visible == true && rolenomodul == 3)
+            {
+                groupBox39.Visible = false;
+            }
+            else
+            {
+                groupBox39.Visible = true;
+            }
+            rolenomodul = 3;
+            label150.Text = "Röle No: 3";
+
+
+            if (kamera3 == "1")
+            {
+                button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            }
+            else
+            {
+                button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            }
+
+            if (irled3 == "1")
+            {
+                button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            }
+            else
+            {
+                button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            }
+
+            if (hab3 == "1")
+            {
+                button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            }
+            else
+            {
+                button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            }
+
+            //if (sled3 == "1")
+            //{
+            //    button23.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            //}
+            //else
+            //{
+            //    button23.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            //}
+        }
+
+        private void label132_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+            if (groupBox39.Visible == true && rolenomodul == 4)
+            {
+                groupBox39.Visible = false;
+            }
+            else
+            {
+                groupBox39.Visible = true;
+            }
+            rolenomodul = 4;
+            label150.Text = "Röle No: 4";
+
+
+            if (kamera4 == "1")
+            {
+                button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            }
+            else
+            {
+                button50.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            }
+
+            if (irled4 == "1")
+            {
+                button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            }
+            else
+            {
+                button49.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            }
+
+            if (hab4 == "1")
+            {
+                button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            }
+            else
+            {
+                button48.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            }
+
+            //if (sled4 == "1")
+            //{
+            //    button23.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\green.png");
+            //}
+            //else
+            //{
+            //    button23.Image = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\red.png");
+            //}
+        }
+
+        private void label125_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button50_Click(object sender, EventArgs e)
+        {
+            role(rolenomodul, "kamera");
+        }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+            role(rolenomodul, "irled");
+        }
+
+        private void button48_Click(object sender, EventArgs e)
+        {
+            role(rolenomodul, "hab");
+        }
+
+        //private void button23_Click(object sender, EventArgs e)
+        //{
+        //    role(rolenomodul, "sinyal");
+        //}
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            button31.PerformClick();
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            button31.PerformClick();
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            button37.PerformClick();
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            button37.PerformClick();
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            button41.PerformClick();
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            button41.PerformClick();
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+            button44.PerformClick();
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            button44.PerformClick();
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                serialPort1.Write("801");
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void label133_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            //vlcControl1.Visible = false;
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            //vlcControl1.Visible = true;
+        }
+
+
+
+        private void vlcControl2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            vlcControl2.Visible = false;
+            vlcControl3.Visible = true;
+            //this.mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[0];
+            //vlcControl2.Stop();
+            //vlcControl1.Play();
+        }
+
+        private void vlcControl1_MouseDoubleClick_1(object sender, MouseEventArgs e)
+        {
+            vlcControl2.Visible = true;
+            vlcControl3.Visible = false;
+            this.mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[11];
+          //  vlcControl1.Stop();
+            //vlcControl2.Play();
+        }
+       
+
+        private void vlcControl2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUM2wZMC025E");
+        }
+
+        private void button24_Click_1(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUM2wZMC005C");
+        }
+
+        private void button26_Click_2(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUM2wZMC015D");
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUM2wFCC013F");
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUM2wFCC003E");
+        }
+
+        private void button28_Click_1(object sender, EventArgs e)
+        {
+            SendMessage2("TPUM2wFCC0240");
+        }
+
+        private void button47_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUD2wRST0163");
+        }
+
+        private void button51_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUG2wPTZ056F");
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUG2wPTZ016B");
+        }
+
+        private void button56_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUG2wPTZ036D");
+        }
+
+        private void button52_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUG2wPTZ026C");
+        }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUG2wPTZ006A");
+        }
+
+        private void button57_Click(object sender, EventArgs e)
+        {
+            SendMessage2("#TPUG2wPTZ046E");
+        }
+
+        private void SendMessage2(string message)
+        {
+            try
+            {
+                string serverIP = "192.168.1.107"; // Sunucu IP adresi
+                int port = 9003; // Sunucu portu
+
+                // UDP istemci soket oluşturma
+                UdpClient udpClient = new UdpClient();
+
+                // Gönderilecek mesaj
+                string messageToSend = message;
+
+                // Mesajı UTF-8 format
+                // Mesajı UTF-8 formatında byte dizisine çevirme
+                byte[] dataToSend = Encoding.UTF8.GetBytes(messageToSend);
+
+                // Sunucuya mesajı gönderme
+                udpClient.Send(dataToSend, dataToSend.Length, serverIP, port);
+
+                // Sunucudan gelen cevabı alma
+                //byte[] receivedData = udpClient.Receive(ref serverEndPoint);
+                //string receivedMessage = Encoding.UTF8.GetString(receivedData);
+
+                //// ListBox üzerinde cevabı gösterme
+                //listBox1.Items.Add("Sunucudan cevap alındı: " + receivedMessage);
+                udpClient.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata oluştu: " + ex.Message);
+            }
+
+            finally
+            {
+                // UDP istemci soketi kapatma
+                //udpClient.Close();
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                vlcControl1.Visible = true;
+            }
+            else
+            {
+                vlcControl1.Visible = false;
+            }
+        }
+
+        private void vlcControl3_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            vlcControl3.Visible = false;
+            vlcControl2.Visible = true;
+            this.mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[0];
+        }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+            serialPort1.Write("701");
+        }
+
+        private void tabControl3_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            //TabPage page = tabControl3.TabPages[e.Index];
+            //e.Graphics.FillRectangle(new SolidBrush(page.BackColor), e.Bounds);
+
+            //Rectangle paddedBounds = e.Bounds;
+            //int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
+            //paddedBounds.Offset(1, yOffset);
+            //TextRenderer.DrawText(e.Graphics, page.Text, e.Font, paddedBounds, page.ForeColor);
+        }
+
+        private void label129_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-
-
 }
+
+public class SharedDataSingleton
+{
+    private static SharedDataSingleton instance;
+    public string[] SharedData { get; set; }
+
+    private SharedDataSingleton() { }
+
+    public static SharedDataSingleton Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = new SharedDataSingleton();
+            return instance;
+        }
+    }
+}
+//nt thermalval = 0;
+//vlcControl2.Stop();
+//string rtspUrl = "";
+//if (thermalval == 0)
+//{
+//    rtspUrl = "rtsp://192.168.144.108:554/stream=" + thermalval;
+//    thermalval = 1;
+//}
+//else
+//{
+//    rtspUrl = "rtsp://192.168.144.108:554/stream=" + thermalval;
+//    thermalval = 0;
+//}
+
+//var options = new string[]
+// {
+//                // Önbelleğe alma süresini milisaniye cinsinden belirleyin (örneğin, 5000 ms).
+//                "network-caching=1"
+// };
+
+//vlcControl2.SetMedia(new Uri(rtspUrl), options);
+//vlcControl2.Play();
 

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 public class PanelEx : Panel
@@ -6,6 +7,7 @@ public class PanelEx : Panel
     public Color m_oBorderColor = new Color();
     public int m_nBorderWidth;
     public ButtonBorderStyle m_oBorderLineStyle;
+    public IntPtr handle;
     public PanelEx()
     {
         m_oBorderColor = new Color();

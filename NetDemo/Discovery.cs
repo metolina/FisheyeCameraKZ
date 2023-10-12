@@ -10,6 +10,8 @@ using System.Runtime.InteropServices;
 using NETSDKHelper;
 using System.IO;
 using Newtonsoft.Json;
+using static NetDemo.NetDemo;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NetDemo
 {
@@ -52,6 +54,8 @@ namespace NetDemo
         //add device
         private void addDeviceBtn_Click(object sender, EventArgs e)
         {
+            NetDemo netdemo = new NetDemo();
+
             String strUserName = this.userNameText.Text;
             String strPassword = this.passwordText.Text;
             if (strUserName == "" || strPassword == "")
@@ -59,17 +63,141 @@ namespace NetDemo
                 return;
             }
 
-            for (int i = 0; i < oDeviceIPList.Count() && i < oDevicePortList.Count(); i++)
+
+            #region Kayıtlı kamera kontrolü
+            string dosyaAdi = "kayitlar.json";
+            string klasorYolu = Path.Combine(Application.LocalUserAppDataPath);
+            string dosyaYolu = Path.Combine(klasorYolu, dosyaAdi);
+
+            // Dosya var mı diye kontrol et
+            if (!File.Exists(dosyaYolu))
             {
-                GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E eDeviceType = GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_IPC_OR_NVR;
-                if ("VMS" == oDeviceTypeList[i])
+                MessageBox.Show("Hiç kamera ayarları kayıt edilmemiş");
+            }
+            else
+            {
+                // Dosyayı oku
+                string json = File.ReadAllText(dosyaYolu);
+
+                // JSON verisini Kayit nesnelerine dönüştür
+                KameraSettings kayitlar = JsonConvert.DeserializeObject<KameraSettings>(json);
+                netdemo.txt_cam1_ip_adress.Text = kayitlar.cam1_ipadress;
+                netdemo.txt_cam1_password.Text = kayitlar.cam1_password;
+                netdemo.txt_cam1_port.Text = kayitlar.cam1_port;
+                netdemo.txt_cam1_username.Text = kayitlar.cam1_username;
+                netdemo.txt_cam2_ip_adress.Text = kayitlar.cam2_ipadress;
+                netdemo.txt_cam2_password.Text = kayitlar.cam2_password;
+                netdemo.txt_cam2_port.Text = kayitlar.cam2_port;
+                netdemo.txt_cam2_username.Text = kayitlar.cam2_username;
+                netdemo.txt_cam3_ip_adress.Text = kayitlar.cam3_ipadress;
+                netdemo.txt_cam3_port.Text = kayitlar.cam3_port;
+                netdemo.txt_cam3_username.Text = kayitlar.cam3_username;
+                netdemo.txt_cam3_password.Text = kayitlar.cam3_password;
+                netdemo.txt_cam4_ip_adress.Text = kayitlar.cam4_ipadress;
+                netdemo.txt_cam4_port.Text = kayitlar.cam4_port;
+                netdemo.txt_cam4_username.Text = kayitlar.cam4_username;
+                netdemo.txt_cam4_password.Text = kayitlar.cam4_password;
+
+            }
+            #endregion
+
+            for (int i = 0; i < DeviceInfoListView.Items.Count; i++)
+            {
+
+                if (oDeviceIPList[i] == netdemo.txt_cam2_ip_adress.Text || oDeviceIPList[i] == netdemo.txt_cam1_ip_adress.Text || oDeviceIPList[i] == netdemo.txt_cam3_ip_adress.Text || oDeviceIPList[i] == netdemo.txt_cam4_ip_adress.Text)
                 {
-                    eDeviceType = GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_VMS;
+                    MessageBox.Show(oDeviceIPList[i] + " Ip adresli kamera kayıtlı");
                 }
-            
+
+
+                if (netdemo.txt_cam1_ip_adress.Text == "")
+                {
+                    netdemo.txt_cam1_ip_adress.Text = oDeviceIPList[i];
+                    netdemo.txt_cam1_port.Text = oDevicePortList[i].ToString();
+                    netdemo.txt_cam1_username.Text = strUserName;
+                    netdemo.txt_cam1_password.Text = strPassword;
+
+
+                }
+                else if (netdemo.txt_cam2_ip_adress.Text == "")
+                {
+                    netdemo.txt_cam2_ip_adress.Text = oDeviceIPList[i];
+                    netdemo.txt_cam2_port.Text = oDevicePortList[i].ToString();
+                    netdemo.txt_cam2_username.Text = strUserName;
+                    netdemo.txt_cam2_password.Text = strPassword;
+                }
+                else if (netdemo.txt_cam3_ip_adress.Text == "")
+                {
+                    netdemo.txt_cam3_ip_adress.Text = oDeviceIPList[i];
+                    netdemo.txt_cam3_port.Text = oDevicePortList[i].ToString();
+                    netdemo.txt_cam3_username.Text = strUserName;
+                    netdemo.txt_cam3_password.Text = strPassword;
+                }
+                else if (netdemo.txt_cam4_ip_adress.Text == "")
+                {
+                    netdemo.txt_cam4_ip_adress.Text = oDeviceIPList[i];
+                    netdemo.txt_cam4_port.Text = oDevicePortList[i].ToString();
+                    netdemo.txt_cam4_username.Text = strUserName;
+                    netdemo.txt_cam4_password.Text = strPassword;
+                }
+                else
+                {
+                    MessageBox.Show("Kayıtlı kamera alanınız dolu");
+                }
+                var kayitlar = new KameraSettings
+                {
+                    cam1_ipadress = netdemo.txt_cam1_ip_adress.Text,
+                    cam1_port = netdemo.txt_cam1_port.Text,
+                    cam1_username = netdemo.txt_cam1_username.Text,
+                    cam1_password = netdemo.txt_cam1_password.Text,
+                    cam2_ipadress = netdemo.txt_cam2_ip_adress.Text,
+                    cam2_port = netdemo.txt_cam2_port.Text,
+                    cam2_username = netdemo.txt_cam2_username.Text,
+                    cam2_password = netdemo.txt_cam2_password.Text,
+                    cam3_ipadress = netdemo.txt_cam3_ip_adress.Text,
+                    cam3_port = netdemo.txt_cam3_port.Text,
+                    cam3_username = netdemo.txt_cam3_username.Text,
+                    cam3_password = netdemo.txt_cam3_password.Text,
+                    cam4_ipadress = netdemo.txt_cam4_ip_adress.Text,
+                    cam4_port = netdemo.txt_cam4_port.Text,
+                    cam4_username = netdemo.txt_cam4_username.Text,
+                    cam4_password = netdemo.txt_cam4_password.Text,
+                };
+                dosyaAdi = "kayitlar.json";
+                klasorYolu = Path.Combine(Application.LocalUserAppDataPath);
+                dosyaYolu = Path.Combine(klasorYolu, dosyaAdi);
+
+                // Nesneyi JSON formatına dönüştür
+                string json = JsonConvert.SerializeObject(kayitlar, Newtonsoft.Json.Formatting.Indented);
+
+                // JSON verisini dosyaya yaz
+                File.WriteAllText(dosyaYolu, json);
+                netdemo.txt_cam1_ip_adress.Text = kayitlar.cam1_ipadress;
+                netdemo.txt_cam1_password.Text = kayitlar.cam1_password;
+                netdemo.txt_cam1_port.Text = kayitlar.cam1_port;
+                netdemo.txt_cam1_username.Text = kayitlar.cam1_username;
+                netdemo.txt_cam2_ip_adress.Text = kayitlar.cam2_ipadress;
+                netdemo.txt_cam2_password.Text = kayitlar.cam2_password;
+                netdemo.txt_cam2_port.Text = kayitlar.cam2_port;
+                netdemo.txt_cam2_username.Text = kayitlar.cam2_username;
+                netdemo.txt_cam3_ip_adress.Text = kayitlar.cam3_ipadress;
+                netdemo.txt_cam3_port.Text = kayitlar.cam3_port;
+                netdemo.txt_cam3_username.Text = kayitlar.cam3_username;
+                netdemo.txt_cam3_password.Text = kayitlar.cam3_password;
+                netdemo.txt_cam4_ip_adress.Text = kayitlar.cam4_ipadress;
+                netdemo.txt_cam4_port.Text = kayitlar.cam4_port;
+                netdemo.txt_cam4_username.Text = kayitlar.cam4_username;
+                netdemo.txt_cam4_password.Text = kayitlar.cam4_password;
+
+                GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E eDeviceType = GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_IPC_OR_NVR;
+                //if ("VMS" == oDeviceTypeList[i])
+                //{
+                //    eDeviceType = GeneralDef.NETDEMO.NETDEMO_DEVICE_TYPE_E.NETDEMO_DEVICE_VMS;
+                //}
+
                 m_oNetDemo.AddLocalDevice(oDeviceIPList[i], oDevicePortList[i], strUserName, strPassword, eDeviceType);
             }
-
+            netdemo.textboxveridoldur();
             this.Close();
         }
 
@@ -209,5 +337,19 @@ namespace NetDemo
             }
         }
 
+        private void Discovery_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            discovery("0.0.0.0", "0.0.0.0");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

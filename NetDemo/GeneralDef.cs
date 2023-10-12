@@ -14,7 +14,7 @@ namespace GeneralDef
         public bool m_playStatus = false;/*播放状态，默认未播放*/
         public bool m_recordStatus = false;/*luxiang*/
         public IntPtr m_playhandle = IntPtr.Zero;/*播放句柄*/
-
+        public bool IsAlarmMode = false;
         /*playBack use*/
         public int m_curVideoSliderValue = 0;
         public int m_maxVideoSliderValue = 0;
