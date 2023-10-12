@@ -34,23 +34,47 @@ namespace NetDemo
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetDemo));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("(Kayıtlı Kameralar)");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("(Kayıtlı Kameralar)");
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.mainTabCtrl = new System.Windows.Forms.TabControl();
             this.LiveView = new System.Windows.Forms.TabPage();
             this.vlcControl1 = new Vlc.DotNet.Forms.VlcControl();
             this.groupBox39 = new System.Windows.Forms.GroupBox();
+            this.button23 = new System.Windows.Forms.Button();
+            this.button48 = new System.Windows.Forms.Button();
+            this.button49 = new System.Windows.Forms.Button();
+            this.button50 = new System.Windows.Forms.Button();
             this.label150 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label142 = new System.Windows.Forms.Label();
             this.label139 = new System.Windows.Forms.Label();
+            this.button21 = new System.Windows.Forms.Button();
             this.label134 = new System.Windows.Forms.Label();
             this.label133 = new System.Windows.Forms.Label();
-            this.button12 = new System.Windows.Forms.Button();
             this.label132 = new System.Windows.Forms.Label();
             this.label127 = new System.Windows.Forms.Label();
             this.label126 = new System.Windows.Forms.Label();
             this.label125 = new System.Windows.Forms.Label();
+            this.HABERLESME = new System.Windows.Forms.Button();
+            this.button42 = new System.Windows.Forms.Button();
+            this.button39 = new System.Windows.Forms.Button();
+            this.button43 = new System.Windows.Forms.Button();
+            this.button40 = new System.Windows.Forms.Button();
+            this.button44 = new System.Windows.Forms.Button();
+            this.button34 = new System.Windows.Forms.Button();
+            this.button41 = new System.Windows.Forms.Button();
+            this.button36 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button37 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button33 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button35 = new System.Windows.Forms.Button();
+            this.button38 = new System.Windows.Forms.Button();
             this.LayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.Playback = new System.Windows.Forms.TabPage();
@@ -80,6 +104,15 @@ namespace NetDemo
             this.PBVideoDateTimeLabel = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.PBVolBtn = new System.Windows.Forms.Button();
+            this.PBFrameBtn = new System.Windows.Forms.Button();
+            this.PBRestartBtn = new System.Windows.Forms.Button();
+            this.PBCaptureBtn = new System.Windows.Forms.Button();
+            this.PBFastForwardBtn = new System.Windows.Forms.Button();
+            this.PBFastBackwardBtn = new System.Windows.Forms.Button();
+            this.PBStopBtn = new System.Windows.Forms.Button();
+            this.PBPauseBtn = new System.Windows.Forms.Button();
+            this.PBStartBtn = new System.Windows.Forms.Button();
             this.Configure = new System.Windows.Forms.TabPage();
             this.cfgTabControl = new System.Windows.Forms.TabControl();
             this.ConfigBasic = new System.Windows.Forms.TabPage();
@@ -352,8 +385,12 @@ namespace NetDemo
             this.FaceRecogMatchRecordIDNoCHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FaceRecogMatchRecordMatchCHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FaceRecogMatchRecordAlarmSourceCHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.personLibPictureBox = new System.Windows.Forms.PictureBox();
+            this.snapshotPictureBox = new System.Windows.Forms.PictureBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
             this.faceSnapshotPicTimeLab = new System.Windows.Forms.Label();
+            this.faceSnapshotSmallPictureBox = new System.Windows.Forms.PictureBox();
+            this.faceSnapshotLargePictureBox = new System.Windows.Forms.PictureBox();
             this.faceRecogRealPlayFLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.FaceLibraryManagenentTabPage = new System.Windows.Forms.TabPage();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
@@ -365,6 +402,7 @@ namespace NetDemo
             this.findPersonInfoBtn = new System.Windows.Forms.Button();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.personInfoBirthText = new System.Windows.Forms.TextBox();
+            this.personInfoImagePictureBox = new System.Windows.Forms.PictureBox();
             this.personInfoGenderCmb = new System.Windows.Forms.ComboBox();
             this.personInfoCityText = new System.Windows.Forms.TextBox();
             this.personInfoIDNoText = new System.Windows.Forms.TextBox();
@@ -469,7 +507,9 @@ namespace NetDemo
             this.LPRRealPlayStartBtn = new System.Windows.Forms.Button();
             this.LPRRealPlayStopBtn = new System.Windows.Forms.Button();
             this.groupBox35 = new System.Windows.Forms.GroupBox();
+            this.vehiclePanoRecogPicBox = new System.Windows.Forms.PictureBox();
             this.plateNoRecogLab = new System.Windows.Forms.Label();
+            this.plateRecogPicBox = new System.Windows.Forms.PictureBox();
             this.LPRAlarmRecordsListView = new System.Windows.Forms.ListView();
             this.plateNoAlarmRecordColHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LPRSnapshotTimeAlarmRecordColHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -481,6 +521,8 @@ namespace NetDemo
             this.LPRCauseAlarmRecordColHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox36 = new System.Windows.Forms.GroupBox();
             this.vehicleSnapshotPicTimeLab = new System.Windows.Forms.Label();
+            this.plateSnapshotSmallPictureBox = new System.Windows.Forms.PictureBox();
+            this.vehicleSnapshotLargePictureBox = new System.Windows.Forms.PictureBox();
             this.LPRRealPlayFLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.LPRVehicleLibraryManagemnetTabPage = new System.Windows.Forms.TabPage();
             this.groupBox28 = new System.Windows.Forms.GroupBox();
@@ -618,7 +660,13 @@ namespace NetDemo
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.RealPlay = new System.Windows.Forms.Button();
+            this.Discovery = new System.Windows.Forms.Button();
+            this.MicVolumeBtn = new System.Windows.Forms.Button();
+            this.SoundBtn = new System.Windows.Forms.Button();
+            this.CapturePicture = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button22 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -650,6 +698,11 @@ namespace NetDemo
             this.label121 = new System.Windows.Forms.Label();
             this.txt_cam1_ip_adress = new System.Windows.Forms.TextBox();
             this.DeviceTree = new System.Windows.Forms.TreeView();
+            this.button20 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button60 = new System.Windows.Forms.Button();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.label129 = new System.Windows.Forms.Label();
             this.label128 = new System.Windows.Forms.Label();
@@ -661,6 +714,10 @@ namespace NetDemo
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label138 = new System.Windows.Forms.Label();
+            this.button55 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.label137 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -674,7 +731,15 @@ namespace NetDemo
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.imageList3 = new System.Windows.Forms.ImageList(this.components);
             this.label3 = new System.Windows.Forms.Label();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button67 = new System.Windows.Forms.Button();
+            this.button66 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button68 = new System.Windows.Forms.Button();
             this.rgbandthermal = new System.Windows.Forms.TabPage();
+            this.button27 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.thermal = new System.Windows.Forms.TabPage();
             this.playPanel3 = new GeneralDef.PlayPanel();
@@ -719,74 +784,6 @@ namespace NetDemo
             this.Pto_USB = new UsbLibrary.UsbHidPort(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.button23 = new System.Windows.Forms.Button();
-            this.button48 = new System.Windows.Forms.Button();
-            this.button49 = new System.Windows.Forms.Button();
-            this.button50 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.HABERLESME = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button42 = new System.Windows.Forms.Button();
-            this.button39 = new System.Windows.Forms.Button();
-            this.button43 = new System.Windows.Forms.Button();
-            this.button40 = new System.Windows.Forms.Button();
-            this.button44 = new System.Windows.Forms.Button();
-            this.button34 = new System.Windows.Forms.Button();
-            this.button41 = new System.Windows.Forms.Button();
-            this.button36 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
-            this.button37 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button33 = new System.Windows.Forms.Button();
-            this.button30 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
-            this.button35 = new System.Windows.Forms.Button();
-            this.button38 = new System.Windows.Forms.Button();
-            this.PBVolBtn = new System.Windows.Forms.Button();
-            this.PBFrameBtn = new System.Windows.Forms.Button();
-            this.PBRestartBtn = new System.Windows.Forms.Button();
-            this.PBCaptureBtn = new System.Windows.Forms.Button();
-            this.PBFastForwardBtn = new System.Windows.Forms.Button();
-            this.PBFastBackwardBtn = new System.Windows.Forms.Button();
-            this.PBStopBtn = new System.Windows.Forms.Button();
-            this.PBPauseBtn = new System.Windows.Forms.Button();
-            this.PBStartBtn = new System.Windows.Forms.Button();
-            this.personLibPictureBox = new System.Windows.Forms.PictureBox();
-            this.snapshotPictureBox = new System.Windows.Forms.PictureBox();
-            this.faceSnapshotSmallPictureBox = new System.Windows.Forms.PictureBox();
-            this.faceSnapshotLargePictureBox = new System.Windows.Forms.PictureBox();
-            this.personInfoImagePictureBox = new System.Windows.Forms.PictureBox();
-            this.vehiclePanoRecogPicBox = new System.Windows.Forms.PictureBox();
-            this.plateRecogPicBox = new System.Windows.Forms.PictureBox();
-            this.plateSnapshotSmallPictureBox = new System.Windows.Forms.PictureBox();
-            this.vehicleSnapshotLargePictureBox = new System.Windows.Forms.PictureBox();
-            this.RealPlay = new System.Windows.Forms.Button();
-            this.Discovery = new System.Windows.Forms.Button();
-            this.MicVolumeBtn = new System.Windows.Forms.Button();
-            this.SoundBtn = new System.Windows.Forms.Button();
-            this.CapturePicture = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button60 = new System.Windows.Forms.Button();
-            this.button55 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button67 = new System.Windows.Forms.Button();
-            this.button66 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button68 = new System.Windows.Forms.Button();
-            this.button27 = new System.Windows.Forms.Button();
             this.mainTabCtrl.SuspendLayout();
             this.LiveView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).BeginInit();
@@ -842,10 +839,15 @@ namespace NetDemo
             this.groupBox26.SuspendLayout();
             this.groupBox24.SuspendLayout();
             this.groupBox23.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.personLibPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.snapshotPictureBox)).BeginInit();
             this.groupBox22.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.faceSnapshotSmallPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.faceSnapshotLargePictureBox)).BeginInit();
             this.FaceLibraryManagenentTabPage.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.groupBox21.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.personInfoImagePictureBox)).BeginInit();
             this.groupBox19.SuspendLayout();
             this.FaceMonitoringTaskTabPage.SuspendLayout();
             this.FaceAlarmRecordTabPage.SuspendLayout();
@@ -859,7 +861,11 @@ namespace NetDemo
             this.groupBox32.SuspendLayout();
             this.groupBox34.SuspendLayout();
             this.groupBox35.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vehiclePanoRecogPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.plateRecogPicBox)).BeginInit();
             this.groupBox36.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.plateSnapshotSmallPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vehicleSnapshotLargePictureBox)).BeginInit();
             this.LPRVehicleLibraryManagemnetTabPage.SuspendLayout();
             this.groupBox28.SuspendLayout();
             this.groupBox29.SuspendLayout();
@@ -891,15 +897,6 @@ namespace NetDemo
             this.deviceOper.SuspendLayout();
             this.rootOper.SuspendLayout();
             this.PannelContextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.personLibPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.snapshotPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.faceSnapshotSmallPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.faceSnapshotLargePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personInfoImagePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehiclePanoRecogPicBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.plateRecogPicBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.plateSnapshotSmallPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleSnapshotLargePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -982,6 +979,77 @@ namespace NetDemo
             this.groupBox39.TabStop = false;
             this.groupBox39.Visible = false;
             // 
+            // button23
+            // 
+            this.button23.BackColor = System.Drawing.Color.White;
+            this.button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button23.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button23.FlatAppearance.BorderSize = 2;
+            this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button23.Image = ((System.Drawing.Image)(resources.GetObject("button23.Image")));
+            this.button23.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button23.Location = new System.Drawing.Point(7, 261);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(20, 20);
+            this.button23.TabIndex = 872;
+            this.button23.Text = "     Sinyal Ledi";
+            this.button23.UseVisualStyleBackColor = false;
+            // 
+            // button48
+            // 
+            this.button48.BackColor = System.Drawing.Color.White;
+            this.button48.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button48.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button48.FlatAppearance.BorderSize = 2;
+            this.button48.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button48.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button48.Image = ((System.Drawing.Image)(resources.GetObject("button48.Image")));
+            this.button48.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button48.Location = new System.Drawing.Point(7, 187);
+            this.button48.Name = "button48";
+            this.button48.Size = new System.Drawing.Size(166, 62);
+            this.button48.TabIndex = 863;
+            this.button48.Text = "        Haberleşme";
+            this.button48.UseVisualStyleBackColor = false;
+            this.button48.Click += new System.EventHandler(this.button48_Click);
+            // 
+            // button49
+            // 
+            this.button49.BackColor = System.Drawing.Color.White;
+            this.button49.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button49.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button49.FlatAppearance.BorderSize = 2;
+            this.button49.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button49.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button49.Image = ((System.Drawing.Image)(resources.GetObject("button49.Image")));
+            this.button49.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button49.Location = new System.Drawing.Point(7, 113);
+            this.button49.Name = "button49";
+            this.button49.Size = new System.Drawing.Size(166, 62);
+            this.button49.TabIndex = 862;
+            this.button49.Text = "     IR LED";
+            this.button49.UseVisualStyleBackColor = false;
+            this.button49.Click += new System.EventHandler(this.button49_Click);
+            // 
+            // button50
+            // 
+            this.button50.BackColor = System.Drawing.Color.White;
+            this.button50.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button50.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button50.FlatAppearance.BorderSize = 2;
+            this.button50.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button50.Image = ((System.Drawing.Image)(resources.GetObject("button50.Image")));
+            this.button50.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button50.Location = new System.Drawing.Point(7, 39);
+            this.button50.Name = "button50";
+            this.button50.Size = new System.Drawing.Size(166, 62);
+            this.button50.TabIndex = 861;
+            this.button50.Text = "     Kamera";
+            this.button50.UseVisualStyleBackColor = false;
+            this.button50.Click += new System.EventHandler(this.button50_Click);
+            // 
             // label150
             // 
             this.label150.AutoSize = true;
@@ -1000,14 +1068,11 @@ namespace NetDemo
             this.groupBox2.Controls.Add(this.button21);
             this.groupBox2.Controls.Add(this.label134);
             this.groupBox2.Controls.Add(this.label133);
-            this.groupBox2.Controls.Add(this.button12);
             this.groupBox2.Controls.Add(this.label132);
             this.groupBox2.Controls.Add(this.label127);
             this.groupBox2.Controls.Add(this.label126);
             this.groupBox2.Controls.Add(this.label125);
             this.groupBox2.Controls.Add(this.HABERLESME);
-            this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Controls.Add(this.button7);
             this.groupBox2.Controls.Add(this.button42);
             this.groupBox2.Controls.Add(this.button39);
             this.groupBox2.Controls.Add(this.button43);
@@ -1053,6 +1118,23 @@ namespace NetDemo
             this.label139.TabIndex = 884;
             this.label139.Text = "Bat-1";
             // 
+            // button21
+            // 
+            this.button21.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button21.BackgroundImage")));
+            this.button21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button21.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button21.FlatAppearance.BorderSize = 0;
+            this.button21.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button21.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button21.Location = new System.Drawing.Point(659, 15);
+            this.button21.Margin = new System.Windows.Forms.Padding(2);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(36, 32);
+            this.button21.TabIndex = 883;
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
             // label134
             // 
             this.label134.AutoSize = true;
@@ -1074,25 +1156,6 @@ namespace NetDemo
             this.label133.TabIndex = 881;
             this.label133.Text = "1";
             this.label133.Click += new System.EventHandler(this.label133_Click);
-            // 
-            // button12
-            // 
-            this.button12.BackColor = System.Drawing.Color.White;
-            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
-            this.button12.FlatAppearance.BorderSize = 3;
-            this.button12.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button12.ForeColor = System.Drawing.Color.White;
-            this.button12.Location = new System.Drawing.Point(697, 17);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(29, 28);
-            this.button12.TabIndex = 228;
-            this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button12.UseVisualStyleBackColor = false;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // label132
             // 
@@ -1135,6 +1198,385 @@ namespace NetDemo
             this.label125.TabIndex = 877;
             this.label125.Text = "1";
             this.label125.Click += new System.EventHandler(this.label125_Click);
+            // 
+            // HABERLESME
+            // 
+            this.HABERLESME.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HABERLESME.BackgroundImage")));
+            this.HABERLESME.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.HABERLESME.Location = new System.Drawing.Point(758, 18);
+            this.HABERLESME.Margin = new System.Windows.Forms.Padding(2);
+            this.HABERLESME.Name = "HABERLESME";
+            this.HABERLESME.Size = new System.Drawing.Size(47, 32);
+            this.HABERLESME.TabIndex = 876;
+            this.HABERLESME.UseVisualStyleBackColor = true;
+            this.HABERLESME.Click += new System.EventHandler(this.HABERLESME_Click);
+            // 
+            // button42
+            // 
+            this.button42.BackColor = System.Drawing.Color.White;
+            this.button42.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button42.BackgroundImage")));
+            this.button42.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button42.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button42.FlatAppearance.BorderSize = 0;
+            this.button42.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button42.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button42.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button42.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button42.Location = new System.Drawing.Point(51, 14);
+            this.button42.Name = "button42";
+            this.button42.Size = new System.Drawing.Size(35, 33);
+            this.button42.TabIndex = 873;
+            this.button42.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button42.UseVisualStyleBackColor = false;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
+            // 
+            // button39
+            // 
+            this.button39.BackColor = System.Drawing.Color.White;
+            this.button39.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button39.BackgroundImage")));
+            this.button39.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button39.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button39.FlatAppearance.BorderSize = 0;
+            this.button39.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button39.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button39.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button39.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button39.Location = new System.Drawing.Point(143, 14);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(35, 33);
+            this.button39.TabIndex = 873;
+            this.button39.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button39.UseVisualStyleBackColor = false;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
+            // 
+            // button43
+            // 
+            this.button43.BackColor = System.Drawing.Color.White;
+            this.button43.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button43.BackgroundImage")));
+            this.button43.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button43.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button43.FlatAppearance.BorderSize = 0;
+            this.button43.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button43.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button43.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button43.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button43.Location = new System.Drawing.Point(37, 14);
+            this.button43.Name = "button43";
+            this.button43.Size = new System.Drawing.Size(12, 33);
+            this.button43.TabIndex = 872;
+            this.button43.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button43.UseVisualStyleBackColor = false;
+            this.button43.Click += new System.EventHandler(this.button43_Click);
+            // 
+            // button40
+            // 
+            this.button40.BackColor = System.Drawing.Color.White;
+            this.button40.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button40.BackgroundImage")));
+            this.button40.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button40.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button40.FlatAppearance.BorderSize = 0;
+            this.button40.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button40.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button40.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button40.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button40.Location = new System.Drawing.Point(129, 14);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(12, 33);
+            this.button40.TabIndex = 872;
+            this.button40.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button40.UseVisualStyleBackColor = false;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
+            // 
+            // button44
+            // 
+            this.button44.BackColor = System.Drawing.Color.White;
+            this.button44.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button44.BackgroundImage")));
+            this.button44.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button44.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button44.FlatAppearance.BorderSize = 0;
+            this.button44.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button44.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button44.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button44.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button44.Location = new System.Drawing.Point(8, 19);
+            this.button44.Name = "button44";
+            this.button44.Size = new System.Drawing.Size(31, 28);
+            this.button44.TabIndex = 871;
+            this.button44.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button44.UseVisualStyleBackColor = false;
+            this.button44.Click += new System.EventHandler(this.button44_Click);
+            // 
+            // button34
+            // 
+            this.button34.BackColor = System.Drawing.Color.White;
+            this.button34.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button34.BackgroundImage")));
+            this.button34.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button34.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button34.FlatAppearance.BorderSize = 0;
+            this.button34.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button34.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button34.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button34.Location = new System.Drawing.Point(239, 14);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(35, 33);
+            this.button34.TabIndex = 873;
+            this.button34.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button34.UseVisualStyleBackColor = false;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
+            // 
+            // button41
+            // 
+            this.button41.BackColor = System.Drawing.Color.White;
+            this.button41.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button41.BackgroundImage")));
+            this.button41.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button41.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button41.FlatAppearance.BorderSize = 0;
+            this.button41.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button41.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button41.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button41.Location = new System.Drawing.Point(102, 19);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(31, 28);
+            this.button41.TabIndex = 871;
+            this.button41.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button41.UseVisualStyleBackColor = false;
+            this.button41.Click += new System.EventHandler(this.button41_Click);
+            // 
+            // button36
+            // 
+            this.button36.BackColor = System.Drawing.Color.White;
+            this.button36.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button36.BackgroundImage")));
+            this.button36.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button36.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button36.FlatAppearance.BorderSize = 0;
+            this.button36.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button36.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button36.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button36.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button36.Location = new System.Drawing.Point(225, 14);
+            this.button36.Name = "button36";
+            this.button36.Size = new System.Drawing.Size(12, 33);
+            this.button36.TabIndex = 872;
+            this.button36.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button36.UseVisualStyleBackColor = false;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
+            // 
+            // button29
+            // 
+            this.button29.BackColor = System.Drawing.Color.White;
+            this.button29.BackgroundImage = global::NetDemo.Properties.Resources.run;
+            this.button29.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button29.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button29.ForeColor = System.Drawing.Color.White;
+            this.button29.Location = new System.Drawing.Point(870, 12);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(36, 36);
+            this.button29.TabIndex = 865;
+            this.button29.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button29.UseVisualStyleBackColor = false;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // button37
+            // 
+            this.button37.BackColor = System.Drawing.Color.White;
+            this.button37.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button37.BackgroundImage")));
+            this.button37.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button37.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button37.FlatAppearance.BorderSize = 0;
+            this.button37.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button37.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button37.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button37.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button37.Location = new System.Drawing.Point(196, 22);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(31, 28);
+            this.button37.TabIndex = 871;
+            this.button37.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button37.UseVisualStyleBackColor = false;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
+            // 
+            // button16
+            // 
+            this.button16.BackColor = System.Drawing.Color.White;
+            this.button16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button16.BackgroundImage")));
+            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button16.ForeColor = System.Drawing.Color.White;
+            this.button16.Location = new System.Drawing.Point(819, 15);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(36, 33);
+            this.button16.TabIndex = 231;
+            this.button16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button16.UseVisualStyleBackColor = false;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button15
+            // 
+            this.button15.BackColor = System.Drawing.Color.White;
+            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button15.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button15.ForeColor = System.Drawing.Color.White;
+            this.button15.Image = ((System.Drawing.Image)(resources.GetObject("button15.Image")));
+            this.button15.Location = new System.Drawing.Point(921, 12);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(36, 36);
+            this.button15.TabIndex = 230;
+            this.button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button15.UseVisualStyleBackColor = false;
+            this.button15.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button14
+            // 
+            this.button14.BackColor = System.Drawing.Color.White;
+            this.button14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button14.BackgroundImage")));
+            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button14.ForeColor = System.Drawing.Color.White;
+            this.button14.Location = new System.Drawing.Point(708, 12);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(36, 36);
+            this.button14.TabIndex = 229;
+            this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.button15_Click_1);
+            // 
+            // button33
+            // 
+            this.button33.BackColor = System.Drawing.Color.White;
+            this.button33.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button33.BackgroundImage")));
+            this.button33.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button33.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button33.FlatAppearance.BorderSize = 0;
+            this.button33.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button33.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button33.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button33.Location = new System.Drawing.Point(336, 13);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(35, 33);
+            this.button33.TabIndex = 870;
+            this.button33.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button33.UseVisualStyleBackColor = false;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
+            // button30
+            // 
+            this.button30.BackColor = System.Drawing.Color.White;
+            this.button30.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button30.BackgroundImage")));
+            this.button30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button30.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button30.FlatAppearance.BorderSize = 0;
+            this.button30.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button30.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button30.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button30.Location = new System.Drawing.Point(322, 13);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(12, 33);
+            this.button30.TabIndex = 869;
+            this.button30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button30.UseVisualStyleBackColor = false;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // button31
+            // 
+            this.button31.BackColor = System.Drawing.Color.White;
+            this.button31.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button31.BackgroundImage")));
+            this.button31.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button31.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button31.FlatAppearance.BorderSize = 0;
+            this.button31.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button31.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button31.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button31.Location = new System.Drawing.Point(290, 18);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(31, 28);
+            this.button31.TabIndex = 868;
+            this.button31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button31.UseVisualStyleBackColor = false;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // button32
+            // 
+            this.button32.BackColor = System.Drawing.Color.White;
+            this.button32.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button32.BackgroundImage")));
+            this.button32.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button32.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button32.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button32.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button32.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button32.Location = new System.Drawing.Point(588, 14);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(58, 22);
+            this.button32.TabIndex = 867;
+            this.button32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button32.UseVisualStyleBackColor = false;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // button35
+            // 
+            this.button35.BackColor = System.Drawing.Color.White;
+            this.button35.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button35.BackgroundImage")));
+            this.button35.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button35.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button35.FlatAppearance.BorderSize = 0;
+            this.button35.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button35.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button35.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button35.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button35.Location = new System.Drawing.Point(490, 14);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(60, 32);
+            this.button35.TabIndex = 864;
+            this.button35.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button35.UseVisualStyleBackColor = false;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
+            // 
+            // button38
+            // 
+            this.button38.BackColor = System.Drawing.Color.White;
+            this.button38.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button38.BackgroundImage")));
+            this.button38.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button38.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button38.FlatAppearance.BorderSize = 0;
+            this.button38.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button38.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button38.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button38.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button38.Location = new System.Drawing.Point(390, 14);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(58, 22);
+            this.button38.TabIndex = 861;
+            this.button38.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button38.UseVisualStyleBackColor = false;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
             // LayoutPanel
             // 
@@ -1465,6 +1907,105 @@ namespace NetDemo
             this.label7.Size = new System.Drawing.Size(65, 16);
             this.label7.TabIndex = 1;
             this.label7.Text = "Begin Time";
+            // 
+            // PBVolBtn
+            // 
+            this.PBVolBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
+            this.PBVolBtn.Enabled = false;
+            this.PBVolBtn.Location = new System.Drawing.Point(461, 615);
+            this.PBVolBtn.Name = "PBVolBtn";
+            this.PBVolBtn.Size = new System.Drawing.Size(35, 30);
+            this.PBVolBtn.TabIndex = 0;
+            this.PBVolBtn.UseVisualStyleBackColor = true;
+            this.PBVolBtn.Click += new System.EventHandler(this.PBVolBtn_Click);
+            // 
+            // PBFrameBtn
+            // 
+            this.PBFrameBtn.BackgroundImage = global::NetDemo.Properties.Resources.icon2;
+            this.PBFrameBtn.Enabled = false;
+            this.PBFrameBtn.Location = new System.Drawing.Point(411, 615);
+            this.PBFrameBtn.Name = "PBFrameBtn";
+            this.PBFrameBtn.Size = new System.Drawing.Size(35, 30);
+            this.PBFrameBtn.TabIndex = 0;
+            this.PBFrameBtn.UseVisualStyleBackColor = true;
+            this.PBFrameBtn.Click += new System.EventHandler(this.PBFrameBtn_Click);
+            // 
+            // PBRestartBtn
+            // 
+            this.PBRestartBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00006;
+            this.PBRestartBtn.Enabled = false;
+            this.PBRestartBtn.Location = new System.Drawing.Point(360, 615);
+            this.PBRestartBtn.Name = "PBRestartBtn";
+            this.PBRestartBtn.Size = new System.Drawing.Size(35, 30);
+            this.PBRestartBtn.TabIndex = 0;
+            this.PBRestartBtn.UseVisualStyleBackColor = true;
+            this.PBRestartBtn.Click += new System.EventHandler(this.PBRestartBtn_Click);
+            // 
+            // PBCaptureBtn
+            // 
+            this.PBCaptureBtn.BackgroundImage = global::NetDemo.Properties.Resources.camera;
+            this.PBCaptureBtn.Enabled = false;
+            this.PBCaptureBtn.Location = new System.Drawing.Point(307, 615);
+            this.PBCaptureBtn.Name = "PBCaptureBtn";
+            this.PBCaptureBtn.Size = new System.Drawing.Size(35, 30);
+            this.PBCaptureBtn.TabIndex = 0;
+            this.PBCaptureBtn.UseVisualStyleBackColor = true;
+            this.PBCaptureBtn.Click += new System.EventHandler(this.PBCaptureBtn_Click);
+            // 
+            // PBFastForwardBtn
+            // 
+            this.PBFastForwardBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00001;
+            this.PBFastForwardBtn.Enabled = false;
+            this.PBFastForwardBtn.Location = new System.Drawing.Point(177, 615);
+            this.PBFastForwardBtn.Name = "PBFastForwardBtn";
+            this.PBFastForwardBtn.Size = new System.Drawing.Size(35, 30);
+            this.PBFastForwardBtn.TabIndex = 0;
+            this.PBFastForwardBtn.UseVisualStyleBackColor = true;
+            this.PBFastForwardBtn.Click += new System.EventHandler(this.PBFastForwardBtn_Click);
+            // 
+            // PBFastBackwardBtn
+            // 
+            this.PBFastBackwardBtn.BackgroundImage = global::NetDemo.Properties.Resources.icon8;
+            this.PBFastBackwardBtn.Enabled = false;
+            this.PBFastBackwardBtn.Location = new System.Drawing.Point(136, 615);
+            this.PBFastBackwardBtn.Name = "PBFastBackwardBtn";
+            this.PBFastBackwardBtn.Size = new System.Drawing.Size(35, 30);
+            this.PBFastBackwardBtn.TabIndex = 0;
+            this.PBFastBackwardBtn.UseVisualStyleBackColor = true;
+            this.PBFastBackwardBtn.Click += new System.EventHandler(this.PBFastBackwardBtn_Click);
+            // 
+            // PBStopBtn
+            // 
+            this.PBStopBtn.BackgroundImage = global::NetDemo.Properties.Resources.STOP;
+            this.PBStopBtn.Enabled = false;
+            this.PBStopBtn.Location = new System.Drawing.Point(95, 615);
+            this.PBStopBtn.Name = "PBStopBtn";
+            this.PBStopBtn.Size = new System.Drawing.Size(35, 30);
+            this.PBStopBtn.TabIndex = 0;
+            this.PBStopBtn.UseVisualStyleBackColor = true;
+            this.PBStopBtn.Click += new System.EventHandler(this.PBStopBtn_Click);
+            // 
+            // PBPauseBtn
+            // 
+            this.PBPauseBtn.BackgroundImage = global::NetDemo.Properties.Resources.PAUSE_ENABLE;
+            this.PBPauseBtn.Enabled = false;
+            this.PBPauseBtn.Location = new System.Drawing.Point(54, 615);
+            this.PBPauseBtn.Name = "PBPauseBtn";
+            this.PBPauseBtn.Size = new System.Drawing.Size(35, 30);
+            this.PBPauseBtn.TabIndex = 0;
+            this.PBPauseBtn.UseVisualStyleBackColor = true;
+            this.PBPauseBtn.Click += new System.EventHandler(this.PBPauseBtn_Click);
+            // 
+            // PBStartBtn
+            // 
+            this.PBStartBtn.BackgroundImage = global::NetDemo.Properties.Resources.PLAY_ENABLE;
+            this.PBStartBtn.Enabled = false;
+            this.PBStartBtn.Location = new System.Drawing.Point(12, 615);
+            this.PBStartBtn.Name = "PBStartBtn";
+            this.PBStartBtn.Size = new System.Drawing.Size(35, 30);
+            this.PBStartBtn.TabIndex = 0;
+            this.PBStartBtn.UseVisualStyleBackColor = true;
+            this.PBStartBtn.Click += new System.EventHandler(this.PBStartBtn_Click);
             // 
             // Configure
             // 
@@ -4247,6 +4788,26 @@ namespace NetDemo
             this.FaceRecogMatchRecordAlarmSourceCHeader.Text = "Alarm Source";
             this.FaceRecogMatchRecordAlarmSourceCHeader.Width = 185;
             // 
+            // personLibPictureBox
+            // 
+            this.personLibPictureBox.BackColor = System.Drawing.Color.LightGray;
+            this.personLibPictureBox.Location = new System.Drawing.Point(105, 22);
+            this.personLibPictureBox.Name = "personLibPictureBox";
+            this.personLibPictureBox.Size = new System.Drawing.Size(98, 120);
+            this.personLibPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.personLibPictureBox.TabIndex = 3;
+            this.personLibPictureBox.TabStop = false;
+            // 
+            // snapshotPictureBox
+            // 
+            this.snapshotPictureBox.BackColor = System.Drawing.Color.LightGray;
+            this.snapshotPictureBox.Location = new System.Drawing.Point(6, 22);
+            this.snapshotPictureBox.Name = "snapshotPictureBox";
+            this.snapshotPictureBox.Size = new System.Drawing.Size(98, 120);
+            this.snapshotPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.snapshotPictureBox.TabIndex = 2;
+            this.snapshotPictureBox.TabStop = false;
+            // 
             // groupBox22
             // 
             this.groupBox22.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -4269,6 +4830,26 @@ namespace NetDemo
             this.faceSnapshotPicTimeLab.TabIndex = 2;
             this.faceSnapshotPicTimeLab.Text = "Time";
             this.faceSnapshotPicTimeLab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // faceSnapshotSmallPictureBox
+            // 
+            this.faceSnapshotSmallPictureBox.BackColor = System.Drawing.Color.LightGray;
+            this.faceSnapshotSmallPictureBox.Location = new System.Drawing.Point(68, 175);
+            this.faceSnapshotSmallPictureBox.Name = "faceSnapshotSmallPictureBox";
+            this.faceSnapshotSmallPictureBox.Size = new System.Drawing.Size(115, 136);
+            this.faceSnapshotSmallPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.faceSnapshotSmallPictureBox.TabIndex = 1;
+            this.faceSnapshotSmallPictureBox.TabStop = false;
+            // 
+            // faceSnapshotLargePictureBox
+            // 
+            this.faceSnapshotLargePictureBox.BackColor = System.Drawing.Color.LightGray;
+            this.faceSnapshotLargePictureBox.Location = new System.Drawing.Point(15, 24);
+            this.faceSnapshotLargePictureBox.Name = "faceSnapshotLargePictureBox";
+            this.faceSnapshotLargePictureBox.Size = new System.Drawing.Size(222, 149);
+            this.faceSnapshotLargePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.faceSnapshotLargePictureBox.TabIndex = 0;
+            this.faceSnapshotLargePictureBox.TabStop = false;
             // 
             // faceRecogRealPlayFLayoutPanel
             // 
@@ -4399,6 +4980,17 @@ namespace NetDemo
             this.personInfoBirthText.Name = "personInfoBirthText";
             this.personInfoBirthText.Size = new System.Drawing.Size(227, 18);
             this.personInfoBirthText.TabIndex = 38;
+            // 
+            // personInfoImagePictureBox
+            // 
+            this.personInfoImagePictureBox.BackColor = System.Drawing.Color.LightGray;
+            this.personInfoImagePictureBox.Location = new System.Drawing.Point(17, 23);
+            this.personInfoImagePictureBox.Name = "personInfoImagePictureBox";
+            this.personInfoImagePictureBox.Size = new System.Drawing.Size(121, 162);
+            this.personInfoImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.personInfoImagePictureBox.TabIndex = 37;
+            this.personInfoImagePictureBox.TabStop = false;
+            this.personInfoImagePictureBox.DoubleClick += new System.EventHandler(this.personInfoImagePictureBox_DoubleClick);
             // 
             // personInfoGenderCmb
             // 
@@ -5420,6 +6012,16 @@ namespace NetDemo
             this.groupBox35.TabStop = false;
             this.groupBox35.Text = "Alarm Records";
             // 
+            // vehiclePanoRecogPicBox
+            // 
+            this.vehiclePanoRecogPicBox.BackColor = System.Drawing.Color.LightGray;
+            this.vehiclePanoRecogPicBox.Location = new System.Drawing.Point(3, 26);
+            this.vehiclePanoRecogPicBox.Name = "vehiclePanoRecogPicBox";
+            this.vehiclePanoRecogPicBox.Size = new System.Drawing.Size(105, 65);
+            this.vehiclePanoRecogPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.vehiclePanoRecogPicBox.TabIndex = 4;
+            this.vehiclePanoRecogPicBox.TabStop = false;
+            // 
             // plateNoRecogLab
             // 
             this.plateNoRecogLab.BackColor = System.Drawing.Color.LightGray;
@@ -5429,6 +6031,16 @@ namespace NetDemo
             this.plateNoRecogLab.TabIndex = 3;
             this.plateNoRecogLab.Text = "Plate No.";
             this.plateNoRecogLab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // plateRecogPicBox
+            // 
+            this.plateRecogPicBox.BackColor = System.Drawing.Color.LightGray;
+            this.plateRecogPicBox.Location = new System.Drawing.Point(2, 93);
+            this.plateRecogPicBox.Name = "plateRecogPicBox";
+            this.plateRecogPicBox.Size = new System.Drawing.Size(106, 41);
+            this.plateRecogPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.plateRecogPicBox.TabIndex = 2;
+            this.plateRecogPicBox.TabStop = false;
             // 
             // LPRAlarmRecordsListView
             // 
@@ -5513,6 +6125,26 @@ namespace NetDemo
             this.vehicleSnapshotPicTimeLab.TabIndex = 3;
             this.vehicleSnapshotPicTimeLab.Text = "Time";
             this.vehicleSnapshotPicTimeLab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // plateSnapshotSmallPictureBox
+            // 
+            this.plateSnapshotSmallPictureBox.BackColor = System.Drawing.Color.LightGray;
+            this.plateSnapshotSmallPictureBox.Location = new System.Drawing.Point(6, 181);
+            this.plateSnapshotSmallPictureBox.Name = "plateSnapshotSmallPictureBox";
+            this.plateSnapshotSmallPictureBox.Size = new System.Drawing.Size(231, 64);
+            this.plateSnapshotSmallPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.plateSnapshotSmallPictureBox.TabIndex = 2;
+            this.plateSnapshotSmallPictureBox.TabStop = false;
+            // 
+            // vehicleSnapshotLargePictureBox
+            // 
+            this.vehicleSnapshotLargePictureBox.BackColor = System.Drawing.Color.LightGray;
+            this.vehicleSnapshotLargePictureBox.Location = new System.Drawing.Point(6, 24);
+            this.vehicleSnapshotLargePictureBox.Name = "vehicleSnapshotLargePictureBox";
+            this.vehicleSnapshotLargePictureBox.Size = new System.Drawing.Size(231, 155);
+            this.vehicleSnapshotLargePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.vehicleSnapshotLargePictureBox.TabIndex = 0;
+            this.vehicleSnapshotLargePictureBox.TabStop = false;
             // 
             // LPRRealPlayFLayoutPanel
             // 
@@ -6995,6 +7627,63 @@ namespace NetDemo
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // RealPlay
+            // 
+            this.RealPlay.BackgroundImage = global::NetDemo.Properties.Resources.PLAY_ENABLE;
+            this.RealPlay.Location = new System.Drawing.Point(940, 183);
+            this.RealPlay.Name = "RealPlay";
+            this.RealPlay.Size = new System.Drawing.Size(30, 32);
+            this.RealPlay.TabIndex = 29;
+            this.RealPlay.UseVisualStyleBackColor = true;
+            // 
+            // Discovery
+            // 
+            this.Discovery.BackgroundImage = global::NetDemo.Properties.Resources.search;
+            this.Discovery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Discovery.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Discovery.Location = new System.Drawing.Point(1012, 247);
+            this.Discovery.Name = "Discovery";
+            this.Discovery.Size = new System.Drawing.Size(30, 30);
+            this.Discovery.TabIndex = 0;
+            this.Discovery.Text = "Kamerayı Bul";
+            this.Discovery.UseVisualStyleBackColor = true;
+            this.Discovery.Click += new System.EventHandler(this.Discovery_Click);
+            // 
+            // MicVolumeBtn
+            // 
+            this.MicVolumeBtn.AutoSize = true;
+            this.MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources.Mic123;
+            this.MicVolumeBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.MicVolumeBtn.Location = new System.Drawing.Point(988, 413);
+            this.MicVolumeBtn.Name = "MicVolumeBtn";
+            this.MicVolumeBtn.Size = new System.Drawing.Size(38, 32);
+            this.MicVolumeBtn.TabIndex = 0;
+            this.MicVolumeBtn.UseVisualStyleBackColor = true;
+            this.MicVolumeBtn.Click += new System.EventHandler(this.MicVolumeBtn_Click);
+            // 
+            // SoundBtn
+            // 
+            this.SoundBtn.AutoSize = true;
+            this.SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
+            this.SoundBtn.Enabled = false;
+            this.SoundBtn.Location = new System.Drawing.Point(894, 359);
+            this.SoundBtn.Name = "SoundBtn";
+            this.SoundBtn.Size = new System.Drawing.Size(30, 32);
+            this.SoundBtn.TabIndex = 2;
+            this.SoundBtn.UseVisualStyleBackColor = true;
+            this.SoundBtn.Click += new System.EventHandler(this.SoundBtn_Click);
+            // 
+            // CapturePicture
+            // 
+            this.CapturePicture.AutoSize = true;
+            this.CapturePicture.BackgroundImage = global::NetDemo.Properties.Resources.camera;
+            this.CapturePicture.Location = new System.Drawing.Point(962, 349);
+            this.CapturePicture.Name = "CapturePicture";
+            this.CapturePicture.Size = new System.Drawing.Size(30, 32);
+            this.CapturePicture.TabIndex = 1;
+            this.CapturePicture.UseVisualStyleBackColor = true;
+            this.CapturePicture.Click += new System.EventHandler(this.CapturePicture_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
@@ -7020,6 +7709,25 @@ namespace NetDemo
             this.tabPage2.TabIndex = 7;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // button22
+            // 
+            this.button22.BackColor = System.Drawing.Color.White;
+            this.button22.BackgroundImage = global::NetDemo.Properties.Resources.padlock_3257787;
+            this.button22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button22.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
+            this.button22.FlatAppearance.BorderSize = 3;
+            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button22.ForeColor = System.Drawing.Color.White;
+            this.button22.Location = new System.Drawing.Point(17, 516);
+            this.button22.Name = "button22";
+            this.button22.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button22.Size = new System.Drawing.Size(99, 67);
+            this.button22.TabIndex = 865;
+            this.button22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button22.UseVisualStyleBackColor = false;
+            this.button22.Click += new System.EventHandler(this.button22_Click_1);
             // 
             // panel3
             // 
@@ -7379,14 +8087,112 @@ namespace NetDemo
             this.DeviceTree.ImageList = this.imageList1;
             this.DeviceTree.Location = new System.Drawing.Point(3, 35);
             this.DeviceTree.Name = "DeviceTree";
-            treeNode2.ImageIndex = 0;
-            treeNode2.Name = "root";
-            treeNode2.Text = "(Kayıtlı Kameralar)";
+            treeNode1.ImageIndex = 0;
+            treeNode1.Name = "root";
+            treeNode1.Text = "(Kayıtlı Kameralar)";
             this.DeviceTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.DeviceTree.SelectedImageIndex = 0;
             this.DeviceTree.Size = new System.Drawing.Size(241, 333);
             this.DeviceTree.TabIndex = 825;
+            // 
+            // button20
+            // 
+            this.button20.BackColor = System.Drawing.Color.White;
+            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button20.FlatAppearance.BorderSize = 3;
+            this.button20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button20.ForeColor = System.Drawing.Color.Black;
+            this.button20.Image = ((System.Drawing.Image)(resources.GetObject("button20.Image")));
+            this.button20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button20.Location = new System.Drawing.Point(303, 351);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(10, 20);
+            this.button20.TabIndex = 860;
+            this.button20.Text = "KUMANDA AYARLARI";
+            this.button20.UseVisualStyleBackColor = false;
+            this.button20.Visible = false;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // button13
+            // 
+            this.button13.BackColor = System.Drawing.Color.Transparent;
+            this.button13.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.button13.FlatAppearance.BorderSize = 3;
+            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button13.ForeColor = System.Drawing.Color.Black;
+            this.button13.Image = ((System.Drawing.Image)(resources.GetObject("button13.Image")));
+            this.button13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button13.Location = new System.Drawing.Point(808, 293);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(185, 70);
+            this.button13.TabIndex = 858;
+            this.button13.Text = "      GÜNCELLE";
+            this.button13.UseVisualStyleBackColor = false;
+            this.button13.Click += new System.EventHandler(this.button13_Click_1);
+            // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.Color.White;
+            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button11.FlatAppearance.BorderSize = 3;
+            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button11.ForeColor = System.Drawing.Color.Black;
+            this.button11.Image = ((System.Drawing.Image)(resources.GetObject("button11.Image")));
+            this.button11.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button11.Location = new System.Drawing.Point(277, 343);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(20, 28);
+            this.button11.TabIndex = 798;
+            this.button11.Text = "LOG KAYITLARI";
+            this.button11.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Visible = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click_1);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button5.FlatAppearance.BorderSize = 3;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.Black;
+            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
+            this.button5.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button5.Location = new System.Drawing.Point(257, 347);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(15, 21);
+            this.button5.TabIndex = 221;
+            this.button5.Text = "AYARLAR";
+            this.button5.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Visible = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button60
+            // 
+            this.button60.BackColor = System.Drawing.Color.White;
+            this.button60.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.button60.FlatAppearance.BorderSize = 3;
+            this.button60.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button60.ForeColor = System.Drawing.Color.Black;
+            this.button60.Image = ((System.Drawing.Image)(resources.GetObject("button60.Image")));
+            this.button60.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button60.Location = new System.Drawing.Point(617, 293);
+            this.button60.Name = "button60";
+            this.button60.Size = new System.Drawing.Size(185, 70);
+            this.button60.TabIndex = 824;
+            this.button60.Text = "        KAMERA BUL";
+            this.button60.UseVisualStyleBackColor = false;
+            this.button60.Click += new System.EventHandler(this.button60_Click_1);
             // 
             // tabPage7
             // 
@@ -7513,6 +8319,77 @@ namespace NetDemo
             this.label138.Size = new System.Drawing.Size(102, 20);
             this.label138.TabIndex = 357;
             this.label138.Text = "BAUD RATE";
+            // 
+            // button55
+            // 
+            this.button55.BackColor = System.Drawing.Color.White;
+            this.button55.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.button55.FlatAppearance.BorderSize = 2;
+            this.button55.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button55.Image = ((System.Drawing.Image)(resources.GetObject("button55.Image")));
+            this.button55.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button55.Location = new System.Drawing.Point(582, 163);
+            this.button55.Margin = new System.Windows.Forms.Padding(2);
+            this.button55.Name = "button55";
+            this.button55.Size = new System.Drawing.Size(369, 64);
+            this.button55.TabIndex = 867;
+            this.button55.Text = "Tahrip Modül Ekle";
+            this.button55.UseVisualStyleBackColor = false;
+            this.button55.Click += new System.EventHandler(this.button55_Click);
+            // 
+            // button19
+            // 
+            this.button19.BackColor = System.Drawing.Color.Transparent;
+            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.button19.FlatAppearance.BorderSize = 3;
+            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button19.ForeColor = System.Drawing.Color.Black;
+            this.button19.Image = ((System.Drawing.Image)(resources.GetObject("button19.Image")));
+            this.button19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button19.Location = new System.Drawing.Point(12, 281);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(228, 70);
+            this.button19.TabIndex = 866;
+            this.button19.Text = "      BAĞLANTIYI KES";
+            this.button19.UseVisualStyleBackColor = false;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button18
+            // 
+            this.button18.BackColor = System.Drawing.Color.Transparent;
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.button18.FlatAppearance.BorderSize = 3;
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button18.ForeColor = System.Drawing.Color.Black;
+            this.button18.Image = ((System.Drawing.Image)(resources.GetObject("button18.Image")));
+            this.button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button18.Location = new System.Drawing.Point(12, 181);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(227, 70);
+            this.button18.TabIndex = 865;
+            this.button18.Text = "      BAĞLAN";
+            this.button18.UseVisualStyleBackColor = false;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button17
+            // 
+            this.button17.BackColor = System.Drawing.Color.Transparent;
+            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.button17.FlatAppearance.BorderSize = 3;
+            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button17.ForeColor = System.Drawing.Color.Black;
+            this.button17.Image = ((System.Drawing.Image)(resources.GetObject("button17.Image")));
+            this.button17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button17.Location = new System.Drawing.Point(278, 181);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(229, 70);
+            this.button17.TabIndex = 859;
+            this.button17.Text = "      GÜNCELLE";
+            this.button17.UseVisualStyleBackColor = false;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // tabPage5
             // 
@@ -7743,6 +8620,142 @@ namespace NetDemo
             this.label3.Text = "YÖNETİM PANELİ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // button25
+            // 
+            this.button25.BackColor = System.Drawing.Color.White;
+            this.button25.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button25.FlatAppearance.BorderSize = 3;
+            this.button25.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button25.ForeColor = System.Drawing.Color.Black;
+            this.button25.Image = ((System.Drawing.Image)(resources.GetObject("button25.Image")));
+            this.button25.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button25.Location = new System.Drawing.Point(785, 12);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(227, 72);
+            this.button25.TabIndex = 863;
+            this.button25.Text = "DOSYA TRANSFERİ";
+            this.button25.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.button25.UseVisualStyleBackColor = false;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.White;
+            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
+            this.button10.FlatAppearance.BorderSize = 3;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button10.ForeColor = System.Drawing.Color.White;
+            this.button10.Image = ((System.Drawing.Image)(resources.GetObject("button10.Image")));
+            this.button10.Location = new System.Drawing.Point(917, 516);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(99, 67);
+            this.button10.TabIndex = 227;
+            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.White;
+            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button9.FlatAppearance.BorderSize = 2;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button9.ForeColor = System.Drawing.Color.Black;
+            this.button9.Image = ((System.Drawing.Image)(resources.GetObject("button9.Image")));
+            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button9.Location = new System.Drawing.Point(971, 12);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(39, 43);
+            this.button9.TabIndex = 225;
+            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Visible = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button67
+            // 
+            this.button67.BackColor = System.Drawing.Color.White;
+            this.button67.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button67.FlatAppearance.BorderSize = 3;
+            this.button67.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.button67.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button67.ForeColor = System.Drawing.Color.Black;
+            this.button67.Image = ((System.Drawing.Image)(resources.GetObject("button67.Image")));
+            this.button67.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button67.Location = new System.Drawing.Point(182, 12);
+            this.button67.Name = "button67";
+            this.button67.Size = new System.Drawing.Size(163, 72);
+            this.button67.TabIndex = 164;
+            this.button67.Text = " KLAVYE";
+            this.button67.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.button67.UseVisualStyleBackColor = false;
+            this.button67.Click += new System.EventHandler(this.button67_Click);
+            // 
+            // button66
+            // 
+            this.button66.BackColor = System.Drawing.Color.White;
+            this.button66.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button66.FlatAppearance.BorderSize = 3;
+            this.button66.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.button66.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button66.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button66.ForeColor = System.Drawing.Color.Black;
+            this.button66.Image = ((System.Drawing.Image)(resources.GetObject("button66.Image")));
+            this.button66.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button66.Location = new System.Drawing.Point(351, 12);
+            this.button66.Name = "button66";
+            this.button66.Size = new System.Drawing.Size(197, 72);
+            this.button66.TabIndex = 165;
+            this.button66.Text = " KAYITLI VİDEO";
+            this.button66.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.button66.UseVisualStyleBackColor = false;
+            this.button66.Click += new System.EventHandler(this.button66_Click);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.White;
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button8.FlatAppearance.BorderSize = 3;
+            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.ForeColor = System.Drawing.Color.Black;
+            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
+            this.button8.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button8.Location = new System.Drawing.Point(554, 12);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(225, 72);
+            this.button8.TabIndex = 223;
+            this.button8.Text = "KAYITLI GÖRÜNTÜ";
+            this.button8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button68
+            // 
+            this.button68.BackColor = System.Drawing.Color.White;
+            this.button68.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button68.FlatAppearance.BorderSize = 3;
+            this.button68.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.button68.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button68.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button68.ForeColor = System.Drawing.Color.Black;
+            this.button68.Image = ((System.Drawing.Image)(resources.GetObject("button68.Image")));
+            this.button68.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button68.Location = new System.Drawing.Point(8, 12);
+            this.button68.Name = "button68";
+            this.button68.Size = new System.Drawing.Size(168, 72);
+            this.button68.TabIndex = 167;
+            this.button68.Text = " BAŞLAT";
+            this.button68.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.button68.UseVisualStyleBackColor = false;
+            this.button68.Click += new System.EventHandler(this.button68_Click);
+            // 
             // rgbandthermal
             // 
             this.rgbandthermal.Controls.Add(this.button27);
@@ -7755,6 +8768,23 @@ namespace NetDemo
             this.rgbandthermal.Text = "tabPage3";
             this.rgbandthermal.UseVisualStyleBackColor = true;
             this.rgbandthermal.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // button27
+            // 
+            this.button27.BackColor = System.Drawing.Color.White;
+            this.button27.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
+            this.button27.FlatAppearance.BorderSize = 3;
+            this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button27.ForeColor = System.Drawing.Color.White;
+            this.button27.Image = ((System.Drawing.Image)(resources.GetObject("button27.Image")));
+            this.button27.Location = new System.Drawing.Point(1176, 710);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(88, 67);
+            this.button27.TabIndex = 228;
+            this.button27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button27.UseVisualStyleBackColor = false;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -8122,1091 +9152,6 @@ namespace NetDemo
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // button23
-            // 
-            this.button23.BackColor = System.Drawing.Color.White;
-            this.button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button23.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button23.FlatAppearance.BorderSize = 2;
-            this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button23.Image = ((System.Drawing.Image)(resources.GetObject("button23.Image")));
-            this.button23.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button23.Location = new System.Drawing.Point(7, 261);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(20, 20);
-            this.button23.TabIndex = 872;
-            this.button23.Text = "     Sinyal Ledi";
-            this.button23.UseVisualStyleBackColor = false;
-            // 
-            // button48
-            // 
-            this.button48.BackColor = System.Drawing.Color.White;
-            this.button48.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button48.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button48.FlatAppearance.BorderSize = 2;
-            this.button48.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button48.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button48.Image = ((System.Drawing.Image)(resources.GetObject("button48.Image")));
-            this.button48.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button48.Location = new System.Drawing.Point(7, 187);
-            this.button48.Name = "button48";
-            this.button48.Size = new System.Drawing.Size(166, 62);
-            this.button48.TabIndex = 863;
-            this.button48.Text = "        Haberleşme";
-            this.button48.UseVisualStyleBackColor = false;
-            this.button48.Click += new System.EventHandler(this.button48_Click);
-            // 
-            // button49
-            // 
-            this.button49.BackColor = System.Drawing.Color.White;
-            this.button49.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button49.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button49.FlatAppearance.BorderSize = 2;
-            this.button49.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button49.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button49.Image = ((System.Drawing.Image)(resources.GetObject("button49.Image")));
-            this.button49.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button49.Location = new System.Drawing.Point(7, 113);
-            this.button49.Name = "button49";
-            this.button49.Size = new System.Drawing.Size(166, 62);
-            this.button49.TabIndex = 862;
-            this.button49.Text = "     IR LED";
-            this.button49.UseVisualStyleBackColor = false;
-            this.button49.Click += new System.EventHandler(this.button49_Click);
-            // 
-            // button50
-            // 
-            this.button50.BackColor = System.Drawing.Color.White;
-            this.button50.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button50.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button50.FlatAppearance.BorderSize = 2;
-            this.button50.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button50.Image = ((System.Drawing.Image)(resources.GetObject("button50.Image")));
-            this.button50.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button50.Location = new System.Drawing.Point(7, 39);
-            this.button50.Name = "button50";
-            this.button50.Size = new System.Drawing.Size(166, 62);
-            this.button50.TabIndex = 861;
-            this.button50.Text = "     Kamera";
-            this.button50.UseVisualStyleBackColor = false;
-            this.button50.Click += new System.EventHandler(this.button50_Click);
-            // 
-            // button21
-            // 
-            this.button21.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button21.BackgroundImage")));
-            this.button21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button21.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button21.FlatAppearance.BorderSize = 0;
-            this.button21.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button21.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button21.Location = new System.Drawing.Point(656, 15);
-            this.button21.Margin = new System.Windows.Forms.Padding(2);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(36, 32);
-            this.button21.TabIndex = 883;
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
-            // HABERLESME
-            // 
-            this.HABERLESME.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HABERLESME.BackgroundImage")));
-            this.HABERLESME.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.HABERLESME.Location = new System.Drawing.Point(731, 14);
-            this.HABERLESME.Margin = new System.Windows.Forms.Padding(2);
-            this.HABERLESME.Name = "HABERLESME";
-            this.HABERLESME.Size = new System.Drawing.Size(47, 32);
-            this.HABERLESME.TabIndex = 876;
-            this.HABERLESME.UseVisualStyleBackColor = true;
-            this.HABERLESME.Click += new System.EventHandler(this.HABERLESME_Click);
-            // 
-            // button6
-            // 
-            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button6.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button6.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button6.Location = new System.Drawing.Point(817, 17);
-            this.button6.Margin = new System.Windows.Forms.Padding(2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(35, 29);
-            this.button6.TabIndex = 875;
-            this.button6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click_1);
-            // 
-            // button7
-            // 
-            this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button7.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button7.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button7.Location = new System.Drawing.Point(782, 16);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(31, 29);
-            this.button7.TabIndex = 874;
-            this.button7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click_1);
-            // 
-            // button42
-            // 
-            this.button42.BackColor = System.Drawing.Color.White;
-            this.button42.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button42.BackgroundImage")));
-            this.button42.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button42.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button42.FlatAppearance.BorderSize = 0;
-            this.button42.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button42.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button42.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button42.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button42.Location = new System.Drawing.Point(51, 14);
-            this.button42.Name = "button42";
-            this.button42.Size = new System.Drawing.Size(35, 33);
-            this.button42.TabIndex = 873;
-            this.button42.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button42.UseVisualStyleBackColor = false;
-            this.button42.Click += new System.EventHandler(this.button42_Click);
-            // 
-            // button39
-            // 
-            this.button39.BackColor = System.Drawing.Color.White;
-            this.button39.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button39.BackgroundImage")));
-            this.button39.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button39.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button39.FlatAppearance.BorderSize = 0;
-            this.button39.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button39.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button39.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button39.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button39.Location = new System.Drawing.Point(143, 14);
-            this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(35, 33);
-            this.button39.TabIndex = 873;
-            this.button39.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button39.UseVisualStyleBackColor = false;
-            this.button39.Click += new System.EventHandler(this.button39_Click);
-            // 
-            // button43
-            // 
-            this.button43.BackColor = System.Drawing.Color.White;
-            this.button43.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button43.BackgroundImage")));
-            this.button43.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button43.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button43.FlatAppearance.BorderSize = 0;
-            this.button43.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button43.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button43.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button43.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button43.Location = new System.Drawing.Point(37, 14);
-            this.button43.Name = "button43";
-            this.button43.Size = new System.Drawing.Size(12, 33);
-            this.button43.TabIndex = 872;
-            this.button43.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button43.UseVisualStyleBackColor = false;
-            this.button43.Click += new System.EventHandler(this.button43_Click);
-            // 
-            // button40
-            // 
-            this.button40.BackColor = System.Drawing.Color.White;
-            this.button40.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button40.BackgroundImage")));
-            this.button40.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button40.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button40.FlatAppearance.BorderSize = 0;
-            this.button40.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button40.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button40.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button40.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button40.Location = new System.Drawing.Point(129, 14);
-            this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(12, 33);
-            this.button40.TabIndex = 872;
-            this.button40.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button40.UseVisualStyleBackColor = false;
-            this.button40.Click += new System.EventHandler(this.button40_Click);
-            // 
-            // button44
-            // 
-            this.button44.BackColor = System.Drawing.Color.White;
-            this.button44.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button44.BackgroundImage")));
-            this.button44.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button44.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button44.FlatAppearance.BorderSize = 0;
-            this.button44.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button44.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button44.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button44.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button44.Location = new System.Drawing.Point(8, 19);
-            this.button44.Name = "button44";
-            this.button44.Size = new System.Drawing.Size(31, 28);
-            this.button44.TabIndex = 871;
-            this.button44.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button44.UseVisualStyleBackColor = false;
-            this.button44.Click += new System.EventHandler(this.button44_Click);
-            // 
-            // button34
-            // 
-            this.button34.BackColor = System.Drawing.Color.White;
-            this.button34.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button34.BackgroundImage")));
-            this.button34.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button34.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button34.FlatAppearance.BorderSize = 0;
-            this.button34.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button34.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button34.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button34.Location = new System.Drawing.Point(239, 14);
-            this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(35, 33);
-            this.button34.TabIndex = 873;
-            this.button34.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button34.UseVisualStyleBackColor = false;
-            this.button34.Click += new System.EventHandler(this.button34_Click);
-            // 
-            // button41
-            // 
-            this.button41.BackColor = System.Drawing.Color.White;
-            this.button41.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button41.BackgroundImage")));
-            this.button41.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button41.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button41.FlatAppearance.BorderSize = 0;
-            this.button41.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button41.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button41.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button41.Location = new System.Drawing.Point(102, 19);
-            this.button41.Name = "button41";
-            this.button41.Size = new System.Drawing.Size(31, 28);
-            this.button41.TabIndex = 871;
-            this.button41.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button41.UseVisualStyleBackColor = false;
-            this.button41.Click += new System.EventHandler(this.button41_Click);
-            // 
-            // button36
-            // 
-            this.button36.BackColor = System.Drawing.Color.White;
-            this.button36.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button36.BackgroundImage")));
-            this.button36.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button36.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button36.FlatAppearance.BorderSize = 0;
-            this.button36.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button36.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button36.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button36.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button36.Location = new System.Drawing.Point(225, 14);
-            this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(12, 33);
-            this.button36.TabIndex = 872;
-            this.button36.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button36.UseVisualStyleBackColor = false;
-            this.button36.Click += new System.EventHandler(this.button36_Click);
-            // 
-            // button29
-            // 
-            this.button29.BackColor = System.Drawing.Color.White;
-            this.button29.BackgroundImage = global::NetDemo.Properties.Resources.run;
-            this.button29.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button29.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button29.ForeColor = System.Drawing.Color.White;
-            this.button29.Location = new System.Drawing.Point(895, 12);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(36, 36);
-            this.button29.TabIndex = 865;
-            this.button29.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button29.UseVisualStyleBackColor = false;
-            this.button29.Click += new System.EventHandler(this.button29_Click);
-            // 
-            // button37
-            // 
-            this.button37.BackColor = System.Drawing.Color.White;
-            this.button37.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button37.BackgroundImage")));
-            this.button37.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button37.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button37.FlatAppearance.BorderSize = 0;
-            this.button37.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button37.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button37.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button37.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button37.Location = new System.Drawing.Point(196, 22);
-            this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(31, 28);
-            this.button37.TabIndex = 871;
-            this.button37.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button37.UseVisualStyleBackColor = false;
-            this.button37.Click += new System.EventHandler(this.button37_Click);
-            // 
-            // button16
-            // 
-            this.button16.BackColor = System.Drawing.Color.White;
-            this.button16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button16.BackgroundImage")));
-            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button16.ForeColor = System.Drawing.Color.White;
-            this.button16.Location = new System.Drawing.Point(857, 15);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(36, 33);
-            this.button16.TabIndex = 231;
-            this.button16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button16.UseVisualStyleBackColor = false;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
-            // button15
-            // 
-            this.button15.BackColor = System.Drawing.Color.White;
-            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button15.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button15.ForeColor = System.Drawing.Color.White;
-            this.button15.Image = ((System.Drawing.Image)(resources.GetObject("button15.Image")));
-            this.button15.Location = new System.Drawing.Point(975, 12);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(36, 36);
-            this.button15.TabIndex = 230;
-            this.button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button15.UseVisualStyleBackColor = false;
-            this.button15.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // button14
-            // 
-            this.button14.BackColor = System.Drawing.Color.White;
-            this.button14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button14.BackgroundImage")));
-            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button14.ForeColor = System.Drawing.Color.White;
-            this.button14.Location = new System.Drawing.Point(935, 12);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(36, 36);
-            this.button14.TabIndex = 229;
-            this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(this.button15_Click_1);
-            // 
-            // button33
-            // 
-            this.button33.BackColor = System.Drawing.Color.White;
-            this.button33.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button33.BackgroundImage")));
-            this.button33.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button33.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button33.FlatAppearance.BorderSize = 0;
-            this.button33.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button33.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button33.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button33.Location = new System.Drawing.Point(336, 13);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(35, 33);
-            this.button33.TabIndex = 870;
-            this.button33.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button33.UseVisualStyleBackColor = false;
-            this.button33.Click += new System.EventHandler(this.button33_Click);
-            // 
-            // button30
-            // 
-            this.button30.BackColor = System.Drawing.Color.White;
-            this.button30.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button30.BackgroundImage")));
-            this.button30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button30.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button30.FlatAppearance.BorderSize = 0;
-            this.button30.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button30.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button30.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button30.Location = new System.Drawing.Point(322, 13);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(12, 33);
-            this.button30.TabIndex = 869;
-            this.button30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button30.UseVisualStyleBackColor = false;
-            this.button30.Click += new System.EventHandler(this.button30_Click);
-            // 
-            // button31
-            // 
-            this.button31.BackColor = System.Drawing.Color.White;
-            this.button31.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button31.BackgroundImage")));
-            this.button31.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button31.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button31.FlatAppearance.BorderSize = 0;
-            this.button31.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button31.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button31.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button31.Location = new System.Drawing.Point(290, 18);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(31, 28);
-            this.button31.TabIndex = 868;
-            this.button31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button31.UseVisualStyleBackColor = false;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
-            // button32
-            // 
-            this.button32.BackColor = System.Drawing.Color.White;
-            this.button32.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button32.BackgroundImage")));
-            this.button32.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button32.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button32.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button32.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button32.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button32.Location = new System.Drawing.Point(588, 14);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(58, 22);
-            this.button32.TabIndex = 867;
-            this.button32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button32.UseVisualStyleBackColor = false;
-            this.button32.Click += new System.EventHandler(this.button32_Click);
-            // 
-            // button35
-            // 
-            this.button35.BackColor = System.Drawing.Color.White;
-            this.button35.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button35.BackgroundImage")));
-            this.button35.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button35.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button35.FlatAppearance.BorderSize = 0;
-            this.button35.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button35.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button35.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button35.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button35.Location = new System.Drawing.Point(490, 14);
-            this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(60, 32);
-            this.button35.TabIndex = 864;
-            this.button35.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button35.UseVisualStyleBackColor = false;
-            this.button35.Click += new System.EventHandler(this.button35_Click);
-            // 
-            // button38
-            // 
-            this.button38.BackColor = System.Drawing.Color.White;
-            this.button38.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button38.BackgroundImage")));
-            this.button38.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button38.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button38.FlatAppearance.BorderSize = 0;
-            this.button38.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button38.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button38.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button38.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button38.Location = new System.Drawing.Point(390, 14);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(58, 22);
-            this.button38.TabIndex = 861;
-            this.button38.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button38.UseVisualStyleBackColor = false;
-            this.button38.Click += new System.EventHandler(this.button38_Click);
-            // 
-            // PBVolBtn
-            // 
-            this.PBVolBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
-            this.PBVolBtn.Enabled = false;
-            this.PBVolBtn.Location = new System.Drawing.Point(461, 615);
-            this.PBVolBtn.Name = "PBVolBtn";
-            this.PBVolBtn.Size = new System.Drawing.Size(35, 30);
-            this.PBVolBtn.TabIndex = 0;
-            this.PBVolBtn.UseVisualStyleBackColor = true;
-            this.PBVolBtn.Click += new System.EventHandler(this.PBVolBtn_Click);
-            // 
-            // PBFrameBtn
-            // 
-            this.PBFrameBtn.BackgroundImage = global::NetDemo.Properties.Resources.icon2;
-            this.PBFrameBtn.Enabled = false;
-            this.PBFrameBtn.Location = new System.Drawing.Point(411, 615);
-            this.PBFrameBtn.Name = "PBFrameBtn";
-            this.PBFrameBtn.Size = new System.Drawing.Size(35, 30);
-            this.PBFrameBtn.TabIndex = 0;
-            this.PBFrameBtn.UseVisualStyleBackColor = true;
-            this.PBFrameBtn.Click += new System.EventHandler(this.PBFrameBtn_Click);
-            // 
-            // PBRestartBtn
-            // 
-            this.PBRestartBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00006;
-            this.PBRestartBtn.Enabled = false;
-            this.PBRestartBtn.Location = new System.Drawing.Point(360, 615);
-            this.PBRestartBtn.Name = "PBRestartBtn";
-            this.PBRestartBtn.Size = new System.Drawing.Size(35, 30);
-            this.PBRestartBtn.TabIndex = 0;
-            this.PBRestartBtn.UseVisualStyleBackColor = true;
-            this.PBRestartBtn.Click += new System.EventHandler(this.PBRestartBtn_Click);
-            // 
-            // PBCaptureBtn
-            // 
-            this.PBCaptureBtn.BackgroundImage = global::NetDemo.Properties.Resources.camera;
-            this.PBCaptureBtn.Enabled = false;
-            this.PBCaptureBtn.Location = new System.Drawing.Point(307, 615);
-            this.PBCaptureBtn.Name = "PBCaptureBtn";
-            this.PBCaptureBtn.Size = new System.Drawing.Size(35, 30);
-            this.PBCaptureBtn.TabIndex = 0;
-            this.PBCaptureBtn.UseVisualStyleBackColor = true;
-            this.PBCaptureBtn.Click += new System.EventHandler(this.PBCaptureBtn_Click);
-            // 
-            // PBFastForwardBtn
-            // 
-            this.PBFastForwardBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00001;
-            this.PBFastForwardBtn.Enabled = false;
-            this.PBFastForwardBtn.Location = new System.Drawing.Point(177, 615);
-            this.PBFastForwardBtn.Name = "PBFastForwardBtn";
-            this.PBFastForwardBtn.Size = new System.Drawing.Size(35, 30);
-            this.PBFastForwardBtn.TabIndex = 0;
-            this.PBFastForwardBtn.UseVisualStyleBackColor = true;
-            this.PBFastForwardBtn.Click += new System.EventHandler(this.PBFastForwardBtn_Click);
-            // 
-            // PBFastBackwardBtn
-            // 
-            this.PBFastBackwardBtn.BackgroundImage = global::NetDemo.Properties.Resources.icon8;
-            this.PBFastBackwardBtn.Enabled = false;
-            this.PBFastBackwardBtn.Location = new System.Drawing.Point(136, 615);
-            this.PBFastBackwardBtn.Name = "PBFastBackwardBtn";
-            this.PBFastBackwardBtn.Size = new System.Drawing.Size(35, 30);
-            this.PBFastBackwardBtn.TabIndex = 0;
-            this.PBFastBackwardBtn.UseVisualStyleBackColor = true;
-            this.PBFastBackwardBtn.Click += new System.EventHandler(this.PBFastBackwardBtn_Click);
-            // 
-            // PBStopBtn
-            // 
-            this.PBStopBtn.BackgroundImage = global::NetDemo.Properties.Resources.STOP;
-            this.PBStopBtn.Enabled = false;
-            this.PBStopBtn.Location = new System.Drawing.Point(95, 615);
-            this.PBStopBtn.Name = "PBStopBtn";
-            this.PBStopBtn.Size = new System.Drawing.Size(35, 30);
-            this.PBStopBtn.TabIndex = 0;
-            this.PBStopBtn.UseVisualStyleBackColor = true;
-            this.PBStopBtn.Click += new System.EventHandler(this.PBStopBtn_Click);
-            // 
-            // PBPauseBtn
-            // 
-            this.PBPauseBtn.BackgroundImage = global::NetDemo.Properties.Resources.PAUSE_ENABLE;
-            this.PBPauseBtn.Enabled = false;
-            this.PBPauseBtn.Location = new System.Drawing.Point(54, 615);
-            this.PBPauseBtn.Name = "PBPauseBtn";
-            this.PBPauseBtn.Size = new System.Drawing.Size(35, 30);
-            this.PBPauseBtn.TabIndex = 0;
-            this.PBPauseBtn.UseVisualStyleBackColor = true;
-            this.PBPauseBtn.Click += new System.EventHandler(this.PBPauseBtn_Click);
-            // 
-            // PBStartBtn
-            // 
-            this.PBStartBtn.BackgroundImage = global::NetDemo.Properties.Resources.PLAY_ENABLE;
-            this.PBStartBtn.Enabled = false;
-            this.PBStartBtn.Location = new System.Drawing.Point(12, 615);
-            this.PBStartBtn.Name = "PBStartBtn";
-            this.PBStartBtn.Size = new System.Drawing.Size(35, 30);
-            this.PBStartBtn.TabIndex = 0;
-            this.PBStartBtn.UseVisualStyleBackColor = true;
-            this.PBStartBtn.Click += new System.EventHandler(this.PBStartBtn_Click);
-            // 
-            // personLibPictureBox
-            // 
-            this.personLibPictureBox.BackColor = System.Drawing.Color.LightGray;
-            this.personLibPictureBox.Location = new System.Drawing.Point(105, 22);
-            this.personLibPictureBox.Name = "personLibPictureBox";
-            this.personLibPictureBox.Size = new System.Drawing.Size(98, 120);
-            this.personLibPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.personLibPictureBox.TabIndex = 3;
-            this.personLibPictureBox.TabStop = false;
-            // 
-            // snapshotPictureBox
-            // 
-            this.snapshotPictureBox.BackColor = System.Drawing.Color.LightGray;
-            this.snapshotPictureBox.Location = new System.Drawing.Point(6, 22);
-            this.snapshotPictureBox.Name = "snapshotPictureBox";
-            this.snapshotPictureBox.Size = new System.Drawing.Size(98, 120);
-            this.snapshotPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.snapshotPictureBox.TabIndex = 2;
-            this.snapshotPictureBox.TabStop = false;
-            // 
-            // faceSnapshotSmallPictureBox
-            // 
-            this.faceSnapshotSmallPictureBox.BackColor = System.Drawing.Color.LightGray;
-            this.faceSnapshotSmallPictureBox.Location = new System.Drawing.Point(68, 175);
-            this.faceSnapshotSmallPictureBox.Name = "faceSnapshotSmallPictureBox";
-            this.faceSnapshotSmallPictureBox.Size = new System.Drawing.Size(115, 136);
-            this.faceSnapshotSmallPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.faceSnapshotSmallPictureBox.TabIndex = 1;
-            this.faceSnapshotSmallPictureBox.TabStop = false;
-            // 
-            // faceSnapshotLargePictureBox
-            // 
-            this.faceSnapshotLargePictureBox.BackColor = System.Drawing.Color.LightGray;
-            this.faceSnapshotLargePictureBox.Location = new System.Drawing.Point(15, 24);
-            this.faceSnapshotLargePictureBox.Name = "faceSnapshotLargePictureBox";
-            this.faceSnapshotLargePictureBox.Size = new System.Drawing.Size(222, 149);
-            this.faceSnapshotLargePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.faceSnapshotLargePictureBox.TabIndex = 0;
-            this.faceSnapshotLargePictureBox.TabStop = false;
-            // 
-            // personInfoImagePictureBox
-            // 
-            this.personInfoImagePictureBox.BackColor = System.Drawing.Color.LightGray;
-            this.personInfoImagePictureBox.Location = new System.Drawing.Point(17, 23);
-            this.personInfoImagePictureBox.Name = "personInfoImagePictureBox";
-            this.personInfoImagePictureBox.Size = new System.Drawing.Size(121, 162);
-            this.personInfoImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.personInfoImagePictureBox.TabIndex = 37;
-            this.personInfoImagePictureBox.TabStop = false;
-            this.personInfoImagePictureBox.DoubleClick += new System.EventHandler(this.personInfoImagePictureBox_DoubleClick);
-            // 
-            // vehiclePanoRecogPicBox
-            // 
-            this.vehiclePanoRecogPicBox.BackColor = System.Drawing.Color.LightGray;
-            this.vehiclePanoRecogPicBox.Location = new System.Drawing.Point(3, 26);
-            this.vehiclePanoRecogPicBox.Name = "vehiclePanoRecogPicBox";
-            this.vehiclePanoRecogPicBox.Size = new System.Drawing.Size(105, 65);
-            this.vehiclePanoRecogPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.vehiclePanoRecogPicBox.TabIndex = 4;
-            this.vehiclePanoRecogPicBox.TabStop = false;
-            // 
-            // plateRecogPicBox
-            // 
-            this.plateRecogPicBox.BackColor = System.Drawing.Color.LightGray;
-            this.plateRecogPicBox.Location = new System.Drawing.Point(2, 93);
-            this.plateRecogPicBox.Name = "plateRecogPicBox";
-            this.plateRecogPicBox.Size = new System.Drawing.Size(106, 41);
-            this.plateRecogPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.plateRecogPicBox.TabIndex = 2;
-            this.plateRecogPicBox.TabStop = false;
-            // 
-            // plateSnapshotSmallPictureBox
-            // 
-            this.plateSnapshotSmallPictureBox.BackColor = System.Drawing.Color.LightGray;
-            this.plateSnapshotSmallPictureBox.Location = new System.Drawing.Point(6, 181);
-            this.plateSnapshotSmallPictureBox.Name = "plateSnapshotSmallPictureBox";
-            this.plateSnapshotSmallPictureBox.Size = new System.Drawing.Size(231, 64);
-            this.plateSnapshotSmallPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.plateSnapshotSmallPictureBox.TabIndex = 2;
-            this.plateSnapshotSmallPictureBox.TabStop = false;
-            // 
-            // vehicleSnapshotLargePictureBox
-            // 
-            this.vehicleSnapshotLargePictureBox.BackColor = System.Drawing.Color.LightGray;
-            this.vehicleSnapshotLargePictureBox.Location = new System.Drawing.Point(6, 24);
-            this.vehicleSnapshotLargePictureBox.Name = "vehicleSnapshotLargePictureBox";
-            this.vehicleSnapshotLargePictureBox.Size = new System.Drawing.Size(231, 155);
-            this.vehicleSnapshotLargePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.vehicleSnapshotLargePictureBox.TabIndex = 0;
-            this.vehicleSnapshotLargePictureBox.TabStop = false;
-            // 
-            // RealPlay
-            // 
-            this.RealPlay.BackgroundImage = global::NetDemo.Properties.Resources.PLAY_ENABLE;
-            this.RealPlay.Location = new System.Drawing.Point(940, 183);
-            this.RealPlay.Name = "RealPlay";
-            this.RealPlay.Size = new System.Drawing.Size(30, 32);
-            this.RealPlay.TabIndex = 29;
-            this.RealPlay.UseVisualStyleBackColor = true;
-            // 
-            // Discovery
-            // 
-            this.Discovery.BackgroundImage = global::NetDemo.Properties.Resources.search;
-            this.Discovery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Discovery.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Discovery.Location = new System.Drawing.Point(1012, 247);
-            this.Discovery.Name = "Discovery";
-            this.Discovery.Size = new System.Drawing.Size(30, 30);
-            this.Discovery.TabIndex = 0;
-            this.Discovery.Text = "Kamerayı Bul";
-            this.Discovery.UseVisualStyleBackColor = true;
-            this.Discovery.Click += new System.EventHandler(this.Discovery_Click);
-            // 
-            // MicVolumeBtn
-            // 
-            this.MicVolumeBtn.AutoSize = true;
-            this.MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources.Mic123;
-            this.MicVolumeBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.MicVolumeBtn.Location = new System.Drawing.Point(988, 413);
-            this.MicVolumeBtn.Name = "MicVolumeBtn";
-            this.MicVolumeBtn.Size = new System.Drawing.Size(38, 32);
-            this.MicVolumeBtn.TabIndex = 0;
-            this.MicVolumeBtn.UseVisualStyleBackColor = true;
-            this.MicVolumeBtn.Click += new System.EventHandler(this.MicVolumeBtn_Click);
-            // 
-            // SoundBtn
-            // 
-            this.SoundBtn.AutoSize = true;
-            this.SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
-            this.SoundBtn.Enabled = false;
-            this.SoundBtn.Location = new System.Drawing.Point(894, 359);
-            this.SoundBtn.Name = "SoundBtn";
-            this.SoundBtn.Size = new System.Drawing.Size(30, 32);
-            this.SoundBtn.TabIndex = 2;
-            this.SoundBtn.UseVisualStyleBackColor = true;
-            this.SoundBtn.Click += new System.EventHandler(this.SoundBtn_Click);
-            // 
-            // CapturePicture
-            // 
-            this.CapturePicture.AutoSize = true;
-            this.CapturePicture.BackgroundImage = global::NetDemo.Properties.Resources.camera;
-            this.CapturePicture.Location = new System.Drawing.Point(962, 349);
-            this.CapturePicture.Name = "CapturePicture";
-            this.CapturePicture.Size = new System.Drawing.Size(30, 32);
-            this.CapturePicture.TabIndex = 1;
-            this.CapturePicture.UseVisualStyleBackColor = true;
-            this.CapturePicture.Click += new System.EventHandler(this.CapturePicture_Click);
-            // 
-            // button22
-            // 
-            this.button22.BackColor = System.Drawing.Color.White;
-            this.button22.BackgroundImage = global::NetDemo.Properties.Resources.padlock_3257787;
-            this.button22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button22.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
-            this.button22.FlatAppearance.BorderSize = 3;
-            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button22.ForeColor = System.Drawing.Color.White;
-            this.button22.Location = new System.Drawing.Point(17, 516);
-            this.button22.Name = "button22";
-            this.button22.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button22.Size = new System.Drawing.Size(99, 67);
-            this.button22.TabIndex = 865;
-            this.button22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button22.UseVisualStyleBackColor = false;
-            this.button22.Click += new System.EventHandler(this.button22_Click_1);
-            // 
-            // button20
-            // 
-            this.button20.BackColor = System.Drawing.Color.White;
-            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button20.FlatAppearance.BorderSize = 3;
-            this.button20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button20.ForeColor = System.Drawing.Color.Black;
-            this.button20.Image = ((System.Drawing.Image)(resources.GetObject("button20.Image")));
-            this.button20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button20.Location = new System.Drawing.Point(303, 351);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(10, 20);
-            this.button20.TabIndex = 860;
-            this.button20.Text = "KUMANDA AYARLARI";
-            this.button20.UseVisualStyleBackColor = false;
-            this.button20.Visible = false;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button13
-            // 
-            this.button13.BackColor = System.Drawing.Color.Transparent;
-            this.button13.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.button13.FlatAppearance.BorderSize = 3;
-            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button13.ForeColor = System.Drawing.Color.Black;
-            this.button13.Image = ((System.Drawing.Image)(resources.GetObject("button13.Image")));
-            this.button13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button13.Location = new System.Drawing.Point(808, 293);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(185, 70);
-            this.button13.TabIndex = 858;
-            this.button13.Text = "      GÜNCELLE";
-            this.button13.UseVisualStyleBackColor = false;
-            this.button13.Click += new System.EventHandler(this.button13_Click_1);
-            // 
-            // button11
-            // 
-            this.button11.BackColor = System.Drawing.Color.White;
-            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button11.FlatAppearance.BorderSize = 3;
-            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button11.ForeColor = System.Drawing.Color.Black;
-            this.button11.Image = ((System.Drawing.Image)(resources.GetObject("button11.Image")));
-            this.button11.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button11.Location = new System.Drawing.Point(277, 343);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(20, 28);
-            this.button11.TabIndex = 798;
-            this.button11.Text = "LOG KAYITLARI";
-            this.button11.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.button11.UseVisualStyleBackColor = false;
-            this.button11.Visible = false;
-            this.button11.Click += new System.EventHandler(this.button11_Click_1);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button5.FlatAppearance.BorderSize = 3;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button5.Location = new System.Drawing.Point(257, 347);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(15, 21);
-            this.button5.TabIndex = 221;
-            this.button5.Text = "AYARLAR";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Visible = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button60
-            // 
-            this.button60.BackColor = System.Drawing.Color.White;
-            this.button60.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.button60.FlatAppearance.BorderSize = 3;
-            this.button60.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button60.ForeColor = System.Drawing.Color.Black;
-            this.button60.Image = ((System.Drawing.Image)(resources.GetObject("button60.Image")));
-            this.button60.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button60.Location = new System.Drawing.Point(617, 293);
-            this.button60.Name = "button60";
-            this.button60.Size = new System.Drawing.Size(185, 70);
-            this.button60.TabIndex = 824;
-            this.button60.Text = "        KAMERA BUL";
-            this.button60.UseVisualStyleBackColor = false;
-            this.button60.Click += new System.EventHandler(this.button60_Click_1);
-            // 
-            // button55
-            // 
-            this.button55.BackColor = System.Drawing.Color.White;
-            this.button55.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.button55.FlatAppearance.BorderSize = 2;
-            this.button55.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button55.Image = ((System.Drawing.Image)(resources.GetObject("button55.Image")));
-            this.button55.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button55.Location = new System.Drawing.Point(582, 163);
-            this.button55.Margin = new System.Windows.Forms.Padding(2);
-            this.button55.Name = "button55";
-            this.button55.Size = new System.Drawing.Size(369, 64);
-            this.button55.TabIndex = 867;
-            this.button55.Text = "Tahrip Modül Ekle";
-            this.button55.UseVisualStyleBackColor = false;
-            this.button55.Click += new System.EventHandler(this.button55_Click);
-            // 
-            // button19
-            // 
-            this.button19.BackColor = System.Drawing.Color.Transparent;
-            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.button19.FlatAppearance.BorderSize = 3;
-            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button19.ForeColor = System.Drawing.Color.Black;
-            this.button19.Image = ((System.Drawing.Image)(resources.GetObject("button19.Image")));
-            this.button19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button19.Location = new System.Drawing.Point(12, 281);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(228, 70);
-            this.button19.TabIndex = 866;
-            this.button19.Text = "      BAĞLANTIYI KES";
-            this.button19.UseVisualStyleBackColor = false;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
-            // button18
-            // 
-            this.button18.BackColor = System.Drawing.Color.Transparent;
-            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.button18.FlatAppearance.BorderSize = 3;
-            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button18.ForeColor = System.Drawing.Color.Black;
-            this.button18.Image = ((System.Drawing.Image)(resources.GetObject("button18.Image")));
-            this.button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button18.Location = new System.Drawing.Point(12, 181);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(227, 70);
-            this.button18.TabIndex = 865;
-            this.button18.Text = "      BAĞLAN";
-            this.button18.UseVisualStyleBackColor = false;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
-            // 
-            // button17
-            // 
-            this.button17.BackColor = System.Drawing.Color.Transparent;
-            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.button17.FlatAppearance.BorderSize = 3;
-            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button17.ForeColor = System.Drawing.Color.Black;
-            this.button17.Image = ((System.Drawing.Image)(resources.GetObject("button17.Image")));
-            this.button17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button17.Location = new System.Drawing.Point(278, 181);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(229, 70);
-            this.button17.TabIndex = 859;
-            this.button17.Text = "      GÜNCELLE";
-            this.button17.UseVisualStyleBackColor = false;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
-            // 
-            // button25
-            // 
-            this.button25.BackColor = System.Drawing.Color.White;
-            this.button25.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button25.FlatAppearance.BorderSize = 3;
-            this.button25.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button25.ForeColor = System.Drawing.Color.Black;
-            this.button25.Image = ((System.Drawing.Image)(resources.GetObject("button25.Image")));
-            this.button25.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button25.Location = new System.Drawing.Point(785, 12);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(227, 72);
-            this.button25.TabIndex = 863;
-            this.button25.Text = "DOSYA TRANSFERİ";
-            this.button25.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.button25.UseVisualStyleBackColor = false;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
-            // button10
-            // 
-            this.button10.BackColor = System.Drawing.Color.White;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
-            this.button10.FlatAppearance.BorderSize = 3;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button10.ForeColor = System.Drawing.Color.White;
-            this.button10.Image = ((System.Drawing.Image)(resources.GetObject("button10.Image")));
-            this.button10.Location = new System.Drawing.Point(917, 516);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(99, 67);
-            this.button10.TabIndex = 227;
-            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // button9
-            // 
-            this.button9.BackColor = System.Drawing.Color.White;
-            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button9.FlatAppearance.BorderSize = 2;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.ForeColor = System.Drawing.Color.Black;
-            this.button9.Image = ((System.Drawing.Image)(resources.GetObject("button9.Image")));
-            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button9.Location = new System.Drawing.Point(971, 12);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(39, 43);
-            this.button9.TabIndex = 225;
-            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button9.UseVisualStyleBackColor = false;
-            this.button9.Visible = false;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button67
-            // 
-            this.button67.BackColor = System.Drawing.Color.White;
-            this.button67.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button67.FlatAppearance.BorderSize = 3;
-            this.button67.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.button67.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button67.ForeColor = System.Drawing.Color.Black;
-            this.button67.Image = ((System.Drawing.Image)(resources.GetObject("button67.Image")));
-            this.button67.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button67.Location = new System.Drawing.Point(182, 12);
-            this.button67.Name = "button67";
-            this.button67.Size = new System.Drawing.Size(163, 72);
-            this.button67.TabIndex = 164;
-            this.button67.Text = " KLAVYE";
-            this.button67.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.button67.UseVisualStyleBackColor = false;
-            this.button67.Click += new System.EventHandler(this.button67_Click);
-            // 
-            // button66
-            // 
-            this.button66.BackColor = System.Drawing.Color.White;
-            this.button66.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button66.FlatAppearance.BorderSize = 3;
-            this.button66.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.button66.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button66.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button66.ForeColor = System.Drawing.Color.Black;
-            this.button66.Image = ((System.Drawing.Image)(resources.GetObject("button66.Image")));
-            this.button66.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button66.Location = new System.Drawing.Point(351, 12);
-            this.button66.Name = "button66";
-            this.button66.Size = new System.Drawing.Size(197, 72);
-            this.button66.TabIndex = 165;
-            this.button66.Text = " KAYITLI VİDEO";
-            this.button66.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.button66.UseVisualStyleBackColor = false;
-            this.button66.Click += new System.EventHandler(this.button66_Click);
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.Color.White;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button8.FlatAppearance.BorderSize = 3;
-            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.ForeColor = System.Drawing.Color.Black;
-            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
-            this.button8.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button8.Location = new System.Drawing.Point(554, 12);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(225, 72);
-            this.button8.TabIndex = 223;
-            this.button8.Text = "KAYITLI GÖRÜNTÜ";
-            this.button8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button68
-            // 
-            this.button68.BackColor = System.Drawing.Color.White;
-            this.button68.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button68.FlatAppearance.BorderSize = 3;
-            this.button68.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.button68.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button68.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button68.ForeColor = System.Drawing.Color.Black;
-            this.button68.Image = ((System.Drawing.Image)(resources.GetObject("button68.Image")));
-            this.button68.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button68.Location = new System.Drawing.Point(8, 12);
-            this.button68.Name = "button68";
-            this.button68.Size = new System.Drawing.Size(168, 72);
-            this.button68.TabIndex = 167;
-            this.button68.Text = " BAŞLAT";
-            this.button68.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.button68.UseVisualStyleBackColor = false;
-            this.button68.Click += new System.EventHandler(this.button68_Click);
-            // 
-            // button27
-            // 
-            this.button27.BackColor = System.Drawing.Color.White;
-            this.button27.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
-            this.button27.FlatAppearance.BorderSize = 3;
-            this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button27.ForeColor = System.Drawing.Color.White;
-            this.button27.Image = ((System.Drawing.Image)(resources.GetObject("button27.Image")));
-            this.button27.Location = new System.Drawing.Point(1176, 710);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(88, 67);
-            this.button27.TabIndex = 228;
-            this.button27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button27.UseVisualStyleBackColor = false;
-            this.button27.Click += new System.EventHandler(this.button27_Click);
-            // 
             // NetDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -9296,11 +9241,16 @@ namespace NetDemo
             this.groupBox26.ResumeLayout(false);
             this.groupBox24.ResumeLayout(false);
             this.groupBox23.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.personLibPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.snapshotPictureBox)).EndInit();
             this.groupBox22.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.faceSnapshotSmallPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.faceSnapshotLargePictureBox)).EndInit();
             this.FaceLibraryManagenentTabPage.ResumeLayout(false);
             this.groupBox20.ResumeLayout(false);
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.personInfoImagePictureBox)).EndInit();
             this.groupBox19.ResumeLayout(false);
             this.groupBox19.PerformLayout();
             this.FaceMonitoringTaskTabPage.ResumeLayout(false);
@@ -9318,7 +9268,11 @@ namespace NetDemo
             this.groupBox32.ResumeLayout(false);
             this.groupBox34.ResumeLayout(false);
             this.groupBox35.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.vehiclePanoRecogPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.plateRecogPicBox)).EndInit();
             this.groupBox36.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.plateSnapshotSmallPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vehicleSnapshotLargePictureBox)).EndInit();
             this.LPRVehicleLibraryManagemnetTabPage.ResumeLayout(false);
             this.groupBox28.ResumeLayout(false);
             this.groupBox29.ResumeLayout(false);
@@ -9361,15 +9315,6 @@ namespace NetDemo
             this.deviceOper.ResumeLayout(false);
             this.rootOper.ResumeLayout(false);
             this.PannelContextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.personLibPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.snapshotPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.faceSnapshotSmallPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.faceSnapshotLargePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personInfoImagePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehiclePanoRecogPicBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.plateRecogPicBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.plateSnapshotSmallPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleSnapshotLargePictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -10029,7 +9974,6 @@ namespace NetDemo
         private Panel panel8;
         private Panel panel5;
         private Panel panel9;
-        private Button button12;
         private UsbLibrary.UsbHidPort usbHidPort1;
         private UsbLibrary.UsbHidPort Pto_USB;
         private Timer timer1;
@@ -10066,8 +10010,6 @@ namespace NetDemo
         private Button button41;
         private Button button36;
         private Button button37;
-        private Button button6;
-        private Button button7;
         private Button HABERLESME;
         private Timer timer2;
         private TabPage fisheye;
