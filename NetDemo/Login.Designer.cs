@@ -54,7 +54,6 @@
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button67 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -376,29 +375,12 @@
             this.button67.UseVisualStyleBackColor = false;
             this.button67.Click += new System.EventHandler(this.button67_Click);
             // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button4.FlatAppearance.BorderSize = 2;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(881, 528);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(137, 43);
-            this.button4.TabIndex = 800;
-            this.button4.Text = "Şifre Değiştir";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Visible = false;
-            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 600);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.led);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -448,6 +430,5 @@
         private System.Windows.Forms.Button led;
         private System.Windows.Forms.Panel panel1;
         private System.IO.Ports.SerialPort serialPort1;
-        private System.Windows.Forms.Button button4;
     }
 }

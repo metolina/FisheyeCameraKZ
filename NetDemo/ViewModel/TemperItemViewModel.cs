@@ -182,10 +182,7 @@ namespace ThermalCamera.ViewModel
                     TemperStd = 0;
                 }
             }
-            catch (Exception ex)
-            {
-                //System.Windows.MessageBox.Show(ex.Message);
-            }
+            
             finally
             {
                 Marshal.FreeHGlobal(inPtr);

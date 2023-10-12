@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +16,7 @@ namespace NetDemo
 {
     public partial class Login : Form
     {
-        int a = 0;
-        int b = 280;
+       
        
         public Login()
         {
@@ -25,6 +25,50 @@ namespace NetDemo
             
 
         }
+        #region Şifreleme İşlemleri
+
+        private const string passwordtxtPathName = "password.json";
+
+        private static string GetDosyaYolu()
+        {
+            return Path.Combine(Application.LocalUserAppDataPath, passwordtxtPathName);
+        }
+
+        public static string LoadPassword()
+        {
+            string dosyaYolu = GetDosyaYolu();
+            if (File.Exists(dosyaYolu))
+            {
+                string json = File.ReadAllText(dosyaYolu);
+                return JsonConvert.DeserializeObject<string>(json);
+            }
+            else
+            {
+                // Dosya yoksa varsayılan bir şifre nesnesi oluştur ve kaydet
+                var defaultPassword = "123";
+                SavePassword(defaultPassword);
+                return defaultPassword;
+            }
+        }
+
+        public static void SavePassword(string password)
+        {
+            string dosyaYolu = GetDosyaYolu();
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(password);
+                File.WriteAllText(dosyaYolu, json);
+            }
+            catch (Exception ex)
+            {
+                // Dosya yazma hatası yakalama işlemi
+                MessageBox.Show("Şifre kaydedilirken bir hata oluştu: " + ex.Message);
+            }
+        }
+
+        #endregion
+         
         private void button1_Click(object sender, EventArgs e)
         {
             if (button1.Text == "Giriş İçin Tıklayınız")
@@ -35,7 +79,7 @@ namespace NetDemo
             else
             {
                 string password = txt_sifre.Text;
-                if (password == "123")
+                if (password == LoadPassword())
                 {
                     if (serialPort1.IsOpen == true)
                     {
@@ -283,6 +327,11 @@ namespace NetDemo
         private void Login_Shown(object sender, EventArgs e)
         {
              // LoadSettings();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

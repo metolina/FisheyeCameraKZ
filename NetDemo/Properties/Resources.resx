@@ -121,9 +121,6 @@
   <data name="Mic12" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\Mic12.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ico00009" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\ico00009.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\logout.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,8 +130,8 @@
   <data name="STOP" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\STOP.ICO;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\icon1.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ico00002" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\ico00002.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico00010" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\ico00010.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,20 +142,14 @@
   <data name="cloud_logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\cloud_logout.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\icon2.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ico1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\ico1.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\icon4.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ico00005" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\ico00005.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico00003" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\ico00003.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mic1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mic1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico00001" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\ico00001.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,11 +184,14 @@
   <data name="NetDemo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\NetDemo.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Mic123" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\Mic123.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="camera" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\camera.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mic1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mic1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\icon2.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon8" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\icon8.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,8 +205,11 @@
   <data name="green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\green.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Mic123" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\Mic123.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ico00005" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\ico00005.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico00004" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\ico00004.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STOP_DISABLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\STOP_DISABLE.ICO;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,8 +220,8 @@
   <data name="device_logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\device_logout.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ico00004" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\ico00004.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ico00009" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\ico00009.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="green1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -235,17 +232,20 @@
   <data name="222" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\222.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ico00012" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\ico00012.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="tree" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\tree.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ico00012" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\ico00012.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ico00003" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\ico00003.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PLAY_DISABLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\PLAY_DISABLE.ICO;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ico00002" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\ico00002.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\icon1.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="run" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\run.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -253,10 +253,13 @@
   <data name="ico00011" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\ico00011.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="runer-silhouette-running-fast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\runer-silhouette-running-fast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="runer-silhouette-running-fast" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\runer-silhouette-running-fast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="padlock_3257787" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\padlock_3257787.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

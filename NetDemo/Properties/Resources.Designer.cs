@@ -423,6 +423,16 @@ namespace NetDemo.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap padlock_3257787 {
+            get {
+                object obj = ResourceManager.GetObject("padlock_3257787", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap PAUSE_ENABLE {
             get {
                 object obj = ResourceManager.GetObject("PAUSE_ENABLE", resourceCulture);

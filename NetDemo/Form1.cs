@@ -14,7 +14,7 @@ namespace NetDemo
     public partial class Form1 : Form
     {
         //Class1 cls;
-        int bbbb = 0;
+       
         public Form1()
         {
             InitializeComponent();

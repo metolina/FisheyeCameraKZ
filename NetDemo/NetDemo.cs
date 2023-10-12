@@ -61,7 +61,6 @@ namespace NetDemo
         IntPtr m_lpNoPreviewTalkHandle = IntPtr.Zero;
 
         PlayPanel m_mourseRightSelectedPanel;/*panel*/
-        TreeNode m_mourseRightDeviceNode = null;
 
         public TreeNodeInfo m_CurSelectTreeNodeInfo = new TreeNodeInfo();
 
@@ -13214,13 +13213,13 @@ namespace NetDemo
         public void AlarmTetikle()
         {
             //alarm sesi çalışacak
-            if (m_curRealPanel.IsAlarmMode == true)
-            {
+            //if (m_curRealPanel.IsAlarmMode == true)
+            //{
                 Assembly a = Assembly.GetExecutingAssembly();
-                Stream s = a.GetManifestResourceStream("../Resources/bip.mp3");
+                Stream s = a.GetManifestResourceStream("bip.mp3");
                 System.Media.SoundPlayer sp = new System.Media.SoundPlayer(s);
                 sp.Play();
-            }
+            //}
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -13867,6 +13866,55 @@ namespace NetDemo
         private void label129_Click(object sender, EventArgs e)
         {
 
+        }
+
+        #region Şifreleme İşlemleri
+
+        private const string passwordtxtPathName = "password.json";
+
+        private static string GetDosyaYolu()
+        {
+            return Path.Combine(Application.LocalUserAppDataPath, passwordtxtPathName);
+        }
+
+        public static string LoadPassword()
+        {
+            string dosyaYolu = GetDosyaYolu();
+            if (File.Exists(dosyaYolu))
+            {
+                string json = File.ReadAllText(dosyaYolu);
+                return JsonConvert.DeserializeObject<string>(json);
+            }
+            else
+            {
+                // Dosya yoksa varsayılan bir şifre nesnesi oluştur ve kaydet
+                var defaultPassword = "123";
+                SavePassword(defaultPassword);
+                return defaultPassword;
+            }
+        }
+
+        public static void SavePassword(string password)
+        {
+            string dosyaYolu = GetDosyaYolu();
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(password);
+                File.WriteAllText(dosyaYolu, json);
+            }
+            catch (Exception ex)
+            {
+                // Dosya yazma hatası yakalama işlemi
+                MessageBox.Show("Şifre kaydedilirken bir hata oluştu: " + ex.Message);
+            }
+        }
+       
+        #endregion
+        private void button22_Click_1(object sender, EventArgs e)
+        {
+            Form frm33 = new Form3();
+            frm33.Show();
         }
     }
 }
