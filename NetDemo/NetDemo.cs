@@ -11183,6 +11183,7 @@ namespace NetDemo
         {
             PannelContextMenuStrip.Items[9].PerformClick()/*= true;*/;
             //FullScreen_Click(sender,null);
+            mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[5];
         }
         //Burada sol tıklamanın down kodunu hex türünden değişkene aktarıyoruz(basılı olma durumu).
         private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
