@@ -10,11 +10,27 @@ namespace NetDemo
         /// <summary>
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Form formToOpen = null;
+
+            if (args.Length > 0)
+            {
+                if (args[0] == "NetDemo")
+                {
+                    formToOpen = new NetDemo();
+                }
+            }
+
+            if (formToOpen == null)
+            {
+                formToOpen = new Login();
+            }
+
+            Application.Run(formToOpen);
         }
+       
     }
 }

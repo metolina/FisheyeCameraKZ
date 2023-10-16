@@ -37,6 +37,7 @@ using System.Net.Sockets;
 using System.Net.NetworkInformation;
 using NAudio.Wave;
 
+
 namespace NetDemo
 {
 
@@ -718,12 +719,12 @@ namespace NetDemo
             if (m_curRealPanel.m_recordStatus == false)
             {
                 //video kayıt kapalı
-                button14.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\REC1.png");
+                button14.BackgroundImage =global::NetDemo.Properties.Resources.record_red;
             }
             else
             {
                 //video kayıt açık
-                button14.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\REC2.png");
+                button14.BackgroundImage = global::NetDemo.Properties.Resources.record_green;
             }
             setDeviceTreeSelectNode();
 
@@ -12113,45 +12114,43 @@ namespace NetDemo
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if (m_curRealPanel.m_playhandle != IntPtr.Zero)
-            {
-                if (m_CurSelectTreeNodeInfo.dwDeviceIndex > m_deviceInfoList.Count() || m_CurSelectTreeNodeInfo.dwDeviceIndex < 0)
-                {
-                    return;
-                }
+            Application.Restart();
+            //if (m_curRealPanel.m_playhandle != IntPtr.Zero)
+            //{
+            //    if (m_CurSelectTreeNodeInfo.dwDeviceIndex > m_deviceInfoList.Count() || m_CurSelectTreeNodeInfo.dwDeviceIndex < 0)
+            //    {
+            //        return;
+            //    }
 
-                String strNoPreviewTemp = string.Copy(LocalSetting.m_strPicSavePath);
-                DateTime oNoPreviewDate = DateTime.Now;
-                String strNoPreviewCurTime = oNoPreviewDate.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
-                LocalSetting.m_strPicSavePath += "\\";
-                LocalSetting.m_strPicSavePath += m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
-                LocalSetting.m_strPicSavePath += "_";
-                LocalSetting.m_strPicSavePath += (getChannelID());
-                LocalSetting.m_strPicSavePath += "_";
-                LocalSetting.m_strPicSavePath += strNoPreviewCurTime;
+            //    String strNoPreviewTemp = string.Copy(LocalSetting.m_strPicSavePath);
+            //    DateTime oNoPreviewDate = DateTime.Now;
+            //    String strNoPreviewCurTime = oNoPreviewDate.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
+            //    LocalSetting.m_strPicSavePath += "\\";
+            //    LocalSetting.m_strPicSavePath += m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
+            //    LocalSetting.m_strPicSavePath += "_";
+            //    LocalSetting.m_strPicSavePath += (getChannelID());
+            //    LocalSetting.m_strPicSavePath += "_";
+            //    LocalSetting.m_strPicSavePath += strNoPreviewCurTime;
 
-                byte[] picNoPreviewSavePath;
-                GetUTF8Buffer(LocalSetting.m_strPicSavePath, NETDEVSDK.NETDEV_LEN_260, out picNoPreviewSavePath);
+            //    byte[] picNoPreviewSavePath;
+            //    GetUTF8Buffer(LocalSetting.m_strPicSavePath, NETDEVSDK.NETDEV_LEN_260, out picNoPreviewSavePath);
 
-                int iiRet = NETDEVSDK.NETDEV_CaptureNoPreview(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, getChannelID(), (int)NETDEV_LIVE_STREAM_INDEX_E.NETDEV_LIVE_STREAM_INDEX_MAIN, LocalSetting.m_strPicSavePath, (int)NETDEV_PICTURE_FORMAT_E.NETDEV_PICTURE_BMP);
-                if (NETDEVSDK.FALSE == iiRet)
-                {
-                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview", NETDEVSDK.NETDEV_GetLastError());
-                    LocalSetting.m_strPicSavePath = strNoPreviewTemp;
-                    return;
-                }
-                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview");
-                LocalSetting.m_strPicSavePath = strNoPreviewTemp;
-                return;
-            }
+            //    int iiRet = NETDEVSDK.NETDEV_CaptureNoPreview(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, getChannelID(), (int)NETDEV_LIVE_STREAM_INDEX_E.NETDEV_LIVE_STREAM_INDEX_MAIN, LocalSetting.m_strPicSavePath, (int)NETDEV_PICTURE_FORMAT_E.NETDEV_PICTURE_BMP);
+            //    if (NETDEVSDK.FALSE == iiRet)
+            //    {
+            //        showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview", NETDEVSDK.NETDEV_GetLastError());
+            //        LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+            //        return;
+            //    }
+            //    showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview");
+            //    LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+            //    return;
+            //}
         }
 
         private void button15_Click_1(object sender, EventArgs e)
         {
-            if (m_curRealPanel.m_playStatus == false)
-            {
-                return;
-            }
+            
 
             if (m_curRealPanel.m_recordStatus == false)
             {
@@ -12174,11 +12173,12 @@ namespace NetDemo
                     return;
                 }
                 showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "start Record");
-                button14.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\REC2.png");
+                button14.BackgroundImage = global::NetDemo.Properties.Resources.record_green;
 
                 m_curRealPanel.m_recordStatus = true;
                 this.LocalRecodBtn.Text = "Durdur";
                 LocalSetting.m_strLocalRecordPath = temp;
+
             }
             else
             {
@@ -12192,7 +12192,7 @@ namespace NetDemo
 
                 m_curRealPanel.m_recordStatus = false;
                 this.LocalRecodBtn.Text = "Başlat";
-                button14.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\REC1.png");
+                button14.BackgroundImage = global::NetDemo.Properties.Resources.record_red;
 
             }
         }
@@ -12642,6 +12642,8 @@ namespace NetDemo
                         //yeniForm.Show(); // Yeni formu göster
 
                         Application.Restart();
+                       
+
                     }
 
            
