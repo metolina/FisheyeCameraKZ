@@ -35,6 +35,7 @@ using Vlc.DotNet.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
+using NAudio.Wave;
 
 namespace NetDemo
 {
@@ -13213,14 +13214,30 @@ namespace NetDemo
         public void AlarmTetikle()
         {
             //alarm sesi çalışacak
-            //if (m_curRealPanel.IsAlarmMode == true)
-            //{
-                
-                Assembly a = Assembly.GetExecutingAssembly();
-                Stream s = a.GetManifestResourceStream("bip.mp3");
-                System.Media.SoundPlayer sp = new System.Media.SoundPlayer(s);
-                sp.Play();
-            //}
+            if (m_curRealPanel.IsAlarmMode == true)
+            {
+
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                string resourceName = "NetDemo.bip.mp3";
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                {
+                    if (stream != null)
+                    {
+                        using (var mp3Reader = new Mp3FileReader(stream))
+                        using (var waveOut = new WaveOutEvent())
+                        {
+                            waveOut.Init(mp3Reader);
+                            waveOut.Play();
+                            Console.WriteLine("Çalınıyor...");
+                            while (waveOut.PlaybackState == PlaybackState.Playing)
+                            {
+                                
+                            }
+                        }
+                    }
+                }
+              
+            }
         }
 
         private void timer2_Tick(object sender, EventArgs e)
