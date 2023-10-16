@@ -509,6 +509,7 @@ namespace NetDemo
                 arrayRealPanel[i].MouseUp += new MouseEventHandler(realPanel_MouseUp);
                 arrayRealPanel[i].MouseMove += new MouseEventHandler(realPanel_MouseMove);
                 arrayRealPanel[i].BackgroundImageLayout = ImageLayout.Stretch;
+
                 //if (i==2)
                 //{
                 //    arrayRealPanel[i].BackgroundImage = mtplogo;
@@ -729,6 +730,14 @@ namespace NetDemo
             {
                 //video kayıt açık
                 button14.BackgroundImage = global::NetDemo.Properties.Resources.record_green;
+            }
+            if (m_curRealPanel.IsAlarmMode==true)
+            {
+                button29.BackgroundImage = Resources.yesilalarm;
+            }
+            else
+            {
+                button29.BackgroundImage = Resources.kirmizialarm;
             }
             setDeviceTreeSelectNode();
 
@@ -13241,7 +13250,6 @@ namespace NetDemo
                             Console.WriteLine("Çalınıyor...");
                             while (waveOut.PlaybackState == PlaybackState.Playing)
                             {
-
                             }
                         }
                     }
