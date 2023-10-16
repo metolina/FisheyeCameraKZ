@@ -1127,10 +1127,10 @@ namespace NetDemo
             this.button21.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.button21.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button21.Location = new System.Drawing.Point(659, 15);
+            this.button21.Location = new System.Drawing.Point(667, 15);
             this.button21.Margin = new System.Windows.Forms.Padding(2);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(36, 32);
+            this.button21.Size = new System.Drawing.Size(45, 36);
             this.button21.TabIndex = 883;
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
@@ -1140,7 +1140,7 @@ namespace NetDemo
             this.label134.AutoSize = true;
             this.label134.BackColor = System.Drawing.Color.Transparent;
             this.label134.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label134.Location = new System.Drawing.Point(597, 36);
+            this.label134.Location = new System.Drawing.Point(611, 27);
             this.label134.Name = "label134";
             this.label134.Size = new System.Drawing.Size(14, 16);
             this.label134.TabIndex = 882;
@@ -1150,7 +1150,8 @@ namespace NetDemo
             // 
             this.label133.AutoSize = true;
             this.label133.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label133.Location = new System.Drawing.Point(417, 36);
+            this.label133.ForeColor = System.Drawing.Color.Black;
+            this.label133.Location = new System.Drawing.Point(413, 29);
             this.label133.Name = "label133";
             this.label133.Size = new System.Drawing.Size(14, 16);
             this.label133.TabIndex = 881;
@@ -1203,10 +1204,10 @@ namespace NetDemo
             // 
             this.HABERLESME.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HABERLESME.BackgroundImage")));
             this.HABERLESME.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.HABERLESME.Location = new System.Drawing.Point(758, 18);
+            this.HABERLESME.Location = new System.Drawing.Point(786, 13);
             this.HABERLESME.Margin = new System.Windows.Forms.Padding(2);
             this.HABERLESME.Name = "HABERLESME";
-            this.HABERLESME.Size = new System.Drawing.Size(47, 32);
+            this.HABERLESME.Size = new System.Drawing.Size(50, 40);
             this.HABERLESME.TabIndex = 876;
             this.HABERLESME.UseVisualStyleBackColor = true;
             this.HABERLESME.Click += new System.EventHandler(this.HABERLESME_Click);
@@ -1380,9 +1381,9 @@ namespace NetDemo
             this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button29.ForeColor = System.Drawing.Color.White;
-            this.button29.Location = new System.Drawing.Point(870, 12);
+            this.button29.Location = new System.Drawing.Point(907, 12);
             this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(36, 36);
+            this.button29.Size = new System.Drawing.Size(45, 36);
             this.button29.TabIndex = 865;
             this.button29.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button29.UseVisualStyleBackColor = false;
@@ -1417,9 +1418,9 @@ namespace NetDemo
             this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button16.ForeColor = System.Drawing.Color.White;
-            this.button16.Location = new System.Drawing.Point(819, 15);
+            this.button16.Location = new System.Drawing.Point(850, 12);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(36, 33);
+            this.button16.Size = new System.Drawing.Size(45, 40);
             this.button16.TabIndex = 231;
             this.button16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button16.UseVisualStyleBackColor = false;
@@ -1434,9 +1435,9 @@ namespace NetDemo
             this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button15.ForeColor = System.Drawing.Color.White;
             this.button15.Image = ((System.Drawing.Image)(resources.GetObject("button15.Image")));
-            this.button15.Location = new System.Drawing.Point(921, 12);
+            this.button15.Location = new System.Drawing.Point(967, 10);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(36, 36);
+            this.button15.Size = new System.Drawing.Size(45, 40);
             this.button15.TabIndex = 230;
             this.button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button15.UseVisualStyleBackColor = false;
@@ -1451,9 +1452,9 @@ namespace NetDemo
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button14.ForeColor = System.Drawing.Color.White;
-            this.button14.Location = new System.Drawing.Point(708, 12);
+            this.button14.Location = new System.Drawing.Point(729, 10);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(36, 36);
+            this.button14.Size = new System.Drawing.Size(45, 45);
             this.button14.TabIndex = 229;
             this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button14.UseVisualStyleBackColor = false;
@@ -1530,9 +1531,9 @@ namespace NetDemo
             this.button32.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button32.Location = new System.Drawing.Point(588, 14);
+            this.button32.Location = new System.Drawing.Point(590, 12);
             this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(58, 22);
+            this.button32.Size = new System.Drawing.Size(65, 40);
             this.button32.TabIndex = 867;
             this.button32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button32.UseVisualStyleBackColor = false;
@@ -1570,9 +1571,9 @@ namespace NetDemo
             this.button38.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button38.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button38.Location = new System.Drawing.Point(390, 14);
+            this.button38.Location = new System.Drawing.Point(382, 13);
             this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(58, 22);
+            this.button38.Size = new System.Drawing.Size(65, 40);
             this.button38.TabIndex = 861;
             this.button38.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button38.UseVisualStyleBackColor = false;
