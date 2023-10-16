@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -10,26 +11,32 @@ namespace NetDemo
         /// <summary>
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form formToOpen = null;
 
-            if (args.Length > 0)
+            string configFilePath = "config.txt";
+
+            if (File.Exists(configFilePath))
             {
-                if (args[0] == "NetDemo")
+                string lastOpenedForm = File.ReadAllText(configFilePath).Trim();
+
+                if (!string.IsNullOrEmpty(lastOpenedForm) && lastOpenedForm=="1")
                 {
-                    formToOpen = new NetDemo();
+                    Application.Run(new NetDemo());
+                }
+                else
+                {
+                    Application.Run(new Login()); // Başlangıç formu
                 }
             }
-
-            if (formToOpen == null)
+            else
             {
-                formToOpen = new Login();
+                Application.Run(new Login()); // Başlangıç formu
             }
 
-            Application.Run(formToOpen);
         }
        
     }

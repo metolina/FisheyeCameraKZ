@@ -212,6 +212,10 @@ namespace NetDemo
             this.Pto_USB.VendorId = 1155;
             this.Pto_USB.CheckDevicePresent();
             timer1.Start();
+            //restart işleminde yeniden login açılmaması için kayıt atılıyor.
+            string configFilePath = "config.txt";
+            string contentToWrite = "0";
+            File.WriteAllText(configFilePath, contentToWrite);
         }
 
 
@@ -719,7 +723,7 @@ namespace NetDemo
             if (m_curRealPanel.m_recordStatus == false)
             {
                 //video kayıt kapalı
-                button14.BackgroundImage =global::NetDemo.Properties.Resources.record_red;
+                button14.BackgroundImage = global::NetDemo.Properties.Resources.record_red;
             }
             else
             {
@@ -982,11 +986,11 @@ namespace NetDemo
                     {
                         NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
                     }
-                    else if (bRet==0 && selectedplaypanel.m_playhandle!= IntPtr.Zero)
+                    else if (bRet == 0 && selectedplaypanel.m_playhandle != IntPtr.Zero)
                     {
                         TabClear();
                         this.mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[9];
-                       
+
                         viewmod.Login();
                         viewmod.RealPlayThermal(playPanel1.Handle);
                         viewmod.RealPlay(playPanel3.Handle);
@@ -1512,7 +1516,7 @@ namespace NetDemo
 
                 return;
             }
-           
+
         }
 
         //add local device
@@ -3005,20 +3009,21 @@ namespace NetDemo
             //DialogResult result = MessageBox.Show("Program kapanmak üzere", "Info", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             //if (result == DialogResult.OK)
             //{
-                e.Cancel = false;  //OK
-                if (serialPort1.IsOpen == true)
-                {
-                    serialPort1.Close();
-                    serialPort1.Close();
-                }
-                this.stopCycleMonitorThread();
-                this.stopKeepAliveDeviceThread();
-                //NETDEVSDK.NETDEV_Cleanup();
-                this.stopCycleMonitorThread();
-                this.stopKeepAliveDeviceThread();
-                Form loginform = new Login();
-                loginform.Close();
-                Application.Exit();
+            e.Cancel = false;  //OK
+            if (serialPort1.IsOpen == true)
+            {
+                serialPort1.Close();
+                serialPort1.Close();
+            }
+            this.stopCycleMonitorThread();
+            this.stopKeepAliveDeviceThread();
+            //NETDEVSDK.NETDEV_Cleanup();
+            this.stopCycleMonitorThread();
+            this.stopKeepAliveDeviceThread();
+            timer1.Stop();
+            Form loginform = new Login();
+            loginform.Close();
+            Application.Exit();
 
 
             //}
@@ -5381,7 +5386,7 @@ namespace NetDemo
             {
 
             }
-            
+
         }
 
         private void NETDEV_ConflagrationAlarmMessCallBack(IntPtr lpHandle, ref NETDEV_CONFLAGRATION_ALARM_INFO_S pstAlarmInfo, IntPtr lpUserParam)
@@ -11518,9 +11523,9 @@ namespace NetDemo
 
             }
 
-           
+
             //TabClear();
-            mainTabCtrl.SelectedIndex = 7; 
+            mainTabCtrl.SelectedIndex = 7;
 
             long GetDriveStatus(string driveName)
             {
@@ -11655,7 +11660,7 @@ namespace NetDemo
                     udpListenerThread.IsBackground = true;
                     udpListenerThread.Start();
 
-                 
+
 
 
 
@@ -11691,7 +11696,7 @@ namespace NetDemo
                     vlcControl1.Visible = false;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -11891,19 +11896,19 @@ namespace NetDemo
 
         private void TabClear()
         {
-        //    //this.LiveView.Parent = null; // hide
-        //    this.Playback.Parent = null; // hide
-        //    this.Configure.Parent = null; // hide
-        //    this.AlarmRecords.Parent = null; // hide
+            //    //this.LiveView.Parent = null; // hide
+            //    this.Playback.Parent = null; // hide
+            //    this.Configure.Parent = null; // hide
+            //    this.AlarmRecords.Parent = null; // hide
 
-        //    this.VCA.Parent = null; // hide
-        //    this.Maintenance.Parent = null;
-        //    this.tabPage1.Parent = null;
-        //    this.tabPage2.Parent = null;
-        //    this.rgbandthermal.Parent = null;
-        //    this.thermal.Parent = null;
-        //    this.rgb.Parent = null;
-        //    this.fisheye.Parent = null;
+            //    this.VCA.Parent = null; // hide
+            //    this.Maintenance.Parent = null;
+            //    this.tabPage1.Parent = null;
+            //    this.tabPage2.Parent = null;
+            //    this.rgbandthermal.Parent = null;
+            //    this.thermal.Parent = null;
+            //    this.rgb.Parent = null;
+            //    this.fisheye.Parent = null;
 
         }
 
@@ -12056,7 +12061,7 @@ namespace NetDemo
             {
                 objDiscovery = new Discovery(this);
             }
-          
+
             objDiscovery.ShowDialog();
         }
 
@@ -12114,6 +12119,9 @@ namespace NetDemo
 
         private void button14_Click(object sender, EventArgs e)
         {
+            string configFilePath = "config.txt";
+            string contentToWrite = "1";
+            File.WriteAllText(configFilePath, contentToWrite);
             Application.Restart();
             //if (m_curRealPanel.m_playhandle != IntPtr.Zero)
             //{
@@ -12150,7 +12158,7 @@ namespace NetDemo
 
         private void button15_Click_1(object sender, EventArgs e)
         {
-            
+
 
             if (m_curRealPanel.m_recordStatus == false)
             {
@@ -12393,9 +12401,9 @@ namespace NetDemo
         public int left = 0;
         public int up = 0;
         public int down = 0;
-        public int home= 0;
-        public int zoom_in= 0;
-        public int zoom_out= 0;
+        public int home = 0;
+        public int zoom_in = 0;
+        public int zoom_out = 0;
         private async void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -12477,7 +12485,7 @@ namespace NetDemo
                     if (vals[16] == "1") valb = 0;
 
 
-                    if (vals[17]=="0" && breath==0)
+                    if (vals[17] == "0" && breath == 0)
                     {
                         serialPort1.Write("301");
                         Thread.Sleep(100);
@@ -12488,82 +12496,82 @@ namespace NetDemo
                     if (vals[17] == "1") breath = 0;
 
 
-                    if (vals[24]=="0")
+                    if (vals[24] == "0")
                     {
                         SendMessage2("#TPUG2wPTZ046E");
                         right = 1;
                     }
-                    else if (vals[24]=="1" && right==1)
+                    else if (vals[24] == "1" && right == 1)
                     {
                         SendMessage2("#TPUG2wPTZ006A");
                         SendMessage2("#TPUG2wPTZ006A");
                         right = 0;
                     }
 
-                    if (vals[22]=="0")
+                    if (vals[22] == "0")
                     {
                         SendMessage2("#TPUG2wPTZ036D");
                         left = 1;
                     }
-                    else if (vals[22]=="1" && left==1)
+                    else if (vals[22] == "1" && left == 1)
                     {
                         SendMessage2("#TPUG2wPTZ006A");
                         SendMessage2("#TPUG2wPTZ006A");
                         left = 0;
                     }
 
-                    if (vals[23]=="0")
+                    if (vals[23] == "0")
                     {
                         SendMessage2("#TPUG2wPTZ016B");
                         up = 1;
                     }
-                    else if (vals[23]=="1" && up==1)
+                    else if (vals[23] == "1" && up == 1)
                     {
                         SendMessage2("#TPUG2wPTZ006A");
                         SendMessage2("#TPUG2wPTZ006A");
                         up = 0;
                     }
-                    if (vals[21]=="0")
+                    if (vals[21] == "0")
                     {
                         SendMessage2("#TPUG2wPTZ026C");
                         down = 1;
                     }
-                    else if (vals[21]=="1" && down==1)
+                    else if (vals[21] == "1" && down == 1)
                     {
                         SendMessage2("#TPUG2wPTZ006A");
                         SendMessage2("#TPUG2wPTZ006A");
                         down = 0;
                     }
-                    if (vals[25]=="0")
+                    if (vals[25] == "0")
                     {
                         SendMessage2("#TPUG2wPTZ056F");
                     }
-                    else if (vals[25]=="1" && home==1)
+                    else if (vals[25] == "1" && home == 1)
                     {
                         SendMessage2("#TPUG2wPTZ006A");
                         home = 0;
                     }
-                    if (vals[29]=="0")
+                    if (vals[29] == "0")
                     {
                         SendMessage2("#TPUM2wZMC025E");
                         zoom_in = 1;
                     }
-                    else if (vals[29]=="1" && zoom_in==1)
+                    else if (vals[29] == "1" && zoom_in == 1)
                     {
                         zoom_in = 0;
                         SendMessage2("#TPUM2wZMC005C");
                     }
-                    if (vals[27]=="0")
+                    if (vals[27] == "0")
                     {
                         SendMessage2("#TPUM2wZMC015D");
                         zoom_out = 1;
                     }
-                    else if(zoom_out==1 && vals[27]=="1")
+                    else if (zoom_out == 1 && vals[27] == "1")
                     {
                         SendMessage2("#TPUM2wZMC005C");
                         zoom_out = 0;
                     }
-                    if (vals[98]=="1")
+                    if (vals[98] == "1")
                     {
                         button55.BackColor = Color.Green;
                     }
@@ -12576,7 +12584,7 @@ namespace NetDemo
 
 
                     //string alici4 = vals[59] + vals[60] + vals[61] + vals[62];
-                    if (vals[19]=="0" && mouseclicker==0)
+                    if (vals[19] == "0" && mouseclicker == 0)
                     {
                         serialPort1.Write("801");
                         mouseclicker = 1;
@@ -12618,7 +12626,7 @@ namespace NetDemo
                     }
                     mouse = vals[37];
 
-                    if(vals[18]=="0")
+                    if (vals[18] == "0")
                     {
                         //SaveSettings2();
 
@@ -12642,11 +12650,11 @@ namespace NetDemo
                         //yeniForm.Show(); // Yeni formu göster
 
                         Application.Restart();
-                       
+
 
                     }
 
-           
+
                     //if (LblAlici4.InvokeRequired)
                     //{
                     //    LblAlici4.Invoke(new MethodInvoker(delegate { LblAlici4.Text = alici4; }));
@@ -12659,162 +12667,162 @@ namespace NetDemo
                     //LblB3.Text = Convert.ToString(vals[57]).ToString();
                     //LblB4.Text = Convert.ToString(vals[64]).ToString();
                     label133.Text = "%" + vals[79]; //
-                        label134.Text = "%" + vals[78];
+                    label134.Text = "%" + vals[78];
 
-                        if (Okuma_Sayac >= 6)
+                    if (Okuma_Sayac >= 6)
+                    {
+
+                        if (Convert.ToInt32(vals[79]) >= 0 && Convert.ToInt32(vals[79]) <= 9)
                         {
-                          
-                            if (Convert.ToInt32(vals[79]) >= 0 && Convert.ToInt32(vals[79]) <= 9)
-                            {
-                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _0.png");
-                            }
-                            else if (Convert.ToInt32(vals[79]) >= 10 && Convert.ToInt32(vals[79]) <= 24)
-                            {
-                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _10.png");
-                            }
-                            else if (Convert.ToInt32(vals[79]) >= 25 && Convert.ToInt32(vals[79]) <= 49)
-                            {
-                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _25.png");
-                            }
-                            else if (Convert.ToInt32(vals[79]) >= 50 && Convert.ToInt32(vals[79]) <= 74)
-                            {
-                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _50.png");
-                            }
-                            else if (Convert.ToInt32(vals[79]) >= 75 && Convert.ToInt32(vals[79]) <= 89)
-                            {
-                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _75.png");
-                            }
-                            else if (Convert.ToInt32(vals[79]) >= 90 && Convert.ToInt32(vals[79]) <= 100)
-                            {
-                                button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _100.png");
-                            }
+                            button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _0.png");
+                        }
+                        else if (Convert.ToInt32(vals[79]) >= 10 && Convert.ToInt32(vals[79]) <= 24)
+                        {
+                            button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _10.png");
+                        }
+                        else if (Convert.ToInt32(vals[79]) >= 25 && Convert.ToInt32(vals[79]) <= 49)
+                        {
+                            button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _25.png");
+                        }
+                        else if (Convert.ToInt32(vals[79]) >= 50 && Convert.ToInt32(vals[79]) <= 74)
+                        {
+                            button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _50.png");
+                        }
+                        else if (Convert.ToInt32(vals[79]) >= 75 && Convert.ToInt32(vals[79]) <= 89)
+                        {
+                            button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _75.png");
+                        }
+                        else if (Convert.ToInt32(vals[79]) >= 90 && Convert.ToInt32(vals[79]) <= 100)
+                        {
+                            button38.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SOL _100.png");
+                        }
 
-                            if (Convert.ToInt32(vals[78]) >= 0 && Convert.ToInt32(vals[78]) <= 9)
-                            {
-                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _0.png");
-                            }
-                            else if (Convert.ToInt32(vals[78]) >= 10 && Convert.ToInt32(vals[78]) <= 24)
-                            {
-                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _10.png");
-                            }
-                            else if (Convert.ToInt32(vals[78]) >= 25 && Convert.ToInt32(vals[78]) <= 49)
-                            {
-                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _25.png");
-                            }
-                            else if (Convert.ToInt32(vals[78]) >= 50 && Convert.ToInt32(vals[78]) <= 74)
-                            {
-                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _50.png");
-                            }
-                            else if (Convert.ToInt32(vals[78]) >= 75 && Convert.ToInt32(vals[78]) <= 89)
-                            {
-                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _75.png");
-                            }
-                            else if (Convert.ToInt32(vals[78]) >= 90 && Convert.ToInt32(vals[78]) <= 100)
-                            {
-                                button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _100.png");
-                            }
+                        if (Convert.ToInt32(vals[78]) >= 0 && Convert.ToInt32(vals[78]) <= 9)
+                        {
+                            button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _0.png");
+                        }
+                        else if (Convert.ToInt32(vals[78]) >= 10 && Convert.ToInt32(vals[78]) <= 24)
+                        {
+                            button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _10.png");
+                        }
+                        else if (Convert.ToInt32(vals[78]) >= 25 && Convert.ToInt32(vals[78]) <= 49)
+                        {
+                            button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _25.png");
+                        }
+                        else if (Convert.ToInt32(vals[78]) >= 50 && Convert.ToInt32(vals[78]) <= 74)
+                        {
+                            button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _50.png");
+                        }
+                        else if (Convert.ToInt32(vals[78]) >= 75 && Convert.ToInt32(vals[78]) <= 89)
+                        {
+                            button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _75.png");
+                        }
+                        else if (Convert.ToInt32(vals[78]) >= 90 && Convert.ToInt32(vals[78]) <= 100)
+                        {
+                            button32.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\SAG _100.png");
+                        }
 
-                            if (Convert.ToInt32(vals[73]) >= 0 && Convert.ToInt32(vals[73]) <= 9)  // röle 4 batarya
-                            {
-                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
-                            }
-                            else if (Convert.ToInt32(vals[73]) >= 10 && Convert.ToInt32(vals[73]) <= 24)
-                            {
-                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
-                            }
-                            else if (Convert.ToInt32(vals[73]) >= 25 && Convert.ToInt32(vals[73]) <= 49)
-                            {
-                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
-                            }
-                            else if (Convert.ToInt32(vals[73]) >= 50 && Convert.ToInt32(vals[73]) <= 74)
-                            {
-                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
-                            }
-                            else if (Convert.ToInt32(vals[73]) >= 75 && Convert.ToInt32(vals[73]) <= 89)
-                            {
-                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
-                            }
-                            else if (Convert.ToInt32(vals[73]) >= 90 && Convert.ToInt32(vals[73]) <= 100)
-                            {
-                                button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
-                            }
+                        if (Convert.ToInt32(vals[73]) >= 0 && Convert.ToInt32(vals[73]) <= 9)  // röle 4 batarya
+                        {
+                            button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                        }
+                        else if (Convert.ToInt32(vals[73]) >= 10 && Convert.ToInt32(vals[73]) <= 24)
+                        {
+                            button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                        }
+                        else if (Convert.ToInt32(vals[73]) >= 25 && Convert.ToInt32(vals[73]) <= 49)
+                        {
+                            button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
+                        }
+                        else if (Convert.ToInt32(vals[73]) >= 50 && Convert.ToInt32(vals[73]) <= 74)
+                        {
+                            button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
+                        }
+                        else if (Convert.ToInt32(vals[73]) >= 75 && Convert.ToInt32(vals[73]) <= 89)
+                        {
+                            button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
+                        }
+                        else if (Convert.ToInt32(vals[73]) >= 90 && Convert.ToInt32(vals[73]) <= 100)
+                        {
+                            button43.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
+                        }
 
-                            if (Convert.ToInt32(vals[72]) >= 0 && Convert.ToInt32(vals[72]) <= 9)  // röle 3 batarya
-                            {
-                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
-                            }
-                            else if (Convert.ToInt32(vals[72]) >= 10 && Convert.ToInt32(vals[72]) <= 24)
-                            {
-                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
-                            }
-                            else if (Convert.ToInt32(vals[72]) >= 25 && Convert.ToInt32(vals[72]) <= 49)
-                            {
-                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
-                            }
-                            else if (Convert.ToInt32(vals[72]) >= 50 && Convert.ToInt32(vals[72]) <= 74)
-                            {
-                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
-                            }
-                            else if (Convert.ToInt32(vals[72]) >= 75 && Convert.ToInt32(vals[72]) <= 89)
-                            {
-                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
-                            }
-                            else if (Convert.ToInt32(vals[72]) >= 90 && Convert.ToInt32(vals[72]) <= 100)
-                            {
-                                button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
-                            }
+                        if (Convert.ToInt32(vals[72]) >= 0 && Convert.ToInt32(vals[72]) <= 9)  // röle 3 batarya
+                        {
+                            button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                        }
+                        else if (Convert.ToInt32(vals[72]) >= 10 && Convert.ToInt32(vals[72]) <= 24)
+                        {
+                            button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                        }
+                        else if (Convert.ToInt32(vals[72]) >= 25 && Convert.ToInt32(vals[72]) <= 49)
+                        {
+                            button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
+                        }
+                        else if (Convert.ToInt32(vals[72]) >= 50 && Convert.ToInt32(vals[72]) <= 74)
+                        {
+                            button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
+                        }
+                        else if (Convert.ToInt32(vals[72]) >= 75 && Convert.ToInt32(vals[72]) <= 89)
+                        {
+                            button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
+                        }
+                        else if (Convert.ToInt32(vals[72]) >= 90 && Convert.ToInt32(vals[72]) <= 100)
+                        {
+                            button40.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
+                        }
 
 
 
-                            if (Convert.ToInt32(vals[71]) >= 0 && Convert.ToInt32(vals[71]) <= 9)  // röle 2 batarya
-                            {
-                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
-                            }
-                            else if (Convert.ToInt32(vals[71]) >= 10 && Convert.ToInt32(vals[71]) <= 24)
-                            {
-                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
-                            }
-                            else if (Convert.ToInt32(vals[71]) >= 25 && Convert.ToInt32(vals[71]) <= 49)
-                            {
-                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
-                            }
-                            else if (Convert.ToInt32(vals[71]) >= 50 && Convert.ToInt32(vals[71]) <= 74)
-                            {
-                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
-                            }
-                            else if (Convert.ToInt32(vals[71]) >= 75 && Convert.ToInt32(vals[71]) <= 89)
-                            {
-                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
-                            }
-                            else if (Convert.ToInt32(vals[71]) >= 90 && Convert.ToInt32(vals[71]) <= 100)
-                            {
-                                button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
-                            }
+                        if (Convert.ToInt32(vals[71]) >= 0 && Convert.ToInt32(vals[71]) <= 9)  // röle 2 batarya
+                        {
+                            button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                        }
+                        else if (Convert.ToInt32(vals[71]) >= 10 && Convert.ToInt32(vals[71]) <= 24)
+                        {
+                            button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                        }
+                        else if (Convert.ToInt32(vals[71]) >= 25 && Convert.ToInt32(vals[71]) <= 49)
+                        {
+                            button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
+                        }
+                        else if (Convert.ToInt32(vals[71]) >= 50 && Convert.ToInt32(vals[71]) <= 74)
+                        {
+                            button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
+                        }
+                        else if (Convert.ToInt32(vals[71]) >= 75 && Convert.ToInt32(vals[71]) <= 89)
+                        {
+                            button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
+                        }
+                        else if (Convert.ToInt32(vals[71]) >= 90 && Convert.ToInt32(vals[71]) <= 100)
+                        {
+                            button36.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
+                        }
 
-                            if (Convert.ToInt32(vals[70]) >= 0 && Convert.ToInt32(vals[70]) <= 9)  // röle 1 batarya
-                            {
-                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
-                            }
-                            else if (Convert.ToInt32(vals[70]) >= 10 && Convert.ToInt32(vals[70]) <= 24)
-                            {
-                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
-                            }
-                            else if (Convert.ToInt32(vals[70]) >= 25 && Convert.ToInt32(vals[70]) <= 49)
-                            {
-                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
-                            }
-                            else if (Convert.ToInt32(vals[70]) >= 50 && Convert.ToInt32(vals[70]) <= 74)
-                            {
-                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
-                            }
-                            else if (Convert.ToInt32(vals[70]) >= 75 && Convert.ToInt32(vals[70]) <= 89)
-                            {
-                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
-                            }
-                            else if (Convert.ToInt32(vals[70]) >= 90 && Convert.ToInt32(vals[70]) <= 100)
-                            {
-                                button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
-                            }
+                        if (Convert.ToInt32(vals[70]) >= 0 && Convert.ToInt32(vals[70]) <= 9)  // röle 1 batarya
+                        {
+                            button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                        }
+                        else if (Convert.ToInt32(vals[70]) >= 10 && Convert.ToInt32(vals[70]) <= 24)
+                        {
+                            button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_10.png");
+                        }
+                        else if (Convert.ToInt32(vals[70]) >= 25 && Convert.ToInt32(vals[70]) <= 49)
+                        {
+                            button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_25.png");
+                        }
+                        else if (Convert.ToInt32(vals[70]) >= 50 && Convert.ToInt32(vals[70]) <= 74)
+                        {
+                            button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_50.png");
+                        }
+                        else if (Convert.ToInt32(vals[70]) >= 75 && Convert.ToInt32(vals[70]) <= 89)
+                        {
+                            button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_75.png");
+                        }
+                        else if (Convert.ToInt32(vals[70]) >= 90 && Convert.ToInt32(vals[70]) <= 100)
+                        {
+                            button30.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\_100.png");
+                        }
 
 
 
@@ -12938,212 +12946,212 @@ namespace NetDemo
                         }
                     }
 
-                        //if (Convert.ToInt32(vals[74]) == 0) //röle 1 
-                        //{
-                        //    button31.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
-                        //}
+                    //if (Convert.ToInt32(vals[74]) == 0) //röle 1 
+                    //{
+                    //    button31.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                    //}
 
 
-                        if (Okuma_Sayac >= 6)
+                    if (Okuma_Sayac >= 6)
+                    {
+                        Okuma_Sayac = 0;
+                    }
+
+                    if (Convert.ToInt32(vals[77]) == 0) // röle 4 
+                    {
+                        button44.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                    }
+                    else
+                    {
+                        button44.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                    }
+
+                    if (Convert.ToInt32(vals[76]) == 0) //röle 3 
+                    {
+                        button41.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                    }
+                    else
+                    {
+                        button41.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                    }
+
+                    if (Convert.ToInt32(vals[75]) == 0) //röle 2 
+                    {
+                        button37.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                    }
+                    else
+                    {
+                        button37.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                    }
+
+                    if (Convert.ToInt32(vals[74]) == 0) //röle 1 
+                    {
+                        button31.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                    }
+                    else
+                    {
+                        button31.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                    }
+
+                    if (Okuma_Sayac2 >= 4)
+                    {
+                        if (Convert.ToInt32(vals[69]) >= 30 && Convert.ToInt32(vals[69]) <= 65)  // röle 4 sinyal
                         {
-                            Okuma_Sayac = 0;
+                            button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
                         }
-
-                        if (Convert.ToInt32(vals[77]) == 0) // röle 4 
+                        else if (Convert.ToInt32(vals[69]) >= 65 && Convert.ToInt32(vals[69]) <= 85)
                         {
-                            button44.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                            button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
                         }
-                        else
+                        else if (Convert.ToInt32(vals[69]) >= 86 && Convert.ToInt32(vals[69]) <= 105)
                         {
-                            button44.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                            button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
                         }
-
-                        if (Convert.ToInt32(vals[76]) == 0) //röle 3 
+                        else if (Convert.ToInt32(vals[69]) >= 106 && Convert.ToInt32(vals[69]) <= 120)
                         {
-                            button41.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                            button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
                         }
-                        else
+                        else if (Convert.ToInt32(vals[69]) >= 121 && Convert.ToInt32(vals[69]) <= 135)
                         {
-                            button41.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                            button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
                         }
-
-                        if (Convert.ToInt32(vals[75]) == 0) //röle 2 
+                        else if (Convert.ToInt32(vals[69]) >= 136 && Convert.ToInt32(vals[69]) <= 140)
                         {
-                            button37.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                            button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
                         }
-                        else
+                        else if (Convert.ToInt32(vals[69]) == 0)
                         {
-                            button37.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                            button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
                         }
+                        string aaa = (vals[64]);
 
-                        if (Convert.ToInt32(vals[74]) == 0) //röle 1 
+
+
+
+                        if (Convert.ToInt32(vals[68]) >= 30 && Convert.ToInt32(vals[68]) <= 65)  // röle 3 sinyal
                         {
-                            button31.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam0.png");
+                            button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
                         }
-                        else
+                        else if (Convert.ToInt32(vals[68]) >= 66 && Convert.ToInt32(vals[68]) <= 85)
                         {
-                            button31.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\Cam1.png");
+                            button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
                         }
-
-                        if (Okuma_Sayac2 >= 4)
+                        else if (Convert.ToInt32(vals[68]) >= 86 && Convert.ToInt32(vals[68]) <= 105)
                         {
-                            if (Convert.ToInt32(vals[69]) >= 30 && Convert.ToInt32(vals[69]) <= 65)  // röle 4 sinyal
-                            {
-                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
-                            }
-                            else if (Convert.ToInt32(vals[69]) >= 65 && Convert.ToInt32(vals[69]) <= 85)
-                            {
-                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
-                            }
-                            else if (Convert.ToInt32(vals[69]) >= 86 && Convert.ToInt32(vals[69]) <= 105)
-                            {
-                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
-                            }
-                            else if (Convert.ToInt32(vals[69]) >= 106 && Convert.ToInt32(vals[69]) <= 120)
-                            {
-                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
-                            }
-                            else if (Convert.ToInt32(vals[69]) >= 121 && Convert.ToInt32(vals[69]) <= 135)
-                            {
-                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
-                            }
-                            else if (Convert.ToInt32(vals[69]) >= 136 && Convert.ToInt32(vals[69]) <= 140)
-                            {
-                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
-                            }
-                            else if (Convert.ToInt32(vals[69]) == 0)
-                            {
-                                button42.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
-                            }
-                            string aaa = (vals[64]);
-
-
-
-
-                            if (Convert.ToInt32(vals[68]) >= 30 && Convert.ToInt32(vals[68]) <= 65)  // röle 3 sinyal
-                            {
-                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
-                            }
-                            else if (Convert.ToInt32(vals[68]) >= 66 && Convert.ToInt32(vals[68]) <= 85)
-                            {
-                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
-                            }
-                            else if (Convert.ToInt32(vals[68]) >= 86 && Convert.ToInt32(vals[68]) <= 105)
-                            {
-                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
-                            }
-                            else if (Convert.ToInt32(vals[68]) >= 106 && Convert.ToInt32(vals[68]) <= 120)
-                            {
-                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
-                            }
-                            else if (Convert.ToInt32(vals[68]) >= 121 && Convert.ToInt32(vals[68]) <= 135)
-                            {
-                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
-                            }
-                            else if (Convert.ToInt32(vals[68]) >= 136 && Convert.ToInt32(vals[68]) <= 140)
-                            {
-                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
-                            }
-                            else if (Convert.ToInt32(vals[68]) == 0)
-                            {
-                                button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
-                            }
-
-
-
-
-                            if (Convert.ToInt32(vals[67]) >= 30 && Convert.ToInt32(vals[67]) <= 65)  // röle 2 sinyal
-                            {
-                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
-                            }
-                            else if (Convert.ToInt32(vals[67]) >= 66 && Convert.ToInt32(vals[67]) <= 85)
-                            {
-                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
-                            }
-                            else if (Convert.ToInt32(vals[67]) >= 86 && Convert.ToInt32(vals[67]) <= 105)
-                            {
-                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
-                            }
-                            else if (Convert.ToInt32(vals[67]) >= 106 && Convert.ToInt32(vals[67]) <= 120)
-                            {
-                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
-                            }
-                            else if (Convert.ToInt32(vals[67]) >= 121 && Convert.ToInt32(vals[67]) <= 135)
-                            {
-                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
-                            }
-                            else if (Convert.ToInt32(vals[67]) >= 136 && Convert.ToInt32(vals[67]) <= 140)
-                            {
-                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
-                            }
-                            else if (Convert.ToInt32(vals[67]) == 0)
-                            {
-                                button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
-                            }
-
-
-                            if (Convert.ToInt32(vals[66]) >= 30 && Convert.ToInt32(vals[66]) <= 65)  // röle 1 sinyal
-                            {
-                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
-                            }
-                            else if (Convert.ToInt32(vals[66]) >= 66 && Convert.ToInt32(vals[66]) <= 85)
-                            {
-                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
-                            }
-                            else if (Convert.ToInt32(vals[66]) >= 86 && Convert.ToInt32(vals[66]) <= 105)
-                            {
-                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
-                            }
-                            else if (Convert.ToInt32(vals[66]) >= 106 && Convert.ToInt32(vals[66]) <= 120)
-                            {
-                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
-                            }
-                            else if (Convert.ToInt32(vals[66]) >= 121 && Convert.ToInt32(vals[66]) <= 135)
-                            {
-                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
-                            }
-                            else if (Convert.ToInt32(vals[66]) >= 136 && Convert.ToInt32(vals[66]) <= 140)
-                            {
-                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
-                            }
-                            else if (Convert.ToInt32(vals[66]) == 0)
-                            {
-                                button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
-                            }
-
-                           
+                            button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
                         }
-                        if (Okuma_Sayac2 >= 4)
+                        else if (Convert.ToInt32(vals[68]) >= 106 && Convert.ToInt32(vals[68]) <= 120)
                         {
-                            Okuma_Sayac2 = 0;
+                            button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
                         }
-                        string aaaa = vals[77];
-                        string aaaa2 = vals[76];
-
-                        if (Convert.ToString(vals[81]).ToString() == "1")
+                        else if (Convert.ToInt32(vals[68]) >= 121 && Convert.ToInt32(vals[68]) <= 135)
                         {
-                            HABERLESME.BackColor = Color.Green;
+                            button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
                         }
-                        else if (Convert.ToString(vals[81]).ToString() == "0")
+                        else if (Convert.ToInt32(vals[68]) >= 136 && Convert.ToInt32(vals[68]) <= 140)
                         {
-                            HABERLESME.BackColor = Color.Red;
+                            button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
                         }
-
-                        if (Convert.ToString(vals[80]).ToString() == "1")
+                        else if (Convert.ToInt32(vals[68]) == 0)
                         {
-
-                            if (serialPort1.IsOpen == true)
-                            {
-                                serialPort1.Write("100");
-                            }
-
-                            Thread.Sleep(1000);
-                            serialPort1.Close();
-                            System.Diagnostics.Process.Start("shutdown", "/s /t 0");
+                            button39.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
                         }
 
 
-                    
+
+
+                        if (Convert.ToInt32(vals[67]) >= 30 && Convert.ToInt32(vals[67]) <= 65)  // röle 2 sinyal
+                        {
+                            button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
+                        }
+                        else if (Convert.ToInt32(vals[67]) >= 66 && Convert.ToInt32(vals[67]) <= 85)
+                        {
+                            button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
+                        }
+                        else if (Convert.ToInt32(vals[67]) >= 86 && Convert.ToInt32(vals[67]) <= 105)
+                        {
+                            button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
+                        }
+                        else if (Convert.ToInt32(vals[67]) >= 106 && Convert.ToInt32(vals[67]) <= 120)
+                        {
+                            button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
+                        }
+                        else if (Convert.ToInt32(vals[67]) >= 121 && Convert.ToInt32(vals[67]) <= 135)
+                        {
+                            button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
+                        }
+                        else if (Convert.ToInt32(vals[67]) >= 136 && Convert.ToInt32(vals[67]) <= 140)
+                        {
+                            button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                        }
+                        else if (Convert.ToInt32(vals[67]) == 0)
+                        {
+                            button34.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                        }
+
+
+                        if (Convert.ToInt32(vals[66]) >= 30 && Convert.ToInt32(vals[66]) <= 65)  // röle 1 sinyal
+                        {
+                            button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\5.png");
+                        }
+                        else if (Convert.ToInt32(vals[66]) >= 66 && Convert.ToInt32(vals[66]) <= 85)
+                        {
+                            button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\4.png");
+                        }
+                        else if (Convert.ToInt32(vals[66]) >= 86 && Convert.ToInt32(vals[66]) <= 105)
+                        {
+                            button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\3.png");
+                        }
+                        else if (Convert.ToInt32(vals[66]) >= 106 && Convert.ToInt32(vals[66]) <= 120)
+                        {
+                            button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\2.png");
+                        }
+                        else if (Convert.ToInt32(vals[66]) >= 121 && Convert.ToInt32(vals[66]) <= 135)
+                        {
+                            button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\1.png");
+                        }
+                        else if (Convert.ToInt32(vals[66]) >= 136 && Convert.ToInt32(vals[66]) <= 140)
+                        {
+                            button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                        }
+                        else if (Convert.ToInt32(vals[66]) == 0)
+                        {
+                            button33.BackgroundImage = System.Drawing.Image.FromFile(Application.StartupPath + "\\Settings\\0.png");
+                        }
+
+
+                    }
+                    if (Okuma_Sayac2 >= 4)
+                    {
+                        Okuma_Sayac2 = 0;
+                    }
+                    string aaaa = vals[77];
+                    string aaaa2 = vals[76];
+
+                    if (Convert.ToString(vals[81]).ToString() == "1")
+                    {
+                        HABERLESME.BackColor = Color.Green;
+                    }
+                    else if (Convert.ToString(vals[81]).ToString() == "0")
+                    {
+                        HABERLESME.BackColor = Color.Red;
+                    }
+
+                    if (Convert.ToString(vals[80]).ToString() == "1")
+                    {
+
+                        if (serialPort1.IsOpen == true)
+                        {
+                            serialPort1.Write("100");
+                        }
+
+                        Thread.Sleep(1000);
+                        serialPort1.Close();
+                        System.Diagnostics.Process.Start("shutdown", "/s /t 0");
+                    }
+
+
+
                 }
             }
             catch (Exception ex)
@@ -13233,12 +13241,12 @@ namespace NetDemo
                             Console.WriteLine("Çalınıyor...");
                             while (waveOut.PlaybackState == PlaybackState.Playing)
                             {
-                                
+
                             }
                         }
                     }
                 }
-              
+
             }
         }
 
@@ -13295,7 +13303,7 @@ namespace NetDemo
             }
             else
             {
-               
+
                 form1.Hide();
                 //form2.Show();
                 form2.Visible = form2.Visible == true ? false : true;
@@ -13308,7 +13316,7 @@ namespace NetDemo
         {
 
             ConnectBarcode1();
-         
+
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -13733,10 +13741,10 @@ namespace NetDemo
             vlcControl2.Visible = true;
             vlcControl3.Visible = false;
             this.mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[11];
-          //  vlcControl1.Stop();
+            //  vlcControl1.Stop();
             //vlcControl2.Play();
         }
-       
+
 
         private void vlcControl2_Click(object sender, EventArgs e)
         {
@@ -13929,7 +13937,7 @@ namespace NetDemo
                 MessageBox.Show("Şifre kaydedilirken bir hata oluştu: " + ex.Message);
             }
         }
-       
+
         #endregion
         private void button22_Click_1(object sender, EventArgs e)
         {

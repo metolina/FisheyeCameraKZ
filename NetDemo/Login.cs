@@ -274,6 +274,9 @@ namespace NetDemo
 
             }
 
+            string configFilePath = "config.txt";
+            string contentToWrite = "0";
+            File.WriteAllText(configFilePath, contentToWrite);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -332,6 +335,11 @@ namespace NetDemo
         private void button4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
         }
     }
 }
