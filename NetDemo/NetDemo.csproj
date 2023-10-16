@@ -456,10 +456,12 @@
     </Content>
     <Content Include="Resources\green.png" />
     <Content Include="Resources\Image1.png" />
+    <None Include="Resources\kirmizialarm.png" />
     <Content Include="Resources\red.png" />
     <None Include="Resources\run.png" />
     <Content Include="Resources\run-open.png" />
     <None Include="Resources\runer-silhouette-running-fast.png" />
+    <None Include="Resources\yesilalarm.png" />
     <Content Include="res\green.png" />
     <Content Include="res\red.png" />
   </ItemGroup>

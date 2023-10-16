@@ -343,6 +343,16 @@ namespace NetDemo.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap kirmizialarm {
+            get {
+                object obj = ResourceManager.GetObject("kirmizialarm", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap KZ_logo_2022 {
             get {
                 object obj = ResourceManager.GetObject("KZ logo 2022", resourceCulture);
@@ -536,6 +546,16 @@ namespace NetDemo.Properties {
         internal static System.Drawing.Bitmap tree {
             get {
                 object obj = ResourceManager.GetObject("tree", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap yesilalarm {
+            get {
+                object obj = ResourceManager.GetObject("yesilalarm", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -13156,12 +13156,12 @@ namespace NetDemo
 
             if (m_curRealPanel.IsAlarmMode == true)
             {
-                button29.BackgroundImage = global::NetDemo.Properties.Resources.run;
+                button29.BackgroundImage = global::NetDemo.Properties.Resources.kirmizialarm;
                 m_curRealPanel.IsAlarmMode = false;
             }
             else
             {
-                button29.BackgroundImage = global::NetDemo.Properties.Resources.runer_silhouette_running_fast;
+                button29.BackgroundImage = global::NetDemo.Properties.Resources.yesilalarm;
                 m_curRealPanel.IsAlarmMode = true;
             }
         }
@@ -13215,6 +13215,7 @@ namespace NetDemo
             //alarm sesi çalışacak
             //if (m_curRealPanel.IsAlarmMode == true)
             //{
+                
                 Assembly a = Assembly.GetExecutingAssembly();
                 Stream s = a.GetManifestResourceStream("bip.mp3");
                 System.Media.SoundPlayer sp = new System.Media.SoundPlayer(s);
