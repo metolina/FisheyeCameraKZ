@@ -742,8 +742,16 @@ namespace NetDemo
             this.button27 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.thermal = new System.Windows.Forms.TabPage();
+            this.playPanel3 = new GeneralDef.PlayPanel();
+            this.playPanel4 = new GeneralDef.PlayPanel();
+            this.playPanel1 = new GeneralDef.PlayPanel();
+            this.playPanel2 = new GeneralDef.PlayPanel();
             this.rgb = new System.Windows.Forms.TabPage();
+            this.playPanel5 = new GeneralDef.PlayPanel();
             this.fisheye = new System.Windows.Forms.TabPage();
+            this.playPanel6 = new GeneralDef.PlayPanel();
+            this.vlcControl2 = new Vlc.DotNet.Forms.VlcControl();
+            this.vlcControl3 = new Vlc.DotNet.Forms.VlcControl();
             this.deviceOper = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Login = new System.Windows.Forms.ToolStripMenuItem();
             this.Logout = new System.Windows.Forms.ToolStripMenuItem();
@@ -776,14 +784,6 @@ namespace NetDemo
             this.Pto_USB = new UsbLibrary.UsbHidPort(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.playPanel3 = new GeneralDef.PlayPanel();
-            this.playPanel4 = new GeneralDef.PlayPanel();
-            this.playPanel1 = new GeneralDef.PlayPanel();
-            this.playPanel2 = new GeneralDef.PlayPanel();
-            this.playPanel5 = new GeneralDef.PlayPanel();
-            this.playPanel6 = new GeneralDef.PlayPanel();
-            this.vlcControl2 = new Vlc.DotNet.Forms.VlcControl();
-            this.vlcControl3 = new Vlc.DotNet.Forms.VlcControl();
             this.mainTabCtrl.SuspendLayout();
             this.LiveView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).BeginInit();
@@ -887,16 +887,16 @@ namespace NetDemo
             this.tabPage5.SuspendLayout();
             this.rgbandthermal.SuspendLayout();
             this.thermal.SuspendLayout();
-            this.rgb.SuspendLayout();
-            this.fisheye.SuspendLayout();
-            this.deviceOper.SuspendLayout();
-            this.rootOper.SuspendLayout();
-            this.PannelContextMenuStrip.SuspendLayout();
             this.playPanel3.SuspendLayout();
             this.playPanel1.SuspendLayout();
+            this.rgb.SuspendLayout();
+            this.fisheye.SuspendLayout();
             this.playPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl3)).BeginInit();
+            this.deviceOper.SuspendLayout();
+            this.rootOper.SuspendLayout();
+            this.PannelContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -7777,6 +7777,8 @@ namespace NetDemo
             // 
             // tabControl3
             // 
+            this.tabControl3.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.tabControl3.CausesValidation = false;
             this.tabControl3.Controls.Add(this.tabPage6);
             this.tabControl3.Controls.Add(this.tabPage7);
             this.tabControl3.Controls.Add(this.tabPage5);
@@ -7788,6 +7790,7 @@ namespace NetDemo
             this.tabControl3.Size = new System.Drawing.Size(1005, 415);
             this.tabControl3.TabIndex = 799;
             this.tabControl3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl3_DrawItem);
+            
             // 
             // tabPage6
             // 
@@ -8805,6 +8808,39 @@ namespace NetDemo
             this.thermal.Text = "termal";
             this.thermal.UseVisualStyleBackColor = true;
             // 
+            // playPanel3
+            // 
+            this.playPanel3.Controls.Add(this.playPanel4);
+            this.playPanel3.Location = new System.Drawing.Point(506, 4);
+            this.playPanel3.Name = "playPanel3";
+            this.playPanel3.Size = new System.Drawing.Size(508, 574);
+            this.playPanel3.TabIndex = 2;
+            this.playPanel3.DoubleClick += new System.EventHandler(this.playPanel3_DoubleClick);
+            // 
+            // playPanel4
+            // 
+            this.playPanel4.Location = new System.Drawing.Point(646, 8);
+            this.playPanel4.Name = "playPanel4";
+            this.playPanel4.Size = new System.Drawing.Size(626, 772);
+            this.playPanel4.TabIndex = 1;
+            // 
+            // playPanel1
+            // 
+            this.playPanel1.Controls.Add(this.playPanel2);
+            this.playPanel1.Location = new System.Drawing.Point(3, 4);
+            this.playPanel1.Name = "playPanel1";
+            this.playPanel1.Size = new System.Drawing.Size(502, 574);
+            this.playPanel1.TabIndex = 0;
+            this.playPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.playPanel1_Paint);
+            this.playPanel1.DoubleClick += new System.EventHandler(this.playPanel1_DoubleClick);
+            // 
+            // playPanel2
+            // 
+            this.playPanel2.Location = new System.Drawing.Point(646, 8);
+            this.playPanel2.Name = "playPanel2";
+            this.playPanel2.Size = new System.Drawing.Size(626, 772);
+            this.playPanel2.TabIndex = 1;
+            // 
             // rgb
             // 
             this.rgb.Controls.Add(this.playPanel5);
@@ -8815,6 +8851,14 @@ namespace NetDemo
             this.rgb.Text = "fullscreenRGB";
             this.rgb.UseVisualStyleBackColor = true;
             // 
+            // playPanel5
+            // 
+            this.playPanel5.Location = new System.Drawing.Point(-1, 2);
+            this.playPanel5.Name = "playPanel5";
+            this.playPanel5.Size = new System.Drawing.Size(1022, 592);
+            this.playPanel5.TabIndex = 0;
+            this.playPanel5.DoubleClick += new System.EventHandler(this.playPanel5_DoubleClick);
+            // 
             // fisheye
             // 
             this.fisheye.Controls.Add(this.playPanel6);
@@ -8824,6 +8868,44 @@ namespace NetDemo
             this.fisheye.TabIndex = 11;
             this.fisheye.Text = "fisheye";
             this.fisheye.UseVisualStyleBackColor = true;
+            // 
+            // playPanel6
+            // 
+            this.playPanel6.Controls.Add(this.vlcControl2);
+            this.playPanel6.Controls.Add(this.vlcControl3);
+            this.playPanel6.Location = new System.Drawing.Point(6, 3);
+            this.playPanel6.Name = "playPanel6";
+            this.playPanel6.Size = new System.Drawing.Size(1010, 587);
+            this.playPanel6.TabIndex = 0;
+            this.playPanel6.Paint += new System.Windows.Forms.PaintEventHandler(this.playPanel6_Paint);
+            this.playPanel6.DoubleClick += new System.EventHandler(this.playPanel6_DoubleClick);
+            // 
+            // vlcControl2
+            // 
+            this.vlcControl2.BackColor = System.Drawing.Color.Black;
+            this.vlcControl2.Location = new System.Drawing.Point(-7, 1);
+            this.vlcControl2.Name = "vlcControl2";
+            this.vlcControl2.Size = new System.Drawing.Size(1017, 583);
+            this.vlcControl2.Spu = -1;
+            this.vlcControl2.TabIndex = 0;
+            this.vlcControl2.Text = "vlcControl2";
+            this.vlcControl2.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("vlcControl2.VlcLibDirectory")));
+            this.vlcControl2.VlcMediaplayerOptions = null;
+            this.vlcControl2.Click += new System.EventHandler(this.vlcControl2_Click);
+            this.vlcControl2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.vlcControl2_MouseDoubleClick);
+            // 
+            // vlcControl3
+            // 
+            this.vlcControl3.BackColor = System.Drawing.Color.Black;
+            this.vlcControl3.Location = new System.Drawing.Point(0, -3);
+            this.vlcControl3.Name = "vlcControl3";
+            this.vlcControl3.Size = new System.Drawing.Size(1010, 541);
+            this.vlcControl3.Spu = -1;
+            this.vlcControl3.TabIndex = 27;
+            this.vlcControl3.Text = "vlcControl3";
+            this.vlcControl3.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("vlcControl3.VlcLibDirectory")));
+            this.vlcControl3.VlcMediaplayerOptions = null;
+            this.vlcControl3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.vlcControl3_MouseDoubleClick);
             // 
             // deviceOper
             // 
@@ -9073,85 +9155,6 @@ namespace NetDemo
             // 
             this.timer2.Interval = 1000;
             // 
-            // playPanel3
-            // 
-            this.playPanel3.Controls.Add(this.playPanel4);
-            this.playPanel3.Location = new System.Drawing.Point(506, 4);
-            this.playPanel3.Name = "playPanel3";
-            this.playPanel3.Size = new System.Drawing.Size(508, 574);
-            this.playPanel3.TabIndex = 2;
-            this.playPanel3.DoubleClick += new System.EventHandler(this.playPanel3_DoubleClick);
-            // 
-            // playPanel4
-            // 
-            this.playPanel4.Location = new System.Drawing.Point(646, 8);
-            this.playPanel4.Name = "playPanel4";
-            this.playPanel4.Size = new System.Drawing.Size(626, 772);
-            this.playPanel4.TabIndex = 1;
-            // 
-            // playPanel1
-            // 
-            this.playPanel1.Controls.Add(this.playPanel2);
-            this.playPanel1.Location = new System.Drawing.Point(3, 4);
-            this.playPanel1.Name = "playPanel1";
-            this.playPanel1.Size = new System.Drawing.Size(502, 574);
-            this.playPanel1.TabIndex = 0;
-            this.playPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.playPanel1_Paint);
-            this.playPanel1.DoubleClick += new System.EventHandler(this.playPanel1_DoubleClick);
-            // 
-            // playPanel2
-            // 
-            this.playPanel2.Location = new System.Drawing.Point(646, 8);
-            this.playPanel2.Name = "playPanel2";
-            this.playPanel2.Size = new System.Drawing.Size(626, 772);
-            this.playPanel2.TabIndex = 1;
-            // 
-            // playPanel5
-            // 
-            this.playPanel5.Location = new System.Drawing.Point(-1, 2);
-            this.playPanel5.Name = "playPanel5";
-            this.playPanel5.Size = new System.Drawing.Size(1022, 592);
-            this.playPanel5.TabIndex = 0;
-            this.playPanel5.DoubleClick += new System.EventHandler(this.playPanel5_DoubleClick);
-            // 
-            // playPanel6
-            // 
-            this.playPanel6.Controls.Add(this.vlcControl2);
-            this.playPanel6.Controls.Add(this.vlcControl3);
-            this.playPanel6.Location = new System.Drawing.Point(6, 3);
-            this.playPanel6.Name = "playPanel6";
-            this.playPanel6.Size = new System.Drawing.Size(1010, 587);
-            this.playPanel6.TabIndex = 0;
-            this.playPanel6.Paint += new System.Windows.Forms.PaintEventHandler(this.playPanel6_Paint);
-            this.playPanel6.DoubleClick += new System.EventHandler(this.playPanel6_DoubleClick);
-            // 
-            // vlcControl2
-            // 
-            this.vlcControl2.BackColor = System.Drawing.Color.Black;
-            this.vlcControl2.Location = new System.Drawing.Point(-7, 1);
-            this.vlcControl2.Name = "vlcControl2";
-            this.vlcControl2.Size = new System.Drawing.Size(1017, 583);
-            this.vlcControl2.Spu = -1;
-            this.vlcControl2.TabIndex = 0;
-            this.vlcControl2.Text = "vlcControl2";
-            this.vlcControl2.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("vlcControl2.VlcLibDirectory")));
-            this.vlcControl2.VlcMediaplayerOptions = null;
-            this.vlcControl2.Click += new System.EventHandler(this.vlcControl2_Click);
-            this.vlcControl2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.vlcControl2_MouseDoubleClick);
-            // 
-            // vlcControl3
-            // 
-            this.vlcControl3.BackColor = System.Drawing.Color.Black;
-            this.vlcControl3.Location = new System.Drawing.Point(0, -3);
-            this.vlcControl3.Name = "vlcControl3";
-            this.vlcControl3.Size = new System.Drawing.Size(1010, 541);
-            this.vlcControl3.Spu = -1;
-            this.vlcControl3.TabIndex = 27;
-            this.vlcControl3.Text = "vlcControl3";
-            this.vlcControl3.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("vlcControl3.VlcLibDirectory")));
-            this.vlcControl3.VlcMediaplayerOptions = null;
-            this.vlcControl3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.vlcControl3_MouseDoubleClick);
-            // 
             // NetDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -9305,16 +9308,16 @@ namespace NetDemo
             this.tabPage5.PerformLayout();
             this.rgbandthermal.ResumeLayout(false);
             this.thermal.ResumeLayout(false);
-            this.rgb.ResumeLayout(false);
-            this.fisheye.ResumeLayout(false);
-            this.deviceOper.ResumeLayout(false);
-            this.rootOper.ResumeLayout(false);
-            this.PannelContextMenuStrip.ResumeLayout(false);
             this.playPanel3.ResumeLayout(false);
             this.playPanel1.ResumeLayout(false);
+            this.rgb.ResumeLayout(false);
+            this.fisheye.ResumeLayout(false);
             this.playPanel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl3)).EndInit();
+            this.deviceOper.ResumeLayout(false);
+            this.rootOper.ResumeLayout(false);
+            this.PannelContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -9950,7 +9953,6 @@ namespace NetDemo
         private Label label3;
         private ImageList imageList2;
         private Button button11;
-        private TabControl tabControl3;
         private TabPage tabPage5;
         private TabPage tabPage6;
         private ListView listView4;
@@ -10069,6 +10071,7 @@ namespace NetDemo
         private Button button55;
         private Label label129;
         private Button button22;
+        private TabControl tabControl3;
     }
 }
 

@@ -36,13 +36,16 @@ using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
 using NAudio.Wave;
-
+using Vlc.DotNet.Wpf;
+using Vlc.DotNet.Forms;
+using VlcControl = Vlc.DotNet.Forms.VlcControl;
 
 namespace NetDemo
 {
 
     public partial class NetDemo : Form
     {
+
         private UdpClient udpServer;
         private IPEndPoint serverEndPoint;
 
@@ -180,6 +183,11 @@ namespace NetDemo
 
                 RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 rk.SetValue(appName, appPath);
+
+
+
+
+
             }
             catch (Exception)
             {
@@ -731,7 +739,7 @@ namespace NetDemo
                 //video kayıt açık
                 button14.BackgroundImage = global::NetDemo.Properties.Resources.record_green;
             }
-            if (m_curRealPanel.IsAlarmMode==true)
+            if (m_curRealPanel.IsAlarmMode == true)
             {
                 button29.BackgroundImage = Resources.yesilalarm;
             }
@@ -920,7 +928,7 @@ namespace NetDemo
             {
                 Int32 bRet = NETDEVSDK.FALSE;
                 Int32 dwPtzMode = screeninformation;
-                Int32 dwInstallMode = 0;
+                Int32 dwInstallMode = 1;
                 if (forfisheye == true)
                 {
                     dwPtzMode = 2;
@@ -933,14 +941,13 @@ namespace NetDemo
                     MultiScreen.Checked = true;
                     screeninformation = 0;
                     dwPtzMode = screeninformation;
-                    dwInstallMode = 0;
+                    dwInstallMode = 1;
                     forfisheye = true;
                     switchRealScreen(selectedplaypanel);
                     vlcControl1.Visible = true;
 
                 }
-                //bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
-                //NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+
 
                 foreach (var item in arrayRealPanel)
                 {
@@ -957,7 +964,6 @@ namespace NetDemo
                             //playPanel6.handle = selectedplaypanel.Handle;
                             screeninformation = 0;
                             return;
-
                         }
                         else
                         {
@@ -11583,6 +11589,7 @@ namespace NetDemo
                 checkBox1.ForeColor = Color.Black;
 
             }
+            
         }
 
         private void StartListening()
@@ -11713,12 +11720,6 @@ namespace NetDemo
 
         private void button66_Click(object sender, EventArgs e)
         {
-
-
-            string akl = "";
-            // FolderBrowserDialog fbd = new FolderBrowserDialog();
-            //if (fbd.ShowDialog() == DialogResult.OK)
-            //{
             DirectoryInfo d = new DirectoryInfo(Application.StartupPath + "\\Record");
             Files = d.GetFiles("*.mp4");
             string str = "";
@@ -11728,14 +11729,25 @@ namespace NetDemo
                 MessageBox.Show("Video Klasörün Boş");
                 return;
             }
-            foreach (FileInfo file in Files)
+            else
             {
-                akl = file.Name;
-                //listBox1.Items.Add(file.Name);
+                Form frm4 = new Form4();
+                frm4.Show();
             }
+
+            //string akl = "";
+            //// FolderBrowserDialog fbd = new FolderBrowserDialog();
+            ////if (fbd.ShowDialog() == DialogResult.OK)
+            ////{
+           
+            //foreach (FileInfo file in Files)
+            //{
+            //    akl = file.Name;
+            //    //listBox1.Items.Add(file.Name);
             //}
-            Process.Start(Application.StartupPath + "\\Record\\" + akl);
-            Process.Start(Application.StartupPath + "\\Record\\");
+            ////}
+            //Process.Start(Application.StartupPath + "\\Record\\" + akl);
+            //Process.Start(Application.StartupPath + "\\Record\\");
         }
 
         private void button60_Click(object sender, EventArgs e)
@@ -11757,72 +11769,29 @@ namespace NetDemo
 
         private void button8_Click(object sender, EventArgs e)
         {
-
-            string akl = "";
-            // FolderBrowserDialog fbd = new FolderBrowserDialog();
-            //if (fbd.ShowDialog() == DialogResult.OK)
+            Form frm5 = new Form5();
+            frm5.Show();
+            //string akl = "";
+            //// FolderBrowserDialog fbd = new FolderBrowserDialog();
+            ////if (fbd.ShowDialog() == DialogResult.OK)
+            ////{
+            //DirectoryInfo d = new DirectoryInfo(Application.StartupPath + "\\Pic");
+            //Files = d.GetFiles("*.jpg");
+            //if (Files.Count() == 0)
             //{
-            DirectoryInfo d = new DirectoryInfo(Application.StartupPath + "\\Pic");
-            Files = d.GetFiles("*.jpg");
-            if (Files.Count() == 0)
-            {
-                MessageBox.Show("Resim Klasörü Boş");
-                return;
-            }
-            string str = "";
-            foreach (FileInfo file in Files)
-            {
-                akl = file.Name;
-                //listBox1.Items.Add(file.Name);
-            }
-            //}
-            Process.Start(Application.StartupPath + "\\Pic\\" + akl);
-            Process.Start(Application.StartupPath + "\\Pic\\");
-            //int width = LayoutPanel.Width;
-            //int height = LayoutPanel.Height;
-
-            //// Bitmap nesnesi oluşturun
-            //Bitmap bmp = new Bitmap(width, height);
-
-            //// LayoutPanel'in görüntüsünü alın
-            //LayoutPanel.DrawToBitmap(bmp, new Rectangle(0, 0, width, height));
-
-            //// PictureBox'a görüntüyü ata
-            //pictureBox1.Image = bmp;
-
-
-
-            //if (m_curRealPanel.m_playhandle == IntPtr.Zero)
-            //{
-            //    if (m_CurSelectTreeNodeInfo.dwDeviceIndex > m_deviceInfoList.Count() || m_CurSelectTreeNodeInfo.dwDeviceIndex < 0)
-            //    {
-            //        return;
-            //    }
-
-            //    String strNoPreviewTemp = string.Copy(LocalSetting.m_strPicSavePath);
-            //    DateTime oNoPreviewDate = DateTime.Now;
-            //    String strNoPreviewCurTime = oNoPreviewDate.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
-            //    LocalSetting.m_strPicSavePath += "\\";
-            //    LocalSetting.m_strPicSavePath += m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
-            //    LocalSetting.m_strPicSavePath += "_";
-            //    LocalSetting.m_strPicSavePath += (getChannelID());
-            //    LocalSetting.m_strPicSavePath += "_";
-            //    LocalSetting.m_strPicSavePath += strNoPreviewCurTime;
-
-            //    byte[] picNoPreviewSavePath;
-            //    GetUTF8Buffer(LocalSetting.m_strPicSavePath, NETDEVSDK.NETDEV_LEN_260, out picNoPreviewSavePath);
-
-            //    int iiRet = NETDEVSDK.NETDEV_CaptureNoPreview(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, getChannelID(), (int)NETDEV_LIVE_STREAM_INDEX_E.NETDEV_LIVE_STREAM_INDEX_MAIN, LocalSetting.m_strPicSavePath, (int)NETDEV_PICTURE_FORMAT_E.NETDEV_PICTURE_BMP);
-            //    if (NETDEVSDK.FALSE == iiRet)
-            //    {
-            //        showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview", NETDEVSDK.NETDEV_GetLastError());
-            //        LocalSetting.m_strPicSavePath = strNoPreviewTemp;
-            //        return;
-            //    }
-            //    showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview");
-            //    LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+            //    MessageBox.Show("Resim Klasörü Boş");
             //    return;
             //}
+            //string str = "";
+            //foreach (FileInfo file in Files)
+            //{
+            //    akl = file.Name;
+            //    //listBox1.Items.Add(file.Name);
+            //}
+            ////}
+            //Process.Start(Application.StartupPath + "\\Pic\\" + akl);
+            //Process.Start(Application.StartupPath + "\\Pic\\");
+           
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -13952,6 +13921,8 @@ namespace NetDemo
             Form frm33 = new Form3();
             frm33.Show();
         }
+
+       
     }
 }
 
@@ -13972,26 +13943,4 @@ public class SharedDataSingleton
         }
     }
 }
-//nt thermalval = 0;
-//vlcControl2.Stop();
-//string rtspUrl = "";
-//if (thermalval == 0)
-//{
-//    rtspUrl = "rtsp://192.168.144.108:554/stream=" + thermalval;
-//    thermalval = 1;
-//}
-//else
-//{
-//    rtspUrl = "rtsp://192.168.144.108:554/stream=" + thermalval;
-//    thermalval = 0;
-//}
-
-//var options = new string[]
-// {
-//                // Önbelleğe alma süresini milisaniye cinsinden belirleyin (örneğin, 5000 ms).
-//                "network-caching=1"
-// };
-
-//vlcControl2.SetMedia(new Uri(rtspUrl), options);
-//vlcControl2.Play();
 
