@@ -8954,7 +8954,7 @@ namespace NetDemo
             this.vlcControl4.Spu = -1;
             this.vlcControl4.TabIndex = 3;
             this.vlcControl4.Text = "vlcControl4";
-            this.vlcControl4.VlcLibDirectory = null;
+            this.vlcControl4.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("vlcControl4.VlcLibDirectory")));
             this.vlcControl4.VlcMediaplayerOptions = null;
             // 
             // listBox1
@@ -9002,9 +9002,8 @@ namespace NetDemo
             this.vlcControl5.Spu = -1;
             this.vlcControl5.TabIndex = 6;
             this.vlcControl5.Text = "vlcControl5";
-            this.vlcControl5.VlcLibDirectory = null;
+            this.vlcControl5.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("vlcControl5.VlcLibDirectory")));
             this.vlcControl5.VlcMediaplayerOptions = null;
-            this.vlcControl5.VlcLibDirectoryNeeded += new System.EventHandler<Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs>(this.vlcControl5_VlcLibDirectoryNeeded);
             // 
             // listBox2
             // 

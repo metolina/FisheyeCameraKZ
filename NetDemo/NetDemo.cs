@@ -11580,12 +11580,7 @@ namespace NetDemo
                 checkBox1.ForeColor = Color.Black;
 
             }
-            vlcControl4.VlcLibDirectory = new DirectoryInfo(@"C:\Program Files\VideoLAN\VLC");
-            vlcControl4.BeginInit();
-            vlcControl4.EndInit();
-            vlcControl5.VlcLibDirectory = new DirectoryInfo(@"C:\Program Files\VideoLAN\VLC");
-            vlcControl5.BeginInit();
-            vlcControl4.EndInit();
+            
         }
 
         private void StartListening()
@@ -13967,12 +13962,7 @@ namespace NetDemo
             mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[0];
         }
 
-        private void vlcControl5_VlcLibDirectoryNeeded(object sender, VlcLibDirectoryNeededEventArgs e)
-        {
-            vlcControl5.VlcLibDirectory = new DirectoryInfo(@"C:\Program Files\VideoLAN\VLC");
-            vlcControl5.VlcMediaplayerOptions = new[] { "--no-xlib" };
-
-        }
+        
     }
 }
 
