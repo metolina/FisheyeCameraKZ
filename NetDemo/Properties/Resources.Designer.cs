@@ -453,6 +453,16 @@ namespace NetDemo.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap play {
+            get {
+                object obj = ResourceManager.GetObject("play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap PLAY_DISABLE {
             get {
                 object obj = ResourceManager.GetObject("PLAY_DISABLE", resourceCulture);
@@ -546,6 +556,16 @@ namespace NetDemo.Properties {
         internal static System.Drawing.Bitmap STOP {
             get {
                 object obj = ResourceManager.GetObject("STOP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap stop_button {
+            get {
+                object obj = ResourceManager.GetObject("stop-button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

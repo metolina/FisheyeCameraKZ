@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Windows.Threading;
-using NetDemo;
 
 namespace ThermalCamera.ViewModel
 {
@@ -21,7 +20,6 @@ namespace ThermalCamera.ViewModel
         static public int currentChannel = 0;
         static public NET_DEVICEINFO_Ex DeviceInfo;
         public IntPtr testthermal;
-        public IntPtr testthermal2;
 
         static public ObservableCollection<int> Channels { get; set; }
 
@@ -470,10 +468,7 @@ namespace ThermalCamera.ViewModel
         {
             return testthermal;
         }
-        //public IntPtr verihandle2()
-        //{
-        //    return testthermal2;
-        //}
+        
         public void LoginInformation(string ipadress, ushort port, string username, string password)
         {
             IP = ipadress;

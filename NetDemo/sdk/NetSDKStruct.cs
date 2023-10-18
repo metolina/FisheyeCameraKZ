@@ -55113,7 +55113,7 @@ namespace NetSDKCS
         public byte[] szUnit; // 标定单位
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
         public byte[] szCertificate; // 标定证书
-        NET_PERIOD_OF_VALIDITY stPeriodOfValidity; // 标定有效期
+        //NET_PERIOD_OF_VALIDITY stPeriodOfValidity; // 标定有效期
     };
 
     /// <summary>

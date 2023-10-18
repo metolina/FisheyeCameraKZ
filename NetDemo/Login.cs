@@ -232,12 +232,13 @@ namespace NetDemo
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine(ex.ToString());
                         //System.IO.File.Delete(fName);
                     }
 
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
         private void Login_Load(object sender, EventArgs e)
         {
@@ -262,6 +263,7 @@ namespace NetDemo
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine(ex.ToString());
                         //System.IO.File.Delete(fName);
                     }
                     serialPort1.PortName = port;
@@ -324,7 +326,7 @@ namespace NetDemo
                     }
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
 
         private void Login_Shown(object sender, EventArgs e)

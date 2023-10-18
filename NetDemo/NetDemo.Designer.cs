@@ -752,6 +752,16 @@ namespace NetDemo
             this.playPanel6 = new GeneralDef.PlayPanel();
             this.vlcControl2 = new Vlc.DotNet.Forms.VlcControl();
             this.vlcControl3 = new Vlc.DotNet.Forms.VlcControl();
+            this.resimler = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.vlcControl4 = new Vlc.DotNet.Forms.VlcControl();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.videolar = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
+            this.vlcControl5 = new Vlc.DotNet.Forms.VlcControl();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
             this.deviceOper = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Login = new System.Windows.Forms.ToolStripMenuItem();
             this.Logout = new System.Windows.Forms.ToolStripMenuItem();
@@ -894,6 +904,10 @@ namespace NetDemo
             this.playPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl3)).BeginInit();
+            this.resimler.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vlcControl4)).BeginInit();
+            this.videolar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vlcControl5)).BeginInit();
             this.deviceOper.SuspendLayout();
             this.rootOper.SuspendLayout();
             this.PannelContextMenuStrip.SuspendLayout();
@@ -926,6 +940,8 @@ namespace NetDemo
             this.mainTabCtrl.Controls.Add(this.thermal);
             this.mainTabCtrl.Controls.Add(this.rgb);
             this.mainTabCtrl.Controls.Add(this.fisheye);
+            this.mainTabCtrl.Controls.Add(this.resimler);
+            this.mainTabCtrl.Controls.Add(this.videolar);
             this.mainTabCtrl.Font = new System.Drawing.Font("Microsoft YaHei", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.mainTabCtrl.Location = new System.Drawing.Point(-2, -19);
             this.mainTabCtrl.Name = "mainTabCtrl";
@@ -1375,7 +1391,7 @@ namespace NetDemo
             // button29
             // 
             this.button29.BackColor = System.Drawing.Color.White;
-            this.button29.BackgroundImage = global::NetDemo.Properties.Resources.kirmizialarm;
+            this.button29.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button29.BackgroundImage")));
             this.button29.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button29.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1446,7 +1462,7 @@ namespace NetDemo
             // button14
             // 
             this.button14.BackColor = System.Drawing.Color.White;
-            this.button14.BackgroundImage = global::NetDemo.Properties.Resources.record_red;
+            this.button14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button14.BackgroundImage")));
             this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button14.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1911,7 +1927,7 @@ namespace NetDemo
             // 
             // PBVolBtn
             // 
-            this.PBVolBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
+            this.PBVolBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PBVolBtn.BackgroundImage")));
             this.PBVolBtn.Enabled = false;
             this.PBVolBtn.Location = new System.Drawing.Point(461, 615);
             this.PBVolBtn.Name = "PBVolBtn";
@@ -1922,7 +1938,7 @@ namespace NetDemo
             // 
             // PBFrameBtn
             // 
-            this.PBFrameBtn.BackgroundImage = global::NetDemo.Properties.Resources.icon2;
+            this.PBFrameBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PBFrameBtn.BackgroundImage")));
             this.PBFrameBtn.Enabled = false;
             this.PBFrameBtn.Location = new System.Drawing.Point(411, 615);
             this.PBFrameBtn.Name = "PBFrameBtn";
@@ -1933,7 +1949,7 @@ namespace NetDemo
             // 
             // PBRestartBtn
             // 
-            this.PBRestartBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00006;
+            this.PBRestartBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PBRestartBtn.BackgroundImage")));
             this.PBRestartBtn.Enabled = false;
             this.PBRestartBtn.Location = new System.Drawing.Point(360, 615);
             this.PBRestartBtn.Name = "PBRestartBtn";
@@ -1944,7 +1960,7 @@ namespace NetDemo
             // 
             // PBCaptureBtn
             // 
-            this.PBCaptureBtn.BackgroundImage = global::NetDemo.Properties.Resources.camera;
+            this.PBCaptureBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PBCaptureBtn.BackgroundImage")));
             this.PBCaptureBtn.Enabled = false;
             this.PBCaptureBtn.Location = new System.Drawing.Point(307, 615);
             this.PBCaptureBtn.Name = "PBCaptureBtn";
@@ -1955,7 +1971,7 @@ namespace NetDemo
             // 
             // PBFastForwardBtn
             // 
-            this.PBFastForwardBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00001;
+            this.PBFastForwardBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PBFastForwardBtn.BackgroundImage")));
             this.PBFastForwardBtn.Enabled = false;
             this.PBFastForwardBtn.Location = new System.Drawing.Point(177, 615);
             this.PBFastForwardBtn.Name = "PBFastForwardBtn";
@@ -1966,7 +1982,7 @@ namespace NetDemo
             // 
             // PBFastBackwardBtn
             // 
-            this.PBFastBackwardBtn.BackgroundImage = global::NetDemo.Properties.Resources.icon8;
+            this.PBFastBackwardBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PBFastBackwardBtn.BackgroundImage")));
             this.PBFastBackwardBtn.Enabled = false;
             this.PBFastBackwardBtn.Location = new System.Drawing.Point(136, 615);
             this.PBFastBackwardBtn.Name = "PBFastBackwardBtn";
@@ -1977,7 +1993,7 @@ namespace NetDemo
             // 
             // PBStopBtn
             // 
-            this.PBStopBtn.BackgroundImage = global::NetDemo.Properties.Resources.STOP;
+            this.PBStopBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PBStopBtn.BackgroundImage")));
             this.PBStopBtn.Enabled = false;
             this.PBStopBtn.Location = new System.Drawing.Point(95, 615);
             this.PBStopBtn.Name = "PBStopBtn";
@@ -1988,7 +2004,7 @@ namespace NetDemo
             // 
             // PBPauseBtn
             // 
-            this.PBPauseBtn.BackgroundImage = global::NetDemo.Properties.Resources.PAUSE_ENABLE;
+            this.PBPauseBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PBPauseBtn.BackgroundImage")));
             this.PBPauseBtn.Enabled = false;
             this.PBPauseBtn.Location = new System.Drawing.Point(54, 615);
             this.PBPauseBtn.Name = "PBPauseBtn";
@@ -1999,7 +2015,7 @@ namespace NetDemo
             // 
             // PBStartBtn
             // 
-            this.PBStartBtn.BackgroundImage = global::NetDemo.Properties.Resources.PLAY_ENABLE;
+            this.PBStartBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PBStartBtn.BackgroundImage")));
             this.PBStartBtn.Enabled = false;
             this.PBStartBtn.Location = new System.Drawing.Point(12, 615);
             this.PBStartBtn.Name = "PBStartBtn";
@@ -7630,7 +7646,7 @@ namespace NetDemo
             // 
             // RealPlay
             // 
-            this.RealPlay.BackgroundImage = global::NetDemo.Properties.Resources.PLAY_ENABLE;
+            this.RealPlay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RealPlay.BackgroundImage")));
             this.RealPlay.Location = new System.Drawing.Point(940, 183);
             this.RealPlay.Name = "RealPlay";
             this.RealPlay.Size = new System.Drawing.Size(30, 32);
@@ -7639,7 +7655,7 @@ namespace NetDemo
             // 
             // Discovery
             // 
-            this.Discovery.BackgroundImage = global::NetDemo.Properties.Resources.search;
+            this.Discovery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Discovery.BackgroundImage")));
             this.Discovery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Discovery.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Discovery.Location = new System.Drawing.Point(1012, 247);
@@ -7653,7 +7669,7 @@ namespace NetDemo
             // MicVolumeBtn
             // 
             this.MicVolumeBtn.AutoSize = true;
-            this.MicVolumeBtn.BackgroundImage = global::NetDemo.Properties.Resources.Mic123;
+            this.MicVolumeBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("MicVolumeBtn.BackgroundImage")));
             this.MicVolumeBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.MicVolumeBtn.Location = new System.Drawing.Point(988, 413);
             this.MicVolumeBtn.Name = "MicVolumeBtn";
@@ -7665,7 +7681,7 @@ namespace NetDemo
             // SoundBtn
             // 
             this.SoundBtn.AutoSize = true;
-            this.SoundBtn.BackgroundImage = global::NetDemo.Properties.Resources.ico00009;
+            this.SoundBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SoundBtn.BackgroundImage")));
             this.SoundBtn.Enabled = false;
             this.SoundBtn.Location = new System.Drawing.Point(894, 359);
             this.SoundBtn.Name = "SoundBtn";
@@ -7677,7 +7693,7 @@ namespace NetDemo
             // CapturePicture
             // 
             this.CapturePicture.AutoSize = true;
-            this.CapturePicture.BackgroundImage = global::NetDemo.Properties.Resources.camera;
+            this.CapturePicture.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CapturePicture.BackgroundImage")));
             this.CapturePicture.Location = new System.Drawing.Point(962, 349);
             this.CapturePicture.Name = "CapturePicture";
             this.CapturePicture.Size = new System.Drawing.Size(30, 32);
@@ -7714,7 +7730,7 @@ namespace NetDemo
             // button22
             // 
             this.button22.BackColor = System.Drawing.Color.White;
-            this.button22.BackgroundImage = global::NetDemo.Properties.Resources.padlock_3257787;
+            this.button22.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button22.BackgroundImage")));
             this.button22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button22.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
             this.button22.FlatAppearance.BorderSize = 3;
@@ -7790,7 +7806,6 @@ namespace NetDemo
             this.tabControl3.Size = new System.Drawing.Size(1005, 415);
             this.tabControl3.TabIndex = 799;
             this.tabControl3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl3_DrawItem);
-            
             // 
             // tabPage6
             // 
@@ -8907,6 +8922,123 @@ namespace NetDemo
             this.vlcControl3.VlcMediaplayerOptions = null;
             this.vlcControl3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.vlcControl3_MouseDoubleClick);
             // 
+            // resimler
+            // 
+            this.resimler.Controls.Add(this.button6);
+            this.resimler.Controls.Add(this.vlcControl4);
+            this.resimler.Controls.Add(this.listBox1);
+            this.resimler.Location = new System.Drawing.Point(4, 20);
+            this.resimler.Name = "resimler";
+            this.resimler.Size = new System.Drawing.Size(1016, 593);
+            this.resimler.TabIndex = 12;
+            this.resimler.Text = "resimler";
+            this.resimler.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.button6.Location = new System.Drawing.Point(8, 5);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(147, 70);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "GERİ";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_2);
+            // 
+            // vlcControl4
+            // 
+            this.vlcControl4.BackColor = System.Drawing.Color.Black;
+            this.vlcControl4.Location = new System.Drawing.Point(258, 81);
+            this.vlcControl4.Name = "vlcControl4";
+            this.vlcControl4.Size = new System.Drawing.Size(762, 512);
+            this.vlcControl4.Spu = -1;
+            this.vlcControl4.TabIndex = 3;
+            this.vlcControl4.Text = "vlcControl4";
+            this.vlcControl4.VlcLibDirectory = null;
+            this.vlcControl4.VlcMediaplayerOptions = null;
+            // 
+            // listBox1
+            // 
+            this.listBox1.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 28;
+            this.listBox1.Location = new System.Drawing.Point(3, 81);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(255, 508);
+            this.listBox1.TabIndex = 2;
+            this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            // 
+            // videolar
+            // 
+            this.videolar.Controls.Add(this.button7);
+            this.videolar.Controls.Add(this.vlcControl5);
+            this.videolar.Controls.Add(this.listBox2);
+            this.videolar.Controls.Add(this.button24);
+            this.videolar.Controls.Add(this.button12);
+            this.videolar.Location = new System.Drawing.Point(4, 20);
+            this.videolar.Name = "videolar";
+            this.videolar.Size = new System.Drawing.Size(1016, 593);
+            this.videolar.TabIndex = 13;
+            this.videolar.Text = "videolar";
+            this.videolar.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.button7.Location = new System.Drawing.Point(5, 2);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(147, 70);
+            this.button7.TabIndex = 7;
+            this.button7.Text = "GERİ";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click_2);
+            // 
+            // vlcControl5
+            // 
+            this.vlcControl5.BackColor = System.Drawing.Color.Black;
+            this.vlcControl5.Location = new System.Drawing.Point(254, 0);
+            this.vlcControl5.Name = "vlcControl5";
+            this.vlcControl5.Size = new System.Drawing.Size(762, 542);
+            this.vlcControl5.Spu = -1;
+            this.vlcControl5.TabIndex = 6;
+            this.vlcControl5.Text = "vlcControl5";
+            this.vlcControl5.VlcLibDirectory = null;
+            this.vlcControl5.VlcMediaplayerOptions = null;
+            this.vlcControl5.VlcLibDirectoryNeeded += new System.EventHandler<Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs>(this.vlcControl5_VlcLibDirectoryNeeded);
+            // 
+            // listBox2
+            // 
+            this.listBox2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 28;
+            this.listBox2.Location = new System.Drawing.Point(0, 78);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(255, 508);
+            this.listBox2.TabIndex = 5;
+            this.listBox2.DoubleClick += new System.EventHandler(this.listBox2_DoubleClick);
+            // 
+            // button24
+            // 
+            this.button24.BackgroundImage = global::NetDemo.Properties.Resources.play;
+            this.button24.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button24.Location = new System.Drawing.Point(751, 533);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(71, 69);
+            this.button24.TabIndex = 9;
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click_2);
+            // 
+            // button12
+            // 
+            this.button12.BackgroundImage = global::NetDemo.Properties.Resources.stop_button;
+            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button12.Location = new System.Drawing.Point(524, 536);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(86, 62);
+            this.button12.TabIndex = 8;
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click_1);
+            // 
             // deviceOper
             // 
             this.deviceOper.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -9315,6 +9447,10 @@ namespace NetDemo
             this.playPanel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl3)).EndInit();
+            this.resimler.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.vlcControl4)).EndInit();
+            this.videolar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.vlcControl5)).EndInit();
             this.deviceOper.ResumeLayout(false);
             this.rootOper.ResumeLayout(false);
             this.PannelContextMenuStrip.ResumeLayout(false);
@@ -10072,6 +10208,16 @@ namespace NetDemo
         private Label label129;
         private Button button22;
         private TabControl tabControl3;
+        private TabPage resimler;
+        private TabPage videolar;
+        private Vlc.DotNet.Forms.VlcControl vlcControl4;
+        private ListBox listBox1;
+        private Button button6;
+        private Button button24;
+        private Button button12;
+        private Button button7;
+        private Vlc.DotNet.Forms.VlcControl vlcControl5;
+        private ListBox listBox2;
     }
 }
 

@@ -173,7 +173,7 @@ namespace NetDemo
                 }
             }
             catch(Exception ex)
-            {
+            { Console.WriteLine(ex.ToString());
                 //timer1.Enable = true;
             }
         }

@@ -527,11 +527,13 @@
     <None Include="Resources\kirmizialarm.png" />
     <None Include="Resources\record_red.png" />
     <None Include="Resources\record_green.png" />
+    <None Include="Resources\play.png" />
     <Content Include="Resources\red.png" />
     <None Include="Resources\run.png" />
     <Content Include="Resources\run-open.png" />
     <None Include="Resources\runer-silhouette-running-fast.png" />
     <None Include="Resources\yesilalarm.png" />
+    <None Include="Resources\stop-button.png" />
     <Content Include="res\green.png" />
     <Content Include="res\red.png" />
   </ItemGroup>

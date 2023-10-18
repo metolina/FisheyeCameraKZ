@@ -2,7 +2,6 @@
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,33 +11,20 @@ using System.Globalization;
 using System.Threading;
 using GeneralDef;
 using NETSDKHelper;
-using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using static NetDemo.Discovery;
 using Newtonsoft.Json;
-using static GeneralDef.NETDEMO;
-using System.Security.AccessControl;
-using System.Reflection.Emit;
 using Microsoft.Win32;
 using UsbLibrary;
 using NetDemo.Properties;
-using System.Security.Cryptography;
 using ThermalCamera.ViewModel;
 using System.IO.Ports;
-using NetSDKCS;
-using System.Windows.Media;
 using Color = System.Drawing.Color;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using System.Resources;
 using Vlc.DotNet.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
 using NAudio.Wave;
-using Vlc.DotNet.Wpf;
-using Vlc.DotNet.Forms;
-using VlcControl = Vlc.DotNet.Forms.VlcControl;
 
 namespace NetDemo
 {
@@ -285,7 +271,6 @@ namespace NetDemo
             }
             else
             {
-                byte i;
                 byte[] In_Data = new byte[64];
                 In_Data = args.data;
                 //for (i = 0; i < 29; ++i)
@@ -1284,36 +1269,42 @@ namespace NetDemo
             }
         }
 
+        public List<string> ListMp4Files(string folderPath)
+        {
 
+            List<string> mp4Files = new List<string>();
+            DirectoryInfo directory = new DirectoryInfo(folderPath);
+            foreach (FileInfo file in directory.GetFiles("*.mp4"))
+            {
+                mp4Files.Add(file.Name);
+            }
+            return mp4Files;
+        }
         private void mainTabCtrlSelectedChanged(object sender, EventArgs e)
         {
-            //if (this.mainTabCtrl.SelectedTab.Name == "LiveView")
-            //{
-            //    //initLiveViewPage();
-            //}
-            //else if (this.mainTabCtrl.SelectedTab.Name == "Playback")
-            //{
-            //    //initPlaybackPage();
-            //}
-            //else if (this.mainTabCtrl.SelectedTab.Name == "Configure")
-            //{
-            //    if (m_CurSelectTreeNodeInfo.dwDeviceIndex >= 0 && m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle != IntPtr.Zero)
-            //    {
-            //        m_config.cfgTabSwitch(0);/*basic0*/
-            //    }
-            //}
-            //else if (this.mainTabCtrl.SelectedTab.Name == "AlarmRecords")
-            //{
-            //    //initAlarmRecordsPage();
-            //}
-            //else if (this.mainTabCtrl.SelectedTab.Name == "VCA")
-            //{
-            //    //initVCAPage();
-            //}
-            //else if (this.mainTabCtrl.SelectedTab.Name == "Maintenance")
-            //{
-            //    //initMaintenancePage();
-            //}
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
+            var list = ListJpgFiles(Application.StartupPath + "\\Pic");
+            foreach (var item in list)
+            {
+                listBox1.Items.Add(item);
+            }
+            var list2 = ListMp4Files(Application.StartupPath + "\\Record");
+            foreach (var item in list2)
+            {
+                listBox2.Items.Add(item);
+            }
+        }
+        public List<string> ListJpgFiles(string folderPath)
+        {
+
+            List<string> mp4Files = new List<string>();
+            DirectoryInfo directory = new DirectoryInfo(folderPath);
+            foreach (FileInfo file in directory.GetFiles("*.jpg"))
+            {
+                mp4Files.Add(file.Name);
+            }
+            return mp4Files;
         }
 
         private void updateChnTreeNode(TreeNode orgTreeNode, NETDEV_DEV_CHN_ENCODE_INFO_S stChnInfo)
@@ -11589,7 +11580,12 @@ namespace NetDemo
                 checkBox1.ForeColor = Color.Black;
 
             }
-            
+            vlcControl4.VlcLibDirectory = new DirectoryInfo(@"C:\Program Files\VideoLAN\VLC");
+            vlcControl4.BeginInit();
+            vlcControl4.EndInit();
+            vlcControl5.VlcLibDirectory = new DirectoryInfo(@"C:\Program Files\VideoLAN\VLC");
+            vlcControl5.BeginInit();
+            vlcControl4.EndInit();
         }
 
         private void StartListening()
@@ -11731,15 +11727,15 @@ namespace NetDemo
             }
             else
             {
-                Form frm4 = new Form4();
-                frm4.Show();
+                mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[13];
+                Application.DoEvents();
             }
 
             //string akl = "";
             //// FolderBrowserDialog fbd = new FolderBrowserDialog();
             ////if (fbd.ShowDialog() == DialogResult.OK)
             ////{
-           
+
             //foreach (FileInfo file in Files)
             //{
             //    akl = file.Name;
@@ -11769,8 +11765,11 @@ namespace NetDemo
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Form frm5 = new Form5();
-            frm5.Show();
+            mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[12];
+
+            Application.DoEvents();
+            //Form frm5 = new Form5();
+            //frm5.Show();
             //string akl = "";
             //// FolderBrowserDialog fbd = new FolderBrowserDialog();
             ////if (fbd.ShowDialog() == DialogResult.OK)
@@ -11791,7 +11790,7 @@ namespace NetDemo
             ////}
             //Process.Start(Application.StartupPath + "\\Pic\\" + akl);
             //Process.Start(Application.StartupPath + "\\Pic\\");
-           
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -12097,41 +12096,38 @@ namespace NetDemo
 
         private void button14_Click(object sender, EventArgs e)
         {
-            string configFilePath = "config.txt";
-            string contentToWrite = "1";
-            File.WriteAllText(configFilePath, contentToWrite);
-            Application.Restart();
-            //if (m_curRealPanel.m_playhandle != IntPtr.Zero)
-            //{
-            //    if (m_CurSelectTreeNodeInfo.dwDeviceIndex > m_deviceInfoList.Count() || m_CurSelectTreeNodeInfo.dwDeviceIndex < 0)
-            //    {
-            //        return;
-            //    }
 
-            //    String strNoPreviewTemp = string.Copy(LocalSetting.m_strPicSavePath);
-            //    DateTime oNoPreviewDate = DateTime.Now;
-            //    String strNoPreviewCurTime = oNoPreviewDate.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
-            //    LocalSetting.m_strPicSavePath += "\\";
-            //    LocalSetting.m_strPicSavePath += m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
-            //    LocalSetting.m_strPicSavePath += "_";
-            //    LocalSetting.m_strPicSavePath += (getChannelID());
-            //    LocalSetting.m_strPicSavePath += "_";
-            //    LocalSetting.m_strPicSavePath += strNoPreviewCurTime;
+            if (m_curRealPanel.m_playhandle != IntPtr.Zero)
+            {
+                if (m_CurSelectTreeNodeInfo.dwDeviceIndex > m_deviceInfoList.Count() || m_CurSelectTreeNodeInfo.dwDeviceIndex < 0)
+                {
+                    return;
+                }
 
-            //    byte[] picNoPreviewSavePath;
-            //    GetUTF8Buffer(LocalSetting.m_strPicSavePath, NETDEVSDK.NETDEV_LEN_260, out picNoPreviewSavePath);
+                String strNoPreviewTemp = string.Copy(LocalSetting.m_strPicSavePath);
+                DateTime oNoPreviewDate = DateTime.Now;
+                String strNoPreviewCurTime = oNoPreviewDate.ToString("yyMMddHHmmss", DateTimeFormatInfo.InvariantInfo);
+                LocalSetting.m_strPicSavePath += "\\";
+                LocalSetting.m_strPicSavePath += m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip;
+                LocalSetting.m_strPicSavePath += "_";
+                LocalSetting.m_strPicSavePath += (getChannelID());
+                LocalSetting.m_strPicSavePath += "_";
+                LocalSetting.m_strPicSavePath += strNoPreviewCurTime;
 
-            //    int iiRet = NETDEVSDK.NETDEV_CaptureNoPreview(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, getChannelID(), (int)NETDEV_LIVE_STREAM_INDEX_E.NETDEV_LIVE_STREAM_INDEX_MAIN, LocalSetting.m_strPicSavePath, (int)NETDEV_PICTURE_FORMAT_E.NETDEV_PICTURE_BMP);
-            //    if (NETDEVSDK.FALSE == iiRet)
-            //    {
-            //        showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview", NETDEVSDK.NETDEV_GetLastError());
-            //        LocalSetting.m_strPicSavePath = strNoPreviewTemp;
-            //        return;
-            //    }
-            //    showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview");
-            //    LocalSetting.m_strPicSavePath = strNoPreviewTemp;
-            //    return;
-            //}
+                byte[] picNoPreviewSavePath;
+                GetUTF8Buffer(LocalSetting.m_strPicSavePath, NETDEVSDK.NETDEV_LEN_260, out picNoPreviewSavePath);
+
+                int iiRet = NETDEVSDK.NETDEV_CaptureNoPreview(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_lpDevHandle, getChannelID(), (int)NETDEV_LIVE_STREAM_INDEX_E.NETDEV_LIVE_STREAM_INDEX_MAIN, LocalSetting.m_strPicSavePath, (int)NETDEV_PICTURE_FORMAT_E.NETDEV_PICTURE_BMP);
+                if (NETDEVSDK.FALSE == iiRet)
+                {
+                    showFailLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview", NETDEVSDK.NETDEV_GetLastError());
+                    LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+                    return;
+                }
+                showSuccessLogInfo(m_deviceInfoList[m_CurSelectTreeNodeInfo.dwDeviceIndex].m_ip + " chl:" + (getChannelID()), "CaptureNoPreview");
+                LocalSetting.m_strPicSavePath = strNoPreviewTemp;
+                return;
+            }
         }
 
         private void button15_Click_1(object sender, EventArgs e)
@@ -12626,7 +12622,9 @@ namespace NetDemo
 
                         //NetDemo yeniForm = new NetDemo(); // Yeni bir form oluştur
                         //yeniForm.Show(); // Yeni formu göster
-
+                        string configFilePath = "config.txt";
+                        string contentToWrite = "1";
+                        File.WriteAllText(configFilePath, contentToWrite);
                         Application.Restart();
 
 
@@ -13922,7 +13920,59 @@ namespace NetDemo
             frm33.Show();
         }
 
-       
+        private void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                string selectedFile = Application.StartupPath + "\\Pic\\" + listBox1.SelectedItem.ToString();
+                vlcControl4.SetMedia(new FileInfo(selectedFile));
+                vlcControl4.Play();
+            }
+        }
+
+        private void button6_Click_2(object sender, EventArgs e)
+        {
+            mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[0];
+            Application.DoEvents();
+        }
+
+        private void listBox2_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedItem != null)
+            {
+                string selectedFile = Application.StartupPath + "\\Record\\" + listBox2.SelectedItem.ToString();
+                vlcControl5.SetMedia(new FileInfo(selectedFile));
+                vlcControl5.Play();
+            }
+        }
+
+        private void button24_Click_2(object sender, EventArgs e)
+        {
+            if (vlcControl5.IsPlaying)
+            {
+                vlcControl5.Pause();
+            }
+            else
+            {
+                vlcControl5.Play();
+            }
+        }
+
+        private void button12_Click_1(object sender, EventArgs e)
+        {
+            vlcControl5.Stop();
+        }
+        private void button7_Click_2(object sender, EventArgs e)
+        {
+            mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[0];
+        }
+
+        private void vlcControl5_VlcLibDirectoryNeeded(object sender, VlcLibDirectoryNeededEventArgs e)
+        {
+            vlcControl5.VlcLibDirectory = new DirectoryInfo(@"C:\Program Files\VideoLAN\VLC");
+            vlcControl5.VlcMediaplayerOptions = new[] { "--no-xlib" };
+
+        }
     }
 }
 
