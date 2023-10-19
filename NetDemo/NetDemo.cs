@@ -2008,6 +2008,7 @@ namespace NetDemo
 
         public void startRealPlay()
         {
+
             if (m_CurSelectTreeNodeInfo.dwDeviceIndex < 0 || getChannelID() < 0)
             {
                 return;
