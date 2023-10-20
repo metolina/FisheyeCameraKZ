@@ -504,6 +504,7 @@
     <Content Include="Resources\bip.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\down-arrow-on-horizontal-line.png" />
     <Content Include="Resources\green.png" />
     <Content Include="Resources\Image1.png" />
     <None Include="Resources\kirmizialarm.png" />

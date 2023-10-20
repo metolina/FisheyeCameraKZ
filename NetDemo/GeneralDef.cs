@@ -16,6 +16,7 @@ namespace GeneralDef
         public IntPtr m_playhandle = IntPtr.Zero;/*播放句柄*/
         public bool IsAlarmMode = false;
         public int DeviceMod = 0;
+        public int m_PositionCamera = 0;
         /*playBack use*/
         public int m_curVideoSliderValue = 0;
         public int m_maxVideoSliderValue = 0;

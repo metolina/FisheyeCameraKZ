@@ -2044,8 +2044,6 @@ namespace NetDemo
 
             m_curRealPanel.m_playStatus = true;
             m_curRealPanel.m_playhandle = Handle;
-
-
             RealPlayInfo objRealPlayInfo = new RealPlayInfo();
             objRealPlayInfo.m_channel = getChannelID();
             objRealPlayInfo.m_panelIndex = m_curRealPanel.m_panelIndex;
@@ -11630,6 +11628,7 @@ namespace NetDemo
                         }
                         if (m_curRealPanel.m_playStatus == false)
                         {
+
                             startRealPlay();
                         }
                         else
@@ -13963,7 +13962,21 @@ namespace NetDemo
             mainTabCtrl.SelectedTab = mainTabCtrl.TabPages[0];
         }
 
-        
+        private void button26_Click_3(object sender, EventArgs e)
+        {
+            if (m_curRealPanel.m_PositionCamera == 0)
+            {
+                m_curRealPanel.m_PositionCamera = 1;
+            }
+            if (m_curRealPanel.m_PositionCamera == 1)
+            {
+                m_curRealPanel.m_PositionCamera = 2;
+            }
+            if (m_curRealPanel.m_PositionCamera == 2)
+            {
+                m_curRealPanel.m_PositionCamera = 0;
+            }
+        }
     }
 }
 
