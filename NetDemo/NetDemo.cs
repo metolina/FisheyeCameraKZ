@@ -724,6 +724,18 @@ namespace NetDemo
                 //video kayıt açık
                 button14.BackgroundImage = global::NetDemo.Properties.Resources.record_green;
             }
+            if (m_curRealPanel.m_PositionCamera == 0)
+            {
+                buttonposition.BackgroundImage = Resources.yerde;
+            }
+            else if (m_curRealPanel.m_PositionCamera == 1)
+            {
+                buttonposition.BackgroundImage = Resources.duvarda;
+            }
+            else
+            {
+                buttonposition.BackgroundImage = Resources.tavanda;
+            }
             if (m_curRealPanel.IsAlarmMode == true)
             {
                 button29.BackgroundImage = Resources.yesilalarm;
@@ -938,13 +950,13 @@ namespace NetDemo
                 {
                     if (item.m_playhandle != null)
                     {
-                        bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(item.m_playhandle, ref dwPtzMode, ref dwInstallMode);
+                        bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(item.m_playhandle, ref dwPtzMode, ref m_curRealPanel.m_PositionCamera);
                         if (bRet == 1)
                         {
                             //TabClear();
                             //this.fisheye.Parent = this.mainTabCtrl; //show
-                            NETDEVSDK.NETDEV_SetPtzAndFixMode(item.m_playhandle, screeninformation, dwInstallMode);
-                            NETDEVSDK.NETDEV_GetPtzAndFixMode(item.m_playhandle, ref screeninformation, ref dwInstallMode);
+                            NETDEVSDK.NETDEV_SetPtzAndFixMode(item.m_playhandle, screeninformation, m_curRealPanel.m_PositionCamera);
+                            NETDEVSDK.NETDEV_GetPtzAndFixMode(item.m_playhandle, ref screeninformation, ref m_curRealPanel.m_PositionCamera);
                             //fisheye bağlantısı tab olarak fisheye tarafına da eklenecek. 
                             //playPanel6.handle = selectedplaypanel.Handle;
                             screeninformation = 0;
@@ -981,10 +993,10 @@ namespace NetDemo
                 Int32 bRet = NETDEVSDK.FALSE;
                 try
                 {
-                    bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref dwInstallMode);
+                    bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(m_curRealPanel.m_playhandle, ref dwPtzMode, ref m_curRealPanel.m_PositionCamera);
                     if (bRet == 1)
                     {
-                        NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, dwInstallMode);
+                        NETDEVSDK.NETDEV_SetPtzAndFixMode(m_curRealPanel.m_playhandle, screeninformation, m_curRealPanel.m_PositionCamera);
                     }
                     else if (bRet == 0 && selectedplaypanel.m_playhandle != IntPtr.Zero)
                     {
@@ -5329,13 +5341,13 @@ namespace NetDemo
             Int32 dwPtzMode = screeninformation;
             Int32 dwInstallMode = 0;
             Int32 bRet = NETDEVSDK.FALSE;
-            bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref dwInstallMode);
+            bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref m_curRealPanel.m_PositionCamera);
 
 
 
             dwPtzMode = screeninformation;
 
-            bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, dwInstallMode);
+            bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, m_curRealPanel.m_PositionCamera);
             //if (NETDEVSDK.FALSE == bRet)
             //{
             //    showFailLogInfo(m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip + " chl:" + (m_curRealPanel.m_channelID), "set fish eye mode", NETDEVSDK.NETDEV_GetLastError());
@@ -5377,10 +5389,10 @@ namespace NetDemo
                     Int32 dwPtzMode = screeninformation;
                     Int32 dwInstallMode = 0;
                     Int32 bRet = NETDEVSDK.FALSE;
-                    bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref dwInstallMode);
+                    bRet = NETDEVSDK.NETDEV_GetPtzAndFixMode(lpUserID, ref dwPtzMode, ref m_curRealPanel.m_PositionCamera);
 
                     dwPtzMode = (int)NETDEV_FISHEYE_PTZ_MODE_E.NETDEV_FISHEYE_MODE_360_6PTZ;
-                    bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, dwInstallMode);
+                    bRet = NETDEVSDK.NETDEV_SetPtzAndFixMode(lpUserID, dwPtzMode, m_curRealPanel.m_PositionCamera);
                     if (NETDEVSDK.FALSE == bRet)
                     {
                         showFailLogInfo(m_deviceInfoList[m_curRealPanel.m_deviceIndex].m_ip + " chl:" + (m_curRealPanel.m_channelID), "set fish eye mode", NETDEVSDK.NETDEV_GetLastError());
@@ -13965,16 +13977,19 @@ namespace NetDemo
         private void button26_Click_3(object sender, EventArgs e)
         {
             if (m_curRealPanel.m_PositionCamera == 0)
-            {
+            { 
                 m_curRealPanel.m_PositionCamera = 1;
+                buttonposition.BackgroundImage = Resources.duvarda;
             }
-            if (m_curRealPanel.m_PositionCamera == 1)
+            else if (m_curRealPanel.m_PositionCamera == 1)
             {
                 m_curRealPanel.m_PositionCamera = 2;
+                buttonposition.BackgroundImage = Resources.tavanda;
             }
-            if (m_curRealPanel.m_PositionCamera == 2)
+            else if (m_curRealPanel.m_PositionCamera == 2)
             {
                 m_curRealPanel.m_PositionCamera = 0;
+                buttonposition.BackgroundImage = Resources.yerde;
             }
         }
     }

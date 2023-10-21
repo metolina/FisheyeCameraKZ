@@ -505,6 +505,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\down-arrow-on-horizontal-line.png" />
+    <None Include="Resources\duvarda.png" />
     <Content Include="Resources\green.png" />
     <Content Include="Resources\Image1.png" />
     <None Include="Resources\kirmizialarm.png" />
@@ -517,6 +518,8 @@
     <None Include="Resources\runer-silhouette-running-fast.png" />
     <None Include="Resources\yesilalarm.png" />
     <None Include="Resources\stop-button.png" />
+    <None Include="Resources\tavanda.png" />
+    <None Include="Resources\yerde.png" />
     <Content Include="res\green.png" />
     <Content Include="res\red.png" />
   </ItemGroup>
